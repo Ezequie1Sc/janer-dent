@@ -2,90 +2,152 @@
   display: block;
 }
 
+
+/* =====================================================
+   SERVICES SECTION
+===================================================== */
+
 .services-section {
+  position: relative;
+
   background: #f8f7f4;
+
   color: #1d1d1f;
+
   padding: 120px 5%;
+
   overflow: hidden;
 }
 
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
 .services-container {
-  max-width: 1400px;
+  max-width: 1500px;
+
   margin: 0 auto;
 
   display: grid;
+
+  /*
+   * Más espacio para el diente
+   * en la columna central.
+   */
+
   grid-template-columns:
-    minmax(275px, 1fr)
-    minmax(320px, 430px)
-    minmax(305px, 1fr);
+    minmax(280px, 1fr)
+    minmax(390px, 560px)
+    minmax(320px, 1fr);
 
   align-items: center;
-  gap: clamp(28px, 4vw, 70px);
+
+  gap: clamp(
+    30px,
+    3vw,
+    65px
+  );
 }
 
-/* =========================
+
+/* =====================================================
    INTRODUCCIÓN
-========================= */
+===================================================== */
 
 .services-intro {
   position: relative;
+
   z-index: 2;
 }
 
+
 .label {
   display: flex;
+
   align-items: center;
+
   gap: 12px;
 
   margin: 0;
 
   color: #8b785f;
+
   font-size: 11px;
+
   font-weight: 600;
+
   letter-spacing: 0.16em;
 }
 
+
 .label span {
   width: 28px;
+
   height: 1px;
+
   background: #c99a56;
 }
+
 
 .services-intro h2 {
   margin: 28px 0;
 
-  font-size: clamp(44px, 4.8vw, 72px);
+  font-size: clamp(
+    44px,
+    4.8vw,
+    72px
+  );
+
   line-height: 1.03;
+
   font-weight: 500;
+
   letter-spacing: -0.055em;
 }
+
 
 .gold-dot {
   color: #c99a56;
 }
 
+
 .text {
   max-width: 420px;
+
   margin: 0;
 
   color: #696969;
+
   font-size: 16px;
+
   line-height: 1.65;
 }
 
+
+/* =====================================================
+   BOTÓN
+===================================================== */
+
 .services-intro a {
   display: inline-flex;
+
   align-items: center;
+
   gap: 16px;
 
   margin-top: 32px;
+
   padding: 13px 20px;
 
   border: 1px solid #c99a56;
+
   border-radius: 99px;
 
   color: #1d1d1f;
+
   font-size: 14px;
+
   text-decoration: none;
 
   transition:
@@ -93,224 +155,278 @@
     color 0.3s ease;
 }
 
+
 .services-intro a svg {
   width: 17px;
+
   height: 17px;
 
   stroke: currentColor;
+
   stroke-width: 1.5;
+
   stroke-linecap: round;
+
   stroke-linejoin: round;
 
-  transition: transform 0.3s ease;
+  transition:
+    transform 0.3s ease;
 }
+
 
 .services-intro a:hover {
   background: #1d1d1f;
+
   color: #fff;
 }
+
 
 .services-intro a:hover svg {
   transform: translateX(4px);
 }
 
-/* =========================
-   DIENTE Y ESCENA 3D
-========================= */
+
+/* =====================================================
+   ÁREA DEL DIENTE
+===================================================== */
 
 .tooth-area {
   position: relative;
+
   width: 100%;
+
   min-width: 0;
+
+  min-height: 560px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: visible;
 }
+
+
+/* =====================================================
+   HALO DORADO
+===================================================== */
+
+.tooth-area::before {
+  content: '';
+
+  position: absolute;
+
+  width: 85%;
+
+  height: 85%;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(
+        201,
+        154,
+        86,
+        0.16
+      ) 0%,
+
+      rgba(
+        201,
+        154,
+        86,
+        0.07
+      ) 38%,
+
+      transparent 72%
+    );
+
+  filter: blur(30px);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+
+/* =====================================================
+   CONTENEDOR DEL DIENTE
+===================================================== */
 
 .tooth-sequence {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1374 / 1145;
-  isolation: isolate;
-}
-
-.tooth-frame {
-  position: absolute;
-  inset: 0;
-
-  display: block;
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-  opacity: 0;
-  pointer-events: none;
 
   /*
-    Todos los frames ocupan el mismo lugar.
-    Solo cambia la perspectiva del diente.
-  */
-  backface-visibility: hidden;
+   * Antes:
+   * max-width: 430px;
+   *
+   * Ahora aumentamos considerablemente
+   * el área disponible.
+   */
+
+  width: 100%;
+
+  max-width: 540px;
+
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  isolation: isolate;
+
+  z-index: 1;
+
+  overflow: visible;
 }
 
-/* La vista inicial permanece visible antes de activar la animación. */
-.tooth-frame:first-child {
-  opacity: 1;
+
+/* =====================================================
+   FRAME DEL DIENTE
+===================================================== */
+
+.tooth-frame {
+  display: block;
+
+  /*
+   * Los archivos WEBP tienen
+   * espacio transparente alrededor.
+   *
+   * Por eso hacemos el frame
+   * más grande que su contenedor.
+   *
+   * Esto hace que el diente real
+   * ocupe mucho más espacio visual.
+   */
+
+  width: 180%;
+
+  height: 180%;
+
+  max-width: none;
+
+  object-fit: contain;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  will-change: contents;
+
+  -webkit-user-drag: none;
+
 }
 
-/*
-  Al bajar hasta Servicios, Angular agrega .is-playing.
-  La secuencia se reproduce una vez y queda en la vista frontal.
-*/
-.tooth-sequence.is-playing .tooth-frame {
-  animation-duration: 7.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
 
-.tooth-sequence.is-playing .tooth-frame:nth-child(1) {
-  animation-name: tooth-front;
-}
-
-.tooth-sequence.is-playing .tooth-frame:nth-child(2) {
-  animation-name: tooth-left;
-}
-
-.tooth-sequence.is-playing .tooth-frame:nth-child(3) {
-  animation-name: tooth-top;
-}
-
-.tooth-sequence.is-playing .tooth-frame:nth-child(4) {
-  animation-name: tooth-right;
-}
-
-.tooth-sequence.is-playing .tooth-frame:nth-child(5) {
-  animation-name: tooth-loop;
-}
-
-/* FRAME 01: FRONTAL */
-@keyframes tooth-front {
-  0%,
-  13% {
-    opacity: 1;
-  }
-
-  25%,
-  100% {
-    opacity: 0;
-  }
-}
-
-/* FRAME 02: IZQUIERDA */
-@keyframes tooth-left {
-  0%,
-  13% {
-    opacity: 0;
-  }
-
-  25%,
-  38% {
-    opacity: 1;
-  }
-
-  50%,
-  100% {
-    opacity: 0;
-  }
-}
-
-/* FRAME 03: SUPERIOR */
-@keyframes tooth-top {
-  0%,
-  38% {
-    opacity: 0;
-  }
-
-  50%,
-  63% {
-    opacity: 1;
-  }
-
-  75%,
-  100% {
-    opacity: 0;
-  }
-}
-
-/* FRAME 04: DERECHA */
-@keyframes tooth-right {
-  0%,
-  63% {
-    opacity: 0;
-  }
-
-  75%,
-  88% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-/* FRAME 05: REGRESO AL FRENTE */
-@keyframes tooth-loop {
-  0%,
-  88% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-/* =========================
-   ICONOS Y SERVICIOS
-========================= */
+/* =====================================================
+   ICONOS OCULTOS
+===================================================== */
 
 .service-symbols {
   position: absolute;
+
   width: 0;
+
   height: 0;
+
   overflow: hidden;
 }
 
+
+/* =====================================================
+   LISTA DE SERVICIOS
+===================================================== */
+
 .service-list {
   display: flex;
+
   flex-direction: column;
+
+  position: relative;
+
+  z-index: 2;
 }
+
+
+/* =====================================================
+   SERVICE ITEM
+===================================================== */
 
 .service-item {
   display: grid;
-  grid-template-columns: 25px 48px minmax(0, 1fr);
+
+  grid-template-columns:
+    25px
+    48px
+    minmax(0, 1fr);
+
   align-items: center;
+
   gap: 14px;
 
   min-width: 0;
+
   padding: 16px 4px;
 
-  border-bottom: 1px solid #ddd9d2;
-  transition: transform 0.3s ease;
+  border-bottom:
+    1px solid #ddd9d2;
+
+  transition:
+    transform 0.3s ease;
 }
 
+
 .service-item:hover {
-  transform: translateX(-5px);
+  transform:
+    translateX(-5px);
 }
+
+
+/* =====================================================
+   NÚMERO
+===================================================== */
 
 .number {
   color: #b38b55;
+
   font-size: 12px;
+
   font-weight: 600;
 }
 
+
+/* =====================================================
+   ICONO
+===================================================== */
+
 .icon {
   display: grid;
+
   place-items: center;
 
   width: 44px;
+
   height: 44px;
 
-  border: 1px solid #e7dfd4;
+  border:
+    1px solid #e7dfd4;
+
   border-radius: 50%;
 
   color: #b38b55;
@@ -321,122 +437,320 @@
     border-color 0.3s ease;
 }
 
+
 .icon svg {
   width: 23px;
+
   height: 23px;
 
   fill: none;
+
   stroke: currentColor;
+
   stroke-width: 1.45;
+
   stroke-linecap: round;
+
   stroke-linejoin: round;
 }
 
+
 .service-item:hover .icon {
   color: #fff;
+
   background: #1d1d1f;
+
   border-color: #1d1d1f;
 }
+
+
+/* =====================================================
+   TEXTO DEL SERVICIO
+===================================================== */
 
 .service-item h3 {
   margin: 0 0 4px;
 
   color: #1d1d1f;
+
   font-size: 15px;
+
   font-weight: 600;
+
   letter-spacing: -0.015em;
 }
+
 
 .service-item p {
   margin: 0;
 
   color: #777;
+
   font-size: 12px;
+
   line-height: 1.45;
 }
 
-/* =========================
+
+/* =====================================================
    TABLET
-========================= */
+===================================================== */
 
 @media (max-width: 1100px) {
+
+  .services-section {
+    padding:
+      100px 5%;
+  }
+
+
   .services-container {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+
     gap: 40px;
   }
 
+
   .tooth-area {
     grid-column: 1 / -1;
+
     grid-row: 1;
 
-    width: min(470px, 100%);
+    width:
+      min(
+        600px,
+        100%
+      );
+
+    min-height: 520px;
+
     margin: 0 auto;
   }
 
+
+  .tooth-sequence {
+    max-width: 560px;
+  }
+
+
+  .tooth-frame {
+    width: 175%;
+
+    height: 175%;
+  }
+
+
   .services-intro {
     grid-column: 1;
+
+    grid-row: 2;
   }
+
 
   .service-list {
     grid-column: 2;
+
+    grid-row: 2;
   }
+
 }
 
-/* =========================
+
+/* =====================================================
+   TABLET PEQUEÑA
+===================================================== */
+
+@media (max-width: 850px) {
+
+  .services-container {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .tooth-area {
+    grid-column: 1;
+
+    grid-row: 1;
+
+    min-height: 500px;
+  }
+
+
+  .services-intro {
+    grid-column: 1;
+
+    grid-row: 2;
+  }
+
+
+  .service-list {
+    grid-column: 1;
+
+    grid-row: 3;
+  }
+
+}
+
+
+/* =====================================================
    MÓVIL
-========================= */
+===================================================== */
 
 @media (max-width: 700px) {
+
   .services-section {
-    padding: 80px 24px;
+    padding:
+      80px 24px;
   }
+
 
   .services-container {
     display: flex;
+
     flex-direction: column;
+
     align-items: stretch;
+
     gap: 42px;
   }
 
+
   .services-intro h2 {
-    font-size: clamp(42px, 11vw, 58px);
+    font-size:
+      clamp(
+        42px,
+        11vw,
+        58px
+      );
   }
+
 
   .text {
     font-size: 15px;
   }
 
+
+  /* ================================================
+     DIENTE
+  ================================================ */
+
   .tooth-area {
     order: 1;
-    width: min(430px, 100%);
+
+    width: 100%;
+
+    min-height: 420px;
   }
+
+
+  .tooth-sequence {
+    width:
+      min(
+        430px,
+        100%
+      );
+
+    max-width: none;
+  }
+
+
+  /*
+   * En móvil mantenemos
+   * el diente grande pero
+   * evitamos que se salga
+   * demasiado de la pantalla.
+   */
+
+  .tooth-frame {
+    width: 155%;
+
+    height: 155%;
+  }
+
+
+  /* ================================================
+     LISTA
+  ================================================ */
 
   .service-list {
     order: 2;
   }
 
+
   .service-item {
-    grid-template-columns: 24px 44px minmax(0, 1fr);
+    grid-template-columns:
+      24px
+      44px
+      minmax(0, 1fr);
+
     gap: 12px;
   }
+
 
   .service-item:hover {
     transform: none;
   }
+
 }
 
-/* =========================
+
+/* =====================================================
+   MÓVIL PEQUEÑO
+===================================================== */
+
+@media (max-width: 420px) {
+
+  .services-section {
+    padding:
+      70px 20px;
+  }
+
+
+  .tooth-area {
+    min-height: 360px;
+  }
+
+
+  .tooth-frame {
+    width: 145%;
+
+    height: 145%;
+  }
+
+
+  .service-item {
+    padding:
+      14px 2px;
+  }
+
+
+  .service-item h3 {
+    font-size: 14px;
+  }
+
+
+  .service-item p {
+    font-size: 11px;
+  }
+
+}
+
+
+/* =====================================================
    MOVIMIENTO REDUCIDO
-========================= */
+===================================================== */
 
-@media (prefers-reduced-motion: reduce) {
-  .tooth-sequence.is-playing .tooth-frame {
-    animation: none;
+@media (
+  prefers-reduced-motion: reduce
+) {
+
+  .tooth-frame {
+    transition: none;
   }
 
-  .tooth-frame:first-child {
-    opacity: 1;
-  }
 
   .service-item,
   .services-intro a,
@@ -444,4 +758,5 @@
   .icon {
     transition: none;
   }
+
 }
