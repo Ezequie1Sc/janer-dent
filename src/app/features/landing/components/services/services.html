@@ -1,1 +1,149 @@
-<p>services works!</p>
+<section 
+#servicesSection
+id="servicios"
+class="services-section"
+>
+
+
+<div class="services-container">
+
+
+
+<!-- HEADER -->
+
+<div class="services-intro">
+
+
+<p class="label">
+
+<span></span>
+NUESTROS SERVICIOS
+
+</p>
+
+
+
+<h2>
+
+Soluciones
+<br>
+para cada sonrisa.
+
+</h2>
+
+
+
+<p class="text">
+
+Contamos con tratamientos que te ayudan a prevenir,
+mejorar y mantener una salud bucal óptima,
+siempre con un enfoque profesional y personalizado.
+
+</p>
+
+
+
+<a href="#contacto">
+
+Ver todos los servicios
+<span>→</span>
+
+</a>
+
+
+</div>
+
+
+
+
+
+<!-- VISUAL TOOTH -->
+
+<div class="tooth-area">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=700&q=80"
+
+alt="Modelo dental"
+
+
+>
+
+
+
+<div class="circle"></div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- SERVICE LIST -->
+
+
+<div class="service-list">
+
+
+@for(service of services; track service.number){
+
+
+<article class="service-item">
+
+
+<div class="number">
+
+{{service.number}}
+
+</div>
+
+
+<div class="icon">
+
+{{service.icon}}
+
+</div>
+
+
+
+<div>
+
+<h3>
+
+{{service.name}}
+
+</h3>
+
+
+<p>
+
+{{service.description}}
+
+</p>
+
+
+</div>
+
+
+</article>
+
+
+
+}
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
