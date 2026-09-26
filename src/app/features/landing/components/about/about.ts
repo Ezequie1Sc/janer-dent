@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnDestroy,
-  ViewChild
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-about',
@@ -13,12 +7,7 @@ import {
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })
-export class About implements AfterViewInit, OnDestroy {
-
-  @ViewChild('aboutSection')
-  section!: ElementRef<HTMLElement>;
-
-  private observer?: IntersectionObserver;
+export class About {
 
   indicators = [
     {
@@ -35,25 +24,4 @@ export class About implements AfterViewInit, OnDestroy {
     }
   ];
 
-  ngAfterViewInit(): void {
-    this.observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          this.section.nativeElement.classList.add('visible');
-
-          // Solo necesitamos animarla una vez.
-          this.observer?.unobserve(this.section.nativeElement);
-        }
-      },
-      {
-        threshold: 0.2
-      }
-    );
-
-    this.observer.observe(this.section.nativeElement);
-  }
-
-  ngOnDestroy(): void {
-    this.observer?.disconnect();
-  }
 }
