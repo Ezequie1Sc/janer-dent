@@ -1,9 +1,50 @@
 import { Component } from '@angular/core';
 
+
 @Component({
-  imports: [],
   selector: 'app-footer',
-  styleUrl: './footer.scss',
+  standalone: true,
+  imports: [],
   templateUrl: './footer.html',
+  styleUrl: './footer.scss',
 })
-export class Footer {}
+export class Footer {
+
+
+  links = [
+
+    {
+      name:'Inicio',
+      url:'#inicio'
+    },
+
+    {
+      name:'Servicios',
+      url:'#servicios'
+    },
+
+    {
+      name:'Nosotros',
+      url:'#nosotros'
+    },
+
+    {
+      name:'Galería',
+      url:'#galeria'
+    },
+
+    {
+      name:'Ubicación',
+      url:'#ubicacion'
+    },
+
+    {
+      name:'Contacto',
+      url:'#contacto'
+    }
+
+  ];
+
+
+
+}
