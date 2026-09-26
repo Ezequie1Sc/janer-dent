@@ -1,149 +1,154 @@
-<section 
-#servicesSection
-id="servicios"
-class="services-section"
+<section
+  #servicesSection
+  id="servicios"
+  class="services-section"
+  aria-labelledby="services-title"
 >
-
-
-<div class="services-container">
-
-
-
-<!-- HEADER -->
-
-<div class="services-intro">
-
-
-<p class="label">
-
-<span></span>
-NUESTROS SERVICIOS
-
-</p>
-
-
-
-<h2>
-
-Soluciones
-<br>
-para cada sonrisa.
-
-</h2>
-
-
-
-<p class="text">
-
-Contamos con tratamientos que te ayudan a prevenir,
-mejorar y mantener una salud bucal óptima,
-siempre con un enfoque profesional y personalizado.
-
-</p>
-
-
-
-<a href="#contacto">
-
-Ver todos los servicios
-<span>→</span>
-
-</a>
-
-
-</div>
-
-
-
-
-
-<!-- VISUAL TOOTH -->
-
-<div class="tooth-area">
-
-
-<img
-
-src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=700&q=80"
-
-alt="Modelo dental"
-
-
->
-
-
-
-<div class="circle"></div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- SERVICE LIST -->
-
-
-<div class="service-list">
-
-
-@for(service of services; track service.number){
-
-
-<article class="service-item">
-
-
-<div class="number">
-
-{{service.number}}
-
-</div>
-
-
-<div class="icon">
-
-{{service.icon}}
-
-</div>
-
-
-
-<div>
-
-<h3>
-
-{{service.name}}
-
-</h3>
-
-
-<p>
-
-{{service.description}}
-
-</p>
-
-
-</div>
-
-
-</article>
-
-
-
-}
-
-
-
-</div>
-
-
-
-
-</div>
-
-
+  <div class="services-container">
+
+    <!-- INTRODUCCIÓN -->
+    <div class="services-intro">
+      <p class="label">
+        <span aria-hidden="true"></span>
+        NUESTROS SERVICIOS
+      </p>
+
+      <h2 id="services-title">
+        Soluciones<br>
+        para cada sonrisa<span class="gold-dot">.</span>
+      </h2>
+
+      <p class="text">
+        Contamos con tratamientos que te ayudan a prevenir,
+        mejorar y mantener una salud bucal óptima,
+        siempre con un enfoque profesional y personalizado.
+      </p>
+
+      <a href="#contacto">
+        Ver todos los servicios
+
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 12h15m-6-6 6 6-6 6" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- DIENTE: LA ANIMACIÓN SE ACTIVA AL BAJAR A ESTA SECCIÓN -->
+    <div class="tooth-area">
+      <div
+        class="tooth-sequence"
+        [class.is-playing]="isPlaying()"
+        role="img"
+        aria-label="Diente cerámico con órbitas doradas visto desde distintos ángulos"
+      >
+        <img
+          class="tooth-frame"
+          src="/assets/services/01-tooth-front.webp"
+          alt=""
+          width="1374"
+          height="1145"
+          loading="eager"
+          decoding="async"
+        >
+
+        <img
+          class="tooth-frame"
+          src="/assets/services/02-tooth-left.webp"
+          alt=""
+          width="1374"
+          height="1145"
+          loading="eager"
+          decoding="async"
+        >
+
+        <img
+          class="tooth-frame"
+          src="/assets/services/03-tooth-top.webp"
+          alt=""
+          width="1374"
+          height="1145"
+          loading="eager"
+          decoding="async"
+        >
+
+        <img
+          class="tooth-frame"
+          src="/assets/services/04-tooth-right.webp"
+          alt=""
+          width="1374"
+          height="1145"
+          loading="eager"
+          decoding="async"
+        >
+
+        <img
+          class="tooth-frame"
+          src="/assets/services/05-tooth-front-loop.webp"
+          alt=""
+          width="1374"
+          height="1145"
+          loading="eager"
+          decoding="async"
+        >
+      </div>
+    </div>
+
+    <!-- DEFINICIONES DE ICONOS SVG -->
+    <svg
+      class="service-symbols"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <symbol id="jd-cleaning" viewBox="0 0 32 32">
+        <path d="M6 22 20 8m-2-2 8 8M4 25l3 3 4-4M23 18v5m-2.5-2.5h5M8 6v4M6 8h4" />
+      </symbol>
+
+      <symbol id="jd-resin" viewBox="0 0 32 32">
+        <path d="M16 8c-3-2-8-2-10 2-2 4 1 8 2 12 1 4 2 5 4 5 2 0 2-6 4-6s2 6 4 6c2 0 3-1 4-5 1-4 4-8 2-12-2-4-7-4-10-2Z" />
+        <path d="m16 9-3 4 3 3 3-3-3-4Z" />
+      </symbol>
+
+      <symbol id="jd-whitening" viewBox="0 0 32 32">
+        <path d="M15 9c-3-2-7-2-9 2-2 4 1 8 2 12 1 4 2 5 4 5 2 0 2-6 4-6s2 6 4 6c2 0 3-1 4-5 1-4 4-8 2-12-2-4-6-4-9-2" />
+        <path d="M23 3v7M19.5 6.5h7M27 13v4m-2-2h4" />
+      </symbol>
+
+      <symbol id="jd-root" viewBox="0 0 32 32">
+        <path d="M16 7c-3-2-8-2-10 2-2 4 1 8 2 12 1 4 2 5 4 5 2 0 2-6 4-6s2 6 4 6c2 0 3-1 4-5 1-4 4-8 2-12-2-4-7-4-10-2Z" />
+        <path d="M16 10v7m-4-4 4 4 4-4m-4 4v8" />
+      </symbol>
+
+      <symbol id="jd-implant" viewBox="0 0 32 32">
+        <path d="M8 5h16v4c0 4-3 6-8 6s-8-2-8-6V5Zm4 10v11l4 4 4-4V15M11 19h10m-10 4h10m-8 4h6" />
+      </symbol>
+
+      <symbol id="jd-prosthesis" viewBox="0 0 32 32">
+        <path d="M3 12c4-3 8-3 13-1 5-2 9-2 13 1l-2 8c-1 4-3 5-5 5-2 0-2-5-6-5s-4 5-6 5c-2 0-4-1-5-5l-2-8Z" />
+        <path d="M10 11v10m6-10v9m6-9v10" />
+      </symbol>
+    </svg>
+
+    <!-- LISTA DE SERVICIOS -->
+    <div class="service-list">
+      @for (service of services; track service.number) {
+        <article class="service-item">
+          <span class="number">
+            {{ service.number }}
+          </span>
+
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <use [attr.href]="'#jd-' + service.icon"></use>
+            </svg>
+          </span>
+
+          <div class="service-copy">
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
+          </div>
+        </article>
+      }
+    </div>
+
+  </div>
 </section>
