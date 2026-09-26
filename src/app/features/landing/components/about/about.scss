@@ -3,196 +3,362 @@
   width: 100%;
 }
 
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
 .about-section {
+  position: relative;
+
   width: 100%;
 
+  /*
+   * 3 escenas.
+   * Cada escena utiliza aproximadamente una pantalla
+   * de recorrido.
+   */
+  height: 300vh;
+
   background: #0b0b0b;
+
   color: #ffffff;
 
-  padding: 140px 5%;
+  overflow: clip;
+
+  isolation: isolate;
+}
+
+
+/* ==========================================================
+   STICKY VIEWPORT
+========================================================== */
+
+.about-sticky {
+  position: sticky;
+
+  top: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  min-height: 680px;
 
   overflow: hidden;
 
-  opacity: 1;
-  transform: none;
+  display: block;
+
+  background: #0b0b0b;
+
+  perspective: 1400px;
 }
 
-.about-container {
+
+/* ==========================================================
+   SCENES
+========================================================== */
+
+.about-scene {
+  position: absolute;
+
+  inset: 0;
+
   width: 100%;
-  max-width: 1400px;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  /*
+   * MUY IMPORTANTE:
+   * Todas las escenas están exactamente
+   * en el mismo lugar.
+   */
+  transform: translate3d(0, 100%, 0);
+
+  transform-origin: center center;
+
+  will-change: transform, opacity;
+
+  backface-visibility: hidden;
+
+  /*
+   * Evita que la transición se vea
+   * como un simple cambio de tarjeta.
+   */
+  transform-style: preserve-3d;
+
+  /*
+   * No usamos transition porque el movimiento
+   * está controlado directamente por el scroll.
+   */
+  transition: none;
+
+  pointer-events: none;
+}
+
+
+/*
+ * Primera escena visible desde el principio.
+ */
+
+.scene-01 {
+  transform: translate3d(0, 0, 0);
+
+  z-index: 1;
+}
+
+
+/*
+ * Las siguientes empiezan abajo.
+ */
+
+.scene-02,
+.scene-03 {
+  z-index: 2;
+}
+
+
+/* ==========================================================
+   COMPOSITION
+========================================================== */
+
+.scene-composition {
+  position: relative;
+
+  width: min(1180px, 82vw);
+
+  height: min(700px, 76vh);
 
   margin: 0 auto;
 
   display: grid;
 
-  grid-template-columns: 1fr 1fr;
+  /*
+   * La imagen ya NO domina la pantalla.
+   */
+  grid-template-columns: minmax(300px, 0.82fr) minmax(420px, 1fr);
 
-  gap: 100px;
+  gap: clamp(60px, 7vw, 120px);
 
   align-items: center;
+
+  transform-origin: center center;
+
+  will-change: transform;
+
+  transform: translateZ(0);
 }
 
-/* =========================
+
+/* ==========================================================
    IMAGE
-========================= */
+========================================================== */
 
-.about-image {
+.scene-image {
   position: relative;
+
   width: 100%;
+
+  max-width: 430px;
+
+  height: min(570px, 68vh);
+
+  margin: 0;
+
+  overflow: hidden;
+
+  justify-self: center;
+
+  background: #141414;
+
+  /*
+   * Sombra extremadamente sutil.
+   */
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.28);
+
+  transform: translateZ(30px);
 }
 
-.about-image img {
+
+/*
+ * Las imágenes se mantienen contenidas.
+ */
+
+.scene-image img {
   display: block;
 
   width: 100%;
-  height: 650px;
+  height: 100%;
 
   object-fit: cover;
 
-  border-radius: 2px;
+  object-position: center;
 
-  filter: grayscale(0.15);
+  filter: saturate(0.94);
+
+  transform: scale(1.015);
+
+  will-change: transform;
+
+  transition:
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* =========================
-   EXPERIENCE
-========================= */
 
-.experience {
+/*
+ * Pequeño movimiento al entrar.
+ */
+
+.about-scene:not(.scene-01) .scene-image img {
+  transform: scale(1.04);
+}
+
+
+/* ==========================================================
+   IMAGE CAPTION
+========================================================== */
+
+.image-caption {
   position: absolute;
 
-  bottom: 40px;
-  left: -35px;
+  left: 20px;
+  right: 20px;
+  bottom: 18px;
 
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 9px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  z-index: 2;
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.scene-content {
+  width: 100%;
+
+  max-width: 570px;
+
+  justify-self: start;
+}
+
+
+/* ==========================================================
+   EYEBROW
+========================================================== */
+
+.scene-eyebrow {
   display: flex;
 
   align-items: center;
 
-  gap: 20px;
+  gap: 12px;
 
-  padding: 25px;
+  margin: 0 0 24px;
 
-  background: #111111;
+  color: #999999;
 
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
+  font-size: 9px;
 
-.experience span {
-  color: #c9a45c;
+  font-weight: 500;
 
-  font-family: serif;
-
-  font-size: 45px;
-}
-
-.experience p {
-  margin: 0;
-
-  color: #ffffff;
-
-  font-size: 12px;
-
-  line-height: 1.4;
-
-  letter-spacing: 2px;
+  letter-spacing: 4px;
 
   text-transform: uppercase;
 }
 
-/* =========================
-   CONTENT
-========================= */
 
-.about-content {
-  width: 100%;
-}
+.scene-eyebrow span {
+  width: 26px;
 
-.about-label {
-  display: flex;
-
-  align-items: center;
-
-  gap: 15px;
-
-  margin: 0;
-
-  color: #aaaaaa;
-
-  font-size: 10px;
-
-  letter-spacing: 6px;
-}
-
-.about-label span {
-  display: block;
-
-  width: 30px;
   height: 1px;
+
+  flex-shrink: 0;
 
   background: #c9a45c;
 }
 
-.about-content h2 {
-  margin: 35px 0;
+
+/* ==========================================================
+   CHAPTER
+========================================================== */
+
+.scene-chapter {
+  margin: 0 0 22px;
+
+  color: #c9a45c;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.scene-title {
+  margin: 0;
+
+  max-width: 620px;
 
   color: #ffffff;
 
-  font-size: clamp(45px, 5vw, 70px);
-
-  line-height: 0.95;
+  font-size: clamp(48px, 5.2vw, 76px);
 
   font-weight: 300;
+
+  line-height: 0.94;
 
   letter-spacing: -3px;
 }
 
-.about-content h3 {
-  margin: 0 0 10px;
 
-  color: #ffffff;
-
-  font-size: 24px;
-
-  font-weight: 400;
-}
-
-.profession {
-  margin: 0;
+.scene-title span {
+  display: inline;
 
   color: #c9a45c;
 
-  line-height: 1.8;
+  font-weight: 300;
 }
 
-.about-description {
-  max-width: 500px;
 
-  margin: 35px 0;
+/* ==========================================================
+   DOCTOR
+========================================================== */
 
-  color: #cccccc;
+.doctor-info {
+  margin-top: 42px;
 
-  line-height: 1.8;
+  padding-left: 18px;
+
+  border-left: 1px solid #c9a45c;
 }
 
-/* =========================
-   INDICATORS
-========================= */
 
-.about-indicators {
-  display: grid;
-
-  gap: 25px;
-
-  margin-top: 50px;
-}
-
-.about-indicator {
-  padding-left: 20px;
-
-  border-left: 1px solid #b98a3c;
-}
-
-.about-indicator h4 {
+.doctor-info h3 {
   margin: 0 0 8px;
 
   color: #ffffff;
@@ -202,70 +368,366 @@
   font-weight: 500;
 }
 
-.about-indicator p {
+
+.doctor-info p {
   margin: 0;
 
-  color: #aaaaaa;
+  color: #c9a45c;
+
+  font-size: 11px;
+
+  line-height: 1.8;
+
+  letter-spacing: 0.4px;
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.scene-description {
+  max-width: 520px;
+
+  margin: 32px 0 0;
+
+  color: #9d9d9d;
+
+  font-size: 13px;
+
+  line-height: 1.9;
+}
+
+
+/* ==========================================================
+   DETAILS
+========================================================== */
+
+.scene-details {
+  width: 100%;
+
+  max-width: 570px;
+
+  margin-top: 38px;
+}
+
+
+.detail-row {
+  display: grid;
+
+  grid-template-columns: 40px 1fr;
+
+  gap: 18px;
+
+  padding: 19px 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+
+.detail-row:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+
+.detail-number {
+  color: #c9a45c;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+}
+
+
+.detail-row h3 {
+  margin: 0 0 5px;
+
+  color: #ffffff;
 
   font-size: 14px;
 
-  line-height: 1.6;
+  font-weight: 500;
 }
 
-/* =========================
+
+.detail-row p {
+  max-width: 450px;
+
+  margin: 0;
+
+  color: #888888;
+
+  font-size: 11px;
+
+  line-height: 1.7;
+}
+
+
+/* ==========================================================
+   PROGRESS
+========================================================== */
+
+.about-progress {
+  position: absolute;
+
+  right: 5vw;
+  bottom: 35px;
+
+  z-index: 20;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  color: #777777;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  pointer-events: none;
+}
+
+
+.progress-track {
+  position: relative;
+
+  width: 70px;
+
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  overflow: hidden;
+}
+
+
+.progress-track span {
+  position: absolute;
+
+  inset: 0;
+
+  width: 33.333%;
+
+  transform-origin: left center;
+
+  background: #c9a45c;
+}
+
+
+/* ==========================================================
    TABLET
-========================= */
+========================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 
-  .about-section {
-    padding: 100px 6%;
-  }
+  .scene-composition {
+    width: 86vw;
 
-  .about-container {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      minmax(260px, 0.75fr)
+      minmax(350px, 1fr);
 
     gap: 50px;
   }
 
-  .about-image img {
+
+  .scene-image {
+    max-width: 370px;
+
     height: 500px;
   }
 
-  .experience {
-    left: 20px;
+
+  .scene-title {
+    font-size: clamp(44px, 6vw, 62px);
   }
+
 }
 
-/* =========================
-   MOBILE
-========================= */
 
-@media (max-width: 600px) {
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 760px) {
 
   .about-section {
-    padding: 80px 20px;
+    height: 300vh;
   }
 
-  .about-image img {
-    height: 430px;
+
+  .about-sticky {
+    min-height: 600px;
   }
 
-  .experience {
-    bottom: 20px;
-    left: 15px;
 
-    padding: 18px;
+  .scene-composition {
+    width: calc(100% - 40px);
+
+    height: auto;
+
+    min-height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: stretch;
+
+    gap: 28px;
+
+    padding: 80px 0 70px;
   }
 
-  .experience span {
-    font-size: 35px;
+
+  .scene-image {
+    width: min(70vw, 330px);
+
+    height: min(48vh, 390px);
+
+    max-width: none;
+
+    margin: 0 auto;
   }
 
-  .about-content h2 {
-    font-size: clamp(42px, 12vw, 58px);
+
+  .scene-content {
+    width: 100%;
+
+    max-width: none;
+  }
+
+
+  .scene-eyebrow {
+    margin-bottom: 16px;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+  }
+
+
+  .scene-chapter {
+    margin-bottom: 14px;
+  }
+
+
+  .scene-title {
+    font-size: clamp(40px, 11vw, 58px);
 
     letter-spacing: -2px;
+  }
+
+
+  .doctor-info {
+    margin-top: 25px;
+  }
+
+
+  .scene-description {
+    margin-top: 22px;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+  }
+
+
+  .scene-details {
+    margin-top: 22px;
+  }
+
+
+  .detail-row {
+    padding: 14px 0;
+  }
+
+
+  .about-progress {
+    right: 20px;
+
+    bottom: 20px;
+  }
+
+}
+
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 480px) {
+
+  .scene-composition {
+    width: calc(100% - 32px);
+
+    padding-top: 65px;
+  }
+
+
+  .scene-image {
+    width: min(64vw, 280px);
+
+    height: 300px;
+  }
+
+
+  .scene-title {
+    font-size: 42px;
+  }
+
+
+  .scene-description {
+    font-size: 11px;
+  }
+
+
+  .about-progress {
+    display: none;
+  }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .about-scene {
+    transform: none !important;
+
+    opacity: 1 !important;
+  }
+
+  .about-scene:not(.scene-01) {
+    display: none;
+  }
+
+  .about-section {
+    height: auto;
+  }
+
+  .about-sticky {
+    position: relative;
+
+    height: auto;
+
+    min-height: 100vh;
+  }
+
+  .scene-01 {
+    position: relative;
+
+    min-height: 100vh;
   }
 
 }
