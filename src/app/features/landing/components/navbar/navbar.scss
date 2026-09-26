@@ -1,0 +1,290 @@
+:host {
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+}
+
+
+.navbar {
+
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 25px 5%;
+
+  transition:
+    background .5s ease,
+    backdrop-filter .5s ease,
+    padding .5s ease;
+
+
+}
+
+
+.navbar-scrolled {
+
+  position: fixed;
+
+  background: rgba(11,11,11,.88);
+  backdrop-filter: blur(14px);
+
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+}
+
+
+
+.navbar-container {
+
+  max-width: 1400px;
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+}
+
+
+
+.logo {
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  color:white;
+  text-decoration:none;
+
+
+}
+
+
+
+.logo-main {
+
+  font-family: serif;
+  font-size:42px;
+  line-height:1;
+
+  color:#C9A45C;
+
+}
+
+
+
+.logo-text {
+
+  display:flex;
+  flex-direction:column;
+
+
+  span {
+
+    font-size:24px;
+    font-weight:500;
+    letter-spacing:-1px;
+
+  }
+
+
+  small {
+
+    font-size:8px;
+    letter-spacing:4px;
+    color:#d6d6d6;
+
+  }
+
+}
+
+
+
+
+
+.desktop-menu {
+
+  display:flex;
+  gap:35px;
+
+  list-style:none;
+  margin:0;
+  padding:0;
+
+
+  a {
+
+    color:white;
+    text-decoration:none;
+
+    font-size:13px;
+
+    transition:.3s;
+
+
+    &:hover {
+
+      color:#C9A45C;
+
+    }
+
+  }
+
+
+}
+
+
+
+
+
+.appointment {
+
+
+  background:#B98A3C;
+
+  color:white;
+
+  padding:13px 26px;
+
+  border-radius:40px;
+
+  text-decoration:none;
+
+  font-size:14px;
+
+  transition:.4s;
+
+
+  span {
+
+    margin-left:8px;
+
+  }
+
+
+  &:hover {
+
+    transform:translateY(-2px);
+
+  }
+
+}
+
+
+
+
+
+.menu-button {
+
+  display:none;
+
+  background:none;
+  border:0;
+
+  width:40px;
+
+
+  span {
+
+    display:block;
+
+    width:28px;
+    height:2px;
+
+    background:white;
+
+    margin:7px 0;
+
+    transition:.3s;
+
+  }
+
+}
+
+
+
+
+
+
+.mobile-menu {
+
+  display:none;
+
+}
+
+
+
+
+
+
+
+@media(max-width:900px){
+
+
+.desktop-menu,
+.appointment {
+
+  display:none;
+
+}
+
+
+.menu-button {
+
+  display:block;
+
+}
+
+
+
+.mobile-menu {
+
+  position:absolute;
+
+  top:100%;
+
+  left:0;
+
+  width:100%;
+
+  background:#0B0B0B;
+
+  padding:30px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:25px;
+
+
+  a {
+
+    color:white;
+    text-decoration:none;
+
+    font-size:18px;
+
+  }
+
+
+}
+
+
+
+.mobile-button {
+
+  background:#B98A3C;
+
+  padding:15px;
+
+  border-radius:30px;
+
+  text-align:center;
+
+}
+
+
+
+}
