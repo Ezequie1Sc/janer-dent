@@ -1,177 +1,230 @@
 :host {
   display: block;
+  width: 100%;
 }
 
 .about-section {
+  width: 100%;
+
   background: #0b0b0b;
-  color: #fff;
+  color: #ffffff;
+
   padding: 140px 5%;
 
-  opacity: 0;
-  transform: translateY(40px);
-
-  transition:
-    opacity 1s ease,
-    transform 1s ease;
-
   overflow: hidden;
-}
 
-.about-section.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .about-container {
   width: 100%;
   max-width: 1400px;
+
   margin: 0 auto;
 
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 100px;
+
   align-items: center;
 }
 
-/* IMAGEN */
+/* =========================
+   IMAGE
+========================= */
 
 .about-image {
   position: relative;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 650px;
-    object-fit: cover;
-    border-radius: 2px;
-    filter: grayscale(0.15);
-  }
+  width: 100%;
 }
 
-/* EXPERIENCIA */
+.about-image img {
+  display: block;
+
+  width: 100%;
+  height: 650px;
+
+  object-fit: cover;
+
+  border-radius: 2px;
+
+  filter: grayscale(0.15);
+}
+
+/* =========================
+   EXPERIENCE
+========================= */
 
 .experience {
   position: absolute;
+
   bottom: 40px;
   left: -35px;
 
-  background: #111;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
 
   padding: 25px;
 
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  background: #111111;
 
-  span {
-    font-size: 45px;
-    line-height: 1;
-    color: #c9a45c;
-    font-family: serif;
-  }
-
-  p {
-    margin: 0;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* LABEL */
+.experience span {
+  color: #c9a45c;
 
-.label {
+  font-family: serif;
+
+  font-size: 45px;
+}
+
+.experience p {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.about-content {
+  width: 100%;
+}
+
+.about-label {
   display: flex;
+
   align-items: center;
+
   gap: 15px;
 
   margin: 0;
 
-  font-size: 10px;
-  letter-spacing: 6px;
-  color: #aaa;
+  color: #aaaaaa;
 
-  span {
-    display: block;
-    width: 30px;
-    height: 1px;
-    background: #c9a45c;
-  }
+  font-size: 10px;
+
+  letter-spacing: 6px;
 }
 
-/* TITULOS */
+.about-label span {
+  display: block;
+
+  width: 30px;
+  height: 1px;
+
+  background: #c9a45c;
+}
 
 .about-content h2 {
   margin: 35px 0;
 
+  color: #ffffff;
+
   font-size: clamp(45px, 5vw, 70px);
+
   line-height: 0.95;
+
   font-weight: 300;
+
   letter-spacing: -3px;
 }
 
 .about-content h3 {
   margin: 0 0 10px;
 
+  color: #ffffff;
+
   font-size: 24px;
+
   font-weight: 400;
 }
 
-/* PROFESION */
-
 .profession {
+  margin: 0;
+
   color: #c9a45c;
+
   line-height: 1.8;
 }
 
-/* DESCRIPCION */
-
-.description {
+.about-description {
   max-width: 500px;
+
   margin: 35px 0;
 
-  color: #ccc;
+  color: #cccccc;
+
   line-height: 1.8;
 }
 
-/* INDICADORES */
+/* =========================
+   INDICATORS
+========================= */
 
-.indicators {
+.about-indicators {
   display: grid;
+
   gap: 25px;
+
   margin-top: 50px;
 }
 
-.indicator {
-  border-left: 1px solid #b98a3c;
+.about-indicator {
   padding-left: 20px;
 
-  h4 {
-    margin: 0 0 8px;
-
-    font-size: 17px;
-    font-weight: 500;
-  }
-
-  p {
-    margin: 0;
-
-    font-size: 14px;
-    color: #aaa;
-    line-height: 1.6;
-  }
+  border-left: 1px solid #b98a3c;
 }
 
-/* TABLET / MOVIL */
+.about-indicator h4 {
+  margin: 0 0 8px;
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  font-weight: 500;
+}
+
+.about-indicator p {
+  margin: 0;
+
+  color: #aaaaaa;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+/* =========================
+   TABLET
+========================= */
 
 @media (max-width: 900px) {
+
   .about-section {
     padding: 100px 6%;
   }
 
   .about-container {
     grid-template-columns: 1fr;
+
     gap: 50px;
   }
 
@@ -181,40 +234,38 @@
 
   .experience {
     left: 20px;
-    bottom: 20px;
   }
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 600px) {
+
   .about-section {
     padding: 80px 20px;
   }
 
   .about-image img {
-    height: 420px;
+    height: 430px;
   }
 
   .experience {
+    bottom: 20px;
     left: 15px;
-    bottom: 15px;
+
     padding: 18px;
+  }
 
-    span {
-      font-size: 35px;
-    }
-
-    p {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-    }
+  .experience span {
+    font-size: 35px;
   }
 
   .about-content h2 {
-    font-size: clamp(40px, 12vw, 55px);
+    font-size: clamp(42px, 12vw, 58px);
+
     letter-spacing: -2px;
   }
 
-  .indicators {
-    margin-top: 35px;
-  }
 }
