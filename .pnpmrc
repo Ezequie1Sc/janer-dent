@@ -1,0 +1,1 @@
+Set-Content .pnpmrc "enable-pre-post-scripts=true"
