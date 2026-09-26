@@ -11,16 +11,6 @@
   },
   "private": true,
   "packageManager": "pnpm@12.3.4",
-
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "esbuild",
-      "lmdb",
-      "msgpackr-extract"
-    ]
-  },
-
   "dependencies": {
     "@angular/common": "^22.2.0",
     "@angular/compiler": "^22.2.0",
@@ -34,7 +24,6 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
-
   "devDependencies": {
     "@angular/build": "^22.2.0",
     "@angular/cli": "^22.2.0",
