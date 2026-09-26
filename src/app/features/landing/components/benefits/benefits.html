@@ -1,1 +1,57 @@
-<p>benefits works!</p>
+<section
+  id="beneficios"
+  class="benefits-section"
+>
+
+  <div class="benefits-container">
+
+    <div class="benefits-header">
+
+      <p class="benefits-label">
+        <span></span>
+        ¿POR QUÉ ELEGIRNOS?
+      </p>
+
+      <h2>
+        Una experiencia
+        <br>
+        odontológica diferente.
+      </h2>
+
+      <p class="benefits-description">
+        Combinamos profesionalismo, tecnología
+        y atención humana para cuidar cada sonrisa.
+      </p>
+
+    </div>
+
+
+    <div class="benefits-grid">
+
+      @for (item of benefits; track item.number) {
+
+        <article class="benefit-item">
+
+          <span class="benefit-number">
+            {{ item.number }}
+          </span>
+
+          <div class="benefit-line"></div>
+
+          <h3>
+            {{ item.title }}
+          </h3>
+
+          <p>
+            {{ item.description }}
+          </p>
+
+        </article>
+
+      }
+
+    </div>
+
+  </div>
+
+</section>
