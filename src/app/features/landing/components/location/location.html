@@ -1,1 +1,199 @@
-<p>location works!</p>
+<section
+id="ubicacion"
+class="location-section"
+>
+
+
+<div class="location-container">
+
+
+
+<!-- INFORMATION -->
+
+<div class="location-info">
+
+
+<p class="label">
+
+<span></span>
+
+UBICACIÓN
+
+</p>
+
+
+
+<h2>
+
+Encuéntranos en
+<br>
+Hecelchakán,
+Campeche.
+
+</h2>
+
+
+
+<p class="address">
+
+Calle 29 s/n, San Antonio,
+<br>
+Hecelchakán, Campeche, México.
+
+</p>
+
+
+
+
+
+<div class="buttons">
+
+
+<a
+href="https://maps.google.com"
+target="_blank"
+class="primary"
+>
+
+Ver en Google Maps
+<span>
+→
+</span>
+
+</a>
+
+
+
+<a
+href="https://maps.google.com"
+target="_blank"
+class="secondary"
+>
+
+Cómo llegar
+
+</a>
+
+
+</div>
+
+
+
+
+<div class="emergency">
+
+
+<span>
+
+URGENCIAS 24 HORAS
+
+</span>
+
+
+<strong>
+
+996 104 6096
+
+</strong>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- MAP -->
+
+<div class="map-container">
+
+
+<iframe
+
+src="https://maps.google.com/maps?q=Hecelchakan%20Campeche&t=&z=15&ie=UTF8&iwloc=&output=embed"
+
+loading="lazy"
+
+allowfullscreen
+
+>
+
+</iframe>
+
+
+
+<div class="map-overlay">
+
+JD JANERDent
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- HOURS -->
+
+
+<div class="schedule">
+
+
+<h3>
+
+Horarios
+
+</h3>
+
+
+
+@for(item of schedules; track item.day){
+
+
+<div class="schedule-item">
+
+
+<h4>
+
+{{item.day}}
+
+</h4>
+
+
+
+@for(hour of item.hours; track hour){
+
+<p>
+
+{{hour}}
+
+</p>
+
+}
+
+
+</div>
+
+
+}
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
