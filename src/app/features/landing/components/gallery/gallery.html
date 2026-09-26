@@ -1,1 +1,93 @@
-<p>gallery works!</p>
+<section
+id="galeria"
+class="gallery-section"
+>
+
+
+<div class="gallery-container">
+
+
+
+<div class="gallery-header">
+
+
+<p class="label">
+
+<span></span>
+
+RESULTADOS
+
+</p>
+
+
+
+<h2>
+
+Tratamientos que
+<br>
+hablan por sí mismos.
+
+</h2>
+
+
+
+<p>
+
+Cada sonrisa refleja nuestro compromiso
+con la calidad, precisión y cuidado
+en cada detalle.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="gallery-grid">
+
+
+@for(item of images; track item.title){
+
+
+<article class="gallery-item">
+
+
+<div class="image-wrapper">
+
+
+<img
+[src]="item.image"
+[alt]="item.title"
+>
+
+
+</div>
+
+
+<div class="caption">
+
+{{item.title}}
+
+</div>
+
+
+</article>
+
+
+}
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
