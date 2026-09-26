@@ -1,1 +1,104 @@
-<p>navbar works!</p>
+<nav 
+  class="navbar"
+  [class.navbar-scrolled]="scrolled()"
+>
+
+  <div class="navbar-container">
+
+
+    <!-- LOGO -->
+    <a 
+      href="#inicio" 
+      class="logo"
+      (click)="closeMenu()"
+    >
+
+      <div class="logo-main">
+        JD
+      </div>
+
+      <div class="logo-text">
+        <span>JANERDent</span>
+        <small>ODONTOLOGÍA INTEGRAL</small>
+      </div>
+
+    </a>
+
+
+
+    <!-- DESKTOP MENU -->
+    <ul class="desktop-menu">
+
+      @for(item of navItems; track item.name){
+
+        <li>
+          <a [href]="item.link">
+            {{item.name}}
+          </a>
+        </li>
+
+      }
+
+    </ul>
+
+
+
+    <!-- CTA -->
+    <a 
+      href="#contacto"
+      class="appointment"
+    >
+      Agendar cita
+      <span>→</span>
+    </a>
+
+
+
+    <!-- MOBILE BUTTON -->
+    <button 
+      class="menu-button"
+      (click)="toggleMenu()"
+      aria-label="Abrir menú"
+    >
+
+      <span [class.active]="menuOpen()"></span>
+      <span [class.active]="menuOpen()"></span>
+
+    </button>
+
+
+  </div>
+
+
+
+  <!-- MOBILE MENU -->
+
+  @if(menuOpen()){
+
+    <div class="mobile-menu">
+
+      @for(item of navItems; track item.name){
+
+        <a 
+          [href]="item.link"
+          (click)="closeMenu()"
+        >
+          {{item.name}}
+        </a>
+
+      }
+
+
+      <a 
+        href="#contacto"
+        class="mobile-button"
+      >
+        Agendar cita →
+      </a>
+
+    </div>
+
+  }
+
+
+</nav>
