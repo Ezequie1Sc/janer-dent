@@ -1,145 +1,382 @@
 <section
-#aboutSection
-id="nosotros"
-class="about-section"
+  #aboutSection
+  id="nosotros"
+  class="about-section"
+  aria-label="Sobre el especialista"
 >
 
+  <div
+    #aboutSticky
+    class="about-sticky"
+  >
 
-<div class="about-container">
+    <!-- =====================================================
+         ESCENA 01
+    ====================================================== -->
 
+    <article
+      #aboutScene
+      class="about-scene scene-01"
+      aria-labelledby="about-title-01"
+    >
 
+      <div class="scene-composition">
 
-<!-- IMAGE -->
+        <!-- IMAGEN -->
 
-<div class="about-image">
+        <figure class="scene-image">
 
+          <img
+            src="/assets/about/about-01-retrato.webp"
+            alt="Dr. Raúl Alberto Gomez Pech, cirujano dentista"
+            width="900"
+            height="1100"
+            loading="eager"
+            decoding="async"
+          >
 
-<img
-src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=80"
-alt="Doctor odontólogo profesional"
->
+          <figcaption class="image-caption">
+            <span>JANER DENT</span>
+            <span>01</span>
+          </figcaption>
 
+        </figure>
 
-<div class="experience">
 
-<span>
-JD
-</span>
+        <!-- CONTENIDO -->
 
-<p>
-Odontología
-Integral
-</p>
+        <div class="scene-content">
 
-</div>
+          <p class="scene-eyebrow">
+            <span></span>
+            SOBRE EL ESPECIALISTA
+          </p>
 
+          <p class="scene-chapter">
+            01 / IDENTIDAD
+          </p>
 
-</div>
+          <h2
+            id="about-title-01"
+            class="scene-title"
+          >
+            Una atención
+            <span>
+              que empieza<br>
+              contigo.
+            </span>
+          </h2>
 
 
+          <div class="doctor-info">
 
+            <h3>
+              Dr. Raúl Alberto Gomez Pech
+            </h3>
 
+            <p>
+              Cirujano Dentista
+              <br>
+              Céd. Prof. 15507422
+            </p>
 
-<!-- CONTENT -->
+          </div>
 
 
-<div class="about-content">
+          <p class="scene-description">
 
+            Mi compromiso es atender a cada paciente con
+            profesionalismo, respeto y confianza, procurando
+            siempre brindar una atención odontológica de calidad.
 
-<p class="label">
+          </p>
 
-<span></span>
+        </div>
 
-SOBRE NOSOTROS
+      </div>
 
-</p>
+    </article>
 
 
+    <!-- =====================================================
+         ESCENA 02
+    ====================================================== -->
 
+    <article
+      #aboutScene
+      class="about-scene scene-02"
+      aria-labelledby="about-title-02"
+    >
 
-<h2>
+      <div class="scene-composition">
 
-Profesionalismo
-que transforma
-sonrisas.
+        <figure class="scene-image">
 
-</h2>
+          <img
+            src="/assets/about/about-02-experiencia.webp"
+            alt="Dr. Raúl Alberto Gomez Pech mostrando un modelo dental"
+            width="900"
+            height="700"
+            loading="eager"
+            decoding="async"
+          >
 
+          <figcaption class="image-caption">
+            <span>JANER DENT</span>
+            <span>02</span>
+          </figcaption>
 
+        </figure>
 
 
-<h3>
+        <div class="scene-content">
 
-Dr. Raúl Alberto Gomez Pech
+          <p class="scene-eyebrow">
+            <span></span>
+            SOBRE EL ESPECIALISTA
+          </p>
 
-</h3>
+          <p class="scene-chapter">
+            02 / EXPERIENCIA
+          </p>
 
+          <h2
+            id="about-title-02"
+            class="scene-title"
+          >
+            Experiencia
+            <span>
+              que se nota.
+            </span>
+          </h2>
 
 
-<p class="profession">
+          <div class="scene-details">
 
-Cirujano Dentista
-<br>
-Céd. Prof. 15507422
+            <div class="detail-row">
 
-</p>
+              <span class="detail-number">
+                01
+              </span>
 
+              <div>
 
+                <h3>
+                  Atención personalizada
+                </h3>
 
+                <p>
+                  Cada paciente recibe un tratamiento
+                  adaptado a sus necesidades.
+                </p>
 
-<p class="description">
+              </div>
 
-Mi compromiso es atender a cada paciente con profesionalismo,
-respeto y confianza, procurando siempre brindar una atención
-odontológica de calidad.
+            </div>
 
-</p>
 
+            <div class="detail-row">
 
+              <span class="detail-number">
+                02
+              </span>
 
+              <div>
 
+                <h3>
+                  Trato humano
+                </h3>
 
-<div class="indicators">
+                <p>
+                  Creamos una experiencia cómoda
+                  y de confianza.
+                </p>
 
+              </div>
 
-@for(item of indicators; track item.title){
+            </div>
 
 
-<div class="indicator">
+            <div class="detail-row">
 
+              <span class="detail-number">
+                03
+              </span>
 
-<h4>
+              <div>
 
-{{item.title}}
+                <h3>
+                  Resultados con confianza
+                </h3>
 
-</h4>
+                <p>
+                  Utilizamos técnicas profesionales
+                  para cuidar tu sonrisa.
+                </p>
 
+              </div>
 
-<p>
+            </div>
 
-{{item.text}}
+          </div>
 
-</p>
+        </div>
 
+      </div>
 
-</div>
+    </article>
 
 
-}
+    <!-- =====================================================
+         ESCENA 03
+    ====================================================== -->
 
+    <article
+      #aboutScene
+      class="about-scene scene-03"
+      aria-labelledby="about-title-03"
+    >
 
+      <div class="scene-composition">
 
-</div>
+        <figure class="scene-image">
 
+          <img
+            src="/assets/about/about-03-precision.webp"
+            alt="Dr. Raúl Alberto Gomez Pech atendiendo a una paciente"
+            width="900"
+            height="1100"
+            loading="eager"
+            decoding="async"
+          >
 
+          <figcaption class="image-caption">
+            <span>JANER DENT</span>
+            <span>03</span>
+          </figcaption>
 
+        </figure>
 
-</div>
 
+        <div class="scene-content">
 
+          <p class="scene-eyebrow">
+            <span></span>
+            SOBRE EL ESPECIALISTA
+          </p>
 
-</div>
+          <p class="scene-chapter">
+            03 / PRECISIÓN
+          </p>
 
+          <h2
+            id="about-title-03"
+            class="scene-title"
+          >
+            Precisión
+            <span>
+              en cada<br>
+              tratamiento.
+            </span>
+          </h2>
 
+
+          <div class="scene-details">
+
+            <div class="detail-row">
+
+              <span class="detail-number">
+                01
+              </span>
+
+              <div>
+
+                <h3>
+                  Valoración
+                </h3>
+
+                <p>
+                  Atención desde el primer contacto.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <span class="detail-number">
+                02
+              </span>
+
+              <div>
+
+                <h3>
+                  Planeación
+                </h3>
+
+                <p>
+                  Tratamientos pensados para cada paciente.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <span class="detail-number">
+                03
+              </span>
+
+              <div>
+
+                <h3>
+                  Seguimiento
+                </h3>
+
+                <p>
+                  Acompañamiento durante el proceso.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         INDICADOR
+    ====================================================== -->
+
+    <div
+      class="about-progress"
+      aria-hidden="true"
+    >
+
+      <span>
+        JANER DENT / NOSOTROS
+      </span>
+
+      <div class="progress-track">
+        <span></span>
+      </div>
+
+      <span>
+        03
+      </span>
+
+    </div>
+
+  </div>
 
 </section>
