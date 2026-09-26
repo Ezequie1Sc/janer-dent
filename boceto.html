@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JANER DENT | Odontología Integral</title>
+
+<meta name="description" content="JANER DENT - Odontología Integral. Atención dental profesional en San Antonio, Hecelchakán, Campeche. Cuidamos tu sonrisa, cuidamos de ti.">
+
+<meta property="og:title" content="JANER DENT | Odontología Integral">
+<meta property="og:description" content="Ofreciendo tratamientos dentales de calidad.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063176.png">
+
+<style>
+
+:root{
+    --black:#0b0b0b;
+    --dark:#141414;
+    --ivory:#faf8f2;
+    --white:#ffffff;
+    --gold:#b99655;
+    --gold-light:#d8bd82;
+    --gray:#777;
+    --line:#ded9cf;
+
+    --transition:.4s ease;
+}
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
+
+
+body{
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    background:var(--ivory);
+    color:var(--black);
+    overflow-x:hidden;
+}
+
+
+img{
+    width:100%;
+    display:block;
+    object-fit:cover;
+}
+
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+button{
+    font-family:inherit;
+}
+
+
+.container{
+    width:min(1200px,90%);
+    margin:auto;
+}
+
+
+/* ==========================
+NAVBAR
+========================== */
+
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:1000;
+    transition:var(--transition);
+}
+
+
+header.scrolled{
+    background:rgba(250,248,242,.95);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+}
+
+
+.navbar{
+    height:90px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+
+.logo{
+    font-size:22px;
+    letter-spacing:3px;
+    font-weight:700;
+}
+
+
+.logo span{
+    display:block;
+    font-size:10px;
+    letter-spacing:4px;
+    color:var(--gold);
+    margin-top:5px;
+}
+
+
+.nav-links{
+    display:flex;
+    gap:35px;
+    align-items:center;
+    list-style:none;
+}
+
+
+.nav-links a{
+    font-size:14px;
+    position:relative;
+}
+
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:0;
+    height:1px;
+    background:var(--gold);
+    transition:.3s;
+}
+
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+
+.btn-gold{
+    background:var(--gold);
+    color:white;
+    padding:14px 28px;
+    border-radius:2px;
+    transition:.3s;
+}
+
+
+.btn-gold:hover{
+    background:#8f6e35;
+}
+
+
+.menu-btn{
+    display:none;
+    font-size:28px;
+    background:none;
+    border:0;
+    cursor:pointer;
+}
+
+
+
+/* ==========================
+HERO
+========================== */
+
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:120px;
+}
+
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+
+.hero h1{
+    font-size:clamp(45px,6vw,80px);
+    line-height:1.05;
+    font-weight:500;
+    letter-spacing:-2px;
+}
+
+
+.hero h1 span{
+    color:var(--gold);
+}
+
+
+.hero p{
+    margin:30px 0;
+    font-size:20px;
+    color:#555;
+}
+
+
+.hero-image{
+    height:650px;
+    position:relative;
+}
+
+
+.hero-image img{
+    height:100%;
+}
+
+
+.hero-image::after{
+    content:"";
+    position:absolute;
+    width:80%;
+    height:80%;
+    border:1px solid var(--gold);
+    right:-25px;
+    bottom:-25px;
+    z-index:-1;
+}
+
+
+.scroll{
+    margin-top:60px;
+    font-size:12px;
+    letter-spacing:3px;
+    color:var(--gold);
+}
+
+
+
+/* ==========================
+SECCIONES
+========================== */
+
+
+section{
+    padding:120px 0;
+}
+
+
+.section-title{
+    font-size:clamp(35px,5vw,60px);
+    font-weight:500;
+    line-height:1.1;
+}
+
+
+.gold-line{
+    width:60px;
+    height:2px;
+    background:var(--gold);
+    margin:30px 0;
+}
+
+
+
+/* ==========================
+FILOSOFIA
+========================== */
+
+
+.philosophy{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+}
+
+
+.philosophy img{
+    height:550px;
+}
+
+
+.philosophy p{
+    color:#555;
+    font-size:18px;
+    line-height:1.8;
+}
+
+
+
+/* ==========================
+SERVICIOS
+========================== */
+
+
+.services{
+    background:#fff;
+}
+
+
+.services-layout{
+    display:grid;
+    grid-template-columns:350px 1fr;
+    gap:80px;
+}
+
+
+.service-list{
+    list-style:none;
+}
+
+
+.service-list li{
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    cursor:pointer;
+    font-size:22px;
+    transition:.3s;
+}
+
+
+.service-list li:hover,
+.service-list li.active{
+    color:var(--gold);
+    padding-left:15px;
+}
+
+
+.service-detail{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+}
+
+
+.service-detail img{
+    height:450px;
+}
+
+
+.service-detail p{
+    color:#555;
+    line-height:1.8;
+    font-size:17px;
+}
+
+
+
+.fade{
+    opacity:0;
+    transform:translateY(30px);
+    transition:1s;
+}
+
+
+.fade.visible{
+    opacity:1;
+    transform:none;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+<nav class="navbar container">
+
+<div class="logo">
+JANER DENT
+<span>ODONTOLOGÍA INTEGRAL</span>
+</div>
+
+
+<ul class="nav-links">
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#servicios">Servicios</a></li>
+<li><a href="#nosotros">Nosotros</a></li>
+<li><a href="#galeria">Galería</a></li>
+<li><a href="#ubicacion">Ubicación</a></li>
+<li><a href="#contacto">Contacto</a></li>
+<li><a class="btn-gold" href="https://wa.me/529961046096">Agendar cita</a></li>
+</ul>
+
+
+<button class="menu-btn">☰</button>
+
+</nav>
+</header>
+
+
+
+<main>
+
+
+<section class="hero" id="inicio">
+
+<div class="container hero-grid">
+
+
+<div class="fade">
+
+<h1>
+Cuidamos tu sonrisa,
+<br>
+<span>cuidamos de ti.</span>
+</h1>
+
+
+<p>
+Ofreciendo tratamientos dentales de calidad.
+</p>
+
+
+<a class="btn-gold" href="https://wa.me/529961046096">
+Agendar por WhatsApp
+</a>
+
+
+<div class="scroll">
+DESLIZA ↓
+</div>
+
+</div>
+
+
+
+<div class="hero-image fade">
+
+<img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=900&q=80"
+alt="Consultorio dental moderno">
+
+</div>
+
+
+</div>
+
+</section>
+<!-- ==========================
+FILOSOFÍA
+========================== -->
+
+<section id="nosotros">
+
+<div class="container philosophy fade">
+
+<div>
+<h2 class="section-title">
+Una sonrisa saludable es parte importante de la calidad de vida.
+</h2>
+
+<div class="gold-line"></div>
+
+<p>
+Su compromiso es atender a cada paciente con profesionalismo,
+respeto y confianza, procurando siempre brindar una atención
+odontológica de calidad.
+</p>
+
+</div>
+
+
+<img 
+src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=80"
+alt="Atención odontológica profesional">
+
+</div>
+
+</section>
+
+
+
+
+<!-- ==========================
+SERVICIOS
+========================== -->
+
+<section id="servicios" class="services">
+
+<div class="container">
+
+<h2 class="section-title fade">
+Nuestros tratamientos
+</h2>
+
+<div class="gold-line"></div>
+
+
+<div class="services-layout">
+
+
+<ul class="service-list fade">
+
+<li class="active"
+data-title="Limpieza dental"
+data-img="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=800&q=80"
+data-text="Ayuda a eliminar placa bacteriana, sarro y manchas superficiales que no siempre pueden retirarse con el cepillado diario. Es un procedimiento preventivo que contribuye a mantener encías saludables, dientes limpios y un aliento más fresco.">
+01 — Limpieza dental
+</li>
+
+
+<li
+data-title="Resinas dentales"
+data-img="https://images.unsplash.com/photo-1606265752439-1f18756aa53e?auto=format&fit=crop&w=800&q=80"
+data-text="Las resinas son materiales del color del diente que se utilizan para reparar dientes afectados por caries, fracturas o pequeñas imperfecciones.">
+02 — Resinas dentales
+</li>
+
+
+<li
+data-title="Blanqueamiento dental"
+data-img="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=800&q=80"
+data-text="Es un tratamiento estético que ayuda a disminuir manchas y aclarar el tono de los dientes. El procedimiento se realiza utilizando productos específicos considerando las condiciones de cada paciente.">
+03 — Blanqueamiento dental
+</li>
+
+
+<li
+data-title="Resinas inyectadas"
+data-img="https://images.unsplash.com/photo-1588776814546-daab30f310e8?auto=format&fit=crop&w=800&q=80"
+data-text="Es una técnica restauradora y estética que permite mejorar la forma, tamaño y apariencia de los dientes utilizando resina compuesta.">
+04 — Resinas inyectadas
+</li>
+
+
+<li
+data-title="Prótesis removible"
+data-img="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=800&q=80"
+data-text="La prótesis removible está diseñada para reemplazar uno o varios dientes ausentes y puede retirarse para su limpieza y mantenimiento.">
+05 — Prótesis removible
+</li>
+
+
+<li
+data-title="Prótesis total"
+data-img="https://images.unsplash.com/photo-1629909615957-be38f7f7c0a5?auto=format&fit=crop&w=800&q=80"
+data-text="La prótesis total está indicada para pacientes que han perdido todos los dientes de una arcada. Su objetivo es ayudar a recuperar la masticación, el habla y la apariencia facial.">
+06 — Prótesis total
+</li>
+
+
+</ul>
+
+
+
+<div class="service-detail fade">
+
+<img id="serviceImage"
+src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=800&q=80"
+alt="Tratamiento dental">
+
+
+<div>
+
+<h3 id="serviceTitle">
+Limpieza dental
+</h3>
+
+<p id="serviceText">
+Ayuda a eliminar placa bacteriana, sarro y manchas superficiales que no siempre pueden retirarse con el cepillado diario.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+<!-- ==========================
+DOCTOR
+========================== -->
+
+<section>
+
+<div class="container philosophy fade">
+
+
+<img 
+src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=900&q=80"
+alt="Doctor odontólogo">
+
+
+<div>
+
+<h2 class="section-title">
+Dr. Raul Alberto Gomez Pech
+</h2>
+
+<div class="gold-line"></div>
+
+
+<p>
+Cirujano dentista
+</p>
+
+<p>
+Céd. Prof. 15507422
+</p>
+
+
+<br>
+
+
+<p>
+Atención basada en:
+<br><br>
+
+<strong>Profesionalismo</strong><br>
+<strong>Respeto</strong><br>
+<strong>Confianza</strong><br>
+<strong>Calidad</strong>
+
+</p>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+<!-- ==========================
+GALERÍA
+========================== -->
+
+
+<section id="galeria" class="services">
+
+<div class="container">
+
+<h2 class="section-title fade">
+Galería
+</h2>
+
+<div class="gold-line"></div>
+
+
+<div class="gallery">
+
+
+<img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=900&q=80"
+alt="Consultorio dental">
+
+
+<img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=80"
+alt="Área clínica">
+
+
+<img src="https://images.unsplash.com/photo-1588776814546-daab30f310e8?auto=format&fit=crop&w=900&q=80"
+alt="Equipo dental">
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<style>
+
+.gallery{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:30px;
+}
+
+.gallery img{
+height:450px;
+transition:.5s;
+}
+
+.gallery img:hover{
+transform:scale(1.03);
+}
+
+
+.gallery img:nth-child(3){
+grid-column:1/-1;
+height:350px;
+}
+
+
+
+@media(max-width:800px){
+
+.hero-grid,
+.philosophy,
+.services-layout,
+.service-detail{
+grid-template-columns:1fr;
+}
+
+
+.nav-links{
+position:fixed;
+top:90px;
+right:-100%;
+background:var(--ivory);
+width:80%;
+height:calc(100vh - 90px);
+flex-direction:column;
+padding:40px;
+transition:.4s;
+}
+
+
+.nav-links.open{
+right:0;
+}
+
+
+.menu-btn{
+display:block;
+}
+
+
+.gallery{
+grid-template-columns:1fr;
+}
+
+.hero-image{
+height:400px;
+}
+
+
+}
+
+</style>
+
+
+
+
+<!-- ==========================
+UBICACIÓN
+========================== -->
+
+
+<section id="ubicacion">
+
+<div class="container fade">
+
+<h2 class="section-title">
+Ubicación
+</h2>
+
+
+<div class="gold-line"></div>
+
+
+<p>
+Calle 29 s/n, San Antonio,
+<br>
+Hecelchakán, Campeche, México
+</p>
+
+
+<div style="
+margin-top:40px;
+height:300px;
+background:#eee;
+display:flex;
+align-items:center;
+justify-content:center;
+border:1px solid #ddd;
+">
+
+<div style="
+font-size:18px;
+color:#b99655;
+">
+
+● JANER DENT
+
+</div>
+
+</div>
+
+
+<br>
+
+
+<a class="btn-gold"
+href="https://maps.google.com/?q=San+Antonio+Hecelchakan+Campeche">
+Ver en Google Maps
+</a>
+
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- ==========================
+CONTACTO
+========================== -->
+
+
+<section id="contacto" class="services">
+
+<div class="container fade">
+
+
+<h2 class="section-title">
+Contacto
+</h2>
+
+<div class="gold-line"></div>
+
+
+<p>
+WhatsApp:
+<br>
+<strong>996 104 6096</strong>
+</p>
+
+
+<br>
+
+
+<p>
+Lunes a viernes:
+<br>
+8:30 a.m. – 1:00 p.m.
+<br>
+5:00 p.m. – 9:00 p.m.
+</p>
+
+
+<br>
+
+
+<p>
+Sábado:
+<br>
+9:00 a.m. – 1:00 p.m.
+<br>
+5:00 p.m. – 9:00 p.m.
+</p>
+
+
+<br>
+
+
+<p>
+Urgencias:
+<br>
+24 horas
+</p>
+
+
+<br>
+
+
+<a class="btn-gold"
+href="https://wa.me/529961046096">
+WhatsApp
+</a>
+
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- ==========================
+FOOTER
+========================== -->
+
+
+<footer style="
+background:#0b0b0b;
+color:white;
+padding:60px 0;
+">
+
+
+<div class="container">
+
+
+<h3>
+JANER DENT
+</h3>
+
+
+<p style="color:#b99655">
+ODONTOLOGÍA INTEGRAL
+</p>
+
+
+<br>
+
+
+<p>
+"Cuidamos tu sonrisa, cuidamos de ti."
+</p>
+
+
+<br>
+
+
+<p>
+WhatsApp · Facebook · Ubicación · Horarios
+</p>
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+<!-- WHATSAPP FLOTANTE -->
+
+
+<a href="https://wa.me/529961046096"
+style="
+position:fixed;
+right:25px;
+bottom:25px;
+background:#b99655;
+color:white;
+width:60px;
+height:60px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:25px;
+z-index:1000;
+">
+✆
+</a>
+
+
+
+
+
+<script>
+
+
+const header=document.querySelector("header");
+
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>50){
+
+header.classList.add("scrolled");
+
+}else{
+
+header.classList.remove("scrolled");
+
+}
+
+});
+
+
+
+
+
+const menu=document.querySelector(".menu-btn");
+const nav=document.querySelector(".nav-links");
+
+
+menu.onclick=()=>{
+
+nav.classList.toggle("open");
+
+};
+
+
+
+
+
+const items=document.querySelectorAll(".service-list li");
+
+
+const image=document.getElementById("serviceImage");
+const title=document.getElementById("serviceTitle");
+const text=document.getElementById("serviceText");
+
+
+items.forEach(item=>{
+
+item.addEventListener("click",()=>{
+
+
+items.forEach(i=>i.classList.remove("active"));
+
+item.classList.add("active");
+
+
+image.src=item.dataset.img;
+
+title.textContent=item.dataset.title;
+
+text.textContent=item.dataset.text;
+
+
+});
+
+
+});
+
+
+
+
+
+const observer=new IntersectionObserver(entries=>{
+
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("visible");
+
+}
+
+});
+
+
+},{threshold:.15});
+
+
+
+document.querySelectorAll(".fade")
+.forEach(el=>observer.observe(el));
+
+
+
+</script>
+
+
+</body>
+</html>
