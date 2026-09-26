@@ -1,39 +1,34 @@
-<nav 
+<nav
   class="navbar"
   [class.navbar-scrolled]="scrolled()"
 >
-
   <div class="navbar-container">
 
-
     <!-- LOGO -->
-    <a 
-      href="#inicio" 
+    <a
+      href="#inicio"
       class="logo"
       (click)="closeMenu()"
+      aria-label="JANERDent - Inicio"
     >
-
-      <div class="logo-main">
-        JD
-      </div>
-
-      <div class="logo-text">
-        <span>JANERDent</span>
-        <small>ODONTOLOGÍA INTEGRAL</small>
-      </div>
-
+      <img
+        src="/assets/hero/janerdent-logo.webp"
+        alt="JANERDent Odontología Integral"
+      >
     </a>
-
 
 
     <!-- DESKTOP MENU -->
     <ul class="desktop-menu">
 
-      @for(item of navItems; track item.name){
+      @for (item of navItems; track item.name) {
 
         <li>
-          <a [href]="item.link">
-            {{item.name}}
+          <a
+            [href]="item.link"
+            (click)="closeMenu()"
+          >
+            {{ item.name }}
           </a>
         </li>
 
@@ -42,9 +37,8 @@
     </ul>
 
 
-
     <!-- CTA -->
-    <a 
+    <a
       href="#contacto"
       class="appointment"
     >
@@ -53,11 +47,11 @@
     </a>
 
 
-
     <!-- MOBILE BUTTON -->
-    <button 
+    <button
       class="menu-button"
       (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen()"
       aria-label="Abrir menú"
     >
 
@@ -66,32 +60,31 @@
 
     </button>
 
-
   </div>
-
 
 
   <!-- MOBILE MENU -->
 
-  @if(menuOpen()){
+  @if (menuOpen()) {
 
     <div class="mobile-menu">
 
-      @for(item of navItems; track item.name){
+      @for (item of navItems; track item.name) {
 
-        <a 
+        <a
           [href]="item.link"
           (click)="closeMenu()"
         >
-          {{item.name}}
+          {{ item.name }}
         </a>
 
       }
 
 
-      <a 
+      <a
         href="#contacto"
         class="mobile-button"
+        (click)="closeMenu()"
       >
         Agendar cita →
       </a>
@@ -99,6 +92,5 @@
     </div>
 
   }
-
 
 </nav>
