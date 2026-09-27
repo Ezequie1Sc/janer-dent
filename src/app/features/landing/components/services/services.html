@@ -1,86 +1,36 @@
 <section
-  #servicesSection
   id="servicios"
   class="services-section"
   aria-labelledby="services-title"
 >
-
   <div class="services-container">
 
-
-    <!-- =================================================
-         INTRODUCCIÓN
-    ================================================== -->
-
-    <div class="services-intro">
-
-      <p class="label">
-
-        <span
-          aria-hidden="true"
-        ></span>
-
+    <!-- ENCABEZADO: MISMA ALINEACIÓN QUE LOS SERVICIOS -->
+    <header class="services-header">
+      <p class="services-eyebrow">
+        <span aria-hidden="true"></span>
         NUESTROS SERVICIOS
-
       </p>
 
-
-      <h2 id="services-title">
-
-        Soluciones<br>
-
-        para cada<br>
-
-        sonrisa<span class="gold-dot">.</span>
-
+      <h2 id="services-title" class="services-title">
+        El cuidado que
+        <span>tu sonrisa merece.</span>
       </h2>
 
-
-      <p class="text">
-
-        Contamos con tratamientos que te ayudan a prevenir,
-        mejorar y mantener una salud bucal óptima,
-        siempre con un enfoque profesional y personalizado.
-
+      <p class="services-description">
+        Tratamientos para cuidar tu salud bucal con
+        atención profesional y personalizada.
       </p>
+    </header>
 
-
-      <a href="#contacto">
-
-        Ver todos los servicios
-
-
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          aria-hidden="true"
-        >
-
-          <path
-            d="M4 12h15m-6-6 6 6-6 6"
-          />
-
-        </svg>
-
-      </a>
-
-    </div>
-
-
-    <!-- =================================================
-         DIENTE INTERACTIVO
-    ================================================== -->
-
-    <div class="tooth-area">
-
-      <div
-        class="tooth-sequence"
-        role="img"
-        aria-label="Diente cerámico con órbitas doradas"
-      >
-
+    <!-- DIENTE FIJO DURANTE EL RECORRIDO -->
+    <div
+      class="tooth-stage"
+      role="img"
+      aria-label="Diente cerámico con órbitas doradas"
+    >
+      <div class="tooth-motion">
         <img
-          #toothImage
           class="tooth-frame"
           src="/assets/touch/01-tooth-front.webp"
           alt=""
@@ -88,181 +38,56 @@
           height="512"
           loading="eager"
           decoding="async"
+          draggable="false"
         >
-
       </div>
-
     </div>
 
-
-    <!-- =================================================
-         DEFINICIONES DE ICONOS
-    ================================================== -->
-
-    <svg
-      class="service-symbols"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-
-
-      <!-- LIMPIEZA -->
-
-      <symbol
-        id="jd-cleaning"
-        viewBox="0 0 32 32"
-      >
-
-        <path
-          d="M6 22 20 8m-2-2 8 8M4 25l3 3 4-4M23 18v5m-2.5-2.5h5M8 6v4M6 8h4"
-        />
-
-      </symbol>
-
-
-      <!-- RESINAS -->
-
-      <symbol
-        id="jd-resin"
-        viewBox="0 0 32 32"
-      >
-
-        <path
-          d="M16 8c-3-2-8-2-10 2-2 4 1 8 2 12 1 4 2 5 4 5 2 0 2-6 4-6s2 6 4 6c2 0 3-1 4-5 1-4 4-8 2-12-2-4-7-4-10-2Z"
-        />
-
-        <path
-          d="m16 9-3 4 3 3 3-3-3-4Z"
-        />
-
-      </symbol>
-
-
-      <!-- BLANQUEAMIENTO -->
-
-      <symbol
-        id="jd-whitening"
-        viewBox="0 0 32 32"
-      >
-
-        <path
-          d="M15 9c-3-2-7-2-9 2-2 4 1 8 2 12 1 4 2 5 4 5 2 0 2-6 4-6s2 6 4 6c2 0 3-1 4-5 1-4 4-8 2-12-2-4-6-4-9-2"
-        />
-
-        <path
-          d="M23 3v7M19.5 6.5h7M27 13v4m-2-2h4"
-        />
-
-      </symbol>
-
-
-      <!-- CONDUCTOS -->
-
-      <symbol
-        id="jd-root"
-        viewBox="0 0 32 32"
-      >
-
-        <path
-          d="M16 7c-3-2-8-2-10 2-2 4 1 8 2 12 1 4 2 5 4 5 2 0 2-6 4-6s2 6 4 6c2 0 3-1 4-5 1-4 4-8 2-12-2-4-7-4-10-2Z"
-        />
-
-        <path
-          d="M16 10v7m-4-4 4 4 4-4m-4 4v8"
-        />
-
-      </symbol>
-
-
-      <!-- IMPLANTES -->
-
-      <symbol
-        id="jd-implant"
-        viewBox="0 0 32 32"
-      >
-
-        <path
-          d="M8 5h16v4c0 4-3 6-8 6s-8-2-8-6V5Zm4 10v11l4 4 4-4V15M11 19h10m-10 4h10m-8 4h6"
-        />
-
-      </symbol>
-
-
-      <!-- PRÓTESIS -->
-
-      <symbol
-        id="jd-prosthesis"
-        viewBox="0 0 32 32"
-      >
-
-        <path
-          d="M3 12c4-3 8-3 13-1 5-2 9-2 13 1l-2 8c-1 4-3 5-5 5-2 0-2-5-6-5s-4 5-6 5c-2 0-4-1-5-5l-2-8Z"
-        />
-
-        <path
-          d="M10 11v10m6-10v9m6-9v10"
-        />
-
-      </symbol>
-
-    </svg>
-
-
-    <!-- =================================================
-         LISTA DE SERVICIOS
-    ================================================== -->
-
+    <!-- ÚNICA COLUMNA DE LECTURA -->
     <div class="service-list">
+      @for (service of services; track service.number) {
+        <article
+          class="service-item"
+          [attr.aria-labelledby]="'service-title-' + service.number"
+        >
+          <div class="service-heading">
+            <span class="service-number" aria-hidden="true">
+              {{ service.number }}
+            </span>
 
-      @for (
-        service of services;
-        track service.number
-      ) {
-
-        <article class="service-item">
-
-          <span class="number">
-            {{ service.number }}
-          </span>
-
-
-          <span
-            class="icon"
-            aria-hidden="true"
-          >
-
-            <svg
-              viewBox="0 0 32 32"
-            >
-
-              <use
-                [attr.href]="'#jd-' + service.icon"
-              ></use>
-
-            </svg>
-
-          </span>
-
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none">
+                @for (path of service.paths; track $index) {
+                  <path [attr.d]="path"></path>
+                }
+              </svg>
+            </span>
+          </div>
 
           <div class="service-copy">
-
-            <h3>
+            <h3 [id]="'service-title-' + service.number">
               {{ service.name }}
             </h3>
 
-
-            <p>
-              {{ service.description }}
-            </p>
-
+            <p>{{ service.description }}</p>
           </div>
-
         </article>
-
       }
-
     </div>
 
-  </div>
+    <footer class="services-footer">
+      <a class="services-cta" href="#contacto">
+        Agenda una valoración
 
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14m-6-6 6 6-6 6"></path>
+        </svg>
+      </a>
+    </footer>
+
+  </div>
 </section>
