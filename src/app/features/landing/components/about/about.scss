@@ -2,15 +2,17 @@
   display: block;
   width: 100%;
 
-  --about-surround: #111211;
-  --about-paper: #f4f3ef;
-  --about-ink: #20211f;
-  --about-muted: #62645e;
-  --about-gold: #987538;
-  --about-line: rgba(32, 33, 31, 0.16);
+  --about-surround: #eae8e3;
+  --about-paper: #f8f7f4;
+  --about-ink: #242521;
+  --about-muted: #65665f;
+  --about-gold: #947238;
+  --about-line: rgba(36, 37, 33, 0.14);
 
-  --about-radius: 30px;
-  --about-header-space: 88px;
+  --about-radius: 26px;
+
+  /* Navbar de aproximadamente 80px + 16px de separación. */
+  --about-header-space: 96px;
 
   font-family: inherit;
 }
@@ -20,7 +22,9 @@
   box-sizing: border-box;
 }
 
-/* RECORRIDO DEL SCROLL */
+/* =====================================================
+   SECCIÓN Y RECORRIDO DEL SCROLL
+===================================================== */
 
 .about-section {
   position: relative;
@@ -51,11 +55,12 @@
   background: var(--about-surround);
 }
 
-/*
- * La escena completa sigue siendo opaca.
- * Así los textos anteriores no se transparentan
- * al entrar el siguiente panel.
- */
+/* =====================================================
+   ESCENAS SUPERPUESTAS
+
+   El fondo de cada escena es opaco para cubrir
+   completamente los textos de la escena anterior.
+===================================================== */
 
 .about-scene {
   position: absolute;
@@ -70,10 +75,11 @@
 
   padding:
     var(--about-header-space)
-    clamp(18px, 3.5vw, 64px)
-    56px;
+    clamp(16px, 2vw, 36px)
+    42px;
 
   background: var(--about-surround);
+  color: var(--about-ink);
 
   overflow: hidden;
   isolation: isolate;
@@ -82,6 +88,7 @@
   backface-visibility: hidden;
   will-change: transform;
 
+  /* El movimiento depende directamente del scroll. */
   transition: none;
   pointer-events: none;
 }
@@ -100,47 +107,52 @@
   z-index: 3;
 }
 
-/* PANEL CLARO CON BORDES REDONDEADOS */
+/* =====================================================
+   TARJETA PRINCIPAL
+===================================================== */
 
 .scene-composition {
   position: relative;
 
   display: grid;
   grid-template-columns:
-    minmax(0, 0.88fr)
-    minmax(0, 1.12fr);
+    minmax(0, 0.92fr)
+    minmax(0, 1.08fr);
 
   align-items: center;
-  gap: clamp(28px, 4.5vw, 76px);
+  gap: clamp(32px, 4.5vw, 72px);
 
   width: 100%;
-  max-width: 1360px;
+  max-width: 1600px;
   min-width: 0;
   min-height: 0;
 
   margin: 0 auto;
-  padding: clamp(24px, 3vw, 48px);
+  padding: clamp(24px, 2.5vw, 40px);
 
   background: var(--about-paper);
   color: var(--about-ink);
 
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(36, 37, 33, 0.08);
   border-radius: var(--about-radius);
 
+  box-shadow: 0 5px 20px rgba(36, 37, 33, 0.035);
+
   /*
-   * Permite acceder al contenido con zoom o en
-   * pantallas excepcionalmente bajas.
+   * Respaldo para texto ampliado o pantallas muy bajas:
+   * permite acceder al contenido que exceda el panel.
    */
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #bab7ae transparent;
 }
 
-/* FOTOGRAFÍA */
+/* =====================================================
+   FOTOGRAFÍA
+===================================================== */
 
 .scene-image {
   position: relative;
-
   align-self: stretch;
 
   width: 100%;
@@ -152,7 +164,7 @@
   overflow: hidden;
 
   background: #dedbd3;
-  border-radius: 18px;
+  border-radius: 16px;
 }
 
 .scene-image img {
@@ -176,7 +188,7 @@
   object-position: center 40%;
 }
 
-/* Contraste localizado únicamente detrás del pie de foto. */
+/* Contraste localizado detrás del pie de fotografía. */
 
 .scene-image::after {
   content: "";
@@ -196,7 +208,6 @@
 
 .image-caption {
   position: absolute;
-
   right: 20px;
   bottom: 20px;
   left: 20px;
@@ -206,7 +217,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   gap: 12px;
 
   color: #ffffff;
@@ -217,11 +227,13 @@
   letter-spacing: 0.15em;
 }
 
-/* CONTENIDO */
+/* =====================================================
+   CONTENIDO Y TIPOGRAFÍA
+===================================================== */
 
 .scene-content {
   width: 100%;
-  max-width: 580px;
+  max-width: 600px;
   min-width: 0;
 
   padding: 8px 0;
@@ -260,13 +272,6 @@
   letter-spacing: 0.18em;
 }
 
-/*
- * Tipografía próxima a la referencia:
- * ligera, sin serifas y sin titulares en negrita.
- *
- * Hereda la familia tipográfica del sitio.
- */
-
 .scene-title {
   max-width: 100%;
   margin: 0;
@@ -292,7 +297,9 @@
   font-weight: inherit;
 }
 
-/* IDENTIDAD DEL ESPECIALISTA */
+/* =====================================================
+   INFORMACIÓN DEL ESPECIALISTA
+===================================================== */
 
 .doctor-info {
   margin-top: clamp(22px, 3svh, 34px);
@@ -339,7 +346,9 @@
   line-height: 1.8;
 }
 
-/* LISTAS EDITORIALES */
+/* =====================================================
+   LISTAS DE EXPERIENCIA Y PRECISIÓN
+===================================================== */
 
 .scene-details {
   width: 100%;
@@ -349,7 +358,6 @@
 .detail-row {
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr);
-
   gap: 15px;
 
   padding: 15px 0;
@@ -395,14 +403,16 @@
   line-height: 1.65;
 }
 
-/* INDICADOR SOBRE EL MARGEN OSCURO */
+/* =====================================================
+   INDICADOR DE PROGRESO
+===================================================== */
 
 .about-progress {
   position: absolute;
 
-  right: clamp(18px, 3.5vw, 64px);
-  bottom: 20px;
-  left: clamp(18px, 3.5vw, 64px);
+  right: clamp(16px, 2vw, 36px);
+  bottom: 14px;
+  left: clamp(16px, 2vw, 36px);
 
   z-index: 10;
 
@@ -410,11 +420,11 @@
   align-items: center;
   gap: 18px;
 
-  color: #bcbcb5;
+  color: var(--about-muted);
 
   font-size: 9px;
   line-height: 1.5;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
 
   pointer-events: none;
 }
@@ -429,7 +439,7 @@
 
   overflow: hidden;
 
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(36, 37, 33, 0.16);
 }
 
 .progress-track > span {
@@ -438,7 +448,7 @@
   width: 100%;
   height: 100%;
 
-  background: #c5a365;
+  background: var(--about-gold);
 
   transform-origin: left center;
   transform: scaleX(var(--scroll-progress));
@@ -450,19 +460,23 @@
 }
 
 .progress-current {
-  color: #f4f3ef;
+  color: var(--about-ink);
 }
 
-/* PORTÁTILES CON POCA ALTURA */
+/* =====================================================
+   PORTÁTILES CON POCA ALTURA
+===================================================== */
 
 @media (min-width: 761px) and (max-height: 760px) {
   .about-scene {
-    padding-top: 76px;
-    padding-bottom: 48px;
+    padding:
+      var(--about-header-space)
+      22px
+      38px;
   }
 
   .scene-composition {
-    gap: 36px;
+    gap: clamp(28px, 4vw, 56px);
     padding: 24px;
   }
 
@@ -485,6 +499,7 @@
 
   .scene-description {
     margin-top: 16px;
+
     font-size: 13px;
     line-height: 1.65;
   }
@@ -500,21 +515,29 @@
   .detail-row p {
     font-size: 12px;
   }
+
+  .about-progress {
+    right: 22px;
+    bottom: 12px;
+    left: 22px;
+  }
 }
 
-/* MÓVIL */
+/* =====================================================
+   MÓVIL
+===================================================== */
 
 @media (max-width: 760px) {
   :host {
-    --about-header-space: 72px;
-    --about-radius: 24px;
+    --about-header-space: 80px;
+    --about-radius: 22px;
   }
 
   .about-scene {
     padding:
       var(--about-header-space)
-      14px
-      44px;
+      12px
+      36px;
   }
 
   .scene-composition {
@@ -522,17 +545,18 @@
     grid-template-rows: auto auto;
 
     align-content: start;
-    gap: 20px;
+    gap: 18px;
 
     max-width: 540px;
-    padding: 20px;
+    padding: 18px;
   }
 
   .scene-image {
     align-self: auto;
+
     height: clamp(120px, 21svh, 190px);
 
-    border-radius: 14px;
+    border-radius: 13px;
   }
 
   .scene-image img {
@@ -628,18 +652,24 @@
   }
 
   .about-progress {
-    right: 20px;
-    bottom: 15px;
-    left: 20px;
+    right: 18px;
+    bottom: 11px;
+    left: 18px;
 
-    gap: 12px;
+    gap: 10px;
 
     font-size: 8px;
     letter-spacing: 0.08em;
   }
+
+  .progress-track {
+    width: 64px;
+  }
 }
 
-/* MÓVILES DE POCA ALTURA */
+/* =====================================================
+   MÓVILES CON POCA ALTURA
+===================================================== */
 
 @media (max-width: 760px) and (max-height: 700px) {
   .scene-composition {
@@ -677,7 +707,12 @@
   }
 }
 
-/* ACCESIBILIDAD */
+/* =====================================================
+   MOVIMIENTO REDUCIDO
+
+   Muestra las tres escenas en orden y conserva
+   todo su contenido accesible.
+===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .about-section {
@@ -686,6 +721,7 @@
 
   .about-sticky {
     position: relative;
+
     height: auto;
     overflow: visible;
   }
