@@ -1,93 +1,187 @@
 <section
-id="galeria"
-class="gallery-section"
+  id="galeria"
+  class="gallery-section"
+  aria-labelledby="gallery-title"
 >
+  <div class="gallery-container">
 
+    <header class="gallery-header">
+      <div>
+        <p class="gallery-label">
+          <span aria-hidden="true"></span>
+          RESULTADOS
+        </p>
 
-<div class="gallery-container">
+        <h2 id="gallery-title">
+          Tratamientos que<br>
+          hablan por sí mismos.
+        </h2>
+      </div>
 
+      <div class="gallery-intro">
+        <p>
+          Cada sonrisa tiene una historia.
+          Descubre el antes y después de nuestros tratamientos.
+        </p>
 
+        <span class="interaction-note">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path d="M8 8 4 12l4 4M16 8l4 4-4 4M4 12h16"/>
+          </svg>
 
-<div class="gallery-header">
+          Desliza para comparar
+        </span>
+      </div>
+    </header>
 
+    <div class="gallery-cases">
+      @for (item of comparisons(); track item.id) {
+        <article
+          class="result-case"
+          [class.result-case--portrait]="item.portrait"
+          [attr.aria-labelledby]="item.id + '-title'"
+        >
 
-<p class="label">
+          <div class="case-description">
+            <span class="case-number">{{ item.number }}</span>
 
-<span></span>
+            <div class="case-copy">
+              <p class="case-category">{{ item.category }}</p>
 
-RESULTADOS
+              <h3 [id]="item.id + '-title'">
+                {{ item.title }}
+              </h3>
 
-</p>
+              <p class="case-text">{{ item.description }}</p>
+            </div>
 
+            <div class="case-detail">
+              <span class="detail-line" aria-hidden="true"></span>
+              <span>El cambio, a tu ritmo.</span>
+            </div>
+          </div>
 
+          <figure class="comparison-figure">
+            <div
+              class="comparison"
+              role="slider"
+              tabindex="0"
+              aria-orientation="horizontal"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              [attr.aria-label]="'Comparar antes y después: ' + item.title"
+              [attr.aria-valuenow]="item.position"
+              [attr.aria-valuetext]="
+                item.position + '% antes y ' +
+                (100 - item.position) + '% después'
+              "
+              [attr.aria-describedby]="item.id + '-help'"
+              [style.--position]="item.position + '%'"
+              [style.aspect-ratio]="item.ratio"
+              (pointerdown)="startDrag($event, item.id)"
+              (pointermove)="moveDrag($event, item.id)"
+              (pointerup)="endDrag($event)"
+              (pointercancel)="endDrag($event)"
+              (lostpointercapture)="cancelDrag()"
+              (keydown)="onKeydown($event, item.id)"
+            >
 
-<h2>
+              <!-- Fotografía completa del después -->
+              <div class="image-layer image-layer--after">
+                <img
+                  [src]="item.after"
+                  [alt]="item.title + ': después del tratamiento'"
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                >
+              </div>
 
-Tratamientos que
-<br>
-hablan por sí mismos.
+              <!-- Fotografía completa del antes; solo cambia su máscara -->
+              <div class="image-layer image-layer--before">
+                <img
+                  [src]="item.before"
+                  [alt]="item.title + ': antes del tratamiento'"
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                  (load)="setImageRatio($event, item.id)"
+                >
+              </div>
 
-</h2>
+              <div class="comparison-divider" aria-hidden="true">
+                <span class="comparison-handle">
+                  <svg
+                    viewBox="0 0 32 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  >
+                    <path d="m11 6-6 6 6 6M21 6l6 6-6 6"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
 
+            <figcaption class="comparison-caption">
+              <span class="comparison-state">Antes</span>
 
+              <span
+                class="comparison-help"
+                [id]="item.id + '-help'"
+              >
+                Arrastra el control · Usa las flechas del teclado
+              </span>
 
-<p>
+              <span class="comparison-state comparison-state--after">
+                Después
+              </span>
+            </figcaption>
 
-Cada sonrisa refleja nuestro compromiso
-con la calidad, precisión y cuidado
-en cada detalle.
+            <div class="comparison-actions" aria-label="Vistas de comparación">
+              <button
+                type="button"
+                [class.is-active]="item.position === 100"
+                [attr.aria-pressed]="item.position === 100"
+                (click)="setPosition(item.id, 100)"
+              >
+                Ver antes
+              </button>
 
-</p>
+              <button
+                type="button"
+                [class.is-active]="item.position === 50"
+                [attr.aria-pressed]="item.position === 50"
+                (click)="setPosition(item.id, 50)"
+              >
+                Comparar
+              </button>
 
+              <button
+                type="button"
+                [class.is-active]="item.position === 0"
+                [attr.aria-pressed]="item.position === 0"
+                (click)="setPosition(item.id, 0)"
+              >
+                Ver después
+              </button>
+            </div>
+          </figure>
 
-</div>
+        </article>
+      }
+    </div>
 
+    <footer class="gallery-footer">
+      <span class="footer-dot" aria-hidden="true"></span>
+      Cada sonrisa es única. Los resultados varían según cada paciente.
+    </footer>
 
-
-
-
-
-<div class="gallery-grid">
-
-
-@for(item of images; track item.title){
-
-
-<article class="gallery-item">
-
-
-<div class="image-wrapper">
-
-
-<img
-[src]="item.image"
-[alt]="item.title"
->
-
-
-</div>
-
-
-<div class="caption">
-
-{{item.title}}
-
-</div>
-
-
-</article>
-
-
-}
-
-
-
-</div>
-
-
-
-
-</div>
-
-
+  </div>
 </section>
