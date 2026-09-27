@@ -1,762 +1,540 @@
 :host {
   display: block;
+  width: 100%;
+
+  font-family: inherit;
+
+  --services-background: #f8f7f4;
+  --services-ink: #242521;
+  --services-muted: #65665f;
+  --services-gold: #947238;
+  --services-line: rgba(36, 37, 33, 0.14);
+
+  /* Ajustar si cambia la altura real del navbar. */
+  --services-nav-height: 80px;
 }
 
+.services-section,
+.services-section * {
+  box-sizing: border-box;
+}
 
 /* =====================================================
-   SERVICES SECTION
+   SECCIÓN COMPACTA
 ===================================================== */
 
 .services-section {
   position: relative;
 
-  background: #f8f7f4;
+  padding:
+    clamp(40px, 4vw, 64px)
+    clamp(22px, 5vw, 80px);
 
-  color: #1d1d1f;
+  background: var(--services-background);
+  color: var(--services-ink);
 
-  padding: 120px 5%;
+  isolation: isolate;
+
+  scroll-margin-top: calc(
+    var(--services-nav-height) + 16px
+  );
+
+  --tooth-y: 0px;
+  --tooth-rotation: 0deg;
+}
+
+/*
+ * Una columna de texto y una columna visual.
+ *
+ * El diente abarca las tres filas y permanece
+ * sticky dentro de todo el contenedor.
+ */
+.services-container {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(0, 0.85fr);
+
+  grid-template-rows: auto auto auto;
+
+  align-items: start;
+
+  column-gap: clamp(36px, 5vw, 80px);
+  row-gap: 0;
+
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+}
+
+/* =====================================================
+   ENCABEZADO
+===================================================== */
+
+.services-header {
+  grid-column: 1;
+  grid-row: 1;
+
+  min-width: 0;
+
+  margin: 0 0 28px;
+}
+
+.services-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 0 0 18px;
+
+  color: var(--services-gold);
+
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.22em;
+}
+
+.services-eyebrow > span {
+  flex: 0 0 26px;
+  height: 1px;
+
+  background: var(--services-gold);
+}
+
+.services-title {
+  margin: 0;
+
+  color: var(--services-ink);
+
+  font-family: inherit;
+  font-size: clamp(36px, 4vw, 58px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.services-title > span {
+  display: block;
+
+  color: inherit;
+  font-weight: inherit;
+}
+
+.services-description {
+  max-width: 44ch;
+
+  margin: 18px 0 0;
+
+  color: var(--services-muted);
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+/* =====================================================
+   DIENTE STICKY
+===================================================== */
+
+.tooth-stage {
+  position: sticky;
+
+  top: calc(var(--services-nav-height) + 24px);
+
+  grid-column: 2;
+  grid-row: 1 / 4;
+
+  align-self: start;
+  justify-self: center;
+
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  max-width: 450px;
+
+  /*
+   * Limita su tamaño también por la altura disponible.
+   * La imagen no crece fuera de su columna.
+   */
+  height: min(
+    450px,
+    calc(100svh - var(--services-nav-height) - 48px)
+  );
+
+  min-width: 0;
 
   overflow: hidden;
 }
 
-
-/* =====================================================
-   CONTAINER
-===================================================== */
-
-.services-container {
-  max-width: 1500px;
-
-  margin: 0 auto;
-
-  display: grid;
-
-  /*
-   * Más espacio para el diente
-   * en la columna central.
-   */
-
-  grid-template-columns:
-    minmax(280px, 1fr)
-    minmax(390px, 560px)
-    minmax(320px, 1fr);
-
-  align-items: center;
-
-  gap: clamp(
-    30px,
-    3vw,
-    65px
-  );
-}
-
-
-/* =====================================================
-   INTRODUCCIÓN
-===================================================== */
-
-.services-intro {
-  position: relative;
-
-  z-index: 2;
-}
-
-
-.label {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  margin: 0;
-
-  color: #8b785f;
-
-  font-size: 11px;
-
-  font-weight: 600;
-
-  letter-spacing: 0.16em;
-}
-
-
-.label span {
-  width: 28px;
-
-  height: 1px;
-
-  background: #c99a56;
-}
-
-
-.services-intro h2 {
-  margin: 28px 0;
-
-  font-size: clamp(
-    44px,
-    4.8vw,
-    72px
+.tooth-motion {
+  width: min(
+    90%,
+    410px,
+    calc(100svh - var(--services-nav-height) - 88px)
   );
 
-  line-height: 1.03;
-
-  font-weight: 500;
-
-  letter-spacing: -0.055em;
-}
-
-
-.gold-dot {
-  color: #c99a56;
-}
-
-
-.text {
-  max-width: 420px;
-
-  margin: 0;
-
-  color: #696969;
-
-  font-size: 16px;
-
-  line-height: 1.65;
-}
-
-
-/* =====================================================
-   BOTÓN
-===================================================== */
-
-.services-intro a {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 16px;
-
-  margin-top: 32px;
-
-  padding: 13px 20px;
-
-  border: 1px solid #c99a56;
-
-  border-radius: 99px;
-
-  color: #1d1d1f;
-
-  font-size: 14px;
-
-  text-decoration: none;
-
-  transition:
-    background 0.3s ease,
-    color 0.3s ease;
-}
-
-
-.services-intro a svg {
-  width: 17px;
-
-  height: 17px;
-
-  stroke: currentColor;
-
-  stroke-width: 1.5;
-
-  stroke-linecap: round;
-
-  stroke-linejoin: round;
-
-  transition:
-    transform 0.3s ease;
-}
-
-
-.services-intro a:hover {
-  background: #1d1d1f;
-
-  color: #fff;
-}
-
-
-.services-intro a:hover svg {
-  transform: translateX(4px);
-}
-
-
-/* =====================================================
-   ÁREA DEL DIENTE
-===================================================== */
-
-.tooth-area {
-  position: relative;
-
-  width: 100%;
-
-  min-width: 0;
-
-  min-height: 560px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  overflow: visible;
-}
-
-
-/* =====================================================
-   HALO DORADO
-===================================================== */
-
-.tooth-area::before {
-  content: '';
-
-  position: absolute;
-
-  width: 85%;
-
-  height: 85%;
-
-  left: 50%;
-
-  top: 50%;
+  aspect-ratio: 1;
 
   transform:
-    translate(
-      -50%,
-      -50%
-    );
+    translate3d(0, var(--tooth-y), 0)
+    rotate(var(--tooth-rotation));
 
-  border-radius: 50%;
+  transform-origin: center;
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(
-        201,
-        154,
-        86,
-        0.16
-      ) 0%,
-
-      rgba(
-        201,
-        154,
-        86,
-        0.07
-      ) 38%,
-
-      transparent 72%
-    );
-
-  filter: blur(30px);
-
-  pointer-events: none;
-
-  z-index: 0;
+  transition: none;
 }
-
-
-/* =====================================================
-   CONTENEDOR DEL DIENTE
-===================================================== */
-
-.tooth-sequence {
-  position: relative;
-
-  /*
-   * Antes:
-   * max-width: 430px;
-   *
-   * Ahora aumentamos considerablemente
-   * el área disponible.
-   */
-
-  width: 100%;
-
-  max-width: 540px;
-
-  aspect-ratio: 1 / 1;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  isolation: isolate;
-
-  z-index: 1;
-
-  overflow: visible;
-}
-
-
-/* =====================================================
-   FRAME DEL DIENTE
-===================================================== */
 
 .tooth-frame {
   display: block;
 
-  /*
-   * Los archivos WEBP tienen
-   * espacio transparente alrededor.
-   *
-   * Por eso hacemos el frame
-   * más grande que su contenedor.
-   *
-   * Esto hace que el diente real
-   * ocupe mucho más espacio visual.
-   */
-
-  width: 180%;
-
-  height: 180%;
-
-  max-width: none;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
 
   object-fit: contain;
 
   user-select: none;
-
   pointer-events: none;
-
-  will-change: contents;
-
   -webkit-user-drag: none;
-
 }
 
-
 /* =====================================================
-   ICONOS OCULTOS
-===================================================== */
+   SERVICIOS
 
-.service-symbols {
-  position: absolute;
-
-  width: 0;
-
-  height: 0;
-
-  overflow: hidden;
-}
-
-
-/* =====================================================
-   LISTA DE SERVICIOS
+   El título de cada servicio comparte el mismo
+   borde izquierdo que el encabezado principal.
 ===================================================== */
 
 .service-list {
-  display: flex;
+  grid-column: 1;
+  grid-row: 2;
 
-  flex-direction: column;
-
-  position: relative;
-
-  z-index: 2;
+  width: 100%;
+  min-width: 0;
 }
-
-
-/* =====================================================
-   SERVICE ITEM
-===================================================== */
 
 .service-item {
-  display: grid;
+  position: relative;
 
-  grid-template-columns:
-    25px
-    48px
-    minmax(0, 1fr);
+  padding: 20px 0 24px;
 
+  border-top: 1px solid var(--services-line);
+
+  --row-y: 0px;
+  --row-progress: 0;
+}
+
+.service-item:last-child {
+  border-bottom: 1px solid var(--services-line);
+}
+
+/* Línea vinculada al progreso de entrada. */
+.service-item::before {
+  content: "";
+
+  position: absolute;
+  top: -1px;
+  right: 0;
+  left: 0;
+
+  height: 1px;
+
+  background: var(--services-gold);
+
+  transform-origin: left center;
+  transform: scaleX(var(--row-progress));
+
+  pointer-events: none;
+}
+
+.service-heading {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  gap: 14px;
-
-  min-width: 0;
-
-  padding: 16px 4px;
-
-  border-bottom:
-    1px solid #ddd9d2;
-
-  transition:
-    transform 0.3s ease;
+  margin-bottom: 8px;
 }
 
+.service-number {
+  color: var(--services-gold);
 
-.service-item:hover {
-  transform:
-    translateX(-5px);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+
+  font-variant-numeric: tabular-nums;
 }
 
-
-/* =====================================================
-   NÚMERO
-===================================================== */
-
-.number {
-  color: #b38b55;
-
-  font-size: 12px;
-
-  font-weight: 600;
-}
-
-
-/* =====================================================
-   ICONO
-===================================================== */
-
-.icon {
+.service-icon {
   display: grid;
-
   place-items: center;
 
-  width: 44px;
+  width: 28px;
+  height: 28px;
 
-  height: 44px;
+  color: #76776f;
 
-  border:
-    1px solid #e7dfd4;
-
-  border-radius: 50%;
-
-  color: #b38b55;
-
-  transition:
-    color 0.3s ease,
-    background 0.3s ease,
-    border-color 0.3s ease;
+  transition: color 180ms ease;
 }
 
+.service-icon svg {
+  display: block;
 
-.icon svg {
-  width: 23px;
-
-  height: 23px;
+  width: 26px;
+  height: 26px;
 
   fill: none;
-
   stroke: currentColor;
 
-  stroke-width: 1.45;
-
+  stroke-width: 1.2;
   stroke-linecap: round;
-
   stroke-linejoin: round;
 }
 
-
-.service-item:hover .icon {
-  color: #fff;
-
-  background: #1d1d1f;
-
-  border-color: #1d1d1f;
+.service-item.is-active .service-icon {
+  color: var(--services-gold);
 }
 
+.service-copy {
+  min-width: 0;
 
-/* =====================================================
-   TEXTO DEL SERVICIO
-===================================================== */
-
-.service-item h3 {
-  margin: 0 0 4px;
-
-  color: #1d1d1f;
-
-  font-size: 15px;
-
-  font-weight: 600;
-
-  letter-spacing: -0.015em;
+  transform: translate3d(0, var(--row-y), 0);
 }
 
-
-.service-item p {
+.service-copy h3 {
   margin: 0;
 
-  color: #777;
+  color: var(--services-ink);
 
-  font-size: 12px;
+  font-family: inherit;
+  font-size: clamp(25px, 2.35vw, 32px);
+  font-weight: 300;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
 
-  line-height: 1.45;
+  overflow-wrap: break-word;
 }
 
+.service-copy p {
+  max-width: 52ch;
+
+  margin: 9px 0 0;
+
+  color: var(--services-muted);
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+/* =====================================================
+   BOTÓN FINAL
+===================================================== */
+
+.services-footer {
+  grid-column: 1;
+  grid-row: 3;
+
+  padding-top: 28px;
+}
+
+.services-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+
+  min-height: 48px;
+
+  padding: 13px 24px;
+
+  border: 1px solid var(--services-ink);
+  border-radius: 999px;
+
+  background: var(--services-ink);
+  color: var(--services-background);
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  text-decoration: none;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.services-cta svg {
+  display: block;
+
+  width: 18px;
+  height: 18px;
+
+  color: #c5a365;
+
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  transition: transform 180ms ease;
+}
+
+.services-cta:focus-visible {
+  outline: 2px solid var(--services-gold);
+  outline-offset: 5px;
+}
+
+@media (hover: hover) {
+  .services-cta:hover {
+    background: #393a34;
+    border-color: #393a34;
+  }
+
+  .services-cta:hover svg {
+    transform: translateX(3px);
+  }
+}
 
 /* =====================================================
    TABLET
 ===================================================== */
 
-@media (max-width: 1100px) {
-
-  .services-section {
-    padding:
-      100px 5%;
-  }
-
-
+@media (min-width: 761px) and (max-width: 1000px) {
   .services-container {
     grid-template-columns:
-      minmax(0, 1fr)
-      minmax(0, 1fr);
+      minmax(0, 1.25fr)
+      minmax(0, 0.75fr);
 
-    gap: 40px;
+    column-gap: 28px;
   }
 
-
-  .tooth-area {
-    grid-column: 1 / -1;
-
-    grid-row: 1;
-
-    width:
-      min(
-        600px,
-        100%
-      );
-
-    min-height: 520px;
-
-    margin: 0 auto;
+  .services-title {
+    font-size: 42px;
   }
 
-
-  .tooth-sequence {
-    max-width: 560px;
+  .service-copy h3 {
+    font-size: 27px;
   }
-
-
-  .tooth-frame {
-    width: 175%;
-
-    height: 175%;
-  }
-
-
-  .services-intro {
-    grid-column: 1;
-
-    grid-row: 2;
-  }
-
-
-  .service-list {
-    grid-column: 2;
-
-    grid-row: 2;
-  }
-
 }
-
-
-/* =====================================================
-   TABLET PEQUEÑA
-===================================================== */
-
-@media (max-width: 850px) {
-
-  .services-container {
-    grid-template-columns:
-      1fr;
-  }
-
-
-  .tooth-area {
-    grid-column: 1;
-
-    grid-row: 1;
-
-    min-height: 500px;
-  }
-
-
-  .services-intro {
-    grid-column: 1;
-
-    grid-row: 2;
-  }
-
-
-  .service-list {
-    grid-column: 1;
-
-    grid-row: 3;
-  }
-
-}
-
 
 /* =====================================================
    MÓVIL
+
+   El diente se convierte en una franja compacta
+   que acompaña el recorrido debajo del navbar.
 ===================================================== */
 
-@media (max-width: 700px) {
-
-  .services-section {
-    padding:
-      80px 24px;
+@media (max-width: 760px) {
+  :host {
+    --services-nav-height: 72px;
   }
 
+  .services-section {
+    padding: 40px 22px;
+  }
 
   .services-container {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: stretch;
-
-    gap: 42px;
+    display: block;
+    max-width: 560px;
   }
 
-
-  .services-intro h2 {
-    font-size:
-      clamp(
-        42px,
-        11vw,
-        58px
-      );
+  .services-header {
+    margin-bottom: 12px;
   }
 
+  .services-eyebrow {
+    margin-bottom: 16px;
 
-  .text {
-    font-size: 15px;
+    font-size: 8px;
+    letter-spacing: 0.2em;
   }
 
-
-  /* ================================================
-     DIENTE
-  ================================================ */
-
-  .tooth-area {
-    order: 1;
-
-    width: 100%;
-
-    min-height: 420px;
+  .services-title {
+    font-size: clamp(34px, 8.4vw, 44px);
   }
 
-
-  .tooth-sequence {
-    width:
-      min(
-        430px,
-        100%
-      );
-
-    max-width: none;
-  }
-
-
-  /*
-   * En móvil mantenemos
-   * el diente grande pero
-   * evitamos que se salga
-   * demasiado de la pantalla.
-   */
-
-  .tooth-frame {
-    width: 155%;
-
-    height: 155%;
-  }
-
-
-  /* ================================================
-     LISTA
-  ================================================ */
-
-  .service-list {
-    order: 2;
-  }
-
-
-  .service-item {
-    grid-template-columns:
-      24px
-      44px
-      minmax(0, 1fr);
-
-    gap: 12px;
-  }
-
-
-  .service-item:hover {
-    transform: none;
-  }
-
-}
-
-
-/* =====================================================
-   MÓVIL PEQUEÑO
-===================================================== */
-
-@media (max-width: 420px) {
-
-  .services-section {
-    padding:
-      70px 20px;
-  }
-
-
-  .tooth-area {
-    min-height: 360px;
-  }
-
-
-  .tooth-frame {
-    width: 145%;
-
-    height: 145%;
-  }
-
-
-  .service-item {
-    padding:
-      14px 2px;
-  }
-
-
-  .service-item h3 {
+  .services-description {
+    margin-top: 16px;
     font-size: 14px;
   }
 
+  .tooth-stage {
+    top: var(--services-nav-height);
+    z-index: 2;
 
-  .service-item p {
-    font-size: 11px;
+    width: 100%;
+    max-width: none;
+    height: 160px;
+
+    margin: 0 0 16px;
+
+    background: var(--services-background);
   }
 
+  .tooth-motion {
+    width: 136px;
+  }
+
+  .service-item {
+    padding: 17px 0 21px;
+  }
+
+  .service-copy h3 {
+    font-size: 26px;
+  }
+
+  .service-copy p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .services-footer {
+    padding-top: 24px;
+  }
 }
 
+/* En horizontal, evita que el diente tape la lectura. */
+
+@media (max-width: 760px) and (max-height: 500px) {
+  .tooth-stage {
+    position: relative;
+    top: auto;
+  }
+}
 
 /* =====================================================
    MOVIMIENTO REDUCIDO
 ===================================================== */
 
-@media (
-  prefers-reduced-motion: reduce
-) {
-
-  .tooth-frame {
-    transition: none;
+@media (prefers-reduced-motion: reduce) {
+  .tooth-stage {
+    position: relative;
+    top: auto;
   }
 
-
-  .service-item,
-  .services-intro a,
-  .services-intro a svg,
-  .icon {
-    transition: none;
+  .tooth-motion,
+  .service-copy {
+    transform: none;
   }
 
+  .service-item::before {
+    display: none;
+  }
+
+  .service-icon,
+  .services-cta,
+  .services-cta svg {
+    transition: none;
+  }
 }
