@@ -1,733 +1,718 @@
 :host {
   display: block;
   width: 100%;
+
+  --about-surround: #111211;
+  --about-paper: #f4f3ef;
+  --about-ink: #20211f;
+  --about-muted: #62645e;
+  --about-gold: #987538;
+  --about-line: rgba(32, 33, 31, 0.16);
+
+  --about-radius: 30px;
+  --about-header-space: 88px;
+
+  font-family: inherit;
 }
 
+.about-section,
+.about-section * {
+  box-sizing: border-box;
+}
 
-/* ==========================================================
-   SECTION
-========================================================== */
+/* RECORRIDO DEL SCROLL */
 
 .about-section {
   position: relative;
-
   width: 100%;
 
-  /*
-   * 3 escenas.
-   * Cada escena utiliza aproximadamente una pantalla
-   * de recorrido.
-   */
   height: 300vh;
+  height: 300svh;
 
-  background: #0b0b0b;
-
-  color: #ffffff;
-
-  overflow: clip;
+  background: var(--about-surround);
+  color: var(--about-ink);
 
   isolation: isolate;
+
+  --scroll-progress: 0;
 }
-
-
-/* ==========================================================
-   STICKY VIEWPORT
-========================================================== */
 
 .about-sticky {
   position: sticky;
-
   top: 0;
 
   width: 100%;
   height: 100vh;
-
-  min-height: 680px;
+  height: 100svh;
 
   overflow: hidden;
+  isolation: isolate;
 
-  display: block;
-
-  background: #0b0b0b;
-
-  perspective: 1400px;
+  background: var(--about-surround);
 }
 
-
-/* ==========================================================
-   SCENES
-========================================================== */
+/*
+ * La escena completa sigue siendo opaca.
+ * Así los textos anteriores no se transparentan
+ * al entrar el siguiente panel.
+ */
 
 .about-scene {
   position: absolute;
-
   inset: 0;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
 
   width: 100%;
   height: 100%;
 
-  display: flex;
+  padding:
+    var(--about-header-space)
+    clamp(18px, 3.5vw, 64px)
+    56px;
 
-  align-items: center;
-  justify-content: center;
+  background: var(--about-surround);
 
   overflow: hidden;
+  isolation: isolate;
 
-  /*
-   * MUY IMPORTANTE:
-   * Todas las escenas están exactamente
-   * en el mismo lugar.
-   */
   transform: translate3d(0, 100%, 0);
-
-  transform-origin: center center;
-
-  will-change: transform, opacity;
-
   backface-visibility: hidden;
+  will-change: transform;
 
-  /*
-   * Evita que la transición se vea
-   * como un simple cambio de tarjeta.
-   */
-  transform-style: preserve-3d;
-
-  /*
-   * No usamos transition porque el movimiento
-   * está controlado directamente por el scroll.
-   */
   transition: none;
-
   pointer-events: none;
 }
 
-
-/*
- * Primera escena visible desde el principio.
- */
-
 .scene-01 {
-  transform: translate3d(0, 0, 0);
-
   z-index: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
 }
 
-
-/*
- * Las siguientes empiezan abajo.
- */
-
-.scene-02,
-.scene-03 {
+.scene-02 {
   z-index: 2;
 }
 
+.scene-03 {
+  z-index: 3;
+}
 
-/* ==========================================================
-   COMPOSITION
-========================================================== */
+/* PANEL CLARO CON BORDES REDONDEADOS */
 
 .scene-composition {
   position: relative;
 
-  width: min(1180px, 82vw);
-
-  height: min(700px, 76vh);
-
-  margin: 0 auto;
-
   display: grid;
-
-  /*
-   * La imagen ya NO domina la pantalla.
-   */
-  grid-template-columns: minmax(300px, 0.82fr) minmax(420px, 1fr);
-
-  gap: clamp(60px, 7vw, 120px);
+  grid-template-columns:
+    minmax(0, 0.88fr)
+    minmax(0, 1.12fr);
 
   align-items: center;
+  gap: clamp(28px, 4.5vw, 76px);
 
-  transform-origin: center center;
+  width: 100%;
+  max-width: 1360px;
+  min-width: 0;
+  min-height: 0;
 
-  will-change: transform;
+  margin: 0 auto;
+  padding: clamp(24px, 3vw, 48px);
 
-  transform: translateZ(0);
+  background: var(--about-paper);
+  color: var(--about-ink);
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: var(--about-radius);
+
+  /*
+   * Permite acceder al contenido con zoom o en
+   * pantallas excepcionalmente bajas.
+   */
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #bab7ae transparent;
 }
 
-
-/* ==========================================================
-   IMAGE
-========================================================== */
+/* FOTOGRAFÍA */
 
 .scene-image {
   position: relative;
 
+  align-self: stretch;
+
   width: 100%;
-
-  max-width: 430px;
-
-  height: min(570px, 68vh);
+  min-width: 0;
+  min-height: 0;
 
   margin: 0;
 
   overflow: hidden;
 
-  justify-self: center;
-
-  background: #141414;
-
-  /*
-   * Sombra extremadamente sutil.
-   */
-  box-shadow:
-    0 35px 90px rgba(0, 0, 0, 0.28);
-
-  transform: translateZ(30px);
+  background: #dedbd3;
+  border-radius: 18px;
 }
 
-
-/*
- * Las imágenes se mantienen contenidas.
- */
-
 .scene-image img {
+  position: absolute;
+  inset: 0;
+
   display: block;
 
   width: 100%;
   height: 100%;
 
   object-fit: cover;
+  object-position: center 35%;
+}
 
+.scene-02 .scene-image img {
   object-position: center;
-
-  filter: saturate(0.94);
-
-  transform: scale(1.015);
-
-  will-change: transform;
-
-  transition:
-    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-
-/*
- * Pequeño movimiento al entrar.
- */
-
-.about-scene:not(.scene-01) .scene-image img {
-  transform: scale(1.04);
+.scene-03 .scene-image img {
+  object-position: center 40%;
 }
 
+/* Contraste localizado únicamente detrás del pie de foto. */
 
-/* ==========================================================
-   IMAGE CAPTION
-========================================================== */
+.scene-image::after {
+  content: "";
 
-.image-caption {
   position: absolute;
-
-  left: 20px;
-  right: 20px;
-  bottom: 18px;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  color: rgba(255, 255, 255, 0.8);
-
-  font-size: 9px;
-
-  letter-spacing: 3px;
-
-  text-transform: uppercase;
-
-  z-index: 2;
-}
-
-
-/* ==========================================================
-   CONTENT
-========================================================== */
-
-.scene-content {
-  width: 100%;
-
-  max-width: 570px;
-
-  justify-self: start;
-}
-
-
-/* ==========================================================
-   EYEBROW
-========================================================== */
-
-.scene-eyebrow {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  margin: 0 0 24px;
-
-  color: #999999;
-
-  font-size: 9px;
-
-  font-weight: 500;
-
-  letter-spacing: 4px;
-
-  text-transform: uppercase;
-}
-
-
-.scene-eyebrow span {
-  width: 26px;
-
-  height: 1px;
-
-  flex-shrink: 0;
-
-  background: #c9a45c;
-}
-
-
-/* ==========================================================
-   CHAPTER
-========================================================== */
-
-.scene-chapter {
-  margin: 0 0 22px;
-
-  color: #c9a45c;
-
-  font-size: 10px;
-
-  letter-spacing: 3px;
-
-  text-transform: uppercase;
-}
-
-
-/* ==========================================================
-   TITLE
-========================================================== */
-
-.scene-title {
-  margin: 0;
-
-  max-width: 620px;
-
-  color: #ffffff;
-
-  font-size: clamp(48px, 5.2vw, 76px);
-
-  font-weight: 300;
-
-  line-height: 0.94;
-
-  letter-spacing: -3px;
-}
-
-
-.scene-title span {
-  display: inline;
-
-  color: #c9a45c;
-
-  font-weight: 300;
-}
-
-
-/* ==========================================================
-   DOCTOR
-========================================================== */
-
-.doctor-info {
-  margin-top: 42px;
-
-  padding-left: 18px;
-
-  border-left: 1px solid #c9a45c;
-}
-
-
-.doctor-info h3 {
-  margin: 0 0 8px;
-
-  color: #ffffff;
-
-  font-size: 17px;
-
-  font-weight: 500;
-}
-
-
-.doctor-info p {
-  margin: 0;
-
-  color: #c9a45c;
-
-  font-size: 11px;
-
-  line-height: 1.8;
-
-  letter-spacing: 0.4px;
-}
-
-
-/* ==========================================================
-   DESCRIPTION
-========================================================== */
-
-.scene-description {
-  max-width: 520px;
-
-  margin: 32px 0 0;
-
-  color: #9d9d9d;
-
-  font-size: 13px;
-
-  line-height: 1.9;
-}
-
-
-/* ==========================================================
-   DETAILS
-========================================================== */
-
-.scene-details {
-  width: 100%;
-
-  max-width: 570px;
-
-  margin-top: 38px;
-}
-
-
-.detail-row {
-  display: grid;
-
-  grid-template-columns: 40px 1fr;
-
-  gap: 18px;
-
-  padding: 19px 0;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.11);
-}
-
-
-.detail-row:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
-}
-
-
-.detail-number {
-  color: #c9a45c;
-
-  font-size: 10px;
-
-  letter-spacing: 2px;
-}
-
-
-.detail-row h3 {
-  margin: 0 0 5px;
-
-  color: #ffffff;
-
-  font-size: 14px;
-
-  font-weight: 500;
-}
-
-
-.detail-row p {
-  max-width: 450px;
-
-  margin: 0;
-
-  color: #888888;
-
-  font-size: 11px;
-
-  line-height: 1.7;
-}
-
-
-/* ==========================================================
-   PROGRESS
-========================================================== */
-
-.about-progress {
-  position: absolute;
-
-  right: 5vw;
-  bottom: 35px;
-
-  z-index: 20;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 14px;
-
-  color: #777777;
-
-  font-size: 8px;
-
-  letter-spacing: 2px;
-
-  text-transform: uppercase;
+  inset: 65% 0 0;
+  z-index: 1;
+
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 0, 0, 0.64)
+  );
 
   pointer-events: none;
 }
 
-
-.progress-track {
-  position: relative;
-
-  width: 70px;
-
-  height: 1px;
-
-  background: rgba(255, 255, 255, 0.15);
-
-  overflow: hidden;
-}
-
-
-.progress-track span {
+.image-caption {
   position: absolute;
 
-  inset: 0;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
 
-  width: 33.333%;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.15em;
+}
+
+/* CONTENIDO */
+
+.scene-content {
+  width: 100%;
+  max-width: 580px;
+  min-width: 0;
+
+  padding: 8px 0;
+}
+
+.scene-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 0 0 24px;
+
+  color: var(--about-muted);
+
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.28em;
+}
+
+.scene-eyebrow > span {
+  flex: 0 0 26px;
+  height: 1px;
+
+  background: var(--about-gold);
+}
+
+.scene-chapter {
+  margin: 0 0 16px;
+
+  color: var(--about-gold);
+
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.18em;
+}
+
+/*
+ * Tipografía próxima a la referencia:
+ * ligera, sin serifas y sin titulares en negrita.
+ *
+ * Hereda la familia tipográfica del sitio.
+ */
+
+.scene-title {
+  max-width: 100%;
+  margin: 0;
+
+  color: var(--about-ink);
+
+  font-family: inherit;
+  font-size: clamp(34px, 3.8vw, 60px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.scene-title > span {
+  display: block;
+
+  color: inherit;
+
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+/* IDENTIDAD DEL ESPECIALISTA */
+
+.doctor-info {
+  margin-top: clamp(22px, 3svh, 34px);
+  padding-left: 16px;
+
+  border-left: 1px solid var(--about-gold);
+}
+
+.doctor-info h3 {
+  margin: 0 0 7px;
+
+  color: var(--about-ink);
+
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+
+.doctor-info p {
+  margin: 0;
+
+  color: var(--about-muted);
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.credential {
+  display: block;
+  color: var(--about-muted);
+}
+
+.scene-description {
+  max-width: 46ch;
+  margin: 22px 0 0;
+
+  color: var(--about-muted);
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* LISTAS EDITORIALES */
+
+.scene-details {
+  width: 100%;
+  margin-top: clamp(22px, 3svh, 34px);
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+
+  gap: 15px;
+
+  padding: 15px 0;
+
+  border-top: 1px solid var(--about-line);
+}
+
+.detail-row:last-child {
+  border-bottom: 1px solid var(--about-line);
+}
+
+.detail-number {
+  padding-top: 3px;
+
+  color: var(--about-gold);
+
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+}
+
+.detail-row h3 {
+  margin: 0 0 5px;
+
+  color: var(--about-ink);
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+
+.detail-row p {
+  max-width: 44ch;
+  margin: 0;
+
+  color: var(--about-muted);
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+/* INDICADOR SOBRE EL MARGEN OSCURO */
+
+.about-progress {
+  position: absolute;
+
+  right: clamp(18px, 3.5vw, 64px);
+  bottom: 20px;
+  left: clamp(18px, 3.5vw, 64px);
+
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  color: #bcbcb5;
+
+  font-size: 9px;
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+
+  pointer-events: none;
+}
+
+.progress-label {
+  margin-right: auto;
+}
+
+.progress-track {
+  width: clamp(70px, 10vw, 140px);
+  height: 2px;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.progress-track > span {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  background: #c5a365;
 
   transform-origin: left center;
-
-  background: #c9a45c;
+  transform: scaleX(var(--scroll-progress));
 }
 
-
-/* ==========================================================
-   TABLET
-========================================================== */
-
-@media (max-width: 1000px) {
-
-  .scene-composition {
-    width: 86vw;
-
-    grid-template-columns:
-      minmax(260px, 0.75fr)
-      minmax(350px, 1fr);
-
-    gap: 50px;
-  }
-
-
-  .scene-image {
-    max-width: 370px;
-
-    height: 500px;
-  }
-
-
-  .scene-title {
-    font-size: clamp(44px, 6vw, 62px);
-  }
-
+.progress-count {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
+.progress-current {
+  color: #f4f3ef;
+}
 
-/* ==========================================================
-   MOBILE
-========================================================== */
+/* PORTÁTILES CON POCA ALTURA */
 
-@media (max-width: 760px) {
-
-  .about-section {
-    height: 300vh;
+@media (min-width: 761px) and (max-height: 760px) {
+  .about-scene {
+    padding-top: 76px;
+    padding-bottom: 48px;
   }
-
-
-  .about-sticky {
-    min-height: 600px;
-  }
-
 
   .scene-composition {
-    width: calc(100% - 40px);
-
-    height: auto;
-
-    min-height: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: stretch;
-
-    gap: 28px;
-
-    padding: 80px 0 70px;
+    gap: 36px;
+    padding: 24px;
   }
-
-
-  .scene-image {
-    width: min(70vw, 330px);
-
-    height: min(48vh, 390px);
-
-    max-width: none;
-
-    margin: 0 auto;
-  }
-
-
-  .scene-content {
-    width: 100%;
-
-    max-width: none;
-  }
-
 
   .scene-eyebrow {
-    margin-bottom: 16px;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-  }
-
-
-  .scene-chapter {
     margin-bottom: 14px;
   }
 
+  .scene-chapter {
+    margin-bottom: 10px;
+  }
 
   .scene-title {
-    font-size: clamp(40px, 11vw, 58px);
-
-    letter-spacing: -2px;
+    font-size: clamp(32px, 3.5vw, 48px);
   }
 
-
-  .doctor-info {
-    margin-top: 25px;
+  .doctor-info,
+  .scene-details {
+    margin-top: 18px;
   }
-
 
   .scene-description {
-    margin-top: 22px;
-
-    font-size: 12px;
-
-    line-height: 1.7;
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.65;
   }
-
-
-  .scene-details {
-    margin-top: 22px;
-  }
-
 
   .detail-row {
-    padding: 14px 0;
+    padding: 10px 0;
   }
 
+  .detail-row h3 {
+    font-size: 15px;
+  }
+
+  .detail-row p {
+    font-size: 12px;
+  }
+}
+
+/* MÓVIL */
+
+@media (max-width: 760px) {
+  :host {
+    --about-header-space: 72px;
+    --about-radius: 24px;
+  }
+
+  .about-scene {
+    padding:
+      var(--about-header-space)
+      14px
+      44px;
+  }
+
+  .scene-composition {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+
+    align-content: start;
+    gap: 20px;
+
+    max-width: 540px;
+    padding: 20px;
+  }
+
+  .scene-image {
+    align-self: auto;
+    height: clamp(120px, 21svh, 190px);
+
+    border-radius: 14px;
+  }
+
+  .scene-image img {
+    object-position: center 32%;
+  }
+
+  .scene-02 .scene-image img {
+    object-position: center 40%;
+  }
+
+  .scene-03 .scene-image img {
+    object-position: center 38%;
+  }
+
+  .image-caption {
+    right: 13px;
+    bottom: 12px;
+    left: 13px;
+
+    font-size: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .scene-content {
+    max-width: none;
+    padding: 0;
+  }
+
+  .scene-eyebrow {
+    gap: 9px;
+    margin-bottom: 10px;
+
+    font-size: 8px;
+    letter-spacing: 0.18em;
+  }
+
+  .scene-eyebrow > span {
+    flex-basis: 20px;
+  }
+
+  .scene-chapter {
+    margin-bottom: 9px;
+    font-size: 9px;
+  }
+
+  .scene-title {
+    font-size: clamp(30px, 7.6vw, 42px);
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+  }
+
+  .doctor-info {
+    margin-top: 17px;
+    padding-left: 12px;
+  }
+
+  .doctor-info h3 {
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+
+  .doctor-info p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .scene-description {
+    margin-top: 15px;
+
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .scene-details {
+    margin-top: 17px;
+  }
+
+  .detail-row {
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 10px;
+
+    padding: 10px 0;
+  }
+
+  .detail-row h3 {
+    margin-bottom: 3px;
+    font-size: 14px;
+  }
+
+  .detail-row p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
 
   .about-progress {
     right: 20px;
+    bottom: 15px;
+    left: 20px;
 
-    bottom: 20px;
+    gap: 12px;
+
+    font-size: 8px;
+    letter-spacing: 0.08em;
   }
-
 }
 
+/* MÓVILES DE POCA ALTURA */
 
-/* ==========================================================
-   SMALL MOBILE
-========================================================== */
-
-@media (max-width: 480px) {
-
+@media (max-width: 760px) and (max-height: 700px) {
   .scene-composition {
-    width: calc(100% - 32px);
-
-    padding-top: 65px;
+    gap: 14px;
+    padding: 16px;
   }
-
 
   .scene-image {
-    width: min(64vw, 280px);
-
-    height: 300px;
+    height: 110px;
   }
 
+  .scene-eyebrow {
+    margin-bottom: 6px;
+  }
+
+  .scene-chapter {
+    margin-bottom: 7px;
+  }
 
   .scene-title {
-    font-size: 42px;
+    font-size: 30px;
   }
 
+  .doctor-info,
+  .scene-details {
+    margin-top: 12px;
+  }
 
   .scene-description {
-    font-size: 11px;
+    margin-top: 12px;
   }
 
-
-  .about-progress {
-    display: none;
+  .detail-row {
+    padding: 8px 0;
   }
-
 }
 
-
-/* ==========================================================
-   REDUCED MOTION
-========================================================== */
+/* ACCESIBILIDAD */
 
 @media (prefers-reduced-motion: reduce) {
-
-  .about-scene {
-    transform: none !important;
-
-    opacity: 1 !important;
-  }
-
-  .about-scene:not(.scene-01) {
-    display: none;
-  }
-
   .about-section {
     height: auto;
   }
 
   .about-sticky {
     position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .about-scene {
+    position: relative;
+    inset: auto;
 
     height: auto;
+    min-height: 100svh;
 
-    min-height: 100vh;
+    overflow: visible;
+
+    transform: none !important;
+    will-change: auto;
+    pointer-events: auto;
   }
 
-  .scene-01 {
-    position: relative;
-
-    min-height: 100vh;
+  .scene-composition {
+    overflow: visible;
   }
 
+  .scene-image {
+    min-height: 320px;
+  }
+
+  .about-progress {
+    display: none;
+  }
 }

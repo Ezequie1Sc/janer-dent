@@ -18,19 +18,21 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrl: './about.scss',
 })
 export class About implements OnDestroy {
-
   private section: HTMLElement | null = null;
+  private sticky: HTMLElement | null = null;
+  private currentLabel: HTMLElement | null = null;
 
   private scenes: HTMLElement[] = [];
 
   private frameId: number | null = null;
+  private resizeObserver: ResizeObserver | null = null;
+  private motionQuery: MediaQueryList | null = null;
 
   private destroyed = false;
-
   private initialized = false;
 
-  private activeScene = 0;
-
+  // -1 garantiza la actualización inicial de accesibilidad.
+  private activeScene = -1;
 
   constructor(
     private readonly host: ElementRef<HTMLElement>,
@@ -39,511 +41,267 @@ export class About implements OnDestroy {
     @Inject(PLATFORM_ID)
     private readonly platformId: object,
   ) {
-
     afterNextRender(() => {
-
       if (this.destroyed) {
         return;
       }
 
       this.zone.runOutsideAngular(() => {
-
         this.initialize();
-
       });
-
     });
-
   }
 
-
-  /* =========================================================
-     INITIALIZE
-  ========================================================= */
-
   private initialize(): void {
-
     if (
       this.initialized ||
+      this.destroyed ||
       !isPlatformBrowser(this.platformId)
     ) {
       return;
     }
 
-
-    const root =
-      this.host.nativeElement;
-
+    const root = this.host.nativeElement;
 
     this.section =
-      root.querySelector<HTMLElement>(
-        '.about-section'
-      );
+      root.querySelector<HTMLElement>('.about-section');
 
+    this.sticky =
+      root.querySelector<HTMLElement>('.about-sticky');
 
-    this.scenes =
-      Array.from(
-        root.querySelectorAll<HTMLElement>(
-          '.about-scene'
-        )
-      );
+    this.currentLabel =
+      root.querySelector<HTMLElement>('.progress-current');
 
+    this.scenes = Array.from(
+      root.querySelectorAll<HTMLElement>('.about-scene'),
+    );
 
     if (
       !this.section ||
+      !this.sticky ||
       this.scenes.length !== 3
     ) {
-
       console.error(
-        '[JANERDent About] No se encontraron las 3 escenas.'
+        '[JANERDent About] No se encontraron el contenedor y las 3 escenas.',
       );
 
       return;
-
     }
-
 
     this.initialized = true;
 
+    this.motionQuery = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    );
 
-    /*
-     * Estado inicial.
-     */
+    this.motionQuery.addEventListener(
+      'change',
+      this.onMotionChange,
+    );
+
+    window.addEventListener('scroll', this.requestRender, {
+      passive: true,
+    });
+
+    window.addEventListener('resize', this.requestRender, {
+      passive: true,
+    });
+
+    // Mantiene el cálculo sincronizado con el tamaño real
+    // del contenedor, incluyendo cambios de orientación.
+    this.resizeObserver = new ResizeObserver(() => {
+      this.requestRender();
+    });
+
+    this.resizeObserver.observe(this.section);
+    this.resizeObserver.observe(this.sticky);
 
     this.render();
+  }
 
+  private readonly requestRender = (): void => {
+    if (
+      this.destroyed ||
+      !this.initialized ||
+      this.frameId !== null
+    ) {
+      return;
+    }
 
-    /*
-     * Scroll.
-     */
-
-    window.addEventListener(
-      'scroll',
-      this.onScroll,
-      {
-        passive: true,
-      }
-    );
-
-
-    /*
-     * Resize.
-     */
-
-    window.addEventListener(
-      'resize',
-      this.onResize,
-      {
-        passive: true,
-      }
-    );
-
-
-    /*
-     * Pequeño delay para asegurar
-     * que las imágenes hayan sido
-     * calculadas por el navegador.
-     */
-
-    requestAnimationFrame(() => {
+    this.frameId = window.requestAnimationFrame(() => {
+      this.frameId = null;
 
       if (!this.destroyed) {
         this.render();
       }
-
     });
-
-  }
-
-
-  /* =========================================================
-     SCROLL
-  ========================================================= */
-
-  private readonly onScroll = (): void => {
-
-    if (
-      this.destroyed ||
-      !isPlatformBrowser(this.platformId)
-    ) {
-      return;
-    }
-
-
-    if (this.frameId !== null) {
-      return;
-    }
-
-
-    this.frameId =
-      requestAnimationFrame(() => {
-
-        this.frameId = null;
-
-        if (!this.destroyed) {
-          this.render();
-        }
-
-      });
-
   };
 
-
-  /* =========================================================
-     RESIZE
-  ========================================================= */
-
-  private readonly onResize = (): void => {
-
-    if (
-      this.destroyed ||
-      !isPlatformBrowser(this.platformId)
-    ) {
-      return;
-    }
-
-
-    if (this.frameId !== null) {
-      return;
-    }
-
-
-    this.frameId =
-      requestAnimationFrame(() => {
-
-        this.frameId = null;
-
-        if (!this.destroyed) {
-          this.render();
-        }
-
-      });
-
+  private readonly onMotionChange = (): void => {
+    this.activeScene = -1;
+    this.requestRender();
   };
-
-
-  /* =========================================================
-     RENDER
-  ========================================================= */
 
   private render(): void {
-
     if (
-      !isPlatformBrowser(this.platformId) ||
       this.destroyed ||
       !this.section ||
+      !this.sticky ||
       this.scenes.length !== 3
     ) {
       return;
     }
 
-
-    const rect =
-      this.section.getBoundingClientRect();
-
-
-    const sectionHeight =
-      this.section.offsetHeight;
-
-
-    const viewportHeight =
-      window.innerHeight;
-
-
-    const scrollDistance =
-      Math.max(
-        1,
-        sectionHeight - viewportHeight
-      );
-
-
-    const traveled =
-      Math.min(
-        Math.max(
-          -rect.top,
-          0
-        ),
-        scrollDistance
-      );
-
-
-    const progress =
-      traveled / scrollDistance;
-
-
-    this.section.style.setProperty(
-      '--scroll-progress',
-      progress.toString()
-    );
-
-
-    const storyProgress =
-      this.clamp(
-        progress
-      );
-
-
-    const position =
-      storyProgress *
-      (this.scenes.length - 1);
-
-
-    const baseIndex =
-      Math.min(
-        Math.floor(position),
-        this.scenes.length - 2
-      );
-
-
-    const nextIndex =
-      baseIndex + 1;
-
-
-    const localProgress =
-      position - baseIndex;
-
-
-    const transition =
-      this.smoothStep(
-        this.clamp(
-          (localProgress - 0.08) / 0.84
-        )
-      );
-
-
-    this.scenes.forEach(
-      (scene, index) => {
-
-        if (index < baseIndex) {
-
-          scene.style.transform =
-            'translate3d(0, -4%, -20px) scale(0.985)';
-
-          scene.style.opacity =
-            '1';
-
-          scene.style.zIndex =
-            String(index + 1);
-
-        }
-
-        else if (index === baseIndex) {
-
-          const y =
-            -4 * transition;
-
-
-          const scale =
-            1 -
-            (0.015 * transition);
-
-
-          scene.style.transform =
-            `
-            translate3d(
-              0,
-              ${y}%,
-              -${20 * transition}px
-            )
-            scale(${scale})
-            `;
-
-
-          scene.style.opacity =
-            '1';
-
-
-          scene.style.zIndex =
-            String(index + 1);
-
-        }
-
-        else if (index === nextIndex) {
-
-          const y =
-            100 *
-            (1 - transition);
-
-
-          const z =
-            70 *
-            (1 - transition);
-
-
-          const scale =
-            0.975 +
-            (0.025 * transition);
-
-
-          scene.style.transform =
-            `
-            translate3d(
-              0,
-              ${y}%,
-              ${z}px
-            )
-            scale(${scale})
-            `;
-
-
-          scene.style.opacity =
-            '1';
-
-
-          scene.style.zIndex =
-            String(index + 10);
-
-        }
-
-        else {
-
-          scene.style.transform =
-            'translate3d(0, 100%, 70px) scale(0.975)';
-
-          scene.style.opacity =
-            '1';
-
-          scene.style.zIndex =
-            String(index + 1);
-
-        }
-
-      }
-    );
-
-
-    const newActiveScene =
-      transition >= 0.5
-        ? nextIndex
-        : baseIndex;
-
-
-    this.updateAccessibility(
-      newActiveScene
-    );
-
-  }
-
-
-  /* =========================================================
-     ACCESSIBILITY
-  ========================================================= */
-
-  private updateAccessibility(
-    activeIndex: number
-  ): void {
-
-    if (
-      this.activeScene === activeIndex
-    ) {
+    if (this.motionQuery?.matches) {
+      this.renderReducedMotion();
       return;
     }
 
+    const rect = this.section.getBoundingClientRect();
 
-    this.activeScene =
-      activeIndex;
-
-
-    this.scenes.forEach(
-      (scene, index) => {
-
-        const active =
-          index === activeIndex;
-
-
-        scene.setAttribute(
-          'aria-hidden',
-          String(!active)
-        );
-
-
-        scene.style.pointerEvents =
-          active
-            ? 'auto'
-            : 'none';
-
-      }
+    // Usa la altura real del sticky, coherente con 100svh.
+    const scrollDistance = Math.max(
+      1,
+      this.section.offsetHeight - this.sticky.offsetHeight,
     );
 
-  }
-
-
-  /* =========================================================
-     HELPERS
-  ========================================================= */
-
-  private clamp(
-    value: number
-  ): number {
-
-    return Math.max(
-      0,
-      Math.min(
-        1,
-        value
-      )
+    const progress = this.clamp(
+      -rect.top / scrollDistance,
     );
 
-  }
-
-
-  private smoothStep(
-    value: number
-  ): number {
-
-    return (
-      value *
-      value *
-      (3 - 2 * value)
+    this.section.style.setProperty(
+      '--scroll-progress',
+      progress.toString(),
     );
-
-  }
-
-
-  /* =========================================================
-     DESTROY
-  ========================================================= */
-
-  ngOnDestroy(): void {
-
-    this.destroyed = true;
-
 
     /*
-     * Las APIs del navegador solamente
-     * existen en el cliente.
+     * Se conserva el recorrido original:
+     *
+     * primera mitad: escena 01 → escena 02
+     * segunda mitad: escena 02 → escena 03
+     *
+     * Los extremos de cada tramo dejan una pausa de lectura.
      */
+    const position = progress * (this.scenes.length - 1);
 
-    if (
-      isPlatformBrowser(this.platformId)
-    ) {
+    const baseIndex = Math.min(
+      Math.floor(position),
+      this.scenes.length - 2,
+    );
 
-      window.removeEventListener(
-        'scroll',
-        this.onScroll
-      );
+    const nextIndex = baseIndex + 1;
+    const localProgress = position - baseIndex;
 
+    const transition = this.smoothStep(
+      this.clamp((localProgress - 0.08) / 0.84),
+    );
 
-      window.removeEventListener(
-        'resize',
-        this.onResize
-      );
+    this.scenes.forEach((scene, index) => {
+      let y = 100;
 
-
-      if (
-        this.frameId !== null
-      ) {
-
-        cancelAnimationFrame(
-          this.frameId
-        );
-
-        this.frameId = null;
-
+      if (index <= baseIndex) {
+        y = 0;
+      } else if (index === nextIndex) {
+        y = 100 * (1 - transition);
       }
 
-    }
+      /*
+       * La escena entrante sube completa.
+       * Su fondo opaco cubre imagen y texto anteriores.
+       *
+       * Sin fade, sin perspective y sin cambios de escala
+       * que dejen huecos alrededor de la escena.
+       */
+      scene.style.transform =
+        `translate3d(0, ${y}%, 0)`;
 
+      scene.style.zIndex = String(index + 1);
+    });
+
+    const newActiveScene =
+      transition >= 0.5 ? nextIndex : baseIndex;
+
+    this.updateAccessibility(newActiveScene);
   }
 
+  private updateAccessibility(activeIndex: number): void {
+    if (this.activeScene === activeIndex) {
+      return;
+    }
+
+    this.activeScene = activeIndex;
+
+    this.scenes.forEach((scene, index) => {
+      const active = index === activeIndex;
+
+      scene.setAttribute(
+        'aria-hidden',
+        String(!active),
+      );
+
+      scene.inert = !active;
+      scene.style.pointerEvents = active ? 'auto' : 'none';
+    });
+
+    if (this.currentLabel) {
+      this.currentLabel.textContent =
+        String(activeIndex + 1).padStart(2, '0');
+    }
+  }
+
+  private renderReducedMotion(): void {
+    this.section?.style.setProperty(
+      '--scroll-progress',
+      '0',
+    );
+
+    this.scenes.forEach((scene) => {
+      scene.style.removeProperty('transform');
+      scene.style.removeProperty('z-index');
+
+      scene.removeAttribute('aria-hidden');
+      scene.inert = false;
+      scene.style.pointerEvents = 'auto';
+    });
+
+    this.activeScene = -1;
+  }
+
+  private clamp(value: number): number {
+    return Math.max(0, Math.min(1, value));
+  }
+
+  private smoothStep(value: number): number {
+    return value * value * (3 - 2 * value);
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed = true;
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    window.removeEventListener(
+      'scroll',
+      this.requestRender,
+    );
+
+    window.removeEventListener(
+      'resize',
+      this.requestRender,
+    );
+
+    this.motionQuery?.removeEventListener(
+      'change',
+      this.onMotionChange,
+    );
+
+    this.resizeObserver?.disconnect();
+
+    if (this.frameId !== null) {
+      window.cancelAnimationFrame(this.frameId);
+      this.frameId = null;
+    }
+  }
 }
