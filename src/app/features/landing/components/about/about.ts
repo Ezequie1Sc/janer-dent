@@ -2,9 +2,13 @@ import {
   afterNextRender,
   Component,
   ElementRef,
+  Inject,
   NgZone,
   OnDestroy,
+  PLATFORM_ID,
 } from '@angular/core';
+
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-about',
@@ -31,6 +35,9 @@ export class About implements OnDestroy {
   constructor(
     private readonly host: ElementRef<HTMLElement>,
     private readonly zone: NgZone,
+
+    @Inject(PLATFORM_ID)
+    private readonly platformId: object,
   ) {
 
     afterNextRender(() => {
@@ -56,7 +63,10 @@ export class About implements OnDestroy {
 
   private initialize(): void {
 
-    if (this.initialized) {
+    if (
+      this.initialized ||
+      !isPlatformBrowser(this.platformId)
+    ) {
       return;
     }
 
@@ -137,7 +147,9 @@ export class About implements OnDestroy {
 
     requestAnimationFrame(() => {
 
-      this.render();
+      if (!this.destroyed) {
+        this.render();
+      }
 
     });
 
@@ -150,6 +162,14 @@ export class About implements OnDestroy {
 
   private readonly onScroll = (): void => {
 
+    if (
+      this.destroyed ||
+      !isPlatformBrowser(this.platformId)
+    ) {
+      return;
+    }
+
+
     if (this.frameId !== null) {
       return;
     }
@@ -160,7 +180,9 @@ export class About implements OnDestroy {
 
         this.frameId = null;
 
-        this.render();
+        if (!this.destroyed) {
+          this.render();
+        }
 
       });
 
@@ -173,6 +195,14 @@ export class About implements OnDestroy {
 
   private readonly onResize = (): void => {
 
+    if (
+      this.destroyed ||
+      !isPlatformBrowser(this.platformId)
+    ) {
+      return;
+    }
+
+
     if (this.frameId !== null) {
       return;
     }
@@ -183,7 +213,9 @@ export class About implements OnDestroy {
 
         this.frameId = null;
 
-        this.render();
+        if (!this.destroyed) {
+          this.render();
+        }
 
       });
 
@@ -197,6 +229,8 @@ export class About implements OnDestroy {
   private render(): void {
 
     if (
+      !isPlatformBrowser(this.platformId) ||
+      this.destroyed ||
       !this.section ||
       this.scenes.length !== 3
     ) {
@@ -216,21 +250,12 @@ export class About implements OnDestroy {
       window.innerHeight;
 
 
-    /*
-     * Distancia real que podemos recorrer
-     * mientras la sección está en pantalla.
-     */
-
     const scrollDistance =
       Math.max(
         1,
         sectionHeight - viewportHeight
       );
 
-
-    /*
-     * Cuánto hemos recorrido.
-     */
 
     const traveled =
       Math.min(
@@ -242,17 +267,9 @@ export class About implements OnDestroy {
       );
 
 
-    /*
-     * 0 → 1
-     */
-
     const progress =
       traveled / scrollDistance;
 
-
-    /*
-     * Guardamos el progreso.
-     */
 
     this.section.style.setProperty(
       '--scroll-progress',
@@ -260,29 +277,11 @@ export class About implements OnDestroy {
     );
 
 
-    /*
-     * Hay 3 escenas.
-     *
-     * 0 → 0.5
-     * escena 1 → escena 2
-     *
-     * 0.5 → 1
-     * escena 2 → escena 3
-     */
-
     const storyProgress =
       this.clamp(
         progress
       );
 
-
-    /*
-     * Posición continua.
-     *
-     * 0 = escena 1
-     * 1 = escena 2
-     * 2 = escena 3
-     */
 
     const position =
       storyProgress *
@@ -304,14 +303,6 @@ export class About implements OnDestroy {
       position - baseIndex;
 
 
-    /*
-     * Zona de transición.
-     *
-     * No empieza inmediatamente.
-     *
-     * Tampoco termina inmediatamente.
-     */
-
     const transition =
       this.smoothStep(
         this.clamp(
@@ -320,16 +311,8 @@ export class About implements OnDestroy {
       );
 
 
-    /*
-     * ESCENAS
-     */
-
     this.scenes.forEach(
       (scene, index) => {
-
-        /*
-         * Escena anterior.
-         */
 
         if (index < baseIndex) {
 
@@ -343,11 +326,6 @@ export class About implements OnDestroy {
             String(index + 1);
 
         }
-
-
-        /*
-         * ESCENA ACTUAL
-         */
 
         else if (index === baseIndex) {
 
@@ -380,44 +358,17 @@ export class About implements OnDestroy {
 
         }
 
-
-        /*
-         * ESCENA QUE ENTRA
-         */
-
         else if (index === nextIndex) {
-
-          /*
-           * AQUÍ ESTÁ EL EFECTO
-           * DE CORTINA VERTICAL.
-           *
-           * Empieza debajo:
-           *
-           * translateY(100%)
-           *
-           * y sube hasta:
-           *
-           * translateY(0)
-           */
 
           const y =
             100 *
             (1 - transition);
 
 
-          /*
-           * Pequeño efecto 3D.
-           */
-
           const z =
             70 *
             (1 - transition);
 
-
-          /*
-           * La nueva escena comienza
-           * ligeramente más pequeña.
-           */
 
           const scale =
             0.975 +
@@ -439,21 +390,10 @@ export class About implements OnDestroy {
             '1';
 
 
-          /*
-           * MUY IMPORTANTE:
-           * la escena nueva queda
-           * encima de la anterior.
-           */
-
           scene.style.zIndex =
             String(index + 10);
 
         }
-
-
-        /*
-         * Escenas futuras.
-         */
 
         else {
 
@@ -471,10 +411,6 @@ export class About implements OnDestroy {
       }
     );
 
-
-    /*
-     * Actualizamos escena activa.
-     */
 
     const newActiveScene =
       transition >= 0.5
@@ -573,27 +509,38 @@ export class About implements OnDestroy {
     this.destroyed = true;
 
 
-    window.removeEventListener(
-      'scroll',
-      this.onScroll
-    );
-
-
-    window.removeEventListener(
-      'resize',
-      this.onResize
-    );
-
+    /*
+     * Las APIs del navegador solamente
+     * existen en el cliente.
+     */
 
     if (
-      this.frameId !== null
+      isPlatformBrowser(this.platformId)
     ) {
 
-      cancelAnimationFrame(
-        this.frameId
+      window.removeEventListener(
+        'scroll',
+        this.onScroll
       );
 
-      this.frameId = null;
+
+      window.removeEventListener(
+        'resize',
+        this.onResize
+      );
+
+
+      if (
+        this.frameId !== null
+      ) {
+
+        cancelAnimationFrame(
+          this.frameId
+        );
+
+        this.frameId = null;
+
+      }
 
     }
 
