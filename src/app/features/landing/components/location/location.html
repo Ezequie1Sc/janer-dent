@@ -1,14 +1,13 @@
-<section
+<section 
 id="ubicacion"
-class="location-section"
->
+class="location-section reveal">
 
 
 <div class="location-container">
 
 
 
-<!-- INFORMATION -->
+<!-- INFORMACIÓN -->
 
 <div class="location-info">
 
@@ -23,24 +22,62 @@ UBICACIÓN
 
 
 
+
+
 <h2>
 
 Encuéntranos en
+
 <br>
+
+<span>
 Hecelchakán,
+</span>
+
+<br>
+
 Campeche.
 
 </h2>
 
 
 
-<p class="address">
+
+
+<div class="address">
+
+
+<div class="icon">
+
+
+<svg viewBox="0 0 24 24">
+
+<path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12z"/>
+
+<circle cx="12" cy="9" r="2.5"/>
+
+</svg>
+
+
+</div>
+
+
+
+
+<p>
 
 Calle 29 s/n, San Antonio,
+
 <br>
+
 Hecelchakán, Campeche, México.
 
 </p>
+
+
+</div>
+
+
 
 
 
@@ -49,30 +86,67 @@ Hecelchakán, Campeche, México.
 <div class="buttons">
 
 
+
 <a
-href="https://maps.google.com"
+
+href="https://maps.app.goo.gl/aaNKGFfPPodFR98n6"
+
 target="_blank"
-class="primary"
->
+
+class="primary">
+
+
+
+<svg viewBox="0 0 24 24">
+
+
+<path d="M12 2l8 4.5v11L12 22l-8-4.5v-11L12 2z"/>
+
+<path d="M12 22V11"/>
+
+<path d="M4 6.5l8 4.5 8-4.5"/>
+
+
+</svg>
+
+
+
+<span>
 
 Ver en Google Maps
-<span>
-→
+
 </span>
+
+
+
+<b>
+
+→
+
+</b>
+
+
 
 </a>
 
 
 
+
+
+
+
 <a
-href="https://maps.google.com"
+
+href="https://maps.app.goo.gl/aaNKGFfPPodFR98n6"
+
 target="_blank"
-class="secondary"
->
+
+class="secondary">
 
 Cómo llegar
 
 </a>
+
 
 
 </div>
@@ -80,7 +154,102 @@ Cómo llegar
 
 
 
-<div class="emergency">
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- MAPA -->
+
+
+<div class="map-container">
+
+
+<iframe
+
+src="https://maps.google.com/maps?q=Hecelchakan%20Campeche&t=&z=16&ie=UTF8&iwloc=&output=embed"
+
+loading="lazy"
+
+allowfullscreen>
+
+</iframe>
+
+
+
+
+
+<div class="janer-marker">
+
+
+<img
+
+src="assets/hero/janerdent-logo.webp"
+
+alt="JANERDent">
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- INFORMACIÓN INFERIOR -->
+
+<div class="bottom-info">
+
+
+
+
+
+
+<div class="info-box">
+
+
+
+<div class="box-icon">
+
+
+<svg viewBox="0 0 24 24">
+
+
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2
+19.79 19.79 0 0 1-8.63-3.07
+19.5 19.5 0 0 1-6-6
+19.79 19.79 0 0 1-3.07-8.67
+A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72
+c.12.9.33 1.78.62 2.63"/>
+
+
+</svg>
+
+
+</div>
+
+
+
+
+<div>
 
 
 <span>
@@ -90,6 +259,7 @@ URGENCIAS 24 HORAS
 </span>
 
 
+
 <strong>
 
 996 104 6096
@@ -97,42 +267,17 @@ URGENCIAS 24 HORAS
 </strong>
 
 
-</div>
+
+<p>
+
+Atención inmediata para emergencias dentales.
+
+</p>
 
 
 
 </div>
 
-
-
-
-
-
-
-<!-- MAP -->
-
-<div class="map-container">
-
-
-<iframe
-
-src="https://maps.google.com/maps?q=Hecelchakan%20Campeche&t=&z=15&ie=UTF8&iwloc=&output=embed"
-
-loading="lazy"
-
-allowfullscreen
-
->
-
-</iframe>
-
-
-
-<div class="map-overlay">
-
-JD JANERDent
-
-</div>
 
 
 </div>
@@ -143,24 +288,56 @@ JD JANERDent
 
 
 
-<!-- HOURS -->
 
 
-<div class="schedule">
+<div class="info-box">
 
 
-<h3>
 
-Horarios
+<div class="box-icon">
 
-</h3>
 
+<svg viewBox="0 0 24 24">
+
+
+<circle cx="12" cy="12" r="9"/>
+
+
+<polyline points="12 7 12 12 16 14"/>
+
+
+</svg>
+
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+
+<span>
+
+HORARIOS
+
+</span>
+
+
+
+
+
+<div class="hours">
 
 
 @for(item of schedules; track item.day){
 
 
-<div class="schedule-item">
+
+<div>
 
 
 <h4>
@@ -171,7 +348,9 @@ Horarios
 
 
 
+
 @for(hour of item.hours; track hour){
+
 
 <p>
 
@@ -179,21 +358,39 @@ Horarios
 
 </p>
 
-}
-
-
-</div>
-
 
 }
 
 
+
+
+</div>
+
+
+}
+
+
+
+</div>
+
+
+
 </div>
 
 
 
 
 </div>
+
+
+
+
+
+
+</div>
+
+
+
 
 
 </section>
