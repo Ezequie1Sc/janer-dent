@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+
 import { Navbar } from '../../components/navbar/navbar';
 import { Hero } from '../../components/hero/hero';
 import { Services } from '../../components/services/services';
+import { MissionVision } from '../../components/mission-vision/mission-vision';
 import { About } from '../../components/about/about';
 import { Benefits } from '../../components/benefits/benefits';
 import { Gallery } from '../../components/gallery/gallery';
@@ -11,10 +13,12 @@ import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [
     Navbar,
     Hero,
     Services,
+    MissionVision,
     About,
     Benefits,
     Gallery,
