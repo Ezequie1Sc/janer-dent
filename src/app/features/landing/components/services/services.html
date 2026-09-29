@@ -5,6 +5,7 @@
 >
   <div class="services-container">
 
+    <!-- ENCABEZADO: MISMA ALINEACIÓN QUE LOS SERVICIOS -->
     <header class="services-header">
       <p class="services-eyebrow">
         <span aria-hidden="true"></span>
@@ -22,6 +23,7 @@
       </p>
     </header>
 
+    <!-- DIENTE FIJO DURANTE EL RECORRIDO -->
     <div
       class="tooth-stage"
       role="img"
@@ -41,6 +43,7 @@
       </div>
     </div>
 
+    <!-- ÚNICA COLUMNA DE LECTURA -->
     <div class="service-list">
       @for (service of services; track service.number) {
         <article
@@ -53,11 +56,7 @@
             </span>
 
             <span class="service-icon" aria-hidden="true">
-              <svg
-                viewBox="0 0 32 32"
-                fill="none"
-                focusable="false"
-              >
+              <svg viewBox="0 0 32 32" fill="none">
                 @for (path of service.paths; track $index) {
                   <path [attr.d]="path"></path>
                 }
@@ -78,13 +77,12 @@
 
     <footer class="services-footer">
       <a class="services-cta" href="#contacto">
-        <span>Agenda una valoración</span>
+        Agenda una valoración
 
         <svg
           viewBox="0 0 24 24"
           fill="none"
           aria-hidden="true"
-          focusable="false"
         >
           <path d="M5 12h14m-6-6 6 6-6 6"></path>
         </svg>
