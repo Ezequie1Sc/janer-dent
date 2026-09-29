@@ -23,7 +23,7 @@
   box-sizing: border-box;
 }
 
-/* BASE: TODO EL CONTENIDO VISIBLE */
+/* RECORRIDO ORIGINAL */
 
 .about-section {
   position: relative;
@@ -32,96 +32,152 @@
   width: 100%;
   min-width: 0;
 
+  height: 300vh;
+  height: 300svh;
+
   background: var(--about-surround);
   color: var(--about-ink);
-
-  scroll-margin-top: var(--about-header-space);
 
   --scroll-progress: 0;
 }
 
 .about-sticky {
-  position: relative;
+  position: sticky;
+  top: 0;
+
   width: 100%;
-  min-width: 0;
+  height: 100vh;
+  height: 100svh;
+
+  overflow: hidden;
+  isolation: isolate;
 
   background: var(--about-surround);
 }
 
-.about-scene {
-  position: relative;
-  width: 100%;
-  min-width: 0;
+/* ESCENAS SUPERPUESTAS */
 
-  padding: 32px clamp(16px, 3vw, 40px);
+.about-scene {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  padding:
+    var(--about-header-space)
+    clamp(16px, 2vw, 36px)
+    42px;
+
+  overflow: hidden;
+  isolation: isolate;
 
   background: var(--about-surround);
   color: var(--about-ink);
+
+  transform: translate3d(0, 100%, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+
+  transition: none;
+  pointer-events: none;
 }
+
+.scene-01 {
+  z-index: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+}
+
+.scene-02 {
+  z-index: 2;
+}
+
+.scene-03 {
+  z-index: 3;
+}
+
+/* TARJETA */
 
 .scene-composition {
   position: relative;
 
   display: grid;
   grid-template-columns:
-    minmax(0, 0.9fr)
-    minmax(0, 1.1fr);
+    minmax(0, 0.92fr)
+    minmax(0, 1.08fr);
+
+  grid-template-rows: minmax(min-content, 1fr);
 
   align-items: center;
-  gap: clamp(24px, 4vw, 52px);
+  gap: clamp(24px, 3.5vw, 48px);
 
   width: 100%;
   max-width: 1140px;
   min-width: 0;
+  min-height: 0;
 
-  height: auto;
-  max-height: none;
+  height: min(
+    590px,
+    calc(100vh - var(--about-header-space) - 54px)
+  );
 
-  margin-inline: auto;
-  padding: clamp(20px, 2.5vw, 30px);
+  height: min(
+    590px,
+    calc(100svh - var(--about-header-space) - 54px)
+  );
+
+  margin: 0 auto;
+  padding: clamp(20px, 2.3vw, 30px);
 
   background: var(--about-paper);
 
   border: 1px solid var(--about-line);
   border-radius: var(--about-radius);
 
-  box-shadow: 0 8px 30px rgba(36, 32, 24, 0.035);
+  box-shadow: 0 8px 30px rgba(36, 32, 24, 0.045);
+
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #bab7ae transparent;
 }
 
-/* FOTOGRAFÍAS COMPLETAS
- *
- * Sin posición absoluta.
- * Sin franjas horizontales de altura fija.
- * Sin cover, zoom ni desplazamientos.
- */
+/* FOTOGRAFÍA COMPLETA */
 
 .scene-image {
   position: relative;
+  align-self: stretch;
 
-  align-self: center;
-  justify-self: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
 
   width: 100%;
-  max-width: 420px;
   min-width: 0;
+  min-height: 240px;
 
-  height: auto;
   margin: 0;
 }
 
+/*
+ * La imagen ocupa su espacio sin recortar.
+ * Su proporción se conserva incluso si el archivo
+ * tiene dimensiones distintas a las del HTML.
+ */
 .scene-image img {
   position: static;
 
   display: block;
 
   width: 100%;
-  height: auto;
-  max-width: 100%;
-
-  /* Limita el tamaño sin recortar el archivo. */
-  max-height: 480px;
-
-  margin: 0;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
 
   object-fit: contain;
   object-position: center;
@@ -130,7 +186,7 @@
   background: #f8f7f4;
 }
 
-/* El pie queda fuera de la foto y no tapa el rostro. */
+/* Pie debajo de la imagen para no taparla. */
 
 .image-caption {
   position: static;
@@ -139,31 +195,30 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 6px 12px;
+  gap: 5px 10px;
 
-  margin-top: 12px;
   padding-inline: 2px;
 
   color: var(--about-muted);
 
   font-size: 9px;
   font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: 0.12em;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
 }
 
 .image-caption > span:last-child {
   color: var(--about-gold);
 }
 
-/* TEXTO */
+/* CONTENIDO */
 
 .scene-content {
   width: 100%;
   max-width: 600px;
   min-width: 0;
 
-  padding: 0;
+  padding: 4px 0;
 }
 
 .scene-eyebrow {
@@ -171,7 +226,7 @@
   align-items: center;
   gap: 12px;
 
-  margin: 0 0 18px;
+  margin: 0 0 20px;
 
   color: var(--about-muted);
 
@@ -191,14 +246,14 @@
 }
 
 .scene-chapter {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
 
   color: var(--about-gold);
 
   font-size: 10px;
   font-weight: 500;
   line-height: 1.5;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
 }
 
 .scene-title {
@@ -208,9 +263,9 @@
   color: var(--about-ink);
 
   font-family: inherit;
-  font-size: clamp(30px, 3.3vw, 50px);
+  font-size: clamp(32px, 3.3vw, 50px);
   font-weight: 300;
-  line-height: 1.12;
+  line-height: 1.1;
   letter-spacing: -0.045em;
 
   text-wrap: balance;
@@ -225,9 +280,11 @@
   font-weight: inherit;
 }
 
+/* INFORMACIÓN DEL DOCTOR */
+
 .doctor-info {
   margin-top: 24px;
-  padding-left: 15px;
+  padding-left: 16px;
 
   border-left: 1px solid var(--about-gold);
 }
@@ -240,7 +297,7 @@
   font-family: inherit;
   font-size: 17px;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.4;
   letter-spacing: -0.025em;
 
   overflow-wrap: anywhere;
@@ -253,7 +310,7 @@
 
   font-size: 13px;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 .credential {
@@ -262,7 +319,7 @@
 
 .scene-description {
   max-width: 46ch;
-  margin: 20px 0 0;
+  margin: 22px 0 0;
 
   color: var(--about-muted);
 
@@ -273,7 +330,7 @@
   overflow-wrap: anywhere;
 }
 
-/* EXPERIENCIA Y PRECISIÓN */
+/* LISTAS */
 
 .scene-details {
   width: 100%;
@@ -283,7 +340,7 @@
 .detail-row {
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr);
-  gap: 14px;
+  gap: 15px;
 
   padding: 14px 0;
 
@@ -331,22 +388,21 @@
 
   font-size: 13px;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
 
   overflow-wrap: anywhere;
 }
 
-/* PROGRESO: SOLO EN MODO CORTINA */
+/* PROGRESO */
 
 .about-progress {
-  display: none;
-
   position: absolute;
-  right: clamp(16px, 3vw, 40px);
-  bottom: 16px;
-  left: clamp(16px, 3vw, 40px);
+  right: clamp(16px, 2vw, 36px);
+  bottom: 14px;
+  left: clamp(16px, 2vw, 36px);
   z-index: 10;
 
+  display: flex;
   align-items: center;
   gap: 18px;
 
@@ -367,6 +423,8 @@
 }
 
 .progress-track {
+  flex-shrink: 0;
+
   width: clamp(70px, 10vw, 140px);
   height: 2px;
 
@@ -376,6 +434,7 @@
 
 .progress-track > span {
   display: block;
+
   width: 100%;
   height: 100%;
 
@@ -394,76 +453,47 @@
   color: var(--about-ink);
 }
 
-/* CORTINA
- *
- * TypeScript activa esta clase únicamente cuando las
- * tres composiciones caben completas en la pantalla.
- */
+/* ESCRITORIO CON POCA ALTURA */
 
-.about-section.is-story {
-  height: 300vh;
-}
-
-.is-story .about-sticky {
-  position: sticky;
-  top: 0;
-
-  height: 100vh;
-
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.is-story .about-scene {
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  height: 100%;
-
-  padding-top: var(--about-header-space);
-  padding-bottom: 48px;
-
-  background: var(--about-surround);
-
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
-.is-story .about-progress {
-  display: flex;
-}
-
-/* TABLET */
-
-@media (min-width: 761px) and (max-width: 1000px) {
+@media (min-width: 761px) and (max-height: 760px) {
   .scene-composition {
-    grid-template-columns:
-      minmax(0, 0.85fr)
-      minmax(0, 1.15fr);
-
-    gap: 24px;
+    gap: 26px;
     padding: 22px;
   }
 
-  .scene-title {
-    font-size: 34px;
+  .scene-eyebrow {
+    margin-bottom: 12px;
   }
 
-  .scene-eyebrow {
-    font-size: 8px;
-    letter-spacing: 0.14em;
+  .scene-chapter {
+    margin-bottom: 10px;
+  }
+
+  .scene-title {
+    font-size: clamp(30px, 3.2vw, 44px);
+  }
+
+  .doctor-info,
+  .scene-details {
+    margin-top: 18px;
+  }
+
+  .scene-description {
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .detail-row {
+    padding: 10px 0;
+  }
+
+  .detail-row h3 {
+    font-size: 15px;
   }
 }
 
-/* MÓVIL
- *
- * Fotografía arriba, texto debajo.
- * La tarjeta crece con su contenido.
- */
+/* MÓVIL: MISMA ANIMACIÓN, FOTO SIN RECORTAR */
 
 @media (max-width: 760px) {
   :host {
@@ -472,340 +502,203 @@
   }
 
   .about-scene {
-    padding: 18px 16px;
-  }
-
-  .about-scene:first-child {
-    padding-top: 32px;
-  }
-
-  .about-scene:last-of-type {
-    padding-bottom: 40px;
+    padding:
+      var(--about-header-space)
+      12px
+      40px;
   }
 
   .scene-composition {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto auto;
+
+    /* Las filas conservan su altura y no aplastan la foto. */
+    grid-template-rows: max-content max-content;
 
     align-items: start;
-    gap: 26px;
+    align-content: start;
+    gap: 20px;
 
-    max-width: 520px;
+    max-width: 480px;
 
-    height: auto;
-    max-height: none;
+    height: calc(
+      100vh - var(--about-header-space) - 48px
+    );
 
-    padding: 20px;
+    height: calc(
+      100svh - var(--about-header-space) - 48px
+    );
+
+    padding: 18px;
   }
 
   .scene-image {
-    width: 100%;
-    max-width: 340px;
+    align-self: start;
 
-    height: auto;
-    min-height: 0;
+    /*
+     * Espacio mayor para la foto vertical.
+     * Contain muestra todo el archivo dentro de ese espacio.
+     */
+    height: clamp(220px, 36vh, 340px);
+    height: clamp(220px, 36svh, 340px);
+
+    min-height: 220px;
+    gap: 8px;
   }
 
   .scene-image img {
-    width: 100%;
-    height: auto;
-    max-height: none;
-
     object-fit: contain;
     object-position: center;
-
     border-radius: 10px;
   }
 
   .image-caption {
-    margin-top: 10px;
-
     font-size: 8px;
     letter-spacing: 0.08em;
   }
 
   .scene-content {
     max-width: none;
+    padding: 0;
   }
 
   .scene-eyebrow {
     gap: 9px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     font-size: 8px;
     letter-spacing: 0.16em;
   }
 
   .scene-eyebrow > span {
-    flex-basis: 22px;
+    flex-basis: 20px;
   }
 
   .scene-chapter {
-    margin-bottom: 10px;
+    margin-bottom: 9px;
     font-size: 9px;
   }
 
   .scene-title {
     font-size: clamp(28px, 7.2vw, 38px);
-    line-height: 1.15;
+    line-height: 1.12;
   }
 
   .doctor-info {
-    margin-top: 20px;
+    margin-top: 17px;
     padding-left: 12px;
   }
 
   .doctor-info h3 {
-    font-size: 16px;
+    margin-bottom: 5px;
+    font-size: 15px;
   }
 
   .doctor-info p {
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1.6;
   }
 
   .scene-description {
-    margin-top: 18px;
-
-    font-size: 14px;
-    line-height: 1.75;
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.7;
   }
 
   .scene-details {
-    margin-top: 22px;
+    margin-top: 18px;
   }
 
   .detail-row {
     grid-template-columns: 20px minmax(0, 1fr);
     gap: 10px;
 
-    padding: 14px 0;
+    padding: 11px 0;
   }
 
   .detail-row h3 {
-    font-size: 15px;
+    margin-bottom: 4px;
+    font-size: 14px;
   }
 
   .detail-row p {
-    font-size: 13px;
-    line-height: 1.65;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .about-progress {
+    right: 16px;
+    bottom: 12px;
+    left: 16px;
+
+    gap: 10px;
+
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .progress-track {
+    width: 50px;
   }
 }
 
 @media (max-width: 360px) {
-  .about-scene {
-    padding-inline: 12px;
-  }
-
   .scene-composition {
-    padding: 16px;
-    gap: 22px;
+    padding: 14px;
+    gap: 17px;
   }
 
   .scene-title {
     font-size: 28px;
   }
+
+  .about-progress {
+    gap: 8px;
+    font-size: 7px;
+  }
 }
 
-/* RESPALDO INMEDIATO PARA MOVIMIENTO REDUCIDO */
+/* MOVIMIENTO REDUCIDO: MISMA EXCEPCIÓN QUE TU ORIGINAL */
 
 @media (prefers-reduced-motion: reduce) {
-  .about-section.is-story {
+  .about-section {
     height: auto;
   }
 
-  .is-story .about-sticky {
+  .about-sticky {
     position: relative;
     height: auto;
     overflow: visible;
   }
 
-  .is-story .about-scene {
+  .about-scene {
     position: relative;
     inset: auto;
 
-    display: block;
     height: auto;
-
-    padding: 24px clamp(16px, 3vw, 40px);
-
-    transform: none !important;
-    will-change: auto;
-  }
-
-  .is-story .about-progress {
-    display: none;
-  }
-}
-/* CORTINA EN ESCRITORIO, TABLET Y CELULAR */
-
-.about-section.is-story {
-  /* TypeScript calcula el recorrido según el contenido. */
-  height: var(--about-story-height, 300vh);
-}
-
-.is-story .about-sticky {
-  position: sticky;
-  top: 0;
-
-  height: 100vh;
-  height: 100svh;
-
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.is-story .about-scene {
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-
-  padding:
-    var(--about-header-space)
-    clamp(16px, 3vw, 40px)
-    48px;
-
-  overflow: hidden;
-  background: var(--about-surround);
-
-  will-change: transform;
-}
-
-/*
- * Cada tarjeta conserva su altura natural.
- * El scroll de la página recorre el contenido largo.
- */
-.is-story .scene-composition {
-  flex: 0 1 1140px;
-  align-self: flex-start;
-
-  height: auto;
-  min-height: 0;
-  max-height: none;
-
-  margin: 0 auto;
-
-  overflow: visible;
-
-  transform: translate3d(
-    0,
-    var(--about-content-y, 0px),
-    0
-  );
-}
-
-/* Las imágenes siguen completas. */
-.is-story .scene-image img {
-  object-fit: contain;
-  object-position: center;
-}
-
-/* Franjas que separan la lectura del navbar y del progreso. */
-.is-story .about-sticky::before,
-.is-story .about-sticky::after {
-  content: "";
-
-  position: absolute;
-  right: 0;
-  left: 0;
-  z-index: 9;
-
-  background: var(--about-surround);
-  pointer-events: none;
-}
-
-.is-story .about-sticky::before {
-  top: 0;
-  height: var(--about-header-space);
-}
-
-.is-story .about-sticky::after {
-  bottom: 0;
-  height: 48px;
-}
-
-.is-story .about-progress {
-  display: flex;
-}
-
-@media (max-width: 760px) {
-  .is-story .about-scene {
-    padding:
-      var(--about-header-space)
-      16px
-      48px;
-  }
-
-  .is-story .scene-composition {
-    flex-basis: 520px;
-    max-width: 520px;
-  }
-
-  .is-story .about-progress {
-    right: 16px;
-    left: 16px;
-    bottom: 16px;
-
-    gap: 10px;
-    font-size: 8px;
-    letter-spacing: 0.04em;
-  }
-
-  .is-story .progress-track {
-    width: 50px;
-    flex-shrink: 0;
-  }
-}
-
-@media (max-width: 360px) {
-  .is-story .about-scene {
-    padding-inline: 12px;
-  }
-
-  .is-story .progress-label {
-    letter-spacing: 0;
-  }
-}
-
-/* Respeta la preferencia de accesibilidad del dispositivo. */
-@media (prefers-reduced-motion: reduce) {
-  .about-section.is-story {
-    height: auto;
-  }
-
-  .is-story .about-sticky {
-    position: relative;
-    height: auto;
-    overflow: visible;
-  }
-
-  .is-story .about-scene {
-    position: relative;
-    inset: auto;
-
-    display: block;
-    height: auto;
+    min-height: 0;
 
     padding: 24px 16px;
+
     overflow: visible;
 
     transform: none !important;
     will-change: auto;
+    pointer-events: auto;
   }
 
-  .is-story .scene-composition {
-    transform: none;
+  .scene-composition {
+    height: auto;
+    max-height: none;
+    overflow: visible;
   }
 
-  .is-story .about-sticky::before,
-  .is-story .about-sticky::after,
-  .is-story .about-progress {
+  .scene-image {
+    align-self: start;
+    height: 420px;
+    min-height: 0;
+  }
+
+  .about-progress {
     display: none;
   }
 }
