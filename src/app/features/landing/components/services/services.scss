@@ -1,6 +1,7 @@
 :host {
   display: block;
   width: 100%;
+  min-width: 0;
 
   font-family: inherit;
 
@@ -10,30 +11,31 @@
   --services-gold: #947238;
   --services-line: rgba(36, 37, 33, 0.14);
 
-  /* Ajustar si cambia la altura real del navbar. */
   --services-nav-height: 80px;
 }
 
 .services-section,
-.services-section * {
+.services-section *,
+.services-section *::before,
+.services-section *::after {
   box-sizing: border-box;
 }
 
-/* =====================================================
-   SECCIÓN COMPACTA
-===================================================== */
+/* SECCIÓN */
 
 .services-section {
   position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  min-width: 0;
 
   padding:
-    clamp(40px, 4vw, 64px)
-    clamp(22px, 5vw, 80px);
+    clamp(40px, 5vw, 72px)
+    clamp(18px, 4vw, 64px);
 
   background: var(--services-background);
   color: var(--services-ink);
-
-  isolation: isolate;
 
   scroll-margin-top: calc(
     var(--services-nav-height) + 16px
@@ -43,12 +45,6 @@
   --tooth-rotation: 0deg;
 }
 
-/*
- * Una columna de texto y una columna visual.
- *
- * El diente abarca las tres filas y permanece
- * sticky dentro de todo el contenedor.
- */
 .services-container {
   display: grid;
 
@@ -60,25 +56,22 @@
 
   align-items: start;
 
-  column-gap: clamp(36px, 5vw, 80px);
-  row-gap: 0;
+  column-gap: clamp(24px, 4vw, 64px);
 
   width: 100%;
   max-width: 1200px;
+  min-width: 0;
 
-  margin: 0 auto;
+  margin-inline: auto;
 }
 
-/* =====================================================
-   ENCABEZADO
-===================================================== */
+/* ENCABEZADO */
 
 .services-header {
   grid-column: 1;
   grid-row: 1;
 
   min-width: 0;
-
   margin: 0 0 28px;
 }
 
@@ -91,17 +84,17 @@
 
   color: var(--services-gold);
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 400;
   line-height: 1.6;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
 }
 
 .services-eyebrow > span {
   flex: 0 0 26px;
   height: 1px;
 
-  background: var(--services-gold);
+  background: currentColor;
 }
 
 .services-title {
@@ -110,13 +103,13 @@
   color: var(--services-ink);
 
   font-family: inherit;
-  font-size: clamp(36px, 4vw, 58px);
+  font-size: clamp(34px, 4.5vw, 58px);
   font-weight: 300;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.045em;
 
   text-wrap: balance;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .services-title > span {
@@ -128,7 +121,6 @@
 
 .services-description {
   max-width: 44ch;
-
   margin: 18px 0 0;
 
   color: var(--services-muted);
@@ -138,13 +130,15 @@
   line-height: 1.75;
 }
 
-/* =====================================================
-   DIENTE STICKY
-===================================================== */
+/* DIENTE
+ *
+ * Contenedor cuadrado limitado por ancho y altura.
+ * El margen interior permite la traslación de ±12px
+ * y la rotación de ±2° del TypeScript actual.
+ */
 
 .tooth-stage {
   position: sticky;
-
   top: calc(var(--services-nav-height) + 24px);
 
   grid-column: 2;
@@ -157,60 +151,83 @@
   place-items: center;
 
   width: 100%;
-  max-width: 450px;
-
-  /*
-   * Limita su tamaño también por la altura disponible.
-   * La imagen no crece fuera de su columna.
-   */
-  height: min(
+  max-width: min(
     450px,
-    calc(100svh - var(--services-nav-height) - 48px)
+    max(
+      100px,
+      calc(100vh - var(--services-nav-height) - 48px)
+    )
   );
 
   min-width: 0;
+  height: auto;
+  aspect-ratio: 1 / 1;
 
-  overflow: hidden;
+  margin: 0;
+
+  overflow: visible;
+}
+
+@supports (height: 100svh) {
+  .tooth-stage {
+    max-width: min(
+      450px,
+      max(
+        100px,
+        calc(100svh - var(--services-nav-height) - 48px)
+      )
+    );
+  }
 }
 
 .tooth-motion {
-  width: min(
-    90%,
-    410px,
-    calc(100svh - var(--services-nav-height) - 88px)
-  );
+  position: relative;
 
-  aspect-ratio: 1;
+  width: calc(100% - 48px);
+  max-width: 402px;
+  min-width: 0;
+
+  height: auto;
+  aspect-ratio: 1 / 1;
 
   transform:
-    translate3d(0, var(--tooth-y), 0)
-    rotate(var(--tooth-rotation));
+    translate3d(
+      0,
+      clamp(-12px, var(--tooth-y), 12px),
+      0
+    )
+    rotate(
+      clamp(-2deg, var(--tooth-rotation), 2deg)
+    );
 
   transform-origin: center;
-
-  transition: none;
 }
 
+/* Contain muestra el archivo completo sin deformarlo. */
 .tooth-frame {
+  position: absolute;
+  inset: 0;
+
   display: block;
 
   width: 100%;
   height: 100%;
   max-width: 100%;
+  max-height: 100%;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
 
   object-fit: contain;
+  object-position: center;
 
   user-select: none;
   pointer-events: none;
   -webkit-user-drag: none;
 }
 
-/* =====================================================
-   SERVICIOS
-
-   El título de cada servicio comparte el mismo
-   borde izquierdo que el encabezado principal.
-===================================================== */
+/* LISTA DE SERVICIOS */
 
 .service-list {
   grid-column: 1;
@@ -223,6 +240,7 @@
 .service-item {
   position: relative;
 
+  min-width: 0;
   padding: 20px 0 24px;
 
   border-top: 1px solid var(--services-line);
@@ -235,7 +253,6 @@
   border-bottom: 1px solid var(--services-line);
 }
 
-/* Línea vinculada al progreso de entrada. */
 .service-item::before {
   content: "";
 
@@ -248,8 +265,8 @@
 
   background: var(--services-gold);
 
-  transform-origin: left center;
   transform: scaleX(var(--row-progress));
+  transform-origin: left center;
 
   pointer-events: none;
 }
@@ -258,6 +275,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 
   margin-bottom: 8px;
 }
@@ -274,6 +292,8 @@
 }
 
 .service-icon {
+  flex: 0 0 28px;
+
   display: grid;
   place-items: center;
 
@@ -315,34 +335,34 @@
   color: var(--services-ink);
 
   font-family: inherit;
-  font-size: clamp(25px, 2.35vw, 32px);
+  font-size: clamp(24px, 2.35vw, 32px);
   font-weight: 300;
-  line-height: 1.18;
+  line-height: 1.2;
   letter-spacing: -0.035em;
 
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .service-copy p {
   max-width: 52ch;
-
   margin: 9px 0 0;
 
   color: var(--services-muted);
 
   font-size: 14px;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.7;
+
+  overflow-wrap: anywhere;
 }
 
-/* =====================================================
-   BOTÓN FINAL
-===================================================== */
+/* BOTÓN */
 
 .services-footer {
   grid-column: 1;
   grid-row: 3;
 
+  min-width: 0;
   padding-top: 28px;
 }
 
@@ -350,8 +370,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 22px;
+  gap: 18px;
 
+  max-width: 100%;
   min-height: 48px;
 
   padding: 13px 24px;
@@ -367,6 +388,7 @@
   font-weight: 400;
   line-height: 1.5;
 
+  text-align: center;
   text-decoration: none;
 
   transition:
@@ -374,7 +396,14 @@
     border-color 180ms ease;
 }
 
+.services-cta > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .services-cta svg {
+  flex: 0 0 18px;
+
   display: block;
 
   width: 18px;
@@ -406,21 +435,19 @@
   }
 }
 
-/* =====================================================
-   TABLET
-===================================================== */
+/* TABLET HORIZONTAL */
 
-@media (min-width: 761px) and (max-width: 1000px) {
+@media (min-width: 901px) and (max-width: 1100px) {
   .services-container {
     grid-template-columns:
-      minmax(0, 1.25fr)
-      minmax(0, 0.75fr);
+      minmax(0, 1.1fr)
+      minmax(0, 0.9fr);
 
     column-gap: 28px;
   }
 
   .services-title {
-    font-size: 42px;
+    font-size: clamp(38px, 4.3vw, 46px);
   }
 
   .service-copy h3 {
@@ -428,94 +455,168 @@
   }
 }
 
-/* =====================================================
-   MÓVIL
+/* TABLET VERTICAL Y MÓVIL
+ *
+ * El diente vuelve al flujo normal:
+ * encabezado → imagen completa → servicios → botón.
+ */
 
-   El diente se convierte en una franja compacta
-   que acompaña el recorrido debajo del navbar.
-===================================================== */
-
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   :host {
     --services-nav-height: 72px;
   }
 
   .services-section {
-    padding: 40px 22px;
+    padding:
+      clamp(36px, 6vw, 56px)
+      clamp(18px, 4vw, 36px);
   }
 
   .services-container {
-    display: block;
-    max-width: 560px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto;
+
+    max-width: 640px;
+    gap: 0;
   }
 
   .services-header {
+    grid-column: 1;
+    grid-row: 1;
+
     margin-bottom: 12px;
   }
 
-  .services-eyebrow {
-    margin-bottom: 16px;
-
-    font-size: 8px;
-    letter-spacing: 0.2em;
-  }
-
   .services-title {
-    font-size: clamp(34px, 8.4vw, 44px);
+    font-size: clamp(32px, 6vw, 48px);
   }
 
   .services-description {
+    max-width: 48ch;
     margin-top: 16px;
-    font-size: 14px;
   }
 
   .tooth-stage {
-    top: var(--services-nav-height);
-    z-index: 2;
+    position: relative;
+    top: auto;
+
+    grid-column: 1;
+    grid-row: 2;
 
     width: 100%;
-    max-width: none;
-    height: 160px;
+    max-width: 340px;
 
-    margin: 0 0 16px;
+    height: auto;
+    aspect-ratio: 1 / 1;
 
-    background: var(--services-background);
+    margin: 4px auto 24px;
   }
 
   .tooth-motion {
-    width: 136px;
+    width: calc(100% - 48px);
+    max-width: none;
   }
 
-  .service-item {
-    padding: 17px 0 21px;
-  }
-
-  .service-copy h3 {
-    font-size: 26px;
-  }
-
-  .service-copy p {
-    font-size: 13px;
-    line-height: 1.65;
+  .service-list {
+    grid-column: 1;
+    grid-row: 3;
   }
 
   .services-footer {
+    grid-column: 1;
+    grid-row: 4;
+
     padding-top: 24px;
   }
 }
 
-/* En horizontal, evita que el diente tape la lectura. */
+/* TELÉFONOS */
 
-@media (max-width: 760px) and (max-height: 500px) {
+@media (max-width: 480px) {
+  .services-section {
+    padding: 36px 20px 40px;
+  }
+
+  .services-eyebrow {
+    gap: 10px;
+
+    margin-bottom: 16px;
+
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .services-eyebrow > span {
+    flex-basis: 22px;
+  }
+
+  .services-title {
+    font-size: clamp(30px, 8.5vw, 40px);
+    line-height: 1.12;
+  }
+
+  .services-description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
   .tooth-stage {
-    position: relative;
-    top: auto;
+    max-width: 290px;
+    margin-block: 6px 20px;
+  }
+
+  .service-item {
+    padding: 18px 0 24px;
+  }
+
+  .service-copy h3 {
+    font-size: clamp(23px, 6.2vw, 27px);
+  }
+
+  .service-copy p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .services-cta {
+    width: 100%;
+    padding-inline: 18px;
   }
 }
 
-/* =====================================================
-   MOVIMIENTO REDUCIDO
-===================================================== */
+/* PANTALLAS MUY ESTRECHAS */
+
+@media (max-width: 360px) {
+  .services-section {
+    padding-inline: 16px;
+  }
+
+  .services-title {
+    font-size: 30px;
+  }
+
+  .services-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.12em;
+  }
+
+  .tooth-stage {
+    max-width: 250px;
+  }
+}
+
+/* VENTANAS BAJAS Y TELÉFONOS EN HORIZONTAL */
+
+@media (max-height: 500px) {
+  .tooth-stage {
+    position: relative;
+    top: auto;
+
+    max-width: 280px;
+  }
+}
+
+/* ACCESIBILIDAD */
 
 @media (prefers-reduced-motion: reduce) {
   .tooth-stage {
@@ -536,5 +637,9 @@
   .services-cta,
   .services-cta svg {
     transition: none;
+  }
+
+  .services-cta:hover svg {
+    transform: none;
   }
 }
