@@ -23,15 +23,20 @@ export class About implements OnDestroy {
   private currentLabel: HTMLElement | null = null;
 
   private scenes: HTMLElement[] = [];
+  private compositions: HTMLElement[] = [];
+  private images: HTMLImageElement[] = [];
 
   private frameId: number | null = null;
   private resizeObserver: ResizeObserver | null = null;
+
   private motionQuery: MediaQueryList | null = null;
+  private desktopQuery: MediaQueryList | null = null;
 
   private destroyed = false;
   private initialized = false;
+  private layoutDirty = true;
 
-  // -1 garantiza la actualización inicial de accesibilidad.
+  private storyEnabled = false;
   private activeScene = -1;
 
   constructor(
@@ -76,48 +81,75 @@ export class About implements OnDestroy {
       root.querySelectorAll<HTMLElement>('.about-scene'),
     );
 
+    this.compositions = Array.from(
+      root.querySelectorAll<HTMLElement>('.scene-composition'),
+    );
+
+    this.images = Array.from(
+      root.querySelectorAll<HTMLImageElement>('.scene-image img'),
+    );
+
     if (
       !this.section ||
       !this.sticky ||
-      this.scenes.length !== 3
+      this.scenes.length !== 3 ||
+      this.compositions.length !== 3
     ) {
-      console.error(
-        '[JANERDent About] No se encontraron el contenedor y las 3 escenas.',
-      );
-
       return;
     }
-
-    this.initialized = true;
 
     this.motionQuery = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     );
 
-    this.motionQuery.addEventListener(
-      'change',
-      this.onMotionChange,
+    this.desktopQuery = window.matchMedia(
+      '(min-width: 761px)',
     );
+
+    this.initialized = true;
 
     window.addEventListener('scroll', this.requestRender, {
       passive: true,
     });
 
-    window.addEventListener('resize', this.requestRender, {
+    window.addEventListener('resize', this.onLayoutChange, {
       passive: true,
     });
 
-    // Mantiene el cálculo sincronizado con el tamaño real
-    // del contenedor, incluyendo cambios de orientación.
-    this.resizeObserver = new ResizeObserver(() => {
-      this.requestRender();
+    this.motionQuery.addEventListener(
+      'change',
+      this.onLayoutChange,
+    );
+
+    this.desktopQuery.addEventListener(
+      'change',
+      this.onLayoutChange,
+    );
+
+    this.images.forEach((image) => {
+      image.addEventListener('load', this.onLayoutChange);
+      image.addEventListener('error', this.onLayoutChange);
     });
 
-    this.resizeObserver.observe(this.section);
-    this.resizeObserver.observe(this.sticky);
+    if (typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.onLayoutChange();
+      });
+
+      // Detecta cambios de tamaño por imágenes, fuentes
+      // o ampliación del texto.
+      this.compositions.forEach((composition) => {
+        this.resizeObserver?.observe(composition);
+      });
+    }
 
     this.render();
   }
+
+  private readonly onLayoutChange = (): void => {
+    this.layoutDirty = true;
+    this.requestRender();
+  };
 
   private readonly requestRender = (): void => {
     if (
@@ -137,29 +169,76 @@ export class About implements OnDestroy {
     });
   };
 
-  private readonly onMotionChange = (): void => {
+  private updateLayout(): void {
+    if (!this.section) {
+      return;
+    }
+
+    this.layoutDirty = false;
+
+    const headerSpace =
+      Number.parseFloat(
+        window
+          .getComputedStyle(this.section)
+          .getPropertyValue('--about-header-space'),
+      ) || 96;
+
+    const viewportHeight = window.innerHeight;
+
+    // Coincide con el espacio superior e inferior del CSS.
+    const availableHeight =
+      viewportHeight - headerSpace - 48;
+
+    const tallestComposition = Math.max(
+      ...this.compositions.map((composition) =>
+        Math.max(
+          composition.getBoundingClientRect().height,
+          composition.scrollHeight,
+        ),
+      ),
+    );
+
+    const shouldEnableStory =
+      this.desktopQuery?.matches === true &&
+      this.motionQuery?.matches !== true &&
+      tallestComposition <= availableHeight - 4;
+
+    if (shouldEnableStory === this.storyEnabled) {
+      return;
+    }
+
+    this.storyEnabled = shouldEnableStory;
     this.activeScene = -1;
-    this.requestRender();
-  };
+
+    this.section.classList.toggle(
+      'is-story',
+      this.storyEnabled,
+    );
+
+    if (!this.storyEnabled) {
+      this.showAllScenes();
+    }
+  }
 
   private render(): void {
     if (
       this.destroyed ||
       !this.section ||
-      !this.sticky ||
-      this.scenes.length !== 3
+      !this.sticky
     ) {
       return;
     }
 
-    if (this.motionQuery?.matches) {
-      this.renderReducedMotion();
+    if (this.layoutDirty) {
+      this.updateLayout();
+    }
+
+    if (!this.storyEnabled) {
       return;
     }
 
     const rect = this.section.getBoundingClientRect();
 
-    // Usa la altura real del sticky, coherente con 100svh.
     const scrollDistance = Math.max(
       1,
       this.section.offsetHeight - this.sticky.offsetHeight,
@@ -174,14 +253,6 @@ export class About implements OnDestroy {
       progress.toString(),
     );
 
-    /*
-     * Se conserva el recorrido original:
-     *
-     * primera mitad: escena 01 → escena 02
-     * segunda mitad: escena 02 → escena 03
-     *
-     * Los extremos de cada tramo dejan una pausa de lectura.
-     */
     const position = progress * (this.scenes.length - 1);
 
     const baseIndex = Math.min(
@@ -205,13 +276,6 @@ export class About implements OnDestroy {
         y = 100 * (1 - transition);
       }
 
-      /*
-       * La escena entrante sube completa.
-       * Su fondo opaco cubre imagen y texto anteriores.
-       *
-       * Sin fade, sin perspective y sin cambios de escala
-       * que dejen huecos alrededor de la escena.
-       */
       scene.style.transform =
         `translate3d(0, ${y}%, 0)`;
 
@@ -234,13 +298,11 @@ export class About implements OnDestroy {
     this.scenes.forEach((scene, index) => {
       const active = index === activeIndex;
 
-      scene.setAttribute(
-        'aria-hidden',
-        String(!active),
-      );
-
+      scene.setAttribute('aria-hidden', String(!active));
       scene.inert = !active;
-      scene.style.pointerEvents = active ? 'auto' : 'none';
+
+      scene.style.pointerEvents =
+        active ? 'auto' : 'none';
     });
 
     if (this.currentLabel) {
@@ -249,7 +311,7 @@ export class About implements OnDestroy {
     }
   }
 
-  private renderReducedMotion(): void {
+  private showAllScenes(): void {
     this.section?.style.setProperty(
       '--scroll-progress',
       '0',
@@ -258,13 +320,17 @@ export class About implements OnDestroy {
     this.scenes.forEach((scene) => {
       scene.style.removeProperty('transform');
       scene.style.removeProperty('z-index');
+      scene.style.removeProperty('pointer-events');
 
       scene.removeAttribute('aria-hidden');
       scene.inert = false;
-      scene.style.pointerEvents = 'auto';
     });
 
     this.activeScene = -1;
+
+    if (this.currentLabel) {
+      this.currentLabel.textContent = '01';
+    }
   }
 
   private clamp(value: number): number {
@@ -289,13 +355,30 @@ export class About implements OnDestroy {
 
     window.removeEventListener(
       'resize',
-      this.requestRender,
+      this.onLayoutChange,
     );
 
     this.motionQuery?.removeEventListener(
       'change',
-      this.onMotionChange,
+      this.onLayoutChange,
     );
+
+    this.desktopQuery?.removeEventListener(
+      'change',
+      this.onLayoutChange,
+    );
+
+    this.images.forEach((image) => {
+      image.removeEventListener(
+        'load',
+        this.onLayoutChange,
+      );
+
+      image.removeEventListener(
+        'error',
+        this.onLayoutChange,
+      );
+    });
 
     this.resizeObserver?.disconnect();
 
