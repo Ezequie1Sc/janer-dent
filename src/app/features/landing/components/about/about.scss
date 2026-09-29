@@ -636,3 +636,176 @@
     display: none;
   }
 }
+/* CORTINA EN ESCRITORIO, TABLET Y CELULAR */
+
+.about-section.is-story {
+  /* TypeScript calcula el recorrido según el contenido. */
+  height: var(--about-story-height, 300vh);
+}
+
+.is-story .about-sticky {
+  position: sticky;
+  top: 0;
+
+  height: 100vh;
+  height: 100svh;
+
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.is-story .about-scene {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  padding:
+    var(--about-header-space)
+    clamp(16px, 3vw, 40px)
+    48px;
+
+  overflow: hidden;
+  background: var(--about-surround);
+
+  will-change: transform;
+}
+
+/*
+ * Cada tarjeta conserva su altura natural.
+ * El scroll de la página recorre el contenido largo.
+ */
+.is-story .scene-composition {
+  flex: 0 1 1140px;
+  align-self: flex-start;
+
+  height: auto;
+  min-height: 0;
+  max-height: none;
+
+  margin: 0 auto;
+
+  overflow: visible;
+
+  transform: translate3d(
+    0,
+    var(--about-content-y, 0px),
+    0
+  );
+}
+
+/* Las imágenes siguen completas. */
+.is-story .scene-image img {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Franjas que separan la lectura del navbar y del progreso. */
+.is-story .about-sticky::before,
+.is-story .about-sticky::after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 9;
+
+  background: var(--about-surround);
+  pointer-events: none;
+}
+
+.is-story .about-sticky::before {
+  top: 0;
+  height: var(--about-header-space);
+}
+
+.is-story .about-sticky::after {
+  bottom: 0;
+  height: 48px;
+}
+
+.is-story .about-progress {
+  display: flex;
+}
+
+@media (max-width: 760px) {
+  .is-story .about-scene {
+    padding:
+      var(--about-header-space)
+      16px
+      48px;
+  }
+
+  .is-story .scene-composition {
+    flex-basis: 520px;
+    max-width: 520px;
+  }
+
+  .is-story .about-progress {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+
+    gap: 10px;
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .is-story .progress-track {
+    width: 50px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .is-story .about-scene {
+    padding-inline: 12px;
+  }
+
+  .is-story .progress-label {
+    letter-spacing: 0;
+  }
+}
+
+/* Respeta la preferencia de accesibilidad del dispositivo. */
+@media (prefers-reduced-motion: reduce) {
+  .about-section.is-story {
+    height: auto;
+  }
+
+  .is-story .about-sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .is-story .about-scene {
+    position: relative;
+    inset: auto;
+
+    display: block;
+    height: auto;
+
+    padding: 24px 16px;
+    overflow: visible;
+
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .is-story .scene-composition {
+    transform: none;
+  }
+
+  .is-story .about-sticky::before,
+  .is-story .about-sticky::after,
+  .is-story .about-progress {
+    display: none;
+  }
+}
