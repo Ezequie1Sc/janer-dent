@@ -1,242 +1,169 @@
 :host {
   display: block;
   width: 100%;
-
-  --about-surround: #eae8e3;
-  --about-paper: #f8f7f4;
-  --about-ink: #242521;
-  --about-muted: #65665f;
-  --about-gold: #947238;
-  --about-line: rgba(36, 37, 33, 0.14);
-
-  --about-radius: 26px;
-
-  /* Navbar de aproximadamente 80px + 16px de separación. */
-  --about-header-space: 96px;
+  min-width: 0;
 
   font-family: inherit;
+
+  --about-surround: #ffffff;
+  --about-paper: #ffffff;
+  --about-ink: #25241f;
+  --about-muted: #6b685f;
+  --about-gold: #947238;
+  --about-line: #e9e5dd;
+
+  --about-radius: 18px;
+  --about-header-space: 96px;
 }
 
 .about-section,
-.about-section * {
+.about-section *,
+.about-section *::before,
+.about-section *::after {
   box-sizing: border-box;
 }
 
-/* =====================================================
-   SECCIÓN Y RECORRIDO DEL SCROLL
-===================================================== */
+/* BASE: TODO EL CONTENIDO VISIBLE */
 
 .about-section {
   position: relative;
-  width: 100%;
+  isolation: isolate;
 
-  height: 300vh;
-  height: 300svh;
+  width: 100%;
+  min-width: 0;
 
   background: var(--about-surround);
   color: var(--about-ink);
 
-  isolation: isolate;
+  scroll-margin-top: var(--about-header-space);
 
   --scroll-progress: 0;
 }
 
 .about-sticky {
-  position: sticky;
-  top: 0;
-
+  position: relative;
   width: 100%;
-  height: 100vh;
-  height: 100svh;
-
-  overflow: hidden;
-  isolation: isolate;
+  min-width: 0;
 
   background: var(--about-surround);
 }
 
-/* =====================================================
-   ESCENAS SUPERPUESTAS
-
-   El fondo de cada escena es opaco para cubrir
-   completamente los textos de la escena anterior.
-===================================================== */
-
 .about-scene {
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-
+  position: relative;
   width: 100%;
-  height: 100%;
+  min-width: 0;
 
-  padding:
-    var(--about-header-space)
-    clamp(16px, 2vw, 36px)
-    42px;
+  padding: 32px clamp(16px, 3vw, 40px);
 
   background: var(--about-surround);
   color: var(--about-ink);
-
-  overflow: hidden;
-  isolation: isolate;
-
-  transform: translate3d(0, 100%, 0);
-  backface-visibility: hidden;
-  will-change: transform;
-
-  /* El movimiento depende directamente del scroll. */
-  transition: none;
-  pointer-events: none;
 }
-
-.scene-01 {
-  z-index: 1;
-  transform: translate3d(0, 0, 0);
-  pointer-events: auto;
-}
-
-.scene-02 {
-  z-index: 2;
-}
-
-.scene-03 {
-  z-index: 3;
-}
-
-/* =====================================================
-   TARJETA PRINCIPAL
-===================================================== */
 
 .scene-composition {
   position: relative;
 
   display: grid;
   grid-template-columns:
-    minmax(0, 0.92fr)
-    minmax(0, 1.08fr);
+    minmax(0, 0.9fr)
+    minmax(0, 1.1fr);
 
   align-items: center;
-  gap: clamp(32px, 4.5vw, 72px);
+  gap: clamp(24px, 4vw, 52px);
 
   width: 100%;
-  max-width: 1600px;
+  max-width: 1140px;
   min-width: 0;
-  min-height: 0;
 
-  margin: 0 auto;
-  padding: clamp(24px, 2.5vw, 40px);
+  height: auto;
+  max-height: none;
+
+  margin-inline: auto;
+  padding: clamp(20px, 2.5vw, 30px);
 
   background: var(--about-paper);
-  color: var(--about-ink);
 
-  border: 1px solid rgba(36, 37, 33, 0.08);
+  border: 1px solid var(--about-line);
   border-radius: var(--about-radius);
 
-  box-shadow: 0 5px 20px rgba(36, 37, 33, 0.035);
-
-  /*
-   * Respaldo para texto ampliado o pantallas muy bajas:
-   * permite acceder al contenido que exceda el panel.
-   */
-  overflow: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #bab7ae transparent;
+  box-shadow: 0 8px 30px rgba(36, 32, 24, 0.035);
 }
 
-/* =====================================================
-   FOTOGRAFÍA
-===================================================== */
+/* FOTOGRAFÍAS COMPLETAS
+ *
+ * Sin posición absoluta.
+ * Sin franjas horizontales de altura fija.
+ * Sin cover, zoom ni desplazamientos.
+ */
 
 .scene-image {
   position: relative;
-  align-self: stretch;
+
+  align-self: center;
+  justify-self: center;
 
   width: 100%;
+  max-width: 420px;
   min-width: 0;
-  min-height: 0;
 
+  height: auto;
   margin: 0;
-
-  overflow: hidden;
-
-  background: #dedbd3;
-  border-radius: 16px;
 }
 
 .scene-image img {
-  position: absolute;
-  inset: 0;
+  position: static;
 
   display: block;
 
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-width: 100%;
 
-  object-fit: cover;
-  object-position: center 35%;
-}
+  /* Limita el tamaño sin recortar el archivo. */
+  max-height: 480px;
 
-.scene-02 .scene-image img {
+  margin: 0;
+
+  object-fit: contain;
   object-position: center;
+
+  border-radius: 12px;
+  background: #f8f7f4;
 }
 
-.scene-03 .scene-image img {
-  object-position: center 40%;
-}
-
-/* Contraste localizado detrás del pie de fotografía. */
-
-.scene-image::after {
-  content: "";
-
-  position: absolute;
-  inset: 65% 0 0;
-  z-index: 1;
-
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(0, 0, 0, 0.64)
-  );
-
-  pointer-events: none;
-}
+/* El pie queda fuera de la foto y no tapa el rostro. */
 
 .image-caption {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  left: 20px;
-
-  z-index: 2;
+  position: static;
 
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 6px 12px;
 
-  color: #ffffff;
+  margin-top: 12px;
+  padding-inline: 2px;
+
+  color: var(--about-muted);
 
   font-size: 9px;
   font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0.15em;
+  line-height: 1.6;
+  letter-spacing: 0.12em;
 }
 
-/* =====================================================
-   CONTENIDO Y TIPOGRAFÍA
-===================================================== */
+.image-caption > span:last-child {
+  color: var(--about-gold);
+}
+
+/* TEXTO */
 
 .scene-content {
   width: 100%;
   max-width: 600px;
   min-width: 0;
 
-  padding: 8px 0;
+  padding: 0;
 }
 
 .scene-eyebrow {
@@ -244,14 +171,16 @@
   align-items: center;
   gap: 12px;
 
-  margin: 0 0 24px;
+  margin: 0 0 18px;
 
   color: var(--about-muted);
 
   font-size: 9px;
   font-weight: 400;
   line-height: 1.6;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.2em;
+
+  overflow-wrap: anywhere;
 }
 
 .scene-eyebrow > span {
@@ -262,14 +191,14 @@
 }
 
 .scene-chapter {
-  margin: 0 0 16px;
+  margin: 0 0 12px;
 
   color: var(--about-gold);
 
   font-size: 10px;
   font-weight: 500;
   line-height: 1.5;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
 }
 
 .scene-title {
@@ -279,31 +208,26 @@
   color: var(--about-ink);
 
   font-family: inherit;
-  font-size: clamp(34px, 3.8vw, 60px);
+  font-size: clamp(30px, 3.3vw, 50px);
   font-weight: 300;
-  line-height: 1.08;
+  line-height: 1.12;
   letter-spacing: -0.045em;
 
   text-wrap: balance;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .scene-title > span {
   display: block;
 
   color: inherit;
-
   font-family: inherit;
   font-weight: inherit;
 }
 
-/* =====================================================
-   INFORMACIÓN DEL ESPECIALISTA
-===================================================== */
-
 .doctor-info {
-  margin-top: clamp(22px, 3svh, 34px);
-  padding-left: 16px;
+  margin-top: 24px;
+  padding-left: 15px;
 
   border-left: 1px solid var(--about-gold);
 }
@@ -316,8 +240,10 @@
   font-family: inherit;
   font-size: 17px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.45;
   letter-spacing: -0.025em;
+
+  overflow-wrap: anywhere;
 }
 
 .doctor-info p {
@@ -327,46 +253,49 @@
 
   font-size: 13px;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .credential {
   display: block;
-  color: var(--about-muted);
 }
 
 .scene-description {
   max-width: 46ch;
-  margin: 22px 0 0;
+  margin: 20px 0 0;
 
   color: var(--about-muted);
 
   font-size: 14px;
   font-weight: 400;
   line-height: 1.8;
+
+  overflow-wrap: anywhere;
 }
 
-/* =====================================================
-   LISTAS DE EXPERIENCIA Y PRECISIÓN
-===================================================== */
+/* EXPERIENCIA Y PRECISIÓN */
 
 .scene-details {
   width: 100%;
-  margin-top: clamp(22px, 3svh, 34px);
+  margin-top: 24px;
 }
 
 .detail-row {
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr);
-  gap: 15px;
+  gap: 14px;
 
-  padding: 15px 0;
+  padding: 14px 0;
 
   border-top: 1px solid var(--about-line);
 }
 
 .detail-row:last-child {
   border-bottom: 1px solid var(--about-line);
+}
+
+.detail-row > div {
+  min-width: 0;
 }
 
 .detail-number {
@@ -390,6 +319,8 @@
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.025em;
+
+  overflow-wrap: anywhere;
 }
 
 .detail-row p {
@@ -400,31 +331,33 @@
 
   font-size: 13px;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.7;
+
+  overflow-wrap: anywhere;
 }
 
-/* =====================================================
-   INDICADOR DE PROGRESO
-===================================================== */
+/* PROGRESO: SOLO EN MODO CORTINA */
 
 .about-progress {
+  display: none;
+
   position: absolute;
-
-  right: clamp(16px, 2vw, 36px);
-  bottom: 14px;
-  left: clamp(16px, 2vw, 36px);
-
+  right: clamp(16px, 3vw, 40px);
+  bottom: 16px;
+  left: clamp(16px, 3vw, 40px);
   z-index: 10;
 
-  display: flex;
   align-items: center;
   gap: 18px;
+
+  max-width: 1140px;
+  margin-inline: auto;
 
   color: var(--about-muted);
 
   font-size: 9px;
   line-height: 1.5;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
 
   pointer-events: none;
 }
@@ -438,13 +371,11 @@
   height: 2px;
 
   overflow: hidden;
-
-  background: rgba(36, 37, 33, 0.16);
+  background: #e7e2d9;
 }
 
 .progress-track > span {
   display: block;
-
   width: 100%;
   height: 100%;
 
@@ -463,397 +394,211 @@
   color: var(--about-ink);
 }
 
-/* =====================================================
-   PORTÁTILES CON POCA ALTURA
-===================================================== */
+/* CORTINA
+ *
+ * TypeScript activa esta clase únicamente cuando las
+ * tres composiciones caben completas en la pantalla.
+ */
 
-@media (min-width: 761px) and (max-height: 760px) {
-  .about-scene {
-    padding:
-      var(--about-header-space)
-      22px
-      38px;
-  }
+.about-section.is-story {
+  height: 300vh;
+}
 
+.is-story .about-sticky {
+  position: sticky;
+  top: 0;
+
+  height: 100vh;
+
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.is-story .about-scene {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+
+  padding-top: var(--about-header-space);
+  padding-bottom: 48px;
+
+  background: var(--about-surround);
+
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.is-story .about-progress {
+  display: flex;
+}
+
+/* TABLET */
+
+@media (min-width: 761px) and (max-width: 1000px) {
   .scene-composition {
-    gap: clamp(28px, 4vw, 56px);
-    padding: 24px;
-  }
+    grid-template-columns:
+      minmax(0, 0.85fr)
+      minmax(0, 1.15fr);
 
-  .scene-eyebrow {
-    margin-bottom: 14px;
-  }
-
-  .scene-chapter {
-    margin-bottom: 10px;
+    gap: 24px;
+    padding: 22px;
   }
 
   .scene-title {
-    font-size: clamp(32px, 3.5vw, 48px);
+    font-size: 34px;
   }
 
-  .doctor-info,
-  .scene-details {
-    margin-top: 18px;
-  }
-
-  .scene-description {
-    margin-top: 16px;
-
-    font-size: 13px;
-    line-height: 1.65;
-  }
-
-  .detail-row {
-    padding: 10px 0;
-  }
-
-  .detail-row h3 {
-    font-size: 15px;
-  }
-
-  .detail-row p {
-    font-size: 12px;
-  }
-
-  .about-progress {
-    right: 22px;
-    bottom: 12px;
-    left: 22px;
+  .scene-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.14em;
   }
 }
 
-/* =====================================================
-   MÓVIL
-===================================================== */
+/* MÓVIL
+ *
+ * Fotografía arriba, texto debajo.
+ * La tarjeta crece con su contenido.
+ */
 
 @media (max-width: 760px) {
   :host {
     --about-header-space: 80px;
-    --about-radius: 22px;
+    --about-radius: 16px;
   }
 
   .about-scene {
-    padding:
-      var(--about-header-space)
-      12px
-      36px;
+    padding: 18px 16px;
+  }
+
+  .about-scene:first-child {
+    padding-top: 32px;
+  }
+
+  .about-scene:last-of-type {
+    padding-bottom: 40px;
   }
 
   .scene-composition {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto;
 
-    align-content: start;
-    gap: 18px;
+    align-items: start;
+    gap: 26px;
 
-    max-width: 540px;
-    padding: 18px;
+    max-width: 520px;
+
+    height: auto;
+    max-height: none;
+
+    padding: 20px;
   }
 
   .scene-image {
-    align-self: auto;
+    width: 100%;
+    max-width: 340px;
 
-    height: clamp(120px, 21svh, 190px);
-
-    border-radius: 13px;
+    height: auto;
+    min-height: 0;
   }
 
   .scene-image img {
-    object-position: center 32%;
-  }
+    width: 100%;
+    height: auto;
+    max-height: none;
 
-  .scene-02 .scene-image img {
-    object-position: center 40%;
-  }
+    object-fit: contain;
+    object-position: center;
 
-  .scene-03 .scene-image img {
-    object-position: center 38%;
+    border-radius: 10px;
   }
 
   .image-caption {
-    right: 13px;
-    bottom: 12px;
-    left: 13px;
+    margin-top: 10px;
 
     font-size: 8px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 
   .scene-content {
     max-width: none;
-    padding: 0;
   }
 
   .scene-eyebrow {
     gap: 9px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     font-size: 8px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
   }
 
   .scene-eyebrow > span {
-    flex-basis: 20px;
+    flex-basis: 22px;
   }
 
   .scene-chapter {
-    margin-bottom: 9px;
+    margin-bottom: 10px;
     font-size: 9px;
   }
 
   .scene-title {
-    font-size: clamp(30px, 7.6vw, 42px);
-    line-height: 1.08;
-    letter-spacing: -0.045em;
+    font-size: clamp(28px, 7.2vw, 38px);
+    line-height: 1.15;
   }
 
   .doctor-info {
-    margin-top: 17px;
+    margin-top: 20px;
     padding-left: 12px;
   }
 
   .doctor-info h3 {
-    margin-bottom: 4px;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .doctor-info p {
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: 13px;
   }
 
   .scene-description {
-    margin-top: 15px;
+    margin-top: 18px;
 
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.75;
   }
 
   .scene-details {
-    margin-top: 17px;
+    margin-top: 22px;
   }
 
   .detail-row {
     grid-template-columns: 20px minmax(0, 1fr);
     gap: 10px;
 
-    padding: 10px 0;
+    padding: 14px 0;
   }
 
   .detail-row h3 {
-    margin-bottom: 3px;
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .detail-row p {
-    font-size: 12px;
-    line-height: 1.5;
-  }
-
-  .about-progress {
-    right: 18px;
-    bottom: 11px;
-    left: 18px;
-
-    gap: 10px;
-
-    font-size: 8px;
-    letter-spacing: 0.08em;
-  }
-
-  .progress-track {
-    width: 64px;
+    font-size: 13px;
+    line-height: 1.65;
   }
 }
 
-/* =====================================================
-   MÓVILES CON POCA ALTURA
-===================================================== */
-
-@media (max-width: 760px) and (max-height: 700px) {
-  .scene-composition {
-    gap: 14px;
-    padding: 16px;
-  }
-
-  .scene-image {
-    height: 110px;
-  }
-
-  .scene-eyebrow {
-    margin-bottom: 6px;
-  }
-
-  .scene-chapter {
-    margin-bottom: 7px;
-  }
-
-  .scene-title {
-    font-size: 30px;
-  }
-
-  .doctor-info,
-  .scene-details {
-    margin-top: 12px;
-  }
-
-  .scene-description {
-    margin-top: 12px;
-  }
-
-  .detail-row {
-    padding: 8px 0;
-  }
-}
-
-/* =====================================================
-   MOVIMIENTO REDUCIDO
-
-   Muestra las tres escenas en orden y conserva
-   todo su contenido accesible.
-===================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  .about-section {
-    height: auto;
-  }
-
-  .about-sticky {
-    position: relative;
-
-    height: auto;
-    overflow: visible;
-  }
-
+@media (max-width: 360px) {
   .about-scene {
-    position: relative;
-    inset: auto;
-
-    height: auto;
-    min-height: 100svh;
-
-    overflow: visible;
-
-    transform: none !important;
-    will-change: auto;
-    pointer-events: auto;
+    padding-inline: 12px;
   }
 
   .scene-composition {
-    overflow: visible;
-  }
-
-  .scene-image {
-    min-height: 320px;
-  }
-
-  .about-progress {
-    display: none;
-  }
-}
-/* ABOUT BLANCO · TARJETAS DE TAMAÑO INTERMEDIO */
-
-:host {
-  --about-surround: #ffffff;
-  --about-paper: #ffffff;
-  --about-ink: #25241f;
-  --about-muted: #6b685f;
-  --about-gold: #947238;
-  --about-radius: 18px;
-}
-
-.about-section,
-.about-sticky,
-.about-scene {
-  background: var(--about-surround);
-}
-
-.scene-composition {
-  width: 100%;
-  max-width: 1140px;
-
-  height: min(
-    590px,
-    calc(100svh - var(--about-header-space) - 54px)
-  );
-
-  gap: clamp(26px, 3.5vw, 48px);
-  padding: clamp(22px, 2.3vw, 30px);
-
-  background: var(--about-paper);
-  border: 1px solid #e9e5dd;
-  border-radius: var(--about-radius);
-
-  box-shadow: 0 8px 30px rgba(36, 32, 24, 0.045);
-}
-
-.scene-title {
-  font-size: clamp(32px, 3.3vw, 50px);
-}
-
-/* Indicador legible sobre blanco */
-
-.about-progress {
-  max-width: 1140px;
-  color: var(--about-muted);
-}
-
-.progress-track {
-  background: #e7e2d9;
-}
-
-.progress-track > span {
-  background: var(--about-gold);
-}
-
-.progress-current {
-  color: var(--about-ink);
-}
-
-/* Portátiles con poca altura */
-
-@media (min-width: 761px) and (max-height: 760px) {
-  .scene-composition {
-    height: min(
-      550px,
-      calc(100svh - var(--about-header-space) - 44px)
-    );
-
-    gap: 28px;
-    padding: 22px;
-  }
-
-  .scene-title {
-    font-size: clamp(30px, 3.2vw, 44px);
-  }
-}
-
-/* Móvil */
-
-@media (max-width: 760px) {
-  .scene-composition {
-    max-width: 480px;
-
-    height: auto;
-    max-height: calc(
-      100svh - var(--about-header-space) - 42px
-    );
-
-    gap: 17px;
-    padding: 18px;
-    border-radius: 16px;
-  }
-
-  .scene-title {
-    font-size: clamp(28px, 7.2vw, 38px);
-  }
-}
-
-@media (max-width: 760px) and (max-height: 700px) {
-  .scene-composition {
-    gap: 13px;
-    padding: 15px;
+    padding: 16px;
+    gap: 22px;
   }
 
   .scene-title {
@@ -861,11 +606,33 @@
   }
 }
 
-/* Accesibilidad */
+/* RESPALDO INMEDIATO PARA MOVIMIENTO REDUCIDO */
 
 @media (prefers-reduced-motion: reduce) {
-  .scene-composition {
+  .about-section.is-story {
     height: auto;
-    max-height: none;
+  }
+
+  .is-story .about-sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .is-story .about-scene {
+    position: relative;
+    inset: auto;
+
+    display: block;
+    height: auto;
+
+    padding: 24px clamp(16px, 3vw, 40px);
+
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .is-story .about-progress {
+    display: none;
   }
 }
