@@ -26,18 +26,22 @@ export class About implements OnDestroy {
   private compositions: HTMLElement[] = [];
   private images: HTMLImageElement[] = [];
 
-  private frameId: number | null = null;
+  private motionQuery: MediaQueryList | null = null;
   private resizeObserver: ResizeObserver | null = null;
 
-  private motionQuery: MediaQueryList | null = null;
-  private desktopQuery: MediaQueryList | null = null;
+  private frameId: number | null = null;
 
-  private destroyed = false;
   private initialized = false;
+  private destroyed = false;
   private layoutDirty = true;
-
-  private storyEnabled = false;
   private activeScene = -1;
+
+  private overflowDistances: number[] = [];
+  private sceneStarts: number[] = [];
+
+  private holdDistance = 0;
+  private transitionDistance = 1;
+  private totalDistance = 1;
 
   constructor(
     private readonly host: ElementRef<HTMLElement>,
@@ -102,10 +106,6 @@ export class About implements OnDestroy {
       '(prefers-reduced-motion: reduce)',
     );
 
-    this.desktopQuery = window.matchMedia(
-      '(min-width: 761px)',
-    );
-
     this.initialized = true;
 
     window.addEventListener('scroll', this.requestRender, {
@@ -121,11 +121,6 @@ export class About implements OnDestroy {
       this.onLayoutChange,
     );
 
-    this.desktopQuery.addEventListener(
-      'change',
-      this.onLayoutChange,
-    );
-
     this.images.forEach((image) => {
       image.addEventListener('load', this.onLayoutChange);
       image.addEventListener('error', this.onLayoutChange);
@@ -136,8 +131,8 @@ export class About implements OnDestroy {
         this.onLayoutChange();
       });
 
-      // Detecta cambios de tamaño por imágenes, fuentes
-      // o ampliación del texto.
+      this.resizeObserver.observe(this.sticky);
+
       this.compositions.forEach((composition) => {
         this.resizeObserver?.observe(composition);
       });
@@ -169,55 +164,91 @@ export class About implements OnDestroy {
     });
   };
 
-  private updateLayout(): void {
-    if (!this.section) {
+  private measureLayout(): void {
+    if (!this.section || !this.sticky) {
       return;
     }
 
     this.layoutDirty = false;
 
-    const headerSpace =
-      Number.parseFloat(
-        window
-          .getComputedStyle(this.section)
-          .getPropertyValue('--about-header-space'),
-      ) || 96;
-
-    const viewportHeight = window.innerHeight;
-
-    // Coincide con el espacio superior e inferior del CSS.
-    const availableHeight =
-      viewportHeight - headerSpace - 48;
-
-    const tallestComposition = Math.max(
-      ...this.compositions.map((composition) =>
-        Math.max(
-          composition.getBoundingClientRect().height,
-          composition.scrollHeight,
-        ),
-      ),
-    );
-
-    const shouldEnableStory =
-      this.desktopQuery?.matches === true &&
-      this.motionQuery?.matches !== true &&
-      tallestComposition <= availableHeight - 4;
-
-    if (shouldEnableStory === this.storyEnabled) {
+    if (this.motionQuery?.matches) {
+      this.showAllScenes();
       return;
     }
 
-    this.storyEnabled = shouldEnableStory;
-    this.activeScene = -1;
+    this.section.classList.add('is-story');
 
-    this.section.classList.toggle(
-      'is-story',
-      this.storyEnabled,
+    const viewportHeight = this.sticky.clientHeight;
+
+    /*
+     * Medimos el espacio real de lectura descontando
+     * las franjas superior e inferior.
+     */
+    const sceneStyle = window.getComputedStyle(
+      this.scenes[0],
     );
 
-    if (!this.storyEnabled) {
-      this.showAllScenes();
-    }
+    const paddingTop =
+      Number.parseFloat(sceneStyle.paddingTop) || 0;
+
+    const paddingBottom =
+      Number.parseFloat(sceneStyle.paddingBottom) || 0;
+
+    const readingHeight = Math.max(
+      1,
+      viewportHeight - paddingTop - paddingBottom,
+    );
+
+    /*
+     * Cuánto debe subir el contenido de cada escena
+     * antes de pasar a la siguiente.
+     */
+    this.overflowDistances = this.compositions.map(
+      (composition) => {
+        const contentHeight = Math.max(
+          composition.offsetHeight,
+          composition.scrollHeight,
+        );
+
+        return Math.max(0, contentHeight - readingHeight);
+      },
+    );
+
+    // Pausas al inicio y al final de cada escena.
+    this.holdDistance = Math.max(
+      60,
+      viewportHeight * 0.16,
+    );
+
+    // Distancia de scroll dedicada a pasar de página.
+    this.transitionDistance = Math.max(
+      220,
+      viewportHeight * 0.85,
+    );
+
+    this.sceneStarts = [];
+
+    let distance = 0;
+
+    this.scenes.forEach((_, index) => {
+      this.sceneStarts.push(distance);
+
+      distance +=
+        this.holdDistance +
+        this.overflowDistances[index] +
+        this.holdDistance;
+
+      if (index < this.scenes.length - 1) {
+        distance += this.transitionDistance;
+      }
+    });
+
+    this.totalDistance = Math.max(1, distance);
+
+    this.section.style.setProperty(
+      '--about-story-height',
+      `${Math.ceil(viewportHeight + this.totalDistance)}px`,
+    );
   }
 
   private render(): void {
@@ -230,62 +261,79 @@ export class About implements OnDestroy {
     }
 
     if (this.layoutDirty) {
-      this.updateLayout();
+      this.measureLayout();
     }
 
-    if (!this.storyEnabled) {
+    if (this.motionQuery?.matches) {
       return;
     }
 
     const rect = this.section.getBoundingClientRect();
 
-    const scrollDistance = Math.max(
-      1,
-      this.section.offsetHeight - this.sticky.offsetHeight,
-    );
-
-    const progress = this.clamp(
-      -rect.top / scrollDistance,
+    const distance = Math.max(
+      0,
+      Math.min(this.totalDistance, -rect.top),
     );
 
     this.section.style.setProperty(
       '--scroll-progress',
-      progress.toString(),
+      String(distance / this.totalDistance),
     );
 
-    const position = progress * (this.scenes.length - 1);
-
-    const baseIndex = Math.min(
-      Math.floor(position),
-      this.scenes.length - 2,
-    );
-
-    const nextIndex = baseIndex + 1;
-    const localProgress = position - baseIndex;
-
-    const transition = this.smoothStep(
-      this.clamp((localProgress - 0.08) / 0.84),
-    );
+    let activeIndex = 0;
 
     this.scenes.forEach((scene, index) => {
-      let y = 100;
+      const start = this.sceneStarts[index];
 
-      if (index <= baseIndex) {
-        y = 0;
-      } else if (index === nextIndex) {
-        y = 100 * (1 - transition);
+      /*
+       * 1. Pausa de lectura.
+       * 2. Recorrido de la tarjeta si es larga.
+       * 3. Pausa antes de la transición.
+       */
+      const contentTravel = Math.max(
+        0,
+        Math.min(
+          this.overflowDistances[index],
+          distance - start - this.holdDistance,
+        ),
+      );
+
+      this.compositions[index].style.setProperty(
+        '--about-content-y',
+        `${-contentTravel}px`,
+      );
+
+      let entrance = 1;
+
+      if (index > 0) {
+        const transitionStart =
+          start - this.transitionDistance;
+
+        entrance = this.smoothStep(
+          this.clamp(
+            (distance - transitionStart) /
+              this.transitionDistance,
+          ),
+        );
       }
+
+      /*
+       * La escena siguiente sube desde abajo y
+       * cubre completamente la anterior.
+       */
+      const y = 100 * (1 - entrance);
 
       scene.style.transform =
         `translate3d(0, ${y}%, 0)`;
 
       scene.style.zIndex = String(index + 1);
+
+      if (entrance >= 0.5) {
+        activeIndex = index;
+      }
     });
 
-    const newActiveScene =
-      transition >= 0.5 ? nextIndex : baseIndex;
-
-    this.updateAccessibility(newActiveScene);
+    this.updateAccessibility(activeIndex);
   }
 
   private updateAccessibility(activeIndex: number): void {
@@ -312,6 +360,12 @@ export class About implements OnDestroy {
   }
 
   private showAllScenes(): void {
+    this.section?.classList.remove('is-story');
+
+    this.section?.style.removeProperty(
+      '--about-story-height',
+    );
+
     this.section?.style.setProperty(
       '--scroll-progress',
       '0',
@@ -324,6 +378,12 @@ export class About implements OnDestroy {
 
       scene.removeAttribute('aria-hidden');
       scene.inert = false;
+    });
+
+    this.compositions.forEach((composition) => {
+      composition.style.removeProperty(
+        '--about-content-y',
+      );
     });
 
     this.activeScene = -1;
@@ -359,11 +419,6 @@ export class About implements OnDestroy {
     );
 
     this.motionQuery?.removeEventListener(
-      'change',
-      this.onLayoutChange,
-    );
-
-    this.desktopQuery?.removeEventListener(
       'change',
       this.onLayoutChange,
     );
