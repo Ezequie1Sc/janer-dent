@@ -1,220 +1,50 @@
 <section
-  #aboutSection
   id="nosotros"
   class="about-section"
-  aria-label="Sobre el especialista"
+  aria-labelledby="about-title"
 >
-  <div #aboutSticky class="about-sticky">
+  <div class="about-container">
 
-    <!-- ESCENA 01 -->
-    <article
-      #aboutScene
-      class="about-scene scene-01"
-      aria-labelledby="about-title-01"
-    >
-      <div class="scene-composition">
+    <figure class="about-image">
+      <img
+        src="/assets/about/about-01-retrato.webp"
+        alt="Dr. Raúl Alberto Gomez Pech, cirujano dentista"
+        width="900"
+        height="1100"
+        loading="lazy"
+        decoding="async"
+      >
+    </figure>
 
-        <figure class="scene-image">
-          <img
-            src="/assets/about/about-01-retrato.webp"
-            alt="Dr. Raúl Alberto Gomez Pech, cirujano dentista"
-            width="900"
-            height="1100"
-            loading="eager"
-            decoding="async"
-          >
-        </figure>
+    <div class="about-content">
+      <p class="about-eyebrow">
+        <span aria-hidden="true"></span>
+        SOBRE NOSOTROS
+      </p>
 
-        <div class="scene-content">
-          <p class="scene-eyebrow">
-            <span aria-hidden="true"></span>
-            SOBRE EL ESPECIALISTA
-          </p>
+      <h2 id="about-title" class="about-title">
+        Una atención
+        <span>que empieza contigo.</span>
+      </h2>
 
-          <p class="scene-chapter">01 / IDENTIDAD</p>
+      <div class="doctor-info">
+        <h3>Dr. Raúl Alberto Gomez Pech</h3>
 
-          <h2 id="about-title-01" class="scene-title">
-            Una atención
-            <span>que empieza contigo.</span>
-          </h2>
+        <p class="doctor-specialty">
+          Cirujano Dentista
+        </p>
 
-          <div class="doctor-info">
-            <h3>Dr. Raúl Alberto Gomez Pech</h3>
-
-            <p>
-              Cirujano Dentista
-              <span class="credential">
-                Céd. Prof. 15507422
-              </span>
-            </p>
-          </div>
-
-          <p class="scene-description">
-            Mi compromiso es atender a cada paciente con
-            profesionalismo, respeto y confianza, procurando
-            siempre brindar una atención odontológica de calidad.
-          </p>
-        </div>
-
+        <p class="doctor-credential">
+          Céd. Prof. 15507422
+        </p>
       </div>
-    </article>
 
-    <!-- ESCENA 02 -->
-    <article
-      #aboutScene
-      class="about-scene scene-02"
-      aria-labelledby="about-title-02"
-    >
-      <div class="scene-composition">
-
-        <figure class="scene-image">
-          <img
-            src="/assets/about/about-02-experiencia.webp"
-            alt="Dr. Raúl Alberto Gomez Pech mostrando un modelo dental"
-            width="900"
-            height="700"
-            loading="eager"
-            decoding="async"
-          >
-        </figure>
-
-        <div class="scene-content">
-          <p class="scene-eyebrow">
-            <span aria-hidden="true"></span>
-            SOBRE EL ESPECIALISTA
-          </p>
-
-          <p class="scene-chapter">02 / EXPERIENCIA</p>
-
-          <h2 id="about-title-02" class="scene-title">
-            Experiencia
-            <span>que se nota.</span>
-          </h2>
-
-          <div class="scene-details">
-
-            <div class="detail-row">
-              <span class="detail-number" aria-hidden="true">
-                01
-              </span>
-
-              <div>
-                <h3>Atención personalizada</h3>
-
-                <p>
-                  Cada paciente recibe un tratamiento
-                  adaptado a sus necesidades.
-                </p>
-              </div>
-            </div>
-
-            <div class="detail-row">
-              <span class="detail-number" aria-hidden="true">
-                02
-              </span>
-
-              <div>
-                <h3>Trato humano</h3>
-
-                <p>
-                  Creamos una experiencia cómoda y de confianza.
-                </p>
-              </div>
-            </div>
-
-            <div class="detail-row">
-              <span class="detail-number" aria-hidden="true">
-                03
-              </span>
-
-              <div>
-                <h3>Resultados con confianza</h3>
-
-                <p>
-                  Utilizamos técnicas profesionales
-                  para cuidar tu sonrisa.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </article>
-
-    <!-- ESCENA 03 -->
-    <article
-      #aboutScene
-      class="about-scene scene-03"
-      aria-labelledby="about-title-03"
-    >
-      <div class="scene-composition">
-
-        <figure class="scene-image">
-          <img
-            src="/assets/about/about-03-precision.webp"
-            alt="Dr. Raúl Alberto Gomez Pech atendiendo a una paciente"
-            width="900"
-            height="1100"
-            loading="eager"
-            decoding="async"
-          >
-        </figure>
-
-        <div class="scene-content">
-          <p class="scene-eyebrow">
-            <span aria-hidden="true"></span>
-            SOBRE EL ESPECIALISTA
-          </p>
-
-          <p class="scene-chapter">03 / PRECISIÓN</p>
-
-          <h2 id="about-title-03" class="scene-title">
-            Precisión
-            <span>en cada tratamiento.</span>
-          </h2>
-
-          <div class="scene-details">
-
-            <div class="detail-row">
-              <span class="detail-number" aria-hidden="true">
-                01
-              </span>
-
-              <div>
-                <h3>Valoración</h3>
-                <p>Atención desde el primer contacto.</p>
-              </div>
-            </div>
-
-            <div class="detail-row">
-              <span class="detail-number" aria-hidden="true">
-                02
-              </span>
-
-              <div>
-                <h3>Planeación</h3>
-                <p>Tratamientos pensados para cada paciente.</p>
-              </div>
-            </div>
-
-            <div class="detail-row">
-              <span class="detail-number" aria-hidden="true">
-                03
-              </span>
-
-              <div>
-                <h3>Seguimiento</h3>
-                <p>Acompañamiento durante el proceso.</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </article>
+      <p class="about-description">
+        Mi compromiso es atender a cada paciente con
+        profesionalismo, respeto y confianza, procurando
+        siempre brindar una atención odontológica de calidad.
+      </p>
+    </div>
 
   </div>
 </section>
