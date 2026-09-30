@@ -3,7 +3,7 @@
   class="location-section"
   aria-labelledby="location-title"
 >
-  <!-- ENCABEZADO CENTRADO -->
+  <!-- ENCABEZADO -->
   <header class="location-header">
     <p class="location-eyebrow">
       <span aria-hidden="true"></span>
@@ -22,13 +22,18 @@
     </p>
 
     <div class="location-actions">
+      <!-- WHATSAPP -->
       <a
         class="location-button button-gold"
         href="https://wa.me/529961046096"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
           <path
             d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5
                9.4 9.4 0 0 1-4-.9L3 21l1.9-5.5
@@ -38,14 +43,19 @@
           <path d="M8 11h8M8 14h5"></path>
         </svg>
 
-        Contáctanos
+        <span>Contáctanos</span>
       </a>
 
+      <!-- TELÉFONO -->
       <a
         class="location-button button-outline"
         href="tel:+529961046096"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
           <path
             d="M22 16.92v3a2 2 0 0 1-2.18 2
                19.79 19.79 0 0 1-8.63-3.07
@@ -62,36 +72,73 @@
           ></path>
         </svg>
 
-        Llamar ahora
+        <span>Llamar ahora</span>
       </a>
 
+      <!-- DESTINO FIJO -->
       <a
         class="location-button button-outline"
-        href="https://maps.app.goo.gl/aaNKGFfPPodFR98n6"
+        [href]="mapsUrl"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="m3 10 18-7-7 18-3-8-8-3Z"
-          ></path>
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="m3 10 18-7-7 18-3-8-8-3Z"></path>
           <path d="m11 13 10-10"></path>
         </svg>
 
-        Cómo llegar
+        <span>Cómo llegar</span>
       </a>
     </div>
   </header>
 
-  <!-- MAPA PANORÁMICO -->
+  <!-- MAPA FIJO -->
   <div class="location-map">
     <iframe
-      title="Mapa de Hecelchakán, Campeche"
-      src="https://maps.google.com/maps?q=Hecelchakan%20Campeche&t=&z=16&ie=UTF8&iwloc=&output=embed"
+      title="Ubicación del consultorio JANERDent"
+      src="https://maps.google.com/maps?q=20.1705166%2C-90.1379765&amp;ll=20.1705166%2C-90.1379765&amp;z=17&amp;t=m&amp;output=embed"
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"
-      allowfullscreen
+      tabindex="-1"
+      aria-hidden="true"
     ></iframe>
+
+    <!-- Toda la superficie abre el mismo enlace -->
+    <a
+      class="location-map-link"
+      [href]="mapsUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Abrir la ubicación de JANERDent en Google Maps, en una pestaña nueva"
+    >
+      <span class="location-map-badge">
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M20 10c0 6-8 11-8 11S4 16 4 10
+               a8 8 0 1 1 16 0Z"
+          ></path>
+          <circle cx="12" cy="10" r="2.5"></circle>
+        </svg>
+
+        <span>Ver ubicación en Google Maps</span>
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M7 17 17 7M7 7h10v10"></path>
+        </svg>
+      </span>
+    </a>
   </div>
 
   <!-- INFORMACIÓN INFERIOR -->
@@ -101,7 +148,11 @@
       <!-- DIRECCIÓN -->
       <div class="location-detail">
         <div class="detail-heading">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
             <path
               d="M20 10c0 6-8 11-8 11S4 16 4 10
                  a8 8 0 1 1 16 0Z"
@@ -119,13 +170,17 @@
 
         <a
           class="location-text-link"
-          href="https://maps.app.goo.gl/aaNKGFfPPodFR98n6"
+          [href]="mapsUrl"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Ver en Google Maps
+          <span>Ver en Google Maps</span>
 
-          <svg viewBox="0 0 24 24" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
             <path d="M7 17 17 7M7 7h10v10"></path>
           </svg>
         </a>
@@ -134,7 +189,11 @@
       <!-- URGENCIAS -->
       <div class="location-detail">
         <div class="detail-heading">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
             <path d="M12 3v18M3 12h18"></path>
           </svg>
 
@@ -156,7 +215,11 @@
       <!-- HORARIOS -->
       <div class="location-detail">
         <div class="detail-heading">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
             <circle cx="12" cy="12" r="9"></circle>
             <path d="M12 7v5l3 2"></path>
           </svg>
