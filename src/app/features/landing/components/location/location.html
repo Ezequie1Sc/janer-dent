@@ -3,67 +3,120 @@
   class="location-section"
   aria-labelledby="location-title"
 >
-  <!-- ENCABEZADO -->
+
+  <!-- ============================
+       ENCABEZADO
+  ============================= -->
+
   <header class="location-header">
+
     <p class="location-eyebrow">
       <span aria-hidden="true"></span>
+
       VISÍTANOS
+
       <span aria-hidden="true"></span>
     </p>
 
+
     <h2 id="location-title">
+
       Tu próxima sonrisa
-      <span>comienza aquí.</span>
+
+      <span>
+        comienza aquí.
+      </span>
+
     </h2>
 
+
     <p class="location-description">
+
       Encuéntranos en Hecelchakán, Campeche.
       Llámanos o escríbenos para agendar tu valoración.
+
     </p>
 
+
+
+    <!-- BOTONES -->
+
     <div class="location-actions">
+
+
+      <!-- WHATSAPP -->
+
       <a
         class="location-button button-gold"
         href="https://wa.me/529961046096"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
+
+        <svg viewBox="0 0 24 24">
+
           <path
-            d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5
-               9.4 9.4 0 0 1-4-.9L3 21l1.9-5.5
-               a9.4 9.4 0 0 1-.9-4A8.5 8.5 0 0 1
-               12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"
-          ></path>
-          <path d="M8 11h8M8 14h5"></path>
+          d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5
+          9.4 9.4 0 0 1-4-.9L3 21l1.9-5.5
+          a9.4 9.4 0 0 1-.9-4A8.5 8.5 0 0 1
+          12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"
+          />
+
+          <path d="M8 11h8M8 14h5"/>
+
         </svg>
 
-        <span>Contáctanos</span>
+
+        <span>
+          Contáctanos
+        </span>
+
+
       </a>
+
+
+
+
+
+      <!-- LLAMAR -->
 
       <a
         class="location-button button-outline"
         href="tel:+529961046096"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
+
+        <svg viewBox="0 0 24 24">
+
           <path
-            d="M22 16.92v3a2 2 0 0 1-2.18 2
-               19.79 19.79 0 0 1-8.63-3.07
-               19.5 19.5 0 0 1-6-6
-               19.79 19.79 0 0 1-3.07-8.67
-               A2 2 0 0 1 4.11 2h3
-               a2 2 0 0 1 2 1.72
-               c.12.96.35 1.9.69 2.79
-               a2 2 0 0 1-.45 2.11L8.09 9.89
-               a16 16 0 0 0 6 6l1.27-1.27
-               a2 2 0 0 1 2.11-.45
-               c.89.34 1.83.57 2.79.69
-               A2 2 0 0 1 22 16.92Z"
-          ></path>
+          d="M22 16.92v3a2 2 0 0 1-2.18 2
+          19.79 19.79 0 0 1-8.63-3.07
+          19.5 19.5 0 0 1-6-6
+          19.79 19.79 0 0 1-3.07-8.67
+          A2 2 0 0 1 4.11 2h3
+          a2 2 0 0 1 2 1.72
+          c.12.96.35 1.9.69 2.79
+          a2 2 0 0 1-.45 2.11L8.09 9.89
+          a16 16 0 0 0 6 6l1.27-1.27
+          a2 2 0 0 1 2.11-.45
+          c.89.34 1.83.57 2.79.69
+          A2 2 0 0 1 22 16.92Z"
+          />
+
         </svg>
 
-        <span>Llamar ahora</span>
+
+        <span>
+          Llamar ahora
+        </span>
+
+
       </a>
+
+
+
+
+
+      <!-- MAPS -->
 
       <a
         class="location-button button-outline"
@@ -71,170 +124,344 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="m3 10 18-7-7 18-3-8-8-3Z"></path>
-          <path d="m11 13 10-10"></path>
+
+        <svg viewBox="0 0 24 24">
+
+          <path d="m3 10 18-7-7 18-3-8-8-3Z"/>
+
+          <path d="m11 13 10-10"/>
+
         </svg>
 
-        <span>Cómo llegar</span>
+
+        <span>
+          Cómo llegar
+        </span>
+
+
       </a>
+
+
     </div>
+
+
   </header>
 
-  <!-- MAPA PERSONALIZADO -->
-  <div class="location-map-frame">
 
-    <div class="location-map-stage">
-      <!-- Leaflet coloca aquí las calles y el marcador -->
-      <div
-        #mapCanvas
-        class="location-map-canvas"
-        aria-hidden="true"
-      ></div>
 
-      <div class="location-map-heading" aria-hidden="true">
-        <span class="location-map-dot"></span>
-        HECELCHAKÁN, CAMPECHE
-      </div>
 
-      @if (mapStatus() !== 'ready') {
-        <p
-          class="location-map-status"
-          role="status"
-        >
-          @if (mapStatus() === 'loading') {
-            Cargando mapa…
-          } @else {
-            El mapa no está disponible.
-            Puedes abrir la ubicación en Google Maps.
-          }
-        </p>
-      }
 
-      <!-- Un solo enlace para toda la superficie -->
-      <a
-        class="location-map-link"
+  <!-- ============================
+       MAPA LEAFLET
+  ============================= -->
+
+  <div class="location-map">
+
+
+    <div
+      #mapCanvas
+      class="location-map-canvas"
+      aria-label="Mapa de ubicación JANERDent"
+    >
+    </div>
+
+
+
+    <!-- BOTÓN SOBRE MAPA -->
+
+    <a
+      class="location-map-link"
+      [href]="mapsUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Abrir ubicación en Google Maps"
+    >
+
+
+      <span class="location-map-action">
+
+
+        Cómo llegar a JANERDent
+
+
+
+        <svg viewBox="0 0 24 24">
+
+          <path
+          d="M7 17 17 7M7 7h10v10"
+          />
+
+        </svg>
+
+
+      </span>
+
+
+    </a>
+
+
+
+  </div>
+
+
+
+
+
+
+
+  <!-- ============================
+       INFORMACIÓN INFERIOR
+  ============================= -->
+
+
+  <div class="location-details">
+
+
+    <div class="location-details-container">
+
+
+
+
+
+      <!-- DIRECCIÓN -->
+
+      <div class="location-detail">
+
+
+        <div class="detail-heading">
+
+
+          <svg viewBox="0 0 24 24">
+
+
+            <path
+            d="M20 10c0 6-8 11-8 11S4 16 4 10
+            a8 8 0 1 1 16 0Z"
+            />
+
+
+            <circle
+            cx="12"
+            cy="10"
+            r="2.5"
+            />
+
+
+          </svg>
+
+
+
+          <h3>
+            Encuéntranos
+          </h3>
+
+
+        </div>
+
+
+
+
+
+        <address class="location-address">
+
+
+          Calle 29 s/n, San Antonio.
+
+          <br>
+
+          Hecelchakán, Campeche, México.
+
+
+        </address>
+
+
+
+
+
+        <a
+        class="location-text-link"
         [href]="mapsUrl"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Abrir la ubicación de JANERDent en Google Maps, en una pestaña nueva"
-      >
-        <span class="location-map-action">
-          <span>Cómo llegar a JANERDent</span>
-
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 17 17 7M7 7h10v10"></path>
-          </svg>
-        </span>
-      </a>
-    </div>
-
-    <!-- Atribución visible del mapa -->
-    <div class="location-map-credits">
-      <span>JANERDent · Hecelchakán</span>
-
-      <span>
-        Mapa:
-        <a
-          href="https://leafletjs.com/"
-          target="_blank"
-          rel="noopener noreferrer"
         >
-          Leaflet
-        </a>
-        · ©
-        <a
-          href="https://www.openstreetmap.org/copyright"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          OpenStreetMap contributors
-        </a>
-      </span>
-    </div>
 
-  </div>
 
-  <!-- INFORMACIÓN INFERIOR -->
-  <div class="location-details">
-    <div class="location-details-container">
-
-      <div class="location-detail">
-        <div class="detail-heading">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M20 10c0 6-8 11-8 11S4 16 4 10
-                 a8 8 0 1 1 16 0Z"
-            ></path>
-            <circle cx="12" cy="10" r="2.5"></circle>
-          </svg>
-
-          <h3>Encuéntranos</h3>
-        </div>
-
-        <address class="location-address">
-          Calle 29 s/n, San Antonio.<br>
-          Hecelchakán, Campeche, México.
-        </address>
-
-        <a
-          class="location-text-link"
-          [href]="mapsUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
           Ver en Google Maps
 
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 17 17 7M7 7h10v10"></path>
+
+          <svg viewBox="0 0 24 24">
+
+
+            <path
+            d="M7 17 17 7M7 7h10v10"
+            />
+
+
           </svg>
+
+
         </a>
+
+
+
       </div>
 
+
+
+
+
+
+
+
+      <!-- URGENCIAS -->
+
       <div class="location-detail">
+
+
         <div class="detail-heading">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 3v18M3 12h18"></path>
+
+
+          <svg viewBox="0 0 24 24">
+
+
+            <path
+            d="M12 3v18M3 12h18"
+            />
+
+
           </svg>
 
-          <h3>Urgencias 24 horas</h3>
+
+
+          <h3>
+            Urgencias 24 horas
+          </h3>
+
+
         </div>
+
+
+
+
 
         <a
-          class="location-phone"
-          href="tel:+529961046096"
+        class="location-phone"
+        href="tel:+529961046096"
         >
+
           996 104 6096
+
         </a>
 
+
+
+
+
         <p class="detail-description">
-          Llámanos si tienes una emergencia dental.
+
+
+          Atención inmediata para emergencias dentales.
+
+
         </p>
+
+
+
       </div>
+
+
+
+
+
+
+
+
+      <!-- HORARIOS -->
+
 
       <div class="location-detail">
+
+
         <div class="detail-heading">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="9"></circle>
-            <path d="M12 7v5l3 2"></path>
+
+
+          <svg viewBox="0 0 24 24">
+
+
+            <circle
+            cx="12"
+            cy="12"
+            r="9"
+            />
+
+
+            <path
+            d="M12 7v5l3 2"
+            />
+
+
           </svg>
 
-          <h3>Horarios de atención</h3>
+
+
+          <h3>
+            Horarios
+          </h3>
+
+
         </div>
+
+
+
+
 
         <div class="location-schedules">
-          @for (item of schedules; track item.day) {
-            <div class="schedule">
-              <h4>{{ item.day }}</h4>
 
-              @for (hour of item.hours; track hour) {
-                <p>{{ hour }}</p>
+
+          @for(item of schedules; track item.day){
+
+
+            <div class="schedule">
+
+
+              <h4>
+                {{item.day}}
+              </h4>
+
+
+
+              @for(hour of item.hours; track hour){
+
+
+                <p>
+                  {{hour}}
+                </p>
+
+
               }
+
+
             </div>
+
+
           }
+
+
         </div>
+
+
+
       </div>
 
+
+
+
     </div>
+
+
   </div>
+
+
+
+
 </section>
