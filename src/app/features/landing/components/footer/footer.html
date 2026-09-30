@@ -1,155 +1,213 @@
 <footer class="footer-section">
 
 
-<div class="footer-container">
+  <div class="footer-container">
 
 
 
-<div class="brand">
+    <!-- MARCA -->
 
+    <div class="footer-brand">
 
-<div class="logo">
 
-JD
+      <img
 
-</div>
+      src="/assets/hero/janerdent-logo.webp"
 
+      alt="JANERDent"
 
+      class="footer-logo"
 
-<h2>
+      >
 
-JANERDent
 
-</h2>
 
+      <p class="footer-description">
 
+        Odontología integral con atención profesional,
+        confianza y calidad para cuidar tu sonrisa.
 
-<p>
+      </p>
 
-ODONTOLOGÍA INTEGRAL
 
-</p>
 
+    </div>
 
 
-<span>
 
-Cuidando sonrisas con profesionalismo,
-confianza y calidad.
 
-</span>
 
 
-</div>
 
+    <!-- NAVEGACIÓN -->
 
 
+    <div class="footer-column">
 
 
+      <h3>
+        Navegación
+      </h3>
 
-<div class="footer-links">
 
 
-<h3>
+      @for(item of links; track item.name){
 
-Navegación
 
-</h3>
+        <a
 
+        [href]="item.url"
 
-@for(item of links; track item.name){
+        >
 
+        {{item.name}}
 
-<a [href]="item.url">
+        </a>
 
-{{item.name}}
 
-</a>
+      }
 
 
-}
 
+    </div>
 
-</div>
 
 
 
 
 
 
+    <!-- CONTACTO -->
 
-<div class="footer-contact">
 
+    <div class="footer-column">
 
-<h3>
 
-Contacto
+      <h3>
+        Contacto
+      </h3>
 
-</h3>
 
 
 
-<a href="https://wa.me/529961046096" target="_blank">
+      <a
 
-WhatsApp
+      href="https://wa.me/529961046096"
 
-</a>
+      target="_blank"
 
+      >
 
+      WhatsApp
 
-<a href="#">
+      </a>
 
-Facebook
 
-</a>
 
 
+      <a
 
-<a href="#">
+      href="https://www.facebook.com/profile.php?id=61589988690037"
 
-Instagram
+      target="_blank"
 
-</a>
+      >
 
+      Facebook
 
+      </a>
 
-<strong>
 
-996 104 6096
 
-</strong>
 
+      <strong>
 
+      996 104 6096
 
-</div>
+      </strong>
 
 
 
+    </div>
 
 
-</div>
 
 
 
 
+  </div>
 
 
 
-<div class="footer-bottom">
 
 
-<div class="line"></div>
 
 
-<p>
 
-© 2024 Janer Dent. Todos los derechos reservados.
 
-</p>
+  <!-- PARTE INFERIOR -->
 
 
+  <div class="footer-bottom">
 
-</div>
+
+
+    <div class="footer-line"></div>
+
+
+
+
+    <div class="footer-bottom-content">
+
+
+      <p>
+
+      © 2026 JANERDent · Hecelchakán, Campeche
+
+      </p>
+
+
+
+
+
+      <div class="legal-links">
+
+
+        <a href="#">
+
+        Aviso de privacidad
+
+        </a>
+
+
+        <a href="#">
+
+        Términos y condiciones
+
+        </a>
+
+
+
+        <a href="#">
+
+        Cookies
+
+        </a>
+
+
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+  </div>
+
+
 
 
 
