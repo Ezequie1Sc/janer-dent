@@ -1,396 +1,182 @@
-<section 
-id="ubicacion"
-class="location-section reveal">
-
-
-<div class="location-container">
-
-
-
-<!-- INFORMACIÓN -->
-
-<div class="location-info">
-
-
-<p class="label">
-
-<span></span>
-
-UBICACIÓN
-
-</p>
-
-
-
-
-
-<h2>
-
-Encuéntranos en
-
-<br>
-
-<span>
-Hecelchakán,
-</span>
-
-<br>
-
-Campeche.
-
-</h2>
-
-
-
-
-
-<div class="address">
-
-
-<div class="icon">
-
-
-<svg viewBox="0 0 24 24">
-
-<path d="M12 21s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12z"/>
-
-<circle cx="12" cy="9" r="2.5"/>
-
-</svg>
-
-
-</div>
-
-
-
-
-<p>
-
-Calle 29 s/n, San Antonio,
-
-<br>
-
-Hecelchakán, Campeche, México.
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="buttons">
-
-
-
-<a
-
-href="https://maps.app.goo.gl/aaNKGFfPPodFR98n6"
-
-target="_blank"
-
-class="primary">
-
-
-
-<svg viewBox="0 0 24 24">
-
-
-<path d="M12 2l8 4.5v11L12 22l-8-4.5v-11L12 2z"/>
-
-<path d="M12 22V11"/>
-
-<path d="M4 6.5l8 4.5 8-4.5"/>
-
-
-</svg>
-
-
-
-<span>
-
-Ver en Google Maps
-
-</span>
-
-
-
-<b>
-
-→
-
-</b>
-
-
-
-</a>
-
-
-
-
-
-
-
-<a
-
-href="https://maps.app.goo.gl/aaNKGFfPPodFR98n6"
-
-target="_blank"
-
-class="secondary">
-
-Cómo llegar
-
-</a>
-
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- MAPA -->
-
-
-<div class="map-container">
-
-
-<iframe
-
-src="https://maps.google.com/maps?q=Hecelchakan%20Campeche&t=&z=16&ie=UTF8&iwloc=&output=embed"
-
-loading="lazy"
-
-allowfullscreen>
-
-</iframe>
-
-
-
-
-
-<div class="janer-marker">
-
-
-<img
-
-src="assets/hero/janerdent-logo.webp"
-
-alt="JANERDent">
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- INFORMACIÓN INFERIOR -->
-
-<div class="bottom-info">
-
-
-
-
-
-
-<div class="info-box">
-
-
-
-<div class="box-icon">
-
-
-<svg viewBox="0 0 24 24">
-
-
-<path d="M22 16.92v3a2 2 0 0 1-2.18 2
-19.79 19.79 0 0 1-8.63-3.07
-19.5 19.5 0 0 1-6-6
-19.79 19.79 0 0 1-3.07-8.67
-A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72
-c.12.9.33 1.78.62 2.63"/>
-
-
-</svg>
-
-
-</div>
-
-
-
-
-<div>
-
-
-<span>
-
-URGENCIAS 24 HORAS
-
-</span>
-
-
-
-<strong>
-
-996 104 6096
-
-</strong>
-
-
-
-<p>
-
-Atención inmediata para emergencias dentales.
-
-</p>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="info-box">
-
-
-
-<div class="box-icon">
-
-
-<svg viewBox="0 0 24 24">
-
-
-<circle cx="12" cy="12" r="9"/>
-
-
-<polyline points="12 7 12 12 16 14"/>
-
-
-</svg>
-
-
-
-</div>
-
-
-
-
-
-
-<div>
-
-
-<span>
-
-HORARIOS
-
-</span>
-
-
-
-
-
-<div class="hours">
-
-
-@for(item of schedules; track item.day){
-
-
-
-<div>
-
-
-<h4>
-
-{{item.day}}
-
-</h4>
-
-
-
-
-@for(hour of item.hours; track hour){
-
-
-<p>
-
-{{hour}}
-
-</p>
-
-
-}
-
-
-
-
-</div>
-
-
-}
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-</div>
-
-
-
-
-
+<section
+  id="ubicacion"
+  class="location-section"
+  aria-labelledby="location-title"
+>
+  <!-- ENCABEZADO CENTRADO -->
+  <header class="location-header">
+    <p class="location-eyebrow">
+      <span aria-hidden="true"></span>
+      VISÍTANOS
+      <span aria-hidden="true"></span>
+    </p>
+
+    <h2 id="location-title">
+      Tu próxima sonrisa
+      <span>comienza aquí.</span>
+    </h2>
+
+    <p class="location-description">
+      Encuéntranos en Hecelchakán, Campeche.
+      Llámanos o escríbenos para agendar tu valoración.
+    </p>
+
+    <div class="location-actions">
+      <a
+        class="location-button button-gold"
+        href="https://wa.me/529961046096"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5
+               9.4 9.4 0 0 1-4-.9L3 21l1.9-5.5
+               a9.4 9.4 0 0 1-.9-4A8.5 8.5 0 0 1
+               12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"
+          ></path>
+          <path d="M8 11h8M8 14h5"></path>
+        </svg>
+
+        Contáctanos
+      </a>
+
+      <a
+        class="location-button button-outline"
+        href="tel:+529961046096"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2
+               19.79 19.79 0 0 1-8.63-3.07
+               19.5 19.5 0 0 1-6-6
+               19.79 19.79 0 0 1-3.07-8.67
+               A2 2 0 0 1 4.11 2h3
+               a2 2 0 0 1 2 1.72
+               c.12.96.35 1.9.69 2.79
+               a2 2 0 0 1-.45 2.11L8.09 9.89
+               a16 16 0 0 0 6 6l1.27-1.27
+               a2 2 0 0 1 2.11-.45
+               c.89.34 1.83.57 2.79.69
+               A2 2 0 0 1 22 16.92Z"
+          ></path>
+        </svg>
+
+        Llamar ahora
+      </a>
+
+      <a
+        class="location-button button-outline"
+        href="https://maps.app.goo.gl/aaNKGFfPPodFR98n6"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="m3 10 18-7-7 18-3-8-8-3Z"
+          ></path>
+          <path d="m11 13 10-10"></path>
+        </svg>
+
+        Cómo llegar
+      </a>
+    </div>
+  </header>
+
+  <!-- MAPA PANORÁMICO -->
+  <div class="location-map">
+    <iframe
+      title="Mapa de Hecelchakán, Campeche"
+      src="https://maps.google.com/maps?q=Hecelchakan%20Campeche&t=&z=16&ie=UTF8&iwloc=&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <!-- INFORMACIÓN INFERIOR -->
+  <div class="location-details">
+    <div class="location-details-container">
+
+      <!-- DIRECCIÓN -->
+      <div class="location-detail">
+        <div class="detail-heading">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20 10c0 6-8 11-8 11S4 16 4 10
+                 a8 8 0 1 1 16 0Z"
+            ></path>
+            <circle cx="12" cy="10" r="2.5"></circle>
+          </svg>
+
+          <h3>Encuéntranos</h3>
+        </div>
+
+        <address class="location-address">
+          Calle 29 s/n, San Antonio.<br>
+          Hecelchakán, Campeche, México.
+        </address>
+
+        <a
+          class="location-text-link"
+          href="https://maps.app.goo.gl/aaNKGFfPPodFR98n6"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver en Google Maps
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 17 17 7M7 7h10v10"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- URGENCIAS -->
+      <div class="location-detail">
+        <div class="detail-heading">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v18M3 12h18"></path>
+          </svg>
+
+          <h3>Urgencias 24 horas</h3>
+        </div>
+
+        <a
+          class="location-phone"
+          href="tel:+529961046096"
+        >
+          996 104 6096
+        </a>
+
+        <p class="detail-description">
+          Llámanos si tienes una emergencia dental.
+        </p>
+      </div>
+
+      <!-- HORARIOS -->
+      <div class="location-detail">
+        <div class="detail-heading">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 7v5l3 2"></path>
+          </svg>
+
+          <h3>Horarios de atención</h3>
+        </div>
+
+        <div class="location-schedules">
+          @for (item of schedules; track item.day) {
+            <div class="schedule">
+              <h4>{{ item.day }}</h4>
+
+              @for (hour of item.hours; track hour) {
+                <p>{{ hour }}</p>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
