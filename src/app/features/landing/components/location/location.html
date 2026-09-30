@@ -22,18 +22,13 @@
     </p>
 
     <div class="location-actions">
-      <!-- WHATSAPP -->
       <a
         class="location-button button-gold"
         href="https://wa.me/529961046096"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
           <path
             d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5
                9.4 9.4 0 0 1-4-.9L3 21l1.9-5.5
@@ -46,16 +41,11 @@
         <span>Contáctanos</span>
       </a>
 
-      <!-- TELÉFONO -->
       <a
         class="location-button button-outline"
         href="tel:+529961046096"
       >
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
           <path
             d="M22 16.92v3a2 2 0 0 1-2.18 2
                19.79 19.79 0 0 1-8.63-3.07
@@ -75,18 +65,13 @@
         <span>Llamar ahora</span>
       </a>
 
-      <!-- DESTINO FIJO -->
       <a
         class="location-button button-outline"
         [href]="mapsUrl"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="m3 10 18-7-7 18-3-8-8-3Z"></path>
           <path d="m11 13 10-10"></path>
         </svg>
@@ -96,63 +81,87 @@
     </div>
   </header>
 
-  <!-- MAPA FIJO -->
-  <div class="location-map">
-    <iframe
-      title="Ubicación del consultorio JANERDent"
-      src="https://maps.google.com/maps?q=20.1705166%2C-90.1379765&amp;ll=20.1705166%2C-90.1379765&amp;z=17&amp;t=m&amp;output=embed"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      tabindex="-1"
-      aria-hidden="true"
-    ></iframe>
+  <!-- MAPA PERSONALIZADO -->
+  <div class="location-map-frame">
 
-    <!-- Toda la superficie abre el mismo enlace -->
-    <a
-      class="location-map-link"
-      [href]="mapsUrl"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Abrir la ubicación de JANERDent en Google Maps, en una pestaña nueva"
-    >
-      <span class="location-map-badge">
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
+    <div class="location-map-stage">
+      <!-- Leaflet coloca aquí las calles y el marcador -->
+      <div
+        #mapCanvas
+        class="location-map-canvas"
+        aria-hidden="true"
+      ></div>
+
+      <div class="location-map-heading" aria-hidden="true">
+        <span class="location-map-dot"></span>
+        HECELCHAKÁN, CAMPECHE
+      </div>
+
+      @if (mapStatus() !== 'ready') {
+        <p
+          class="location-map-status"
+          role="status"
         >
-          <path
-            d="M20 10c0 6-8 11-8 11S4 16 4 10
-               a8 8 0 1 1 16 0Z"
-          ></path>
-          <circle cx="12" cy="10" r="2.5"></circle>
-        </svg>
+          @if (mapStatus() === 'loading') {
+            Cargando mapa…
+          } @else {
+            El mapa no está disponible.
+            Puedes abrir la ubicación en Google Maps.
+          }
+        </p>
+      }
 
-        <span>Ver ubicación en Google Maps</span>
+      <!-- Un solo enlace para toda la superficie -->
+      <a
+        class="location-map-link"
+        [href]="mapsUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Abrir la ubicación de JANERDent en Google Maps, en una pestaña nueva"
+      >
+        <span class="location-map-action">
+          <span>Cómo llegar a JANERDent</span>
 
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 17 17 7M7 7h10v10"></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- Atribución visible del mapa -->
+    <div class="location-map-credits">
+      <span>JANERDent · Hecelchakán</span>
+
+      <span>
+        Mapa:
+        <a
+          href="https://leafletjs.com/"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <path d="M7 17 17 7M7 7h10v10"></path>
-        </svg>
+          Leaflet
+        </a>
+        · ©
+        <a
+          href="https://www.openstreetmap.org/copyright"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          OpenStreetMap contributors
+        </a>
       </span>
-    </a>
+    </div>
+
   </div>
 
   <!-- INFORMACIÓN INFERIOR -->
   <div class="location-details">
     <div class="location-details-container">
 
-      <!-- DIRECCIÓN -->
       <div class="location-detail">
         <div class="detail-heading">
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
             <path
               d="M20 10c0 6-8 11-8 11S4 16 4 10
                  a8 8 0 1 1 16 0Z"
@@ -174,26 +183,17 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span>Ver en Google Maps</span>
+          Ver en Google Maps
 
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 17 17 7M7 7h10v10"></path>
           </svg>
         </a>
       </div>
 
-      <!-- URGENCIAS -->
       <div class="location-detail">
         <div class="detail-heading">
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 3v18M3 12h18"></path>
           </svg>
 
@@ -212,14 +212,9 @@
         </p>
       </div>
 
-      <!-- HORARIOS -->
       <div class="location-detail">
         <div class="detail-heading">
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9"></circle>
             <path d="M12 7v5l3 2"></path>
           </svg>
