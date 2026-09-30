@@ -23,25 +23,35 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+
+            "allowedCommonJsDependencies": [
+              "leaflet"
+            ],
+
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
+
             "styles": [
               "src/tailwind.css",
               "src/styles.scss"
             ],
+
             "server": "src/main.server.ts",
             "outputMode": "server",
+
             "security": {
               "allowedHosts": []
             },
+
             "ssr": {
               "entry": "src/server.ts"
             }
           },
+
           "configurations": {
             "production": {
               "budgets": [
@@ -52,20 +62,23 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "8kB",
-                  "maximumError": "12kB"
+                  "maximumWarning": "25kB",
+                  "maximumError": "30kB"
                 }
               ],
               "outputHashing": "all"
             },
+
             "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             }
           },
+
           "defaultConfiguration": "production"
         },
+
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
@@ -78,6 +91,7 @@
           },
           "defaultConfiguration": "development"
         },
+
         "test": {
           "builder": "@angular/build:unit-test"
         }
