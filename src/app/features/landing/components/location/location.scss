@@ -516,3 +516,187 @@
     transition: none;
   }
 }
+/* =========================================
+   ENCABEZADO BLANCO
+========================================= */
+
+.location-section {
+  background: #ffffff;
+  color: #25241f;
+}
+
+.location-header {
+  background: #ffffff;
+}
+
+.location-eyebrow {
+  color: #947238;
+}
+
+.location-header h2 {
+  color: #25241f;
+}
+
+.location-header h2 > span {
+  color: #947238;
+}
+
+.location-description {
+  color: #6b685f;
+}
+
+/* BOTONES SOBRE FONDO BLANCO */
+
+.button-gold {
+  background: #b98a3c;
+  border-color: #b98a3c;
+  color: #17130d;
+}
+
+.button-gold svg {
+  color: currentColor;
+}
+
+.button-outline {
+  background: #ffffff;
+  border-color: #d6d0c5;
+  color: #25241f;
+}
+
+.button-outline svg {
+  color: #947238;
+}
+
+@media (hover: hover) {
+  .button-gold:hover {
+    background: #cca153;
+    border-color: #cca153;
+    color: #17130d;
+  }
+
+  .button-outline:hover {
+    background: #f5f2ec;
+    border-color: #947238;
+    color: #25241f;
+  }
+}
+
+/* =========================================
+   MAPA FIJO Y ENLACE ÚNICO
+========================================= */
+
+.location-map {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  height: clamp(360px, 43vw, 600px);
+
+  background: #e9e7e2;
+
+  border-top: 1px solid #e8e4dc;
+  border-bottom: 3px solid #b98a3c;
+}
+
+.location-map iframe {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+
+  /*
+   * Impide arrastrar el mapa, cambiar el zoom
+   * o seleccionar otro lugar dentro del iframe.
+   */
+  pointer-events: none;
+}
+
+.location-map-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 24px;
+
+  color: #25241f;
+  text-decoration: none;
+
+  cursor: pointer;
+  touch-action: pan-y pinch-zoom;
+}
+
+.location-map-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  max-width: 100%;
+  min-height: 48px;
+
+  padding: 13px 20px;
+
+  background: #ffffff;
+  border: 1px solid #e8e4dc;
+  border-radius: 6px;
+
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.location-map-badge svg {
+  color: #947238;
+}
+
+.location-map-badge > span {
+  min-width: 0;
+}
+
+.location-map-link:focus-visible {
+  outline: 3px solid #947238;
+  outline-offset: -5px;
+}
+
+@media (hover: hover) {
+  .location-map-link:hover .location-map-badge {
+    background: #faf8f4;
+    border-color: #947238;
+  }
+}
+
+@media (max-width: 600px) {
+  .location-map {
+    height: 360px;
+  }
+
+  .location-map-link {
+    padding: 16px;
+  }
+
+  .location-map-badge {
+    gap: 9px;
+    padding: 12px 15px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .location-map-badge {
+    transition: none;
+  }
+}
