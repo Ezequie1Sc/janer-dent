@@ -151,9 +151,9 @@
 
 
 
-  <!-- ============================
-       MAPA LEAFLET
-  ============================= -->
+ <!-- MAPA LEAFLET -->
+
+<div class="location-map-frame">
 
   <div class="location-map">
 
@@ -161,35 +161,25 @@
     <div
       #mapCanvas
       class="location-map-canvas"
-      aria-label="Mapa de ubicación JANERDent"
-    >
-    </div>
+    ></div>
 
 
-
-    <!-- BOTÓN SOBRE MAPA -->
 
     <a
       class="location-map-link"
       [href]="mapsUrl"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Abrir ubicación en Google Maps"
     >
 
-
       <span class="location-map-action">
-
 
         Cómo llegar a JANERDent
 
 
-
         <svg viewBox="0 0 24 24">
 
-          <path
-          d="M7 17 17 7M7 7h10v10"
-          />
+          <path d="M7 17 17 7M7 7h10v10"/>
 
         </svg>
 
@@ -200,9 +190,10 @@
     </a>
 
 
-
   </div>
 
+
+</div>
 
 
 
