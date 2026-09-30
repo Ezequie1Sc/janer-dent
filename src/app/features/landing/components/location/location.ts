@@ -8,6 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './location.scss',
 })
 export class Location {
+  // Todos los enlaces del mapa utilizan este mismo destino.
+  readonly mapsUrl =
+    'https://maps.app.goo.gl/aaNKGFfPPodFR98n6';
+
   readonly schedules = [
     {
       day: 'Lunes a viernes',
