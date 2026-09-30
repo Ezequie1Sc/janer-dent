@@ -19,6 +19,7 @@
       "architect": {
         "build": {
           "builder": "@angular/build:application",
+
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
@@ -81,14 +82,17 @@
 
         "serve": {
           "builder": "@angular/build:dev-server",
+
           "configurations": {
             "production": {
               "buildTarget": "janer-dent:build:production"
             },
+
             "development": {
               "buildTarget": "janer-dent:build:development"
             }
           },
+
           "defaultConfiguration": "development"
         },
 
