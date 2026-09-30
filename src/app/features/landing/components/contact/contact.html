@@ -1,129 +1,338 @@
 <section
-id="contacto"
-class="contact-section"
+  #contactSection
+  id="contacto"
+  class="contact-section"
+  [class.is-revealed]="visible()"
+  aria-labelledby="contact-title"
 >
-
-
-<div class="contact-background">
-
-
-<img
-src=".\assets\hero\janerdent-hero-desktop.webp"
-alt="Clínica dental"
->
-
-
-</div>
-
-
-
-<div class="overlay"></div>
-
-
-
-
-
-<div class="contact-container">
-
-
-
-<div class="contact-content">
-
-
-<p class="label">
-
-<span></span>
-
-AGENDA TU CITA
-
-</p>
-
-
-
-
-<h2>
-
-Un cuidado
-<br>
-profesional.
-
-</h2>
-
-
-
-
-<p class="description">
-
-Pacientes que confían en nosotros
-y hoy sonríen con más seguridad.
-
-</p>
-
-
-
-
-
-<a
-
-class="whatsapp"
-
-[href]="'https://wa.me/' + whatsapp"
-
-target="_blank"
-
->
-
-
-Agendar por WhatsApp
-
-<span>
-
-→
-
-</span>
-
-
-</a>
-
-
-
-
-</div>
-
-
-
-
-
-<div class="contact-number">
-
-
-<p>
-
-CONTACTO
-
-</p>
-
-
-<strong>
-
-996 104 6096
-
-</strong>
-
-
-<span>
-
-JD JANERDent
-
-</span>
-
-
-</div>
-
-
-
-</div>
-
-
-
+  <div class="contact-container">
+
+    <!-- INTRODUCCIÓN -->
+    <div class="contact-intro">
+      <p class="contact-eyebrow">
+        <span aria-hidden="true"></span>
+        AGENDA TU CITA
+      </p>
+
+      <h2 id="contact-title" class="contact-title">
+        Tu próxima
+        <span>sonrisa empieza</span>
+        aquí.
+      </h2>
+
+      <p class="contact-description">
+        Un espacio para cuidar de ti. Elige tu tratamiento
+        y cuéntanos cuándo te gustaría visitarnos.
+      </p>
+
+      <ol class="contact-steps" aria-label="Cómo solicitar tu cita">
+        <li>
+          <span class="step-number" aria-hidden="true">01</span>
+
+          <div>
+            <strong>Elige tu visita</strong>
+            <p>Completa tus datos, tratamiento y horario deseado.</p>
+          </div>
+        </li>
+
+        <li>
+          <span class="step-number" aria-hidden="true">02</span>
+
+          <div>
+            <strong>Conversemos por WhatsApp</strong>
+            <p>Envía el mensaje preparado y confirmaremos la disponibilidad.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="contact-direct">
+        <div>
+          <span class="contact-direct-label">¿PREFIERES LLAMARNOS?</span>
+
+          <a href="tel:+529961046096" class="contact-phone">
+            996 104 6096
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M7 17 17 7M7 7h10v10"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <p class="contact-location">
+          JANERDent
+          <span>Hecelchakán, Campeche</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- FORMULARIO -->
+    <div class="appointment-panel">
+      <header class="appointment-header">
+        <p class="appointment-eyebrow">TU PRÓXIMA VISITA</p>
+
+        <h3>Hagamos espacio para ti.</h3>
+
+        <p>
+          Indícanos tus preferencias para solicitar una cita.
+        </p>
+      </header>
+
+      <form
+        #appointmentForm="ngForm"
+        class="appointment-form"
+        (ngSubmit)="solicitarCita()"
+        novalidate
+      >
+        <!-- NOMBRE -->
+        <div class="form-field">
+          <label for="contact-name">Nombre completo</label>
+
+          <input
+            id="contact-name"
+            name="nombre"
+            type="text"
+            autocomplete="name"
+            placeholder="¿Cómo te llamas?"
+            required
+            minlength="2"
+            maxlength="80"
+            #nombreControl="ngModel"
+            [ngModel]="nombre()"
+            (ngModelChange)="nombre.set($event)"
+            [attr.aria-invalid]="
+              (enviado() || nombreControl.touched) && errorNombre()
+                ? 'true'
+                : null
+            "
+            [attr.aria-describedby]="
+              (enviado() || nombreControl.touched) && errorNombre()
+                ? 'name-error'
+                : null
+            "
+          />
+
+          @if ((enviado() || nombreControl.touched) && errorNombre()) {
+            <p id="name-error" class="field-error">
+              {{ errorNombre() }}
+            </p>
+          }
+        </div>
+
+        <!-- TRATAMIENTO -->
+        <div class="form-field">
+          <label for="contact-service">Tratamiento de interés</label>
+
+          <div class="select-wrapper">
+            <select
+              id="contact-service"
+              name="servicio"
+              required
+              #servicioControl="ngModel"
+              [ngModel]="servicio()"
+              (ngModelChange)="servicio.set($event)"
+              [attr.aria-invalid]="
+                (enviado() || servicioControl.touched) && errorServicio()
+                  ? 'true'
+                  : null
+              "
+              [attr.aria-describedby]="
+                (enviado() || servicioControl.touched) && errorServicio()
+                  ? 'service-description service-error'
+                  : 'service-description'
+              "
+            >
+              <option value="" disabled>Selecciona un tratamiento</option>
+
+              @for (tratamiento of tratamientos; track tratamiento.nombre) {
+                <option [value]="tratamiento.nombre">
+                  {{ tratamiento.nombre }}
+                </option>
+              }
+            </select>
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="m6 9 6 6 6-6"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+
+          <p
+            id="service-description"
+            class="field-hint service-description"
+            aria-live="polite"
+          >
+            @if (tratamientoSeleccionado(); as tratamiento) {
+              {{ tratamiento.descripcion }}
+            } @else {
+              Encuentra el cuidado que necesita tu sonrisa.
+            }
+          </p>
+
+          @if ((enviado() || servicioControl.touched) && errorServicio()) {
+            <p id="service-error" class="field-error">
+              {{ errorServicio() }}
+            </p>
+          }
+        </div>
+
+        <!-- FECHA Y HORA -->
+        <div class="form-row">
+          <div class="form-field">
+            <label for="contact-date">Fecha deseada</label>
+
+            <input
+              id="contact-date"
+              name="fecha"
+              type="date"
+              required
+              #fechaControl="ngModel"
+              [min]="reloj().fecha"
+              [ngModel]="fecha()"
+              (ngModelChange)="fecha.set($event)"
+              (focus)="actualizarReloj()"
+              [attr.aria-invalid]="
+                (enviado() || fechaControl.touched) && errorFecha()
+                  ? 'true'
+                  : null
+              "
+              [attr.aria-describedby]="
+                (enviado() || fechaControl.touched) && errorFecha()
+                  ? 'date-error'
+                  : null
+              "
+            />
+
+            @if ((enviado() || fechaControl.touched) && errorFecha()) {
+              <p id="date-error" class="field-error">
+                {{ errorFecha() }}
+              </p>
+            }
+          </div>
+
+          <div class="form-field">
+            <label for="contact-time">Hora deseada</label>
+
+            <input
+              id="contact-time"
+              name="hora"
+              type="time"
+              step="60"
+              required
+              #horaControl="ngModel"
+              [ngModel]="hora()"
+              (ngModelChange)="hora.set($event)"
+              (focus)="actualizarReloj()"
+              [attr.aria-invalid]="
+                (enviado() || horaControl.touched) && errorHora()
+                  ? 'true'
+                  : null
+              "
+              [attr.aria-describedby]="
+                (enviado() || horaControl.touched) && errorHora()
+                  ? 'time-hint time-error'
+                  : 'time-hint'
+              "
+            />
+
+            <p id="time-hint" class="field-hint">
+              Hora de Campeche.
+            </p>
+
+            @if ((enviado() || horaControl.touched) && errorHora()) {
+              <p id="time-error" class="field-error">
+                {{ errorHora() }}
+              </p>
+            }
+          </div>
+        </div>
+
+        <!-- RESUMEN -->
+        <dl class="appointment-summary">
+          <div>
+            <dt>Fecha de tu visita</dt>
+            <dd>{{ fechaResumen() }}</dd>
+          </div>
+
+          <div>
+            <dt>Horario preferido</dt>
+            <dd>{{ hora() ? hora() + ' h' : 'Por elegir' }}</dd>
+          </div>
+        </dl>
+
+        @if (enviado() && !formularioValido()) {
+          <p class="form-error" role="alert">
+            Revisa los campos indicados para continuar.
+          </p>
+        }
+
+        <button type="submit" class="appointment-submit">
+          <span>Continuar en WhatsApp</span>
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M5 12h14m-6-6 6 6-6 6"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+
+        <div class="appointment-notice">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="8"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+
+            <path
+              d="M12 8v4l2.5 1.5"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <p>
+            Se abrirá WhatsApp con tu mensaje listo para enviar.
+            Tu cita quedará agendada cuando el consultorio confirme
+            la fecha y la hora.
+          </p>
+        </div>
+      </form>
+    </div>
+
+  </div>
 </section>
