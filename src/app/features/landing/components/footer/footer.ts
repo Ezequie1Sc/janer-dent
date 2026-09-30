@@ -3,87 +3,20 @@ import { Component } from '@angular/core';
 
 @Component({
 
-  selector:'app-footer',
+selector:'app-footer',
 
-  standalone:true,
+standalone:true,
 
-  imports:[],
+imports:[],
 
-  templateUrl:'./footer.html',
+templateUrl:'./footer.html',
 
-  styleUrl:'./footer.scss'
+styleUrl:'./footer.scss'
 
 })
 
 
 export class Footer {
-
-
-
-links = [
-
-
-{
-
-name:'Inicio',
-
-url:'#inicio'
-
-},
-
-
-
-{
-
-name:'Servicios',
-
-url:'#servicios'
-
-},
-
-
-
-{
-
-name:'Nosotros',
-
-url:'#nosotros'
-
-},
-
-
-
-{
-
-name:'Galería',
-
-url:'#galeria'
-
-},
-
-
-
-{
-
-name:'Ubicación',
-
-url:'#ubicacion'
-
-},
-
-
-
-{
-
-name:'Contacto',
-
-url:'#contacto'
-
-}
-
-
-];
-
 
 
 }
