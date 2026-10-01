@@ -1,16 +1,22 @@
 :host {
   display: block;
+  width: 100%;
 }
 
 .contact {
   position: relative;
+
+  width: 100%;
   overflow: hidden;
-  padding: 120px 24px;
-  background: #0b0b0b;
-  color: #f5f1e8;
+
+  padding: 120px 5vw;
+
+  background: #ffffff;
+  color: #171614;
 
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(24px);
+
   transition:
     opacity 0.8s ease,
     transform 0.8s ease;
@@ -20,45 +26,46 @@
     transform: translateY(0);
   }
 
-  // Detalle dorado muy sutil
+  // Línea decorativa superior
   &::before {
     content: '';
+
     position: absolute;
     top: 0;
-    left: 8%;
-    width: 140px;
+    left: 5vw;
+
+    width: 48px;
     height: 1px;
-    background: #bd9142;
+
+    background: #b88a3b;
   }
 }
 
-.contact__container {
-  position: relative;
-  z-index: 1;
 
-  width: min(1180px, 100%);
+// ======================================================
+// CONTENEDOR
+// ======================================================
+
+.contact__container {
+  width: min(1240px, 100%);
   margin: 0 auto;
 
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 100px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
 
-  padding: 76px 82px;
+  gap: clamp(70px, 9vw, 140px);
 
-  background: #f1eadc;
-  color: #171513;
-
-  border-radius: 4px;
+  align-items: center;
 }
 
+
 // ======================================================
-// INTRO
+// INTRODUCCIÓN
 // ======================================================
 
 .contact__intro {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .contact__eyebrow {
@@ -68,278 +75,434 @@
 
   margin-bottom: 38px;
 
-  color: #a77a2d;
+  color: #aa7b30;
 
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.3em;
+
+  letter-spacing: 0.28em;
   text-transform: uppercase;
 
   span {
+    display: block;
+
     width: 34px;
     height: 1px;
-    background: #a77a2d;
+
+    background: #aa7b30;
   }
 }
 
+
 .contact__title {
-  max-width: 470px;
+  max-width: 520px;
+
   margin: 0;
 
-  font-size: clamp(48px, 5vw, 72px);
-  line-height: 0.96;
+  color: #171614;
+
+  font-size: clamp(50px, 5.2vw, 76px);
   font-weight: 300;
-  letter-spacing: -0.045em;
+
+  line-height: 0.96;
+  letter-spacing: -0.055em;
 
   em {
     display: block;
-    color: #ad8033;
-    font-family: Georgia, 'Times New Roman', serif;
+
+    color: #b08337;
+
+    font-family:
+      Georgia,
+      'Times New Roman',
+      serif;
+
     font-weight: 400;
+    font-style: italic;
+
+    letter-spacing: -0.045em;
   }
 }
 
+
 .contact__description {
-  max-width: 390px;
+  max-width: 410px;
+
   margin: 34px 0 0;
 
-  color: #625d55;
+  color: #706c65;
 
   font-size: 14px;
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
-.contact__info {
-  margin-top: 72px;
+
+// ======================================================
+// WHATSAPP DIRECTO
+// ======================================================
+
+.contact__direct {
+  margin-top: 70px;
+
   padding-top: 24px;
 
-  border-top: 1px solid rgba(23, 21, 19, 0.15);
+  border-top: 1px solid #e7e3dc;
 }
 
-.contact__info-label {
+
+.contact__direct-label {
   display: block;
-  margin-bottom: 8px;
 
-  color: #817a70;
+  margin-bottom: 10px;
 
-  font-size: 10px;
+  color: #918b82;
+
+  font-size: 9px;
+  font-weight: 500;
+
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
+
 
 .contact__phone {
   display: inline-flex;
   align-items: center;
   gap: 14px;
 
-  color: #171513;
+  color: #171614;
+
   text-decoration: none;
 
   font-size: 20px;
   font-weight: 400;
 
-  transition: color 0.25s ease;
-
-  span {
-    color: #ad8033;
-    transition: transform 0.25s ease;
-  }
+  transition:
+    color 0.25s ease;
 
   &:hover {
-    color: #ad8033;
+    color: #b08337;
 
-    span {
+    .contact__phone-arrow {
       transform: translate(3px, -3px);
     }
   }
 }
 
+
+.contact__phone-arrow {
+  color: #b08337;
+
+  font-size: 18px;
+
+  transition:
+    transform 0.25s ease;
+}
+
+
 // ======================================================
-// FORMULARIO
+// ZONA DEL FORMULARIO
 // ======================================================
 
-.contact__form-wrapper {
-  padding-top: 2px;
-}
-
-.contact__form-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-
-  margin-bottom: 34px;
-  padding-bottom: 16px;
-
-  border-bottom: 1px solid rgba(23, 21, 19, 0.15);
-
-  span {
-    color: #ad8033;
-
-    font-size: 11px;
-    font-weight: 600;
-  }
-
-  p {
-    margin: 0;
-
-    color: #716b62;
-
-    font-size: 10px;
-    letter-spacing: 0.22em;
-  }
-}
-
-.contact__form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px 20px;
-}
-
-.field {
+.contact__form-area {
   position: relative;
 
+  padding: clamp(35px, 4vw, 52px);
+
+  background: #f7f5f0;
+
+  // Separación sutil del blanco de la sección
+  border: 1px solid #eeebe4;
+}
+
+
+// ======================================================
+// ENCABEZADO FORMULARIO
+// ======================================================
+
+.contact__form-heading {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 18px;
+
+  margin-bottom: 36px;
+
+  padding-bottom: 22px;
+
+  border-bottom: 1px solid #e5e1d9;
+}
+
+
+.contact__form-number {
+  color: #b08337;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.1em;
+}
+
+
+.contact__form-heading div:last-child {
   display: flex;
   flex-direction: column;
 
-  &:nth-child(1),
-  &:nth-child(2) {
-    grid-column: span 1;
-  }
+  gap: 5px;
 }
+
+
+.contact__form-heading span {
+  color: #777169;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+}
+
+
+.contact__form-heading p {
+  margin: 0;
+
+  color: #272522;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+
+// ======================================================
+// FORM
+// ======================================================
+
+.contact__form {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 28px 22px;
+}
+
+
+// ======================================================
+// CAMPOS
+// ======================================================
+
+.field {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
 
 .field label {
   margin-bottom: 10px;
 
-  color: #57524b;
+  color: #5e5951;
 
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
 }
+
 
 .field input,
 .field select {
   width: 100%;
-  height: 48px;
+  height: 50px;
 
   padding: 0 14px;
 
-  border: 0;
-  border-bottom: 1px solid rgba(23, 21, 19, 0.25);
+  border: 1px solid #ddd8cf;
 
-  background: transparent;
-
-  color: #171513;
-
-  font-family: inherit;
-  font-size: 14px;
+  border-radius: 0;
 
   outline: none;
 
+  background: #ffffff;
+
+  color: #22201d;
+
+  font-family: inherit;
+  font-size: 13px;
+
   transition:
     border-color 0.25s ease,
-    background 0.25s ease;
+    box-shadow 0.25s ease;
+
+  &:hover {
+    border-color: #c8c0b3;
+  }
 
   &:focus {
-    border-bottom-color: #ad8033;
-    background: rgba(255, 255, 255, 0.22);
+    border-color: #b08337;
+
+    box-shadow:
+      0 0 0 2px rgba(176, 131, 55, 0.08);
   }
 
   &::placeholder {
-    color: #9b958b;
+    color: #a39d94;
   }
 }
 
-.field select {
-  appearance: none;
-  cursor: pointer;
-}
 
-.select-wrapper,
-.date-wrapper {
+// ======================================================
+// SELECT
+// ======================================================
+
+.field__select {
   position: relative;
 }
 
-.select-arrow,
-.date-icon {
+
+.field__select select {
+  appearance: none;
+
+  padding-right: 42px;
+
+  cursor: pointer;
+}
+
+
+.field__arrow {
   position: absolute;
-  right: 12px;
+
   top: 50%;
+  right: 15px;
 
   transform: translateY(-50%);
 
-  color: #ad8033;
+  color: #b08337;
+
+  font-size: 13px;
 
   pointer-events: none;
 }
 
-.field input[type='date'],
-.field input[type='time'] {
+
+// ======================================================
+// FECHA
+// ======================================================
+
+.field__date {
+  position: relative;
+}
+
+
+.field__date input {
   cursor: pointer;
 }
+
+
+.field__date input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+
+  opacity: 0.55;
+}
+
+
+// ======================================================
+// HINT / VALIDACIÓN
+// ======================================================
 
 .field__hint {
   margin-top: 8px;
 
-  color: #8a8379;
+  color: #8d877f;
 
-  font-size: 10px;
+  font-size: 9px;
   line-height: 1.5;
 }
 
-.field__summary {
-  margin-top: 7px;
 
-  color: #a77a2d;
+.field__selected {
+  margin-top: 8px;
+
+  color: #a5782f;
 
   font-size: 10px;
 }
+
 
 .field__error {
   margin-top: 7px;
 
-  color: #9a493e;
+  color: #a14d43;
 
-  font-size: 10px;
+  font-size: 9px;
+  line-height: 1.4;
 }
 
+
 // ======================================================
-// RESUMEN
+// RESUMEN DE CITA
 // ======================================================
 
 .appointment-summary {
   grid-column: 1 / -1;
 
   display: grid;
-  grid-template-columns: 1.5fr 1fr 0.7fr;
+
+  grid-template-columns:
+    minmax(0, 1.5fr)
+    minmax(0, 1fr)
+    minmax(80px, 0.6fr);
+
   gap: 20px;
 
-  margin-top: 4px;
   padding: 20px 0;
 
-  border-top: 1px solid rgba(23, 21, 19, 0.12);
-  border-bottom: 1px solid rgba(23, 21, 19, 0.12);
-
-  div {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  span {
-    color: #8a8379;
-
-    font-size: 8px;
-    letter-spacing: 0.18em;
-  }
-
-  strong {
-    color: #25221e;
-
-    font-size: 12px;
-    font-weight: 500;
-  }
+  border-top: 1px solid #e2ded6;
+  border-bottom: 1px solid #e2ded6;
 }
+
+
+.appointment-summary__item {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+.appointment-summary__item span {
+  color: #9a948b;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+}
+
+
+.appointment-summary__item strong {
+  overflow: hidden;
+
+  color: #272522;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 // ======================================================
 // BOTÓN
@@ -358,14 +521,16 @@
   padding: 0 22px;
 
   border: 0;
-  border-radius: 2px;
+  border-radius: 0;
 
-  background: #b78636;
-  color: #fff;
+  background: #b08337;
+  color: #ffffff;
 
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 0.02em;
 
   cursor: pointer;
 
@@ -374,7 +539,8 @@
     transform 0.25s ease;
 
   &:hover {
-    background: #9d702b;
+    background: #956d2e;
+
     transform: translateY(-2px);
   }
 
@@ -383,38 +549,57 @@
   }
 }
 
+
 .contact__submit-arrow {
-  font-size: 20px;
-  line-height: 1;
+  font-size: 19px;
+  font-weight: 300;
+
+  transition:
+    transform 0.25s ease;
 }
+
+
+.contact__submit:hover
+.contact__submit-arrow {
+  transform: translateX(4px);
+}
+
+
+// ======================================================
+// NOTA
+// ======================================================
 
 .contact__note {
   grid-column: 1 / -1;
 
-  margin: -12px 0 0;
+  margin: -10px 0 0;
 
-  color: #8a8379;
+  color: #918b83;
 
   font-size: 9px;
   line-height: 1.6;
+
   text-align: center;
 }
+
 
 // ======================================================
 // TABLET
 // ======================================================
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
   .contact {
-    padding: 80px 20px;
+    padding: 90px 32px;
   }
 
   .contact__container {
     grid-template-columns: 1fr;
 
-    gap: 60px;
+    gap: 65px;
+  }
 
-    padding: 60px 50px;
+  .contact__intro {
+    max-width: 680px;
   }
 
   .contact__title {
@@ -422,13 +607,14 @@
   }
 
   .contact__description {
-    max-width: 520px;
+    max-width: 560px;
   }
 
-  .contact__info {
-    margin-top: 42px;
+  .contact__direct {
+    margin-top: 40px;
   }
 }
+
 
 // ======================================================
 // MOBILE
@@ -436,15 +622,15 @@
 
 @media (max-width: 600px) {
   .contact {
-    padding: 55px 14px;
+    padding: 70px 20px;
+
+    &::before {
+      left: 20px;
+    }
   }
 
   .contact__container {
-    gap: 48px;
-
-    padding: 42px 24px;
-
-    border-radius: 3px;
+    gap: 50px;
   }
 
   .contact__eyebrow {
@@ -452,7 +638,7 @@
   }
 
   .contact__title {
-    font-size: clamp(42px, 13vw, 58px);
+    font-size: clamp(44px, 14vw, 60px);
   }
 
   .contact__description {
@@ -461,27 +647,47 @@
     font-size: 13px;
   }
 
-  .contact__info {
+  .contact__direct {
     margin-top: 38px;
+  }
+
+  .contact__form-area {
+    padding: 28px 20px;
+  }
+
+  .contact__form-heading {
+    margin-bottom: 30px;
+  }
+
+  .contact__form-heading p {
+    font-size: 18px;
   }
 
   .contact__form {
     grid-template-columns: 1fr;
+
     gap: 24px;
   }
 
-  .field {
-    grid-column: 1 / -1 !important;
+  .field--full {
+    grid-column: auto;
   }
 
   .appointment-summary {
     grid-template-columns: 1fr;
-    gap: 14px;
+
+    gap: 15px;
+  }
+
+  .appointment-summary__item strong {
+    white-space: normal;
   }
 
   .contact__submit {
     min-height: 54px;
 
-    font-size: 11px;
+    padding: 0 18px;
+
+    font-size: 10px;
   }
 }
