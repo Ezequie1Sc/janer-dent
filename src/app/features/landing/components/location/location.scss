@@ -1,92 +1,113 @@
 /* =========================================================
-   LOCATION
+   LOCATION SECTION
    ========================================================= */
 
 .location-section {
   width: 100%;
+
   background: #ffffff;
+
   color: #171717;
+
   overflow: hidden;
 }
 
+
 /* =========================================================
-   HERO CON IMAGEN DE FONDO
+   LOCATION HERO
    ========================================================= */
 
 .location-header {
   position: relative;
+
   isolation: isolate;
 
   min-height: 620px;
 
   display: flex;
+
   align-items: center;
 
-  background-image: url('/assets/consultorio/janerdent-location-bg.webp');
+  justify-content: center;
+
+  background-image:
+    url('/assets/consultorio/janerdent-location-bg.webp');
+
   background-size: cover;
+
   background-position: center;
+
   background-repeat: no-repeat;
 
   overflow: hidden;
 }
 
-/*
-  Overlay negro.
-  La imagen continúa visible, pero la sección mantiene
-  la estética oscura de JANERDent.
-*/
+
+/* =========================================================
+   DARK OVERLAY
+   ========================================================= */
 
 .location-header-overlay {
   position: absolute;
+
   inset: 0;
+
   z-index: -1;
 
   background:
     linear-gradient(
       90deg,
-      rgba(8, 8, 8, 0.96) 0%,
-      rgba(8, 8, 8, 0.88) 42%,
-      rgba(8, 8, 8, 0.68) 72%,
+      rgba(8, 8, 8, 0.93) 0%,
+      rgba(8, 8, 8, 0.84) 38%,
+      rgba(8, 8, 8, 0.70) 70%,
       rgba(8, 8, 8, 0.82) 100%
     );
 }
 
-/*
-  Una segunda capa sutil para evitar que las zonas
-  claras de la fotografía dominen el contenido.
-*/
 
 .location-header::after {
   content: '';
+
   position: absolute;
+
   inset: 0;
+
   z-index: -1;
+
+  pointer-events: none;
 
   background:
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.25) 0%,
-      transparent 35%,
+      rgba(0, 0, 0, 0.18) 0%,
+      transparent 45%,
       rgba(0, 0, 0, 0.35) 100%
     );
-
-  pointer-events: none;
 }
 
+
 /* =========================================================
-   CONTENIDO
+   HERO CONTENT
    ========================================================= */
 
 .location-header-content {
-  width: min(1180px, calc(100% - 48px));
+  position: relative;
+
+  z-index: 2;
+
+  width: min(760px, calc(100% - 48px));
 
   margin: 0 auto;
 
-  padding: 100px 0;
+  padding: 80px 0;
 
-  position: relative;
-  z-index: 2;
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
 }
+
 
 /* =========================================================
    EYEBROW
@@ -94,7 +115,9 @@
 
 .location-eyebrow {
   display: flex;
+
   align-items: center;
+
   gap: 12px;
 
   margin: 0 0 24px;
@@ -110,26 +133,32 @@
     sans-serif;
 
   font-size: 11px;
+
   font-weight: 600;
+
   letter-spacing: 0.22em;
+
   text-transform: uppercase;
 }
 
-.location-eyebrow span {
-  width: 34px;
-  height: 1px;
 
+.location-eyebrow span {
   display: block;
+
+  width: 34px;
+
+  height: 1px;
 
   background: #c9a45c;
 }
+
 
 /* =========================================================
    TITLE
    ========================================================= */
 
 .location-header h2 {
-  max-width: 700px;
+  max-width: 760px;
 
   margin: 0;
 
@@ -150,6 +179,7 @@
   letter-spacing: -0.045em;
 }
 
+
 .location-header h2 span {
   display: block;
 
@@ -158,16 +188,17 @@
   font-weight: 300;
 }
 
+
 /* =========================================================
    DESCRIPTION
    ========================================================= */
 
 .location-description {
-  max-width: 530px;
+  max-width: 540px;
 
   margin: 28px 0 0;
 
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.76);
 
   font-family:
     Inter,
@@ -175,18 +206,22 @@
     sans-serif;
 
   font-size: 15px;
+
   font-weight: 400;
 
   line-height: 1.75;
 }
 
+
 /* =========================================================
-   BUTTONS
+   ACTIONS
    ========================================================= */
 
 .location-actions {
   display: flex;
+
   flex-wrap: wrap;
+
   align-items: center;
 
   gap: 12px;
@@ -194,11 +229,18 @@
   margin-top: 38px;
 }
 
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
 .location-button {
   min-height: 50px;
 
   display: inline-flex;
+
   align-items: center;
+
   justify-content: center;
 
   gap: 10px;
@@ -213,6 +255,7 @@
     sans-serif;
 
   font-size: 13px;
+
   font-weight: 600;
 
   text-decoration: none;
@@ -225,43 +268,57 @@
     box-shadow 220ms ease;
 }
 
+
 .location-button svg {
   width: 17px;
+
   height: 17px;
 
+  flex-shrink: 0;
+
   fill: none;
+
   stroke: currentColor;
 
   stroke-width: 1.7;
 
   stroke-linecap: round;
-  stroke-linejoin: round;
 
-  flex-shrink: 0;
+  stroke-linejoin: round;
 }
+
 
 .location-button:hover {
   transform: translateY(-2px);
 }
 
-/* GOLD */
+
+/* =========================================================
+   GOLD BUTTON
+   ========================================================= */
 
 .button-gold {
   color: #111111;
+
   background: #c9a45c;
 
   border: 1px solid #c9a45c;
 }
 
+
 .button-gold:hover {
   background: #d7b775;
+
   border-color: #d7b775;
 
   box-shadow:
     0 12px 30px rgba(201, 164, 92, 0.18);
 }
 
-/* OUTLINE */
+
+/* =========================================================
+   OUTLINE BUTTON
+   ========================================================= */
 
 .button-outline {
   color: #ffffff;
@@ -273,6 +330,7 @@
   backdrop-filter: blur(8px);
 }
 
+
 .button-outline:hover {
   color: #ffffff;
 
@@ -280,6 +338,7 @@
 
   border-color: rgba(255, 255, 255, 0.55);
 }
+
 
 /* =========================================================
    MAP
@@ -289,6 +348,7 @@
   position: relative;
 
   width: 100%;
+
   height: 430px;
 
   background: #f4f3f0;
@@ -296,38 +356,46 @@
   overflow: hidden;
 }
 
-.location-map iframe {
-  width: 100%;
-  height: 100%;
 
+.location-map iframe {
   display: block;
+
+  width: 100%;
+
+  height: 100%;
 
   border: 0;
 
   filter: grayscale(0.15);
 }
 
-/*
-  Link invisible que cubre todo el mapa.
-*/
+
+/* =========================================================
+   MAP LINK
+   ========================================================= */
 
 .location-map-link {
   position: absolute;
+
   inset: 0;
 
+  z-index: 2;
+
   display: flex;
+
   align-items: flex-end;
+
   justify-content: flex-end;
 
   padding: 24px;
 
   text-decoration: none;
-
-  z-index: 2;
 }
+
 
 .location-map-badge {
   display: inline-flex;
+
   align-items: center;
 
   gap: 10px;
@@ -351,12 +419,14 @@
     sans-serif;
 
   font-size: 12px;
+
   font-weight: 600;
 
   transition:
     transform 220ms ease,
     box-shadow 220ms ease;
 }
+
 
 .location-map-link:hover .location-map-badge {
   transform: translateY(-3px);
@@ -365,23 +435,30 @@
     0 15px 35px rgba(0, 0, 0, 0.17);
 }
 
+
 .location-map-badge svg {
   width: 17px;
+
   height: 17px;
 
   fill: none;
+
   stroke: #a9823c;
 
   stroke-width: 1.7;
 
   stroke-linecap: round;
+
   stroke-linejoin: round;
 }
 
+
 .location-map-badge svg:last-child {
   width: 14px;
+
   height: 14px;
 }
+
 
 /* =========================================================
    DETAILS
@@ -392,6 +469,7 @@
 
   border-top: 1px solid #e8e5df;
 }
+
 
 .location-details-container {
   width: min(1180px, calc(100% - 48px));
@@ -404,12 +482,11 @@
     1.1fr
     0.8fr
     1.2fr;
-
-  gap: 0;
 }
 
+
 /* =========================================================
-   DETAIL
+   DETAIL ITEM
    ========================================================= */
 
 .location-detail {
@@ -420,18 +497,26 @@
   border-right: 1px solid #e8e5df;
 }
 
+
 .location-detail:first-child {
   padding-left: 0;
 }
 
-.location-detail:last-child {
-  border-right: 0;
 
+.location-detail:last-child {
   padding-right: 0;
+
+  border-right: 0;
 }
+
+
+/* =========================================================
+   DETAIL HEADING
+   ========================================================= */
 
 .detail-heading {
   display: flex;
+
   align-items: center;
 
   gap: 12px;
@@ -439,20 +524,25 @@
   margin-bottom: 20px;
 }
 
+
 .detail-heading svg {
   width: 18px;
+
   height: 18px;
 
   flex-shrink: 0;
 
   fill: none;
+
   stroke: #a9823c;
 
   stroke-width: 1.6;
 
   stroke-linecap: round;
+
   stroke-linejoin: round;
 }
+
 
 .detail-heading h3 {
   margin: 0;
@@ -470,6 +560,7 @@
 
   letter-spacing: -0.01em;
 }
+
 
 /* =========================================================
    ADDRESS
@@ -492,8 +583,10 @@
   line-height: 1.8;
 }
 
+
 .location-text-link {
   display: inline-flex;
+
   align-items: center;
 
   gap: 7px;
@@ -508,6 +601,7 @@
     sans-serif;
 
   font-size: 12px;
+
   font-weight: 600;
 
   text-decoration: none;
@@ -515,22 +609,28 @@
   transition: color 180ms ease;
 }
 
+
 .location-text-link:hover {
   color: #806225;
 }
 
+
 .location-text-link svg {
   width: 13px;
+
   height: 13px;
 
   fill: none;
+
   stroke: currentColor;
 
   stroke-width: 1.6;
 
   stroke-linecap: round;
+
   stroke-linejoin: round;
 }
+
 
 /* =========================================================
    PHONE
@@ -538,8 +638,6 @@
 
 .location-phone {
   display: inline-block;
-
-  margin: 0;
 
   color: #171717;
 
@@ -559,9 +657,11 @@
   transition: color 180ms ease;
 }
 
+
 .location-phone:hover {
   color: #a9823c;
 }
+
 
 .detail-description {
   max-width: 230px;
@@ -580,6 +680,7 @@
   line-height: 1.7;
 }
 
+
 /* =========================================================
    SCHEDULES
    ========================================================= */
@@ -587,10 +688,12 @@
 .location-schedules {
   display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
 
   gap: 24px;
 }
+
 
 .schedule h4 {
   margin: 0 0 8px;
@@ -607,6 +710,7 @@
   font-weight: 650;
 }
 
+
 .schedule p {
   margin: 3px 0;
 
@@ -622,33 +726,36 @@
   line-height: 1.6;
 }
 
+
 /* =========================================================
    TABLET
    ========================================================= */
 
 @media (max-width: 900px) {
+
   .location-header {
     min-height: 560px;
 
-    background-position:
-      62% center;
+    background-position: 62% center;
   }
 
+
   .location-header-content {
-    width: min(100% - 40px, 700px);
+    width: min(700px, calc(100% - 40px));
 
     padding: 85px 0;
   }
 
-  .location-header h2 {
-    max-width: 620px;
 
+  .location-header h2 {
     font-size: clamp(46px, 8vw, 66px);
   }
+
 
   .location-details-container {
     grid-template-columns: 1fr 1fr;
   }
+
 
   .location-detail {
     min-height: 220px;
@@ -658,37 +765,43 @@
     border-bottom: 1px solid #e8e5df;
   }
 
+
   .location-detail:first-child {
     padding-left: 0;
   }
 
-  .location-detail:nth-child(2) {
-    border-right: 0;
 
+  .location-detail:nth-child(2) {
     padding-right: 0;
+
+    border-right: 0;
   }
+
 
   .location-detail:last-child {
     grid-column: 1 / -1;
 
     padding-left: 0;
+
     padding-right: 0;
 
     border-bottom: 0;
   }
 }
 
+
 /* =========================================================
    MOBILE
    ========================================================= */
 
 @media (max-width: 640px) {
-  .location-header {
-    min-height: auto;
 
-    background-position:
-      68% center;
+  .location-header {
+    min-height: 600px;
+
+    background-position: 68% center;
   }
+
 
   .location-header-overlay {
     background:
@@ -699,11 +812,13 @@
       );
   }
 
+
   .location-header-content {
     width: calc(100% - 36px);
 
-    padding: 75px 0 70px;
+    padding: 70px 0;
   }
+
 
   .location-eyebrow {
     margin-bottom: 20px;
@@ -713,9 +828,11 @@
     letter-spacing: 0.18em;
   }
 
+
   .location-eyebrow span {
     width: 24px;
   }
+
 
   .location-header h2 {
     font-size: clamp(42px, 12vw, 56px);
@@ -724,6 +841,7 @@
 
     letter-spacing: -0.04em;
   }
+
 
   .location-description {
     max-width: 100%;
@@ -735,6 +853,7 @@
     line-height: 1.7;
   }
 
+
   .location-actions {
     display: grid;
 
@@ -745,19 +864,23 @@
     margin-top: 30px;
   }
 
+
   .location-button {
     width: 100%;
 
     min-height: 52px;
   }
 
+
   .location-map {
     height: 350px;
   }
 
+
   .location-map-link {
     padding: 14px;
   }
+
 
   .location-map-badge {
     width: 100%;
@@ -769,11 +892,13 @@
     font-size: 11px;
   }
 
+
   .location-details-container {
     width: calc(100% - 36px);
 
     display: block;
   }
+
 
   .location-detail,
   .location-detail:first-child,
@@ -787,9 +912,11 @@
     border-bottom: 1px solid #e8e5df;
   }
 
+
   .location-detail:last-child {
     border-bottom: 0;
   }
+
 
   .location-schedules {
     grid-template-columns: 1fr 1fr;
@@ -797,22 +924,26 @@
     gap: 20px;
   }
 
+
   .location-phone {
     font-size: 22px;
   }
 }
+
 
 /* =========================================================
    REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   .location-button,
   .location-map-badge,
   .location-text-link,
   .location-phone {
     transition: none;
   }
+
 
   .location-button:hover,
   .location-map-link:hover .location-map-badge {

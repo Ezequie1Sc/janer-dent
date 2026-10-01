@@ -8,15 +8,16 @@ import { Component } from '@angular/core';
   styleUrl: './location.scss',
 })
 export class Location {
+
   /**
-   * URL oficial de Google Maps utilizado
-   * por todos los enlaces relacionados con la ubicación.
+   * Enlace utilizado para abrir
+   * la ubicación de JANERDent.
    */
   readonly mapsUrl =
     'https://maps.app.goo.gl/aaNKGFfPPodFR98n6';
 
   /**
-   * Horarios de atención del consultorio.
+   * Horarios de atención.
    */
   readonly schedules = [
     {
