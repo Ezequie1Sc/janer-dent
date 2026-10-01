@@ -25,21 +25,21 @@ export class Benefits implements AfterViewInit, OnDestroy {
       number: '01',
       title: 'Atención personalizada',
       description:
-        'Cada tratamiento es diseñado pensando en las necesidades de cada paciente.'
+        'Cada tratamiento es diseñado pensando en las necesidades y objetivos de cada paciente.'
     },
 
     {
       number: '02',
       title: 'Tecnología avanzada',
       description:
-        'Utilizamos herramientas y técnicas actuales para ofrecer mejores resultados.'
+        'Utilizamos herramientas y técnicas actuales para ofrecer diagnósticos precisos y tratamientos más efectivos.'
     },
 
     {
       number: '03',
       title: 'Experiencia profesional',
       description:
-        'Conocimiento y preparación para brindar tratamientos seguros y de calidad.'
+        'Contamos con un equipo capacitado y en constante actualización para brindarte la mejor atención.'
     },
 
     {
@@ -60,7 +60,7 @@ export class Benefits implements AfterViewInit, OnDestroy {
       number: '06',
       title: 'Seguridad',
       description:
-        'Procesos profesionales enfocados en el bienestar de cada paciente.'
+        'Seguimos protocolos estrictos de higiene y esterilización para proteger tu salud en cada visita.'
     }
 
   ];
@@ -80,7 +80,6 @@ export class Benefits implements AfterViewInit, OnDestroy {
     }
 
     this.setupScrollAnimation();
-
   }
 
 
@@ -96,7 +95,7 @@ export class Benefits implements AfterViewInit, OnDestroy {
 
     const items =
       section.querySelectorAll<HTMLElement>(
-        '.benefit-card'
+        '.benefit-item'
       );
 
     if (!items.length) {
