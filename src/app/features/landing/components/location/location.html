@@ -3,8 +3,14 @@
   class="location-section"
   aria-labelledby="location-title"
 >
-  <!-- ENCABEZADO -->
+
+  <!-- =========================================
+       ENCABEZADO
+       SOLO ESTA PARTE ES NEGRA
+  ========================================== -->
+
   <header class="location-header">
+
     <p class="location-eyebrow">
       <span aria-hidden="true"></span>
       VISÍTANOS
@@ -22,6 +28,7 @@
     </p>
 
     <div class="location-actions">
+
       <!-- WHATSAPP -->
       <a
         class="location-button button-gold"
@@ -29,6 +36,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
+
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
@@ -40,17 +48,21 @@
                a9.4 9.4 0 0 1-.9-4A8.5 8.5 0 0 1
                12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"
           ></path>
+
           <path d="M8 11h8M8 14h5"></path>
         </svg>
 
         <span>Contáctanos</span>
+
       </a>
+
 
       <!-- TELÉFONO -->
       <a
         class="location-button button-outline"
         href="tel:+529961046096"
       >
+
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
@@ -73,15 +85,18 @@
         </svg>
 
         <span>Llamar ahora</span>
+
       </a>
 
-      <!-- DESTINO FIJO -->
+
+      <!-- GOOGLE MAPS -->
       <a
         class="location-button button-outline"
         [href]="mapsUrl"
         target="_blank"
         rel="noopener noreferrer"
       >
+
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
@@ -92,30 +107,42 @@
         </svg>
 
         <span>Cómo llegar</span>
+
       </a>
+
     </div>
+
   </header>
 
-  <!-- MAPA FIJO -->
+
+  <!-- =========================================
+       MAPA
+       PERMANECE FUERA DEL FONDO NEGRO
+  ========================================== -->
+
   <div class="location-map">
+
     <iframe
       title="Ubicación del consultorio JANERDent"
-      src="https://maps.google.com/maps?q=20.1705166%2C-90.1379765&amp;ll=20.1705166%2C-90.1379765&amp;z=17&amp;t=m&amp;output=embed"
+      src="https://maps.google.com/maps?q=20.1705166%2C-90.1379765&ll=20.1705166%2C-90.1379765&z=17&t=m&output=embed"
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"
       tabindex="-1"
       aria-hidden="true"
     ></iframe>
 
-    <!-- Toda la superficie abre el mismo enlace -->
+
+    <!-- TODA LA SUPERFICIE DEL MAPA ABRE GOOGLE MAPS -->
     <a
       class="location-map-link"
       [href]="mapsUrl"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Abrir la ubicación de JANERDent en Google Maps, en una pestaña nueva"
+      aria-label="Abrir la ubicación de JANERDent en Google Maps"
     >
+
       <span class="location-map-badge">
+
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
@@ -125,7 +152,12 @@
             d="M20 10c0 6-8 11-8 11S4 16 4 10
                a8 8 0 1 1 16 0Z"
           ></path>
-          <circle cx="12" cy="10" r="2.5"></circle>
+
+          <circle
+            cx="12"
+            cy="10"
+            r="2.5"
+          ></circle>
         </svg>
 
         <span>Ver ubicación en Google Maps</span>
@@ -137,17 +169,29 @@
         >
           <path d="M7 17 17 7M7 7h10v10"></path>
         </svg>
+
       </span>
+
     </a>
+
   </div>
 
-  <!-- INFORMACIÓN INFERIOR -->
+
+  <!-- =========================================
+       INFORMACIÓN INFERIOR
+       ESTA PARTE PERMANECE BLANCA
+  ========================================== -->
+
   <div class="location-details">
+
     <div class="location-details-container">
+
 
       <!-- DIRECCIÓN -->
       <div class="location-detail">
+
         <div class="detail-heading">
+
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -157,16 +201,24 @@
               d="M20 10c0 6-8 11-8 11S4 16 4 10
                  a8 8 0 1 1 16 0Z"
             ></path>
-            <circle cx="12" cy="10" r="2.5"></circle>
+
+            <circle
+              cx="12"
+              cy="10"
+              r="2.5"
+            ></circle>
           </svg>
 
           <h3>Encuéntranos</h3>
+
         </div>
+
 
         <address class="location-address">
           Calle 29 s/n, San Antonio.<br>
           Hecelchakán, Campeche, México.
         </address>
+
 
         <a
           class="location-text-link"
@@ -174,6 +226,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
+
           <span>Ver en Google Maps</span>
 
           <svg
@@ -183,12 +236,17 @@
           >
             <path d="M7 17 17 7M7 7h10v10"></path>
           </svg>
+
         </a>
+
       </div>
+
 
       <!-- URGENCIAS -->
       <div class="location-detail">
+
         <div class="detail-heading">
+
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -198,7 +256,9 @@
           </svg>
 
           <h3>Urgencias 24 horas</h3>
+
         </div>
+
 
         <a
           class="location-phone"
@@ -207,39 +267,66 @@
           996 104 6096
         </a>
 
+
         <p class="detail-description">
           Llámanos si tienes una emergencia dental.
         </p>
+
       </div>
+
 
       <!-- HORARIOS -->
       <div class="location-detail">
+
         <div class="detail-heading">
+
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
             focusable="false"
           >
-            <circle cx="12" cy="12" r="9"></circle>
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+            ></circle>
+
             <path d="M12 7v5l3 2"></path>
           </svg>
 
           <h3>Horarios de atención</h3>
+
         </div>
+
 
         <div class="location-schedules">
+
           @for (item of schedules; track item.day) {
+
             <div class="schedule">
-              <h4>{{ item.day }}</h4>
+
+              <h4>
+                {{ item.day }}
+              </h4>
 
               @for (hour of item.hours; track hour) {
-                <p>{{ hour }}</p>
+
+                <p>
+                  {{ hour }}
+                </p>
+
               }
+
             </div>
+
           }
+
         </div>
+
       </div>
 
     </div>
+
   </div>
+
 </section>
