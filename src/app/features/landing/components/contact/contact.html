@@ -1,157 +1,99 @@
 <section
   #contactSection
-  id="contacto"
-  class="contact-section"
-  [class.is-revealed]="visible()"
-  aria-labelledby="contact-title"
+  class="contact"
+  [class.is-visible]="visible()"
 >
-  <div class="contact-container">
+  <div class="contact__container">
 
     <!-- INTRODUCCIÓN -->
-    <div class="contact-intro">
-      <p class="contact-eyebrow">
-        <span aria-hidden="true"></span>
-        AGENDA TU CITA
-      </p>
+    <div class="contact__intro">
 
-      <h2 id="contact-title" class="contact-title">
-        Tu próxima
-        <span>sonrisa empieza</span>
-        aquí.
+      <div class="contact__eyebrow">
+        <span></span>
+        AGENDA TU CITA
+      </div>
+
+      <h2 class="contact__title">
+        Una sonrisa que
+        <em>vale la pena</em>
+        cuidar.
       </h2>
 
-      <p class="contact-description">
-        Un espacio para cuidar de ti. Elige tu tratamiento
-        y cuéntanos cuándo te gustaría visitarnos.
+      <p class="contact__description">
+        Elige el tratamiento y la fecha que prefieras.
+        Déjanos tus datos y nos pondremos en contacto
+        para confirmar tu cita.
       </p>
 
-      <ol class="contact-steps" aria-label="Cómo solicitar tu cita">
-        <li>
-          <span class="step-number" aria-hidden="true">01</span>
+      <div class="contact__info">
+        <span class="contact__info-label">
+          ¿Prefieres WhatsApp?
+        </span>
 
-          <div>
-            <strong>Elige tu visita</strong>
-            <p>Completa tus datos, tratamiento y horario deseado.</p>
-          </div>
-        </li>
-
-        <li>
-          <span class="step-number" aria-hidden="true">02</span>
-
-          <div>
-            <strong>Conversemos por WhatsApp</strong>
-            <p>Envía el mensaje preparado y confirmaremos la disponibilidad.</p>
-          </div>
-        </li>
-      </ol>
-
-      <div class="contact-direct">
-        <div>
-          <span class="contact-direct-label">¿PREFIERES LLAMARNOS?</span>
-
-          <a href="tel:+529961046096" class="contact-phone">
-            996 104 6096
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M7 17 17 7M7 7h10v10"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </a>
-        </div>
-
-        <p class="contact-location">
-          JANERDent
-          <span>Hecelchakán, Campeche</span>
-        </p>
+        <a
+          class="contact__phone"
+          href="https://wa.me/529961046096"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          996 104 6096
+          <span>↗</span>
+        </a>
       </div>
+
     </div>
 
     <!-- FORMULARIO -->
-    <div class="appointment-panel">
-      <header class="appointment-header">
-        <p class="appointment-eyebrow">TU PRÓXIMA VISITA</p>
+    <div class="contact__form-wrapper">
 
-        <h3>Hagamos espacio para ti.</h3>
-
-        <p>
-          Indícanos tus preferencias para solicitar una cita.
-        </p>
-      </header>
+      <div class="contact__form-header">
+        <span>01</span>
+        <p>DATOS DE LA CITA</p>
+      </div>
 
       <form
-        #appointmentForm="ngForm"
-        class="appointment-form"
+        class="contact__form"
         (ngSubmit)="solicitarCita()"
         novalidate
       >
+
         <!-- NOMBRE -->
-        <div class="form-field">
-          <label for="contact-name">Nombre completo</label>
+        <div class="field">
+          <label for="nombre">
+            Nombre completo
+          </label>
 
           <input
-            id="contact-name"
-            name="nombre"
+            id="nombre"
             type="text"
+            [value]="nombre()"
+            (input)="nombre.set($any($event.target).value)"
+            placeholder="Escribe tu nombre"
             autocomplete="name"
-            placeholder="¿Cómo te llamas?"
-            required
-            minlength="2"
-            maxlength="80"
-            #nombreControl="ngModel"
-            [ngModel]="nombre()"
-            (ngModelChange)="nombre.set($event)"
-            [attr.aria-invalid]="
-              (enviado() || nombreControl.touched) && errorNombre()
-                ? 'true'
-                : null
-            "
-            [attr.aria-describedby]="
-              (enviado() || nombreControl.touched) && errorNombre()
-                ? 'name-error'
-                : null
-            "
           />
 
-          @if ((enviado() || nombreControl.touched) && errorNombre()) {
-            <p id="name-error" class="field-error">
+          @if (enviado() && errorNombre()) {
+            <span class="field__error">
               {{ errorNombre() }}
-            </p>
+            </span>
           }
         </div>
 
         <!-- TRATAMIENTO -->
-        <div class="form-field">
-          <label for="contact-service">Tratamiento de interés</label>
+        <div class="field">
+          <label for="servicio">
+            Tratamiento
+          </label>
 
           <div class="select-wrapper">
             <select
-              id="contact-service"
-              name="servicio"
-              required
-              #servicioControl="ngModel"
-              [ngModel]="servicio()"
-              (ngModelChange)="servicio.set($event)"
-              [attr.aria-invalid]="
-                (enviado() || servicioControl.touched) && errorServicio()
-                  ? 'true'
-                  : null
-              "
-              [attr.aria-describedby]="
-                (enviado() || servicioControl.touched) && errorServicio()
-                  ? 'service-description service-error'
-                  : 'service-description'
-              "
+              id="servicio"
+              [value]="servicio()"
+              (change)="servicio.set($any($event.target).value)"
             >
-              <option value="" disabled>Selecciona un tratamiento</option>
+              <option value="" disabled>
+                Selecciona un tratamiento
+              </option>
 
               @for (tratamiento of tratamientos; track tratamiento.nombre) {
                 <option [value]="tratamiento.nombre">
@@ -160,177 +102,111 @@
               }
             </select>
 
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="m6 9 6 6 6-6"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <span class="select-arrow">⌄</span>
           </div>
 
-          <p
-            id="service-description"
-            class="field-hint service-description"
-            aria-live="polite"
-          >
-            @if (tratamientoSeleccionado(); as tratamiento) {
-              {{ tratamiento.descripcion }}
-            } @else {
-              Encuentra el cuidado que necesita tu sonrisa.
-            }
-          </p>
-
-          @if ((enviado() || servicioControl.touched) && errorServicio()) {
-            <p id="service-error" class="field-error">
+          @if (enviado() && errorServicio()) {
+            <span class="field__error">
               {{ errorServicio() }}
-            </p>
+            </span>
+          }
+
+          @if (tratamientoSeleccionado(); as tratamiento) {
+            <span class="field__hint">
+              {{ tratamiento.descripcion }}
+            </span>
           }
         </div>
 
-        <!-- FECHA Y HORA -->
-        <div class="form-row">
-          <div class="form-field">
-            <label for="contact-date">Fecha deseada</label>
+        <!-- FECHA -->
+        <div class="field">
+          <label for="fecha">
+            Fecha preferida
+          </label>
 
+          <div class="date-wrapper">
             <input
-              id="contact-date"
-              name="fecha"
+              id="fecha"
               type="date"
-              required
-              #fechaControl="ngModel"
+              [value]="fecha()"
               [min]="reloj().fecha"
-              [ngModel]="fecha()"
-              (ngModelChange)="fecha.set($event)"
-              (focus)="actualizarReloj()"
-              [attr.aria-invalid]="
-                (enviado() || fechaControl.touched) && errorFecha()
-                  ? 'true'
-                  : null
-              "
-              [attr.aria-describedby]="
-                (enviado() || fechaControl.touched) && errorFecha()
-                  ? 'date-error'
-                  : null
-              "
+              (change)="fecha.set($any($event.target).value)"
             />
 
-            @if ((enviado() || fechaControl.touched) && errorFecha()) {
-              <p id="date-error" class="field-error">
-                {{ errorFecha() }}
-              </p>
-            }
+            <span class="date-icon">⌕</span>
           </div>
 
-          <div class="form-field">
-            <label for="contact-time">Hora deseada</label>
+          @if (fecha()) {
+            <span class="field__summary">
+              {{ fechaResumen() }}
+            </span>
+          }
 
-            <input
-              id="contact-time"
-              name="hora"
-              type="time"
-              step="60"
-              required
-              #horaControl="ngModel"
-              [ngModel]="hora()"
-              (ngModelChange)="hora.set($event)"
-              (focus)="actualizarReloj()"
-              [attr.aria-invalid]="
-                (enviado() || horaControl.touched) && errorHora()
-                  ? 'true'
-                  : null
-              "
-              [attr.aria-describedby]="
-                (enviado() || horaControl.touched) && errorHora()
-                  ? 'time-hint time-error'
-                  : 'time-hint'
-              "
-            />
+          @if (enviado() && errorFecha()) {
+            <span class="field__error">
+              {{ errorFecha() }}
+            </span>
+          }
+        </div>
 
-            <p id="time-hint" class="field-hint">
-              Hora de Campeche.
-            </p>
+        <!-- HORA -->
+        <div class="field">
+          <label for="hora">
+            Hora preferida
+          </label>
 
-            @if ((enviado() || horaControl.touched) && errorHora()) {
-              <p id="time-error" class="field-error">
-                {{ errorHora() }}
-              </p>
-            }
-          </div>
+          <input
+            id="hora"
+            type="time"
+            [value]="hora()"
+            (change)="hora.set($any($event.target).value)"
+          />
+
+          @if (enviado() && errorHora()) {
+            <span class="field__error">
+              {{ errorHora() }}
+            </span>
+          }
         </div>
 
         <!-- RESUMEN -->
-        <dl class="appointment-summary">
-          <div>
-            <dt>Fecha de tu visita</dt>
-            <dd>{{ fechaResumen() }}</dd>
-          </div>
+        @if (fecha() && servicio()) {
+          <div class="appointment-summary">
 
-          <div>
-            <dt>Horario preferido</dt>
-            <dd>{{ hora() ? hora() + ' h' : 'Por elegir' }}</dd>
-          </div>
-        </dl>
+            <div>
+              <span>TRATAMIENTO</span>
+              <strong>{{ servicio() }}</strong>
+            </div>
 
-        @if (enviado() && !formularioValido()) {
-          <p class="form-error" role="alert">
-            Revisa los campos indicados para continuar.
-          </p>
+            <div>
+              <span>FECHA</span>
+              <strong>{{ fechaResumen() }}</strong>
+            </div>
+
+            @if (hora()) {
+              <div>
+                <span>HORA</span>
+                <strong>{{ hora() }}</strong>
+              </div>
+            }
+
+          </div>
         }
 
-        <button type="submit" class="appointment-submit">
-          <span>Continuar en WhatsApp</span>
-
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M5 12h14m-6-6 6 6-6 6"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+        <!-- BOTÓN -->
+        <button
+          class="contact__submit"
+          type="submit"
+        >
+          <span>Solicitar cita por WhatsApp</span>
+          <span class="contact__submit-arrow">→</span>
         </button>
 
-        <div class="appointment-notice">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="8"
-              stroke="currentColor"
-              stroke-width="1.5"
-            />
+        <p class="contact__note">
+          La fecha y hora quedan sujetas a confirmación
+          por parte del consultorio.
+        </p>
 
-            <path
-              d="M12 8v4l2.5 1.5"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-
-          <p>
-            Se abrirá WhatsApp con tu mensaje listo para enviar.
-            Tu cita quedará agendada cuando el consultorio confirme
-            la fecha y la hora.
-          </p>
-        </div>
       </form>
     </div>
 
