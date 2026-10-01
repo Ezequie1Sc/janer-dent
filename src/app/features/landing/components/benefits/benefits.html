@@ -6,78 +6,68 @@
 >
   <div class="benefits-container">
 
-    <!-- HEADER -->
-    <header class="benefits-header">
+    <!-- =========================================
+         PARTE SUPERIOR
+    ========================================== -->
 
-      <div class="section-label">
-        <span class="label-line"></span>
+    <div class="benefits-hero">
 
-        <span>¿POR QUÉ ELEGIRNOS?</span>
+      <!-- COLUMNA IZQUIERDA -->
+      <div class="benefits-heading">
 
-        <span class="label-line"></span>
+        <div class="section-label">
+          <span class="label-line"></span>
+          <span>POR QUÉ ELEGIRNOS</span>
+          <span class="label-line"></span>
+        </div>
+
+        <h2 id="benefits-title">
+          Una experiencia
+          <br>
+          odontológica
+          <br>
+          <span>diferente.</span>
+        </h2>
+
+        <div class="heading-decoration"></div>
+
       </div>
 
-      <h2 id="benefits-title">
-        Una atención pensada
-        <span>para ti.</span>
-      </h2>
 
-      <p class="benefits-intro">
-        En JANER DENT combinamos atención personalizada,
-        tecnología y experiencia para que cada visita
-        sea una experiencia segura y cercana.
-      </p>
+      <!-- IMAGEN -->
+      <div class="benefits-visual">
 
-    </header>
+        <div class="visual-image">
 
+          <img
+            src="assets/consultorio/janerdent-consultorio-real.webp"
+            alt="Interior del consultorio dental JANER DENT"
+          />
 
-    <!-- VISUAL -->
-    <div class="benefits-feature">
+          <div class="visual-overlay"></div>
 
-      <div class="feature-image">
-
-        <img
-          src="assets/consultorio/janerdent-consultorio-real.webp"
-          alt="Interior del consultorio dental JANER DENT"
-          class="benefits-image"
-        />
-
-        <div class="feature-overlay"></div>
-
-        <div class="feature-content">
-
-          <span class="feature-number">01</span>
-
-          <div>
-            <span class="feature-eyebrow">
-              NUESTRA FILOSOFÍA
-            </span>
-
-            <h3>
-              Tu sonrisa merece
-              <span>atención especial.</span>
-            </h3>
-          </div>
+          <span class="visual-label">
+            JANER
+          </span>
 
         </div>
 
       </div>
 
 
-      <div class="feature-side">
+      <!-- TEXTO LATERAL -->
+      <div class="benefits-aside">
 
-        <span class="feature-side-number">
-          JANER
-        </span>
+        <span class="aside-line"></span>
 
         <p>
-          Cada detalle de nuestro espacio está pensado
-          para que te sientas cómodo desde el primer momento.
+          Cada detalle de nuestro espacio está pensado para
+          que te sientas cómodo desde el primer momento.
         </p>
 
         <a
           href="#contacto"
-          class="feature-link"
+          class="aside-link"
         >
           Conoce nuestra atención
 
@@ -95,97 +85,26 @@
     </div>
 
 
-    <!-- BENEFICIOS -->
+    <!-- =========================================
+         BENEFICIOS
+    ========================================== -->
+
     <div class="benefits-grid">
 
       @for (item of benefits; track item.number) {
 
         <article
-          class="benefit-card"
+          class="benefit-item"
           [attr.data-number]="item.number"
         >
 
-          <div class="benefit-top">
+          <div class="benefit-header">
 
             <span class="benefit-number">
               {{ item.number }}
             </span>
 
-            <span
-              class="benefit-icon"
-              aria-hidden="true"
-            >
-
-              @if (item.number === '01') {
-
-                <svg viewBox="0 0 32 32" fill="none">
-                  <circle
-                    cx="16"
-                    cy="10"
-                    r="4"
-                  />
-                  <path
-                    d="M8 25C8.8 19.8 11.5 17 16 17C20.5 17 23.2 19.8 24 25"
-                  />
-                </svg>
-
-              } @else if (item.number === '02') {
-
-                <svg viewBox="0 0 32 32" fill="none">
-                  <rect
-                    x="6"
-                    y="6"
-                    width="20"
-                    height="15"
-                    rx="1"
-                  />
-                  <path d="M11 26H21" />
-                  <path d="M16 21V26" />
-                </svg>
-
-              } @else if (item.number === '03') {
-
-                <svg viewBox="0 0 32 32" fill="none">
-                  <path
-                    d="M16 27C16 27 7 21.8 7 13.5C7 9.9 9.3 7 12.5 7C14.3 7 15.5 8 16 9.5C16.5 8 17.7 7 19.5 7C22.7 7 25 9.9 25 13.5C25 21.8 16 27 16 27Z"
-                  />
-                  <path d="M16 12V19" />
-                  <path d="M12.5 15.5H19.5" />
-                </svg>
-
-              } @else if (item.number === '04') {
-
-                <svg viewBox="0 0 32 32" fill="none">
-                  <circle cx="11" cy="10" r="3" />
-                  <circle cx="21" cy="10" r="3" />
-                  <path
-                    d="M5 24C5.6 19.8 7.7 17 11 17C14.3 17 16.4 19.8 17 24"
-                  />
-                  <path
-                    d="M15 24C15.6 19.8 17.7 17 21 17C24.3 17 26.4 19.8 27 24"
-                  />
-                </svg>
-
-              } @else if (item.number === '05') {
-
-                <svg viewBox="0 0 32 32" fill="none">
-                  <path
-                    d="M16 5L19.2 11.5L26 12.5L21 17.5L22.2 24.5L16 21.2L9.8 24.5L11 17.5L6 12.5L12.8 11.5L16 5Z"
-                  />
-                </svg>
-
-              } @else {
-
-                <svg viewBox="0 0 32 32" fill="none">
-                  <path
-                    d="M16 5L24 8V14C24 19.6 20.8 24.2 16 27C11.2 24.2 8 19.6 8 14V8L16 5Z"
-                  />
-                  <path d="M12.5 16L15.2 18.7L20 13.5" />
-                </svg>
-
-              }
-
-            </span>
+            <span class="benefit-line"></span>
 
           </div>
 
@@ -199,19 +118,6 @@
             <p>
               {{ item.description }}
             </p>
-
-          </div>
-
-
-          <div class="benefit-arrow">
-
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M5 12h13"></path>
-              <path d="m13 6 6 6-6 6"></path>
-            </svg>
 
           </div>
 
