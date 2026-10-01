@@ -5,7 +5,10 @@
 >
   <div class="contact__container">
 
-    <!-- INTRODUCCIÓN -->
+    <!-- ==========================================
+         ENCABEZADO / MENSAJE
+    =========================================== -->
+
     <div class="contact__intro">
 
       <div class="contact__eyebrow">
@@ -25,9 +28,10 @@
         para confirmar tu cita.
       </p>
 
-      <div class="contact__info">
-        <span class="contact__info-label">
-          ¿Prefieres WhatsApp?
+      <div class="contact__direct">
+
+        <span class="contact__direct-label">
+          ¿Prefieres agendar directamente?
         </span>
 
         <a
@@ -36,20 +40,34 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          996 104 6096
-          <span>↗</span>
+          <span>996 104 6096</span>
+          <span class="contact__phone-arrow">↗</span>
         </a>
+
       </div>
 
     </div>
 
-    <!-- FORMULARIO -->
-    <div class="contact__form-wrapper">
 
-      <div class="contact__form-header">
-        <span>01</span>
-        <p>DATOS DE LA CITA</p>
+    <!-- ==========================================
+         FORMULARIO
+    =========================================== -->
+
+    <div class="contact__form-area">
+
+      <div class="contact__form-heading">
+
+        <div class="contact__form-number">
+          01
+        </div>
+
+        <div>
+          <span>RESERVA</span>
+          <p>Cuéntanos cómo podemos ayudarte.</p>
+        </div>
+
       </div>
+
 
       <form
         class="contact__form"
@@ -58,7 +76,8 @@
       >
 
         <!-- NOMBRE -->
-        <div class="field">
+        <div class="field field--full">
+
           <label for="nombre">
             Nombre completo
           </label>
@@ -68,7 +87,7 @@
             type="text"
             [value]="nombre()"
             (input)="nombre.set($any($event.target).value)"
-            placeholder="Escribe tu nombre"
+            placeholder="Tu nombre"
             autocomplete="name"
           />
 
@@ -77,32 +96,46 @@
               {{ errorNombre() }}
             </span>
           }
+
         </div>
+
 
         <!-- TRATAMIENTO -->
         <div class="field">
+
           <label for="servicio">
             Tratamiento
           </label>
 
-          <div class="select-wrapper">
+          <div class="field__select">
+
             <select
               id="servicio"
               [value]="servicio()"
               (change)="servicio.set($any($event.target).value)"
             >
+
               <option value="" disabled>
-                Selecciona un tratamiento
+                Selecciona
               </option>
 
-              @for (tratamiento of tratamientos; track tratamiento.nombre) {
+              @for (
+                tratamiento of tratamientos;
+                track tratamiento.nombre
+              ) {
+
                 <option [value]="tratamiento.nombre">
                   {{ tratamiento.nombre }}
                 </option>
+
               }
+
             </select>
 
-            <span class="select-arrow">⌄</span>
+            <span class="field__arrow">
+              ↓
+            </span>
+
           </div>
 
           @if (enviado() && errorServicio()) {
@@ -116,15 +149,19 @@
               {{ tratamiento.descripcion }}
             </span>
           }
+
         </div>
+
 
         <!-- FECHA -->
         <div class="field">
+
           <label for="fecha">
             Fecha preferida
           </label>
 
-          <div class="date-wrapper">
+          <div class="field__date">
+
             <input
               id="fecha"
               type="date"
@@ -133,11 +170,10 @@
               (change)="fecha.set($any($event.target).value)"
             />
 
-            <span class="date-icon">⌕</span>
           </div>
 
           @if (fecha()) {
-            <span class="field__summary">
+            <span class="field__selected">
               {{ fechaResumen() }}
             </span>
           }
@@ -147,10 +183,13 @@
               {{ errorFecha() }}
             </span>
           }
+
         </div>
+
 
         <!-- HORA -->
         <div class="field">
+
           <label for="hora">
             Hora preferida
           </label>
@@ -167,47 +206,80 @@
               {{ errorHora() }}
             </span>
           }
+
         </div>
+
 
         <!-- RESUMEN -->
         @if (fecha() && servicio()) {
+
           <div class="appointment-summary">
 
-            <div>
+            <div class="appointment-summary__item">
+
               <span>TRATAMIENTO</span>
-              <strong>{{ servicio() }}</strong>
+
+              <strong>
+                {{ servicio() }}
+              </strong>
+
             </div>
 
-            <div>
+
+            <div class="appointment-summary__item">
+
               <span>FECHA</span>
-              <strong>{{ fechaResumen() }}</strong>
+
+              <strong>
+                {{ fechaResumen() }}
+              </strong>
+
             </div>
+
 
             @if (hora()) {
-              <div>
+
+              <div class="appointment-summary__item">
+
                 <span>HORA</span>
-                <strong>{{ hora() }}</strong>
+
+                <strong>
+                  {{ hora() }}
+                </strong>
+
               </div>
+
             }
 
           </div>
+
         }
+
 
         <!-- BOTÓN -->
         <button
           class="contact__submit"
           type="submit"
         >
-          <span>Solicitar cita por WhatsApp</span>
-          <span class="contact__submit-arrow">→</span>
+
+          <span>
+            Solicitar cita por WhatsApp
+          </span>
+
+          <span class="contact__submit-arrow">
+            →
+          </span>
+
         </button>
 
+
         <p class="contact__note">
-          La fecha y hora quedan sujetas a confirmación
-          por parte del consultorio.
+          La fecha y hora son preferencias y están
+          sujetas a confirmación del consultorio.
         </p>
 
       </form>
+
     </div>
 
   </div>
