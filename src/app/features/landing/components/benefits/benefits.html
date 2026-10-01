@@ -6,7 +6,7 @@
   <div class="benefits-container">
 
     <!-- =========================================
-         IMAGEN
+         VISUAL
     ========================================== -->
     <div class="benefits-visual">
 
@@ -14,24 +14,30 @@
 
         <div class="image-frame">
 
-          <div class="image-border"></div>
+          <div class="image-decoration"></div>
 
           <img
             src="assets/consultorio/janerdent-consultorio-real.webp"
-            alt="Consultorio dental JANER DENT"
+            alt="Interior del consultorio dental JANER DENT"
             class="benefits-image"
           />
 
-          <div class="image-caption">
+          <div class="image-overlay"></div>
 
+          <div class="image-caption">
             <span class="caption-brand">
               JANER DENT
             </span>
 
-            <span class="caption-location">
-              HECELCHAKÁN, CAMPECHE
-            </span>
+            <span class="caption-divider"></span>
 
+            <span class="caption-location">
+              HECELCHAKÁN · CAMPECHE
+            </span>
+          </div>
+
+          <div class="image-number">
+            01
           </div>
 
         </div>
@@ -42,7 +48,7 @@
 
 
     <!-- =========================================
-         CONTENIDO
+         CONTENT
     ========================================== -->
     <div class="benefits-content">
 
@@ -50,22 +56,17 @@
       <header class="benefits-header">
 
         <div class="section-label">
-
           <span class="label-line"></span>
 
           <span>
             ¿POR QUÉ ELEGIRNOS?
           </span>
-
         </div>
-
 
         <h2>
           Una experiencia
-          <br />
-          odontológica diferente.
+          <span>odontológica diferente.</span>
         </h2>
-
 
         <p class="benefits-description">
           Combinamos profesionalismo, tecnología y atención humana
@@ -76,22 +77,19 @@
 
 
       <!-- =========================================
-           BENEFICIOS
+           BENEFITS
       ========================================== -->
       <div class="benefits-list">
 
         @for (item of benefits; track item.number) {
 
-          <article
-            class="benefit-item"
-          >
+          <article class="benefit-item">
 
-            <div class="benefit-header">
+            <div class="benefit-top">
 
               <span class="benefit-number">
                 {{ item.number }}
               </span>
-
 
               <span
                 class="benefit-icon"
@@ -104,7 +102,6 @@
                   <svg
                     viewBox="0 0 32 32"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <circle
                       cx="16"
@@ -128,7 +125,6 @@
                   <svg
                     viewBox="0 0 32 32"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <rect
                       x="6"
@@ -156,11 +152,10 @@
 
                 } @else if (item.number === '03') {
 
-                  <!-- Experiencia profesional -->
+                  <!-- Experiencia -->
                   <svg
                     viewBox="0 0 32 32"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M16 27C16 27 7 21.8 7 13.5C7 9.9 9.3 7 12.5 7C14.3 7 15.5 8 16 9.5C16.5 8 17.7 7 19.5 7C22.7 7 25 9.9 25 13.5C25 21.8 16 27 16 27Z"
@@ -190,7 +185,6 @@
                   <svg
                     viewBox="0 0 32 32"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <circle
                       cx="11"
@@ -229,7 +223,6 @@
                   <svg
                     viewBox="0 0 32 32"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M16 5L19.2 11.5L26 12.5L21 17.5L22.2 24.5L16 21.2L9.8 24.5L11 17.5L6 12.5L12.8 11.5L16 5Z"
@@ -245,7 +238,6 @@
                   <svg
                     viewBox="0 0 32 32"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M16 5L24 8V14C24 19.6 20.8 24.2 16 27C11.2 24.2 8 19.6 8 14V8L16 5Z"
@@ -270,17 +262,24 @@
             </div>
 
 
-            <div class="benefit-line"></div>
+            <div class="benefit-content">
+
+              <h3>
+                {{ item.title }}
+              </h3>
+
+              <p>
+                {{ item.description }}
+              </p>
+
+            </div>
 
 
-            <h3>
-              {{ item.title }}
-            </h3>
-
-
-            <p>
-              {{ item.description }}
-            </p>
+            <div class="benefit-footer">
+              <span class="benefit-arrow">
+                ↗
+              </span>
+            </div>
 
           </article>
 
