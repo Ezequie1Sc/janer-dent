@@ -3,125 +3,106 @@
   class="location-section"
   aria-labelledby="location-title"
 >
-
-  <!-- =========================================
-       ENCABEZADO
-       SOLO ESTA PARTE ES NEGRA
-  ========================================== -->
-
+  <!-- HERO / INFORMACIÓN PRINCIPAL -->
   <header class="location-header">
+    <div class="location-header-overlay"></div>
 
-    <p class="location-eyebrow">
-      <span aria-hidden="true"></span>
-      VISÍTANOS
-      <span aria-hidden="true"></span>
-    </p>
+    <div class="location-header-content">
+      <p class="location-eyebrow">
+        <span aria-hidden="true"></span>
+        VISÍTANOS
+        <span aria-hidden="true"></span>
+      </p>
 
-    <h2 id="location-title">
-      Tu próxima sonrisa
-      <span>comienza aquí.</span>
-    </h2>
+      <h2 id="location-title">
+        Tu próxima sonrisa
+        <span>comienza aquí.</span>
+      </h2>
 
-    <p class="location-description">
-      Encuéntranos en Hecelchakán, Campeche.
-      Llámanos o escríbenos para agendar tu valoración.
-    </p>
+      <p class="location-description">
+        Encuéntranos en Hecelchakán, Campeche.
+        Llámanos o escríbenos para agendar tu valoración.
+      </p>
 
-    <div class="location-actions">
-
-      <!-- WHATSAPP -->
-      <a
-        class="location-button button-gold"
-        href="https://wa.me/529961046096"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
+      <div class="location-actions">
+        <!-- WHATSAPP -->
+        <a
+          class="location-button button-gold"
+          href="https://wa.me/529961046096"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <path
-            d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5
-               9.4 9.4 0 0 1-4-.9L3 21l1.9-5.5
-               a9.4 9.4 0 0 1-.9-4A8.5 8.5 0 0 1
-               12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"
-          ></path>
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5
+                 9.4 9.4 0 0 1-4-.9L3 21l1.9-5.5
+                 a9.4 9.4 0 0 1-.9-4A8.5 8.5 0 0 1
+                 12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"
+            ></path>
 
-          <path d="M8 11h8M8 14h5"></path>
-        </svg>
+            <path d="M8 11h8M8 14h5"></path>
+          </svg>
 
-        <span>Contáctanos</span>
+          <span>Contáctanos</span>
+        </a>
 
-      </a>
-
-
-      <!-- TELÉFONO -->
-      <a
-        class="location-button button-outline"
-        href="tel:+529961046096"
-      >
-
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
+        <!-- TELÉFONO -->
+        <a
+          class="location-button button-outline"
+          href="tel:+529961046096"
         >
-          <path
-            d="M22 16.92v3a2 2 0 0 1-2.18 2
-               19.79 19.79 0 0 1-8.63-3.07
-               19.5 19.5 0 0 1-6-6
-               19.79 19.79 0 0 1-3.07-8.67
-               A2 2 0 0 1 4.11 2h3
-               a2 2 0 0 1 2 1.72
-               c.12.96.35 1.9.69 2.79
-               a2 2 0 0 1-.45 2.11L8.09 9.89
-               a16 16 0 0 0 6 6l1.27-1.27
-               a2 2 0 0 1 2.11-.45
-               c.89.34 1.83.57 2.79.69
-               A2 2 0 0 1 22 16.92Z"
-          ></path>
-        </svg>
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2
+                 19.79 19.79 0 0 1-8.63-3.07
+                 19.5 19.5 0 0 1-6-6
+                 19.79 19.79 0 0 1-3.07-8.67
+                 A2 2 0 0 1 4.11 2h3
+                 a2 2 0 0 1 2 1.72
+                 c.12.96.35 1.9.69 2.79
+                 a2 2 0 0 1-.45 2.11L8.09 9.89
+                 a16 16 0 0 0 6 6l1.27-1.27
+                 a2 2 0 0 1 2.11-.45
+                 c.89.34 1.83.57 2.79.69
+                 A2 2 0 0 1 22 16.92Z"
+            ></path>
+          </svg>
 
-        <span>Llamar ahora</span>
+          <span>Llamar ahora</span>
+        </a>
 
-      </a>
-
-
-      <!-- GOOGLE MAPS -->
-      <a
-        class="location-button button-outline"
-        [href]="mapsUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
+        <!-- GOOGLE MAPS -->
+        <a
+          class="location-button button-outline"
+          [href]="mapsUrl"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <path d="m3 10 18-7-7 18-3-8-8-3Z"></path>
-          <path d="m11 13 10-10"></path>
-        </svg>
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="m3 10 18-7-7 18-3-8-8-3Z"></path>
+            <path d="m11 13 10-10"></path>
+          </svg>
 
-        <span>Cómo llegar</span>
-
-      </a>
-
+          <span>Cómo llegar</span>
+        </a>
+      </div>
     </div>
-
   </header>
 
-
-  <!-- =========================================
-       MAPA
-       PERMANECE FUERA DEL FONDO NEGRO
-  ========================================== -->
-
+  <!-- MAPA -->
   <div class="location-map">
-
     <iframe
       title="Ubicación del consultorio JANERDent"
       src="https://maps.google.com/maps?q=20.1705166%2C-90.1379765&ll=20.1705166%2C-90.1379765&z=17&t=m&output=embed"
@@ -131,18 +112,15 @@
       aria-hidden="true"
     ></iframe>
 
-
-    <!-- TODA LA SUPERFICIE DEL MAPA ABRE GOOGLE MAPS -->
+    <!-- Toda la superficie abre Google Maps -->
     <a
       class="location-map-link"
       [href]="mapsUrl"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Abrir la ubicación de JANERDent en Google Maps"
+      aria-label="Abrir la ubicación de JANERDent en Google Maps, en una pestaña nueva"
     >
-
       <span class="location-map-badge">
-
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
@@ -169,29 +147,17 @@
         >
           <path d="M7 17 17 7M7 7h10v10"></path>
         </svg>
-
       </span>
-
     </a>
-
   </div>
 
-
-  <!-- =========================================
-       INFORMACIÓN INFERIOR
-       ESTA PARTE PERMANECE BLANCA
-  ========================================== -->
-
+  <!-- INFORMACIÓN INFERIOR -->
   <div class="location-details">
-
     <div class="location-details-container">
-
 
       <!-- DIRECCIÓN -->
       <div class="location-detail">
-
         <div class="detail-heading">
-
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -210,15 +176,12 @@
           </svg>
 
           <h3>Encuéntranos</h3>
-
         </div>
 
-
         <address class="location-address">
-          Calle 29 s/n, San Antonio.<br>
+          Calle 29 s/n, San Antonio.<br />
           Hecelchakán, Campeche, México.
         </address>
-
 
         <a
           class="location-text-link"
@@ -226,7 +189,6 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-
           <span>Ver en Google Maps</span>
 
           <svg
@@ -236,17 +198,12 @@
           >
             <path d="M7 17 17 7M7 7h10v10"></path>
           </svg>
-
         </a>
-
       </div>
-
 
       <!-- URGENCIAS -->
       <div class="location-detail">
-
         <div class="detail-heading">
-
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -256,9 +213,7 @@
           </svg>
 
           <h3>Urgencias 24 horas</h3>
-
         </div>
-
 
         <a
           class="location-phone"
@@ -267,19 +222,14 @@
           996 104 6096
         </a>
 
-
         <p class="detail-description">
           Llámanos si tienes una emergencia dental.
         </p>
-
       </div>
-
 
       <!-- HORARIOS -->
       <div class="location-detail">
-
         <div class="detail-heading">
-
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -295,38 +245,21 @@
           </svg>
 
           <h3>Horarios de atención</h3>
-
         </div>
-
 
         <div class="location-schedules">
-
           @for (item of schedules; track item.day) {
-
             <div class="schedule">
-
-              <h4>
-                {{ item.day }}
-              </h4>
+              <h4>{{ item.day }}</h4>
 
               @for (hour of item.hours; track hour) {
-
-                <p>
-                  {{ hour }}
-                </p>
-
+                <p>{{ hour }}</p>
               }
-
             </div>
-
           }
-
         </div>
-
       </div>
 
     </div>
-
   </div>
-
 </section>
