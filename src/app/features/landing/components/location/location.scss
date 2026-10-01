@@ -1,456 +1,423 @@
-:host {
-  display: block;
-  width: 100%;
-  min-width: 0;
-
-  font-family: inherit;
-
-  --location-black: #171816;
-  --location-white: #ffffff;
-  --location-gold: #b98a3c;
-
-  --location-ink: #25241f;
-  --location-muted: #6b685f;
-  --location-line: #e8e4dc;
-  --location-dark-muted: #bdbab2;
-}
-
-
-/* =========================================
-   BASE
-========================================= */
-
-.location-section,
-.location-section *,
-.location-section *::before,
-.location-section *::after {
-  box-sizing: border-box;
-}
+/* =========================================================
+   LOCATION
+   ========================================================= */
 
 .location-section {
   width: 100%;
-  min-width: 0;
-
   background: #ffffff;
-  color: var(--location-ink);
-
-  scroll-margin-top: 80px;
+  color: #171717;
+  overflow: hidden;
 }
 
-
-/* =========================================
-   EVITAR CURSIVAS
-========================================= */
-
-.location-section em,
-.location-section i {
-  font-style: normal;
-}
-
-
-/* =========================================
-   ICONOS
-========================================= */
-
-.location-section svg {
-  display: block;
-  flex-shrink: 0;
-
-  width: 20px;
-  height: 20px;
-
-  fill: none;
-  stroke: currentColor;
-
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-
-/* =========================================
-   HEADER — NEGRO
-========================================= */
+/* =========================================================
+   HERO CON IMAGEN DE FONDO
+   ========================================================= */
 
 .location-header {
-  width: 100%;
-  max-width: none;
+  position: relative;
+  isolation: isolate;
 
-  margin: 0;
+  min-height: 620px;
 
-  padding:
-    clamp(64px, 8vw, 110px)
-    24px
-    clamp(56px, 7vw, 90px);
+  display: flex;
+  align-items: center;
 
-  text-align: center;
+  background-image: url('/assets/consultorio/janerdent-location-bg.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-  background: var(--location-black);
-  color: var(--location-white);
+  overflow: hidden;
 }
 
+/*
+  Overlay negro.
+  La imagen continúa visible, pero la sección mantiene
+  la estética oscura de JANERDent.
+*/
 
-/* =========================================
+.location-header-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 8, 8, 0.96) 0%,
+      rgba(8, 8, 8, 0.88) 42%,
+      rgba(8, 8, 8, 0.68) 72%,
+      rgba(8, 8, 8, 0.82) 100%
+    );
+}
+
+/*
+  Una segunda capa sutil para evitar que las zonas
+  claras de la fotografía dominen el contenido.
+*/
+
+.location-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      transparent 35%,
+      rgba(0, 0, 0, 0.35) 100%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
+
+.location-header-content {
+  width: min(1180px, calc(100% - 48px));
+
+  margin: 0 auto;
+
+  padding: 100px 0;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
    EYEBROW
-========================================= */
+   ========================================================= */
 
 .location-eyebrow {
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  gap: 14px;
+  gap: 12px;
 
   margin: 0 0 24px;
 
-  color: #d3ad70;
+  color: #c9a45c;
 
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.6;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
 
-  letter-spacing: 0.24em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-style: normal;
 }
 
-.location-eyebrow > span {
+.location-eyebrow span {
   width: 34px;
   height: 1px;
 
-  background: currentColor;
+  display: block;
+
+  background: #c9a45c;
 }
 
-
-/* =========================================
-   TÍTULO
-========================================= */
+/* =========================================================
+   TITLE
+   ========================================================= */
 
 .location-header h2 {
-  max-width: 900px;
+  max-width: 700px;
 
-  margin: 0 auto;
+  margin: 0;
 
   color: #ffffff;
 
-  font-family: inherit;
+  font-family:
+    'DM Sans',
+    Inter,
+    system-ui,
+    sans-serif;
 
-  font-size: clamp(38px, 5vw, 68px);
+  font-size: clamp(48px, 6vw, 78px);
+
   font-weight: 300;
 
-  line-height: 1.08;
+  line-height: 0.98;
 
   letter-spacing: -0.045em;
-
-  text-wrap: balance;
-
-  overflow-wrap: anywhere;
-
-  font-style: normal;
 }
 
-
-/* FRASE DORADA */
-
-.location-header h2 > span {
+.location-header h2 span {
   display: block;
 
-  margin-top: 2px;
+  color: #c9a45c;
 
-  color: #d3ad70;
-
-  font-style: normal;
+  font-weight: 300;
 }
 
-
-/* =========================================
-   DESCRIPCIÓN
-========================================= */
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
 
 .location-description {
-  max-width: 580px;
+  max-width: 530px;
 
-  margin: 24px auto 0;
+  margin: 28px 0 0;
 
-  color: #c5c3bd;
+  color: rgba(255, 255, 255, 0.72);
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
 
   font-size: 15px;
   font-weight: 400;
 
-  line-height: 1.8;
-
-  text-wrap: pretty;
-
-  font-style: normal;
+  line-height: 1.75;
 }
 
-
-/* =========================================
-   BOTONES
-========================================= */
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 
 .location-actions {
   display: flex;
-
   flex-wrap: wrap;
-
   align-items: center;
-  justify-content: center;
 
   gap: 12px;
 
-  margin-top: 34px;
+  margin-top: 38px;
 }
 
 .location-button {
-  display: inline-flex;
+  min-height: 50px;
 
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
   gap: 10px;
 
-  min-height: 50px;
+  padding: 0 20px;
 
-  max-width: 100%;
+  border-radius: 2px;
 
-  padding: 13px 22px;
-
-  border: 1px solid transparent;
-  border-radius: 6px;
-
-  font-family: inherit;
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
 
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
 
-  line-height: 1.5;
-
-  text-align: center;
   text-decoration: none;
 
   transition:
-    transform 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease;
-
-  font-style: normal;
+    transform 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
 }
 
+.location-button svg {
+  width: 17px;
+  height: 17px;
 
-/* BOTÓN PRINCIPAL */
+  fill: none;
+  stroke: currentColor;
 
-.location-header .button-gold {
-  background: #b98a3c;
-  border-color: #b98a3c;
+  stroke-width: 1.7;
 
-  color: #17130d;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  flex-shrink: 0;
 }
 
+.location-button:hover {
+  transform: translateY(-2px);
+}
 
-/* BOTONES SECUNDARIOS */
+/* GOLD */
 
-.location-header .button-outline {
-  background: transparent;
+.button-gold {
+  color: #111111;
+  background: #c9a45c;
 
-  border-color: #55554f;
+  border: 1px solid #c9a45c;
+}
 
+.button-gold:hover {
+  background: #d7b775;
+  border-color: #d7b775;
+
+  box-shadow:
+    0 12px 30px rgba(201, 164, 92, 0.18);
+}
+
+/* OUTLINE */
+
+.button-outline {
   color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  backdrop-filter: blur(8px);
 }
 
-.location-header .button-outline svg {
-  color: #d3ad70;
+.button-outline:hover {
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border-color: rgba(255, 255, 255, 0.55);
 }
 
-
-/* HOVER */
-
-@media (hover: hover) {
-
-  .location-header .button-gold:hover {
-    background: #cca153;
-    border-color: #cca153;
-
-    transform: translateY(-2px);
-  }
-
-  .location-header .button-outline:hover {
-    background: #242520;
-
-    border-color: #d3ad70;
-
-    color: #ffffff;
-
-    transform: translateY(-2px);
-  }
-}
-
-
-/* FOCUS */
-
-.location-section a:focus-visible {
-  outline: 3px solid var(--location-gold);
-  outline-offset: 5px;
-}
-
-
-/* =========================================
-   MAPA
-========================================= */
+/* =========================================================
+   MAP
+   ========================================================= */
 
 .location-map {
   position: relative;
-  isolation: isolate;
 
   width: 100%;
+  height: 430px;
 
-  height: clamp(360px, 43vw, 600px);
+  background: #f4f3f0;
 
-  background: #e9e7e2;
-
-  border-top: 1px solid #e8e4dc;
-  border-bottom: 3px solid var(--location-gold);
+  overflow: hidden;
 }
 
 .location-map iframe {
-  display: block;
-
   width: 100%;
   height: 100%;
 
+  display: block;
+
   border: 0;
 
-  /*
-    Evita que el usuario interactúe
-    directamente con el iframe.
-  */
-  pointer-events: none;
+  filter: grayscale(0.15);
 }
 
-
-/* =========================================
-   ENLACE DEL MAPA
-========================================= */
+/*
+  Link invisible que cubre todo el mapa.
+*/
 
 .location-map-link {
   position: absolute;
-
   inset: 0;
 
-  z-index: 1;
-
   display: flex;
-
-  align-items: flex-start;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-end;
 
   padding: 24px;
 
-  color: var(--location-ink);
-
   text-decoration: none;
 
-  cursor: pointer;
-
-  touch-action: pan-y pinch-zoom;
+  z-index: 2;
 }
 
 .location-map-badge {
   display: inline-flex;
-
   align-items: center;
-  justify-content: center;
 
-  gap: 12px;
+  gap: 10px;
 
-  max-width: 100%;
-  min-height: 48px;
+  padding: 13px 17px;
 
-  padding: 13px 20px;
+  color: #171717;
 
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.96);
 
-  border: 1px solid #e8e4dc;
-  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  border-radius: 3px;
 
   box-shadow:
-    0 4px 18px rgba(0, 0, 0, 0.1);
+    0 10px 30px rgba(0, 0, 0, 0.12);
 
-  font-family: inherit;
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
 
-  font-size: 13px;
-  font-weight: 500;
-
-  line-height: 1.5;
-
-  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
 
   transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
 
-  font-style: normal;
+.location-map-link:hover .location-map-badge {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.17);
 }
 
 .location-map-badge svg {
-  color: #947238;
+  width: 17px;
+  height: 17px;
+
+  fill: none;
+  stroke: #a9823c;
+
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.location-map-badge > span {
-  min-width: 0;
+.location-map-badge svg:last-child {
+  width: 14px;
+  height: 14px;
 }
 
-.location-map-link:focus-visible {
-  outline: 3px solid #947238;
-  outline-offset: -5px;
-}
-
-
-@media (hover: hover) {
-
-  .location-map-link:hover .location-map-badge {
-    background: #faf8f4;
-    border-color: #947238;
-
-    transform: translateY(-2px);
-  }
-}
-
-
-/* =========================================
-   INFORMACIÓN INFERIOR — BLANCA
-========================================= */
+/* =========================================================
+   DETAILS
+   ========================================================= */
 
 .location-details {
   background: #ffffff;
 
-  color: var(--location-ink);
-
-  padding:
-    clamp(40px, 5vw, 64px)
-    clamp(20px, 5vw, 72px);
+  border-top: 1px solid #e8e5df;
 }
 
 .location-details-container {
+  width: min(1180px, calc(100% - 48px));
+
+  margin: 0 auto;
+
   display: grid;
 
   grid-template-columns:
-    minmax(0, 1fr)
-    minmax(0, 1fr)
-    minmax(0, 1.25fr);
+    1.1fr
+    0.8fr
+    1.2fr;
 
-  width: 100%;
-  max-width: 1280px;
-
-  margin-inline: auto;
+  gap: 0;
 }
 
-.location-detail {
-  min-width: 0;
+/* =========================================================
+   DETAIL
+   ========================================================= */
 
-  padding-inline: clamp(20px, 3vw, 40px);
+.location-detail {
+  min-height: 240px;
+
+  padding: 48px 42px;
+
+  border-right: 1px solid #e8e5df;
 }
 
 .location-detail:first-child {
@@ -458,408 +425,397 @@
 }
 
 .location-detail:last-child {
+  border-right: 0;
+
   padding-right: 0;
 }
 
-.location-detail + .location-detail {
-  border-left: 1px solid var(--location-line);
-}
-
-
-/* =========================================
-   ENCABEZADOS
-========================================= */
-
 .detail-heading {
   display: flex;
-
   align-items: center;
 
-  gap: 11px;
+  gap: 12px;
 
   margin-bottom: 20px;
 }
 
 .detail-heading svg {
-  color: #947238;
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+
+  fill: none;
+  stroke: #a9823c;
+
+  stroke-width: 1.6;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .detail-heading h3 {
   margin: 0;
 
-  color: var(--location-ink);
+  color: #171717;
 
-  font-family: inherit;
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
 
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 13px;
 
-  line-height: 1.6;
+  font-weight: 650;
 
-  letter-spacing: 0.12em;
-
-  text-transform: uppercase;
-
-  font-style: normal;
+  letter-spacing: -0.01em;
 }
 
-
-/* =========================================
-   DIRECCIÓN
-========================================= */
+/* =========================================================
+   ADDRESS
+   ========================================================= */
 
 .location-address {
   margin: 0;
 
-  color: var(--location-muted);
+  color: #5f5d58;
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
 
   font-size: 14px;
 
   font-style: normal;
 
-  line-height: 1.85;
+  line-height: 1.8;
 }
 
 .location-text-link {
   display: inline-flex;
-
   align-items: center;
 
-  gap: 8px;
+  gap: 7px;
 
-  margin-top: 16px;
+  margin-top: 18px;
 
-  color: #846126;
+  color: #a9823c;
 
-  font-size: 13px;
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
 
-  line-height: 1.6;
-
-  text-decoration: underline;
-  text-underline-offset: 4px;
-
-  transition: color 180ms ease;
-
-  font-style: normal;
-}
-
-.location-text-link svg {
-  width: 16px;
-  height: 16px;
-}
-
-
-/* =========================================
-   TELÉFONO
-========================================= */
-
-.location-phone {
-  display: inline-block;
-
-  max-width: 100%;
-
-  color: var(--location-ink);
-
-  font-family: inherit;
-
-  font-size: clamp(24px, 2.3vw, 32px);
-
-  font-weight: 300;
-
-  line-height: 1.3;
-
-  letter-spacing: -0.035em;
+  font-size: 12px;
+  font-weight: 600;
 
   text-decoration: none;
 
   transition: color 180ms ease;
+}
 
-  font-style: normal;
+.location-text-link:hover {
+  color: #806225;
+}
+
+.location-text-link svg {
+  width: 13px;
+  height: 13px;
+
+  fill: none;
+  stroke: currentColor;
+
+  stroke-width: 1.6;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =========================================================
+   PHONE
+   ========================================================= */
+
+.location-phone {
+  display: inline-block;
+
+  margin: 0;
+
+  color: #171717;
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
+
+  font-size: 24px;
+
+  font-weight: 500;
+
+  letter-spacing: -0.03em;
+
+  text-decoration: none;
+
+  transition: color 180ms ease;
+}
+
+.location-phone:hover {
+  color: #a9823c;
 }
 
 .detail-description {
-  max-width: 29ch;
+  max-width: 230px;
 
   margin: 12px 0 0;
 
-  color: var(--location-muted);
+  color: #77746e;
 
-  font-size: 13px;
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
 
-  line-height: 1.75;
+  font-size: 12px;
 
-  font-style: normal;
+  line-height: 1.7;
 }
 
-
-/* =========================================
-   HORARIOS
-========================================= */
+/* =========================================================
+   SCHEDULES
+   ========================================================= */
 
 .location-schedules {
   display: grid;
 
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  gap: 20px;
-}
-
-.schedule {
-  min-width: 0;
+  gap: 24px;
 }
 
 .schedule h4 {
   margin: 0 0 8px;
 
-  color: var(--location-ink);
+  color: #171717;
 
-  font-family: inherit;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  line-height: 1.5;
-
-  font-style: normal;
-}
-
-.schedule p {
-  margin: 4px 0 0;
-
-  color: var(--location-muted);
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
 
   font-size: 12px;
 
-  line-height: 1.7;
-
-  font-style: normal;
+  font-weight: 650;
 }
 
+.schedule p {
+  margin: 3px 0;
 
-/* =========================================
-   HOVER LINKS BLANCOS
-========================================= */
+  color: #77746e;
 
-@media (hover: hover) {
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
 
-  .location-text-link:hover {
-    color: var(--location-ink);
-  }
+  font-size: 11px;
 
-  .location-phone:hover {
-    color: #846126;
-  }
+  line-height: 1.6;
 }
 
-
-/* =========================================
+/* =========================================================
    TABLET
-========================================= */
+   ========================================================= */
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
+  .location-header {
+    min-height: 560px;
+
+    background-position:
+      62% center;
+  }
+
+  .location-header-content {
+    width: min(100% - 40px, 700px);
+
+    padding: 85px 0;
+  }
+
+  .location-header h2 {
+    max-width: 620px;
+
+    font-size: clamp(46px, 8vw, 66px);
+  }
 
   .location-details-container {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr 1fr;
+  }
 
-    row-gap: 30px;
+  .location-detail {
+    min-height: 220px;
+
+    padding: 40px 28px;
+
+    border-bottom: 1px solid #e8e5df;
+  }
+
+  .location-detail:first-child {
+    padding-left: 0;
   }
 
   .location-detail:nth-child(2) {
+    border-right: 0;
+
     padding-right: 0;
   }
 
   .location-detail:last-child {
     grid-column: 1 / -1;
 
-    padding:
-      28px 0 0;
+    padding-left: 0;
+    padding-right: 0;
 
-    border-left: 0;
-
-    border-top: 1px solid var(--location-line);
-  }
-
-  .location-schedules {
-    max-width: 520px;
-
-    gap: 32px;
+    border-bottom: 0;
   }
 }
 
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-/* =========================================
-   MÓVIL
-========================================= */
+@media (max-width: 640px) {
+  .location-header {
+    min-height: auto;
 
-@media (max-width: 600px) {
-
-  .location-section {
-    scroll-margin-top: 72px;
+    background-position:
+      68% center;
   }
 
+  .location-header-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(8, 8, 8, 0.94) 0%,
+        rgba(8, 8, 8, 0.88) 100%
+      );
+  }
 
-  /* HEADER NEGRO */
+  .location-header-content {
+    width: calc(100% - 36px);
 
-  .location-header {
-    padding:
-      52px
-      20px
-      48px;
+    padding: 75px 0 70px;
   }
 
   .location-eyebrow {
     margin-bottom: 20px;
 
-    font-size: 9px;
+    font-size: 10px;
 
-    gap: 10px;
+    letter-spacing: 0.18em;
   }
 
-  .location-eyebrow > span {
+  .location-eyebrow span {
     width: 24px;
   }
 
   .location-header h2 {
-    font-size:
-      clamp(34px, 9vw, 46px);
+    font-size: clamp(42px, 12vw, 56px);
 
-    line-height: 1.08;
+    line-height: 0.98;
+
+    letter-spacing: -0.04em;
   }
 
   .location-description {
-    margin-top: 20px;
+    max-width: 100%;
+
+    margin-top: 24px;
 
     font-size: 14px;
 
-    line-height: 1.75;
+    line-height: 1.7;
   }
-
-
-  /* BOTONES */
 
   .location-actions {
     display: grid;
 
-    grid-template-columns:
-      minmax(0, 1fr);
+    grid-template-columns: 1fr;
 
-    gap: 10px;
+    gap: 9px;
 
-    width: 100%;
-    max-width: 360px;
-
-    margin: 28px auto 0;
+    margin-top: 30px;
   }
 
   .location-button {
     width: 100%;
 
-    min-height: 50px;
+    min-height: 52px;
   }
 
-
-  /* MAPA */
-
   .location-map {
-    height: 360px;
+    height: 350px;
   }
 
   .location-map-link {
-    padding: 16px;
+    padding: 14px;
   }
 
   .location-map-badge {
-    gap: 9px;
+    width: 100%;
 
-    padding: 12px 15px;
+    justify-content: center;
 
-    font-size: 12px;
-  }
+    padding: 13px 12px;
 
-
-  /* INFORMACIÓN */
-
-  .location-details {
-    padding:
-      36px
-      24px
-      44px;
+    font-size: 11px;
   }
 
   .location-details-container {
-    grid-template-columns:
-      minmax(0, 1fr);
+    width: calc(100% - 36px);
 
-    gap: 0;
+    display: block;
   }
 
   .location-detail,
   .location-detail:first-child,
-  .location-detail:nth-child(2),
   .location-detail:last-child {
-    grid-column: auto;
+    min-height: auto;
 
-    padding:
-      28px 0;
+    padding: 36px 0;
 
-    border: 0;
-  }
+    border-right: 0;
 
-  .location-detail:first-child {
-    padding-top: 0;
+    border-bottom: 1px solid #e8e5df;
   }
 
   .location-detail:last-child {
-    padding-bottom: 0;
+    border-bottom: 0;
   }
 
-  .location-detail + .location-detail {
-    border-top: 1px solid var(--location-line);
-  }
+  .location-schedules {
+    grid-template-columns: 1fr 1fr;
 
-  .detail-heading {
-    margin-bottom: 16px;
+    gap: 20px;
   }
 
   .location-phone {
-    font-size: 30px;
-  }
-
-  .location-schedules {
-    gap: 18px;
+    font-size: 22px;
   }
 }
 
-
-/* =========================================
-   PANTALLAS MUY PEQUEÑAS
-========================================= */
-
-@media (max-width: 360px) {
-
-  .location-details {
-    padding-inline: 20px;
-  }
-
-  .location-schedules {
-    grid-template-columns:
-      minmax(0, 1fr);
-  }
-}
-
-
-/* =========================================
-   ACCESIBILIDAD
-========================================= */
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+  .location-button,
+  .location-map-badge,
+  .location-text-link,
+  .location-phone {
+    transition: none;
+  }
 
-  .location-section *,
-  .location-section *::before,
-  .location-section *::after {
-    scroll-behavior: auto;
-    transition: none !important;
+  .location-button:hover,
+  .location-map-link:hover .location-map-badge {
+    transform: none;
   }
 }

@@ -8,10 +8,16 @@ import { Component } from '@angular/core';
   styleUrl: './location.scss',
 })
 export class Location {
-
+  /**
+   * URL oficial de Google Maps utilizado
+   * por todos los enlaces relacionados con la ubicación.
+   */
   readonly mapsUrl =
     'https://maps.app.goo.gl/aaNKGFfPPodFR98n6';
 
+  /**
+   * Horarios de atención del consultorio.
+   */
   readonly schedules = [
     {
       day: 'Lunes a viernes',
