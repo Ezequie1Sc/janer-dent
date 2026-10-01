@@ -3,28 +3,34 @@
   class="location-section"
   aria-labelledby="location-title"
 >
-  <!-- HERO / INFORMACIÓN PRINCIPAL -->
+  <!-- HERO / UBICACIÓN -->
   <header class="location-header">
     <div class="location-header-overlay"></div>
 
     <div class="location-header-content">
+
+      <!-- EYEBROW -->
       <p class="location-eyebrow">
         <span aria-hidden="true"></span>
         VISÍTANOS
         <span aria-hidden="true"></span>
       </p>
 
+      <!-- TÍTULO -->
       <h2 id="location-title">
         Tu próxima sonrisa
         <span>comienza aquí.</span>
       </h2>
 
+      <!-- DESCRIPCIÓN -->
       <p class="location-description">
         Encuéntranos en Hecelchakán, Campeche.
         Llámanos o escríbenos para agendar tu valoración.
       </p>
 
+      <!-- ACCIONES -->
       <div class="location-actions">
+
         <!-- WHATSAPP -->
         <a
           class="location-button button-gold"
@@ -97,12 +103,14 @@
 
           <span>Cómo llegar</span>
         </a>
+
       </div>
     </div>
   </header>
 
   <!-- MAPA -->
   <div class="location-map">
+
     <iframe
       title="Ubicación del consultorio JANERDent"
       src="https://maps.google.com/maps?q=20.1705166%2C-90.1379765&ll=20.1705166%2C-90.1379765&z=17&t=m&output=embed"
@@ -112,7 +120,6 @@
       aria-hidden="true"
     ></iframe>
 
-    <!-- Toda la superficie abre Google Maps -->
     <a
       class="location-map-link"
       [href]="mapsUrl"
@@ -121,6 +128,7 @@
       aria-label="Abrir la ubicación de JANERDent en Google Maps, en una pestaña nueva"
     >
       <span class="location-map-badge">
+
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
@@ -147,17 +155,21 @@
         >
           <path d="M7 17 17 7M7 7h10v10"></path>
         </svg>
+
       </span>
     </a>
   </div>
 
-  <!-- INFORMACIÓN INFERIOR -->
+  <!-- INFORMACIÓN -->
   <div class="location-details">
+
     <div class="location-details-container">
 
       <!-- DIRECCIÓN -->
       <div class="location-detail">
+
         <div class="detail-heading">
+
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -176,6 +188,7 @@
           </svg>
 
           <h3>Encuéntranos</h3>
+
         </div>
 
         <address class="location-address">
@@ -199,11 +212,14 @@
             <path d="M7 17 17 7M7 7h10v10"></path>
           </svg>
         </a>
+
       </div>
 
       <!-- URGENCIAS -->
       <div class="location-detail">
+
         <div class="detail-heading">
+
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -213,6 +229,7 @@
           </svg>
 
           <h3>Urgencias 24 horas</h3>
+
         </div>
 
         <a
@@ -225,11 +242,14 @@
         <p class="detail-description">
           Llámanos si tienes una emergencia dental.
         </p>
+
       </div>
 
       <!-- HORARIOS -->
       <div class="location-detail">
+
         <div class="detail-heading">
+
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -245,21 +265,30 @@
           </svg>
 
           <h3>Horarios de atención</h3>
+
         </div>
 
         <div class="location-schedules">
+
           @for (item of schedules; track item.day) {
+
             <div class="schedule">
+
               <h4>{{ item.day }}</h4>
 
               @for (hour of item.hours; track hour) {
                 <p>{{ hour }}</p>
               }
+
             </div>
+
           }
+
         </div>
+
       </div>
 
     </div>
   </div>
+
 </section>
