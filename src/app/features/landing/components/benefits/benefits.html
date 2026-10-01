@@ -1,84 +1,55 @@
 <section
   id="beneficios"
   class="benefits-section"
-  #benefitsSection
   aria-labelledby="benefits-title"
 >
   <div class="benefits-container">
 
     <!-- =========================================
-         PARTE SUPERIOR
+         ENCABEZADO
     ========================================== -->
+    <header class="benefits-header">
 
-    <div class="benefits-hero">
+      <div class="section-label">
+        <span class="label-line"></span>
 
-      <!-- COLUMNA IZQUIERDA -->
-      <div class="benefits-heading">
+        <span>POR QUÉ ELEGIRNOS</span>
 
-        <div class="section-label">
-          <span class="label-line"></span>
-          <span>POR QUÉ ELEGIRNOS</span>
-          <span class="label-line"></span>
-        </div>
+        <span class="label-line"></span>
+      </div>
+
+    </header>
+
+
+    <!-- =========================================
+         BLOQUE PRINCIPAL
+    ========================================== -->
+    <div class="benefits-intro">
+
+      <!-- TEXTO -->
+      <div class="intro-content">
 
         <h2 id="benefits-title">
-          Una experiencia
-          <br>
-          odontológica
-          <br>
-          <span>diferente.</span>
+          Cuidado en
+          <span>cada detalle.</span>
         </h2>
 
-        <div class="heading-decoration"></div>
+        <p>
+          Tu bienestar y confianza son nuestra prioridad.
+          Por eso, te ofrecemos una atención odontológica
+          completa, profesional y humana.
+        </p>
 
       </div>
 
 
       <!-- IMAGEN -->
-      <div class="benefits-visual">
+      <div class="intro-image">
 
-        <div class="visual-image">
-
-          <img
-            src="assets/consultorio/janerdent-consultorio-real.webp"
-            alt="Interior del consultorio dental JANER DENT"
-          />
-
-          <div class="visual-overlay"></div>
-
-          <span class="visual-label">
-            JANER
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <!-- TEXTO LATERAL -->
-      <div class="benefits-aside">
-
-        <span class="aside-line"></span>
-
-        <p>
-          Cada detalle de nuestro espacio está pensado para
-          que te sientas cómodo desde el primer momento.
-        </p>
-
-        <a
-          href="#contacto"
-          class="aside-link"
-        >
-          Conoce nuestra atención
-
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M5 12h13"></path>
-            <path d="m13 6 6 6-6 6"></path>
-          </svg>
-        </a>
+        <img
+          src="assets/consultorio/janerdent-consultorio-real.webp"
+          alt="Interior del consultorio dental JANER DENT"
+        />
 
       </div>
 
@@ -86,30 +57,26 @@
 
 
     <!-- =========================================
+         DIVISOR
+    ========================================== -->
+    <div class="section-divider"></div>
+
+
+    <!-- =========================================
          BENEFICIOS
     ========================================== -->
-
     <div class="benefits-grid">
 
       @for (item of benefits; track item.number) {
 
-        <article
-          class="benefit-item"
-          [attr.data-number]="item.number"
-        >
+        <article class="benefit-item">
 
-          <div class="benefit-header">
-
-            <span class="benefit-number">
-              {{ item.number }}
-            </span>
-
-            <span class="benefit-line"></span>
-
+          <div class="benefit-number">
+            {{ item.number }}
           </div>
 
 
-          <div class="benefit-content">
+          <div class="benefit-info">
 
             <h3>
               {{ item.title }}
