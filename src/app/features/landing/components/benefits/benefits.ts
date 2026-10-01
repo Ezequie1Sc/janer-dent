@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnDestroy,
-  ViewChild
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-benefits',
@@ -13,40 +7,35 @@ import {
   templateUrl: './benefits.html',
   styleUrl: './benefits.scss'
 })
-export class Benefits implements AfterViewInit, OnDestroy {
-
-  @ViewChild('benefitsSection')
-  benefitsSection?: ElementRef<HTMLElement>;
-
+export class Benefits {
 
   readonly benefits = [
-
     {
       number: '01',
       title: 'Atención personalizada',
       description:
-        'Cada tratamiento es diseñado pensando en las necesidades de cada paciente.'
+        'Cada tratamiento es diseñado pensando en las necesidades y objetivos de cada paciente.'
     },
 
     {
       number: '02',
       title: 'Tecnología avanzada',
       description:
-        'Utilizamos herramientas y técnicas actuales para ofrecer mejores resultados.'
+        'Herramientas actuales para ofrecer diagnósticos precisos y tratamientos efectivos.'
     },
 
     {
       number: '03',
       title: 'Experiencia profesional',
       description:
-        'Conocimiento y preparación para brindar tratamientos seguros y de calidad.'
+        'Equipo capacitado y en constante actualización para brindarte una atención de calidad.'
     },
 
     {
       number: '04',
       title: 'Trato humano',
       description:
-        'Creamos un ambiente cómodo basado en confianza, respeto y cercanía.'
+        'Un ambiente cómodo y cercano basado en confianza, respeto y atención personalizada.'
     },
 
     {
@@ -60,88 +49,8 @@ export class Benefits implements AfterViewInit, OnDestroy {
       number: '06',
       title: 'Seguridad',
       description:
-        'Procesos profesionales enfocados en el bienestar de cada paciente.'
+        'Protocolos profesionales de higiene y esterilización para proteger tu bienestar.'
     }
-
   ];
-
-
-  private observer?: IntersectionObserver;
-
-
-  ngAfterViewInit(): void {
-
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    if (typeof IntersectionObserver === 'undefined') {
-      return;
-    }
-
-    this.setupScrollAnimation();
-
-  }
-
-
-  private setupScrollAnimation(): void {
-
-    const section =
-      this.benefitsSection?.nativeElement;
-
-    if (!section) {
-      return;
-    }
-
-
-    const items =
-      section.querySelectorAll<HTMLElement>(
-        '.benefit-card'
-      );
-
-    if (!items.length) {
-      return;
-    }
-
-
-    this.observer =
-      new IntersectionObserver(
-        (entries) => {
-
-          entries.forEach((entry) => {
-
-            if (!entry.isIntersecting) {
-              return;
-            }
-
-            const element =
-              entry.target as HTMLElement;
-
-            element.classList.add('is-visible');
-
-            this.observer?.unobserve(element);
-
-          });
-
-        },
-        {
-          threshold: 0.12,
-          rootMargin: '0px 0px -50px 0px'
-        }
-      );
-
-
-    items.forEach((item) => {
-      this.observer?.observe(item);
-    });
-
-  }
-
-
-  ngOnDestroy(): void {
-
-    this.observer?.disconnect();
-
-  }
 
 }
