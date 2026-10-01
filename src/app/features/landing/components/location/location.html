@@ -3,32 +3,30 @@
   class="location-section"
   aria-labelledby="location-title"
 >
-  <!-- HERO / UBICACIÓN -->
-  <header class="location-header">
-    <div class="location-header-overlay"></div>
+  <!-- CAPA DE FONDO -->
+  <div class="location-background" aria-hidden="true"></div>
 
-    <div class="location-header-content">
+  <!-- CONTENIDO CENTRADO -->
+  <div class="location-content">
 
-      <!-- EYEBROW -->
+    <header class="location-header">
+
       <p class="location-eyebrow">
         <span aria-hidden="true"></span>
         VISÍTANOS
         <span aria-hidden="true"></span>
       </p>
 
-      <!-- TÍTULO -->
       <h2 id="location-title">
         Tu próxima sonrisa
         <span>comienza aquí.</span>
       </h2>
 
-      <!-- DESCRIPCIÓN -->
       <p class="location-description">
-        Encuéntranos en Hecelchakán, Campeche.
-        Llámanos o escríbenos para agendar tu valoración.
+        Encuéntranos en Hecelchakán, Campeche. Llámanos o escríbenos para
+        agendar tu valoración.
       </p>
 
-      <!-- ACCIONES -->
       <div class="location-actions">
 
         <!-- WHATSAPP -->
@@ -105,190 +103,8 @@
         </a>
 
       </div>
-    </div>
-  </header>
 
-  <!-- MAPA -->
-  <div class="location-map">
+    </header>
 
-    <iframe
-      title="Ubicación del consultorio JANERDent"
-      src="https://maps.google.com/maps?q=20.1705166%2C-90.1379765&ll=20.1705166%2C-90.1379765&z=17&t=m&output=embed"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      tabindex="-1"
-      aria-hidden="true"
-    ></iframe>
-
-    <a
-      class="location-map-link"
-      [href]="mapsUrl"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Abrir la ubicación de JANERDent en Google Maps, en una pestaña nueva"
-    >
-      <span class="location-map-badge">
-
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            d="M20 10c0 6-8 11-8 11S4 16 4 10
-               a8 8 0 1 1 16 0Z"
-          ></path>
-
-          <circle
-            cx="12"
-            cy="10"
-            r="2.5"
-          ></circle>
-        </svg>
-
-        <span>Ver ubicación en Google Maps</span>
-
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path d="M7 17 17 7M7 7h10v10"></path>
-        </svg>
-
-      </span>
-    </a>
   </div>
-
-  <!-- INFORMACIÓN -->
-  <div class="location-details">
-
-    <div class="location-details-container">
-
-      <!-- DIRECCIÓN -->
-      <div class="location-detail">
-
-        <div class="detail-heading">
-
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M20 10c0 6-8 11-8 11S4 16 4 10
-                 a8 8 0 1 1 16 0Z"
-            ></path>
-
-            <circle
-              cx="12"
-              cy="10"
-              r="2.5"
-            ></circle>
-          </svg>
-
-          <h3>Encuéntranos</h3>
-
-        </div>
-
-        <address class="location-address">
-          Calle 29 s/n, San Antonio.<br />
-          Hecelchakán, Campeche, México.
-        </address>
-
-        <a
-          class="location-text-link"
-          [href]="mapsUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>Ver en Google Maps</span>
-
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M7 17 17 7M7 7h10v10"></path>
-          </svg>
-        </a>
-
-      </div>
-
-      <!-- URGENCIAS -->
-      <div class="location-detail">
-
-        <div class="detail-heading">
-
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M12 3v18M3 12h18"></path>
-          </svg>
-
-          <h3>Urgencias 24 horas</h3>
-
-        </div>
-
-        <a
-          class="location-phone"
-          href="tel:+529961046096"
-        >
-          996 104 6096
-        </a>
-
-        <p class="detail-description">
-          Llámanos si tienes una emergencia dental.
-        </p>
-
-      </div>
-
-      <!-- HORARIOS -->
-      <div class="location-detail">
-
-        <div class="detail-heading">
-
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="9"
-            ></circle>
-
-            <path d="M12 7v5l3 2"></path>
-          </svg>
-
-          <h3>Horarios de atención</h3>
-
-        </div>
-
-        <div class="location-schedules">
-
-          @for (item of schedules; track item.day) {
-
-            <div class="schedule">
-
-              <h4>{{ item.day }}</h4>
-
-              @for (hour of item.hours; track hour) {
-                <p>{{ hour }}</p>
-              }
-
-            </div>
-
-          }
-
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
 </section>
