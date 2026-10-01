@@ -36,7 +36,6 @@ export class Contact {
 
   readonly whatsapp = '529961046096';
 
-  // Hecelchakán utiliza la zona horaria de Campeche/Yucatán.
   private readonly zonaHoraria = 'America/Merida';
 
   readonly visible = signal(false);
@@ -55,15 +54,18 @@ export class Contact {
   readonly tratamientos: readonly Tratamiento[] = [
     {
       nombre: 'Limpieza dental',
-      descripcion: 'Eliminamos placa y sarro para cuidar tu sonrisa.',
+      descripcion:
+        'Eliminamos placa y sarro para cuidar la salud de tu sonrisa.',
     },
     {
       nombre: 'Resinas dentales',
-      descripcion: 'Recuperamos la apariencia natural de tus dientes.',
+      descripcion:
+        'Recuperamos la apariencia natural de tus dientes.',
     },
     {
       nombre: 'Blanqueamiento dental',
-      descripcion: 'Un tono más luminoso para tu sonrisa.',
+      descripcion:
+        'Una sonrisa más luminosa mediante un tratamiento profesional.',
     },
     {
       nombre: 'Tratamientos de conductos',
@@ -77,7 +79,8 @@ export class Contact {
     },
     {
       nombre: 'Prótesis dentales',
-      descripcion: 'Comodidad y confianza al volver a sonreír.',
+      descripcion:
+        'Comodidad y confianza para volver a sonreír.',
     },
   ];
 
@@ -160,7 +163,6 @@ export class Contact {
   });
 
   constructor() {
-    // Se ejecuta únicamente después del renderizado en el navegador.
     afterNextRender(() => {
       this.actualizarReloj();
 
@@ -222,7 +224,9 @@ export class Contact {
       return;
     }
 
-    const nombre = this.nombre().trim().replace(/\s+/g, ' ');
+    const nombre = this.nombre()
+      .trim()
+      .replace(/\s+/g, ' ');
 
     const mensaje = [
       'Hola, JANERDent. Quisiera solicitar una cita.',
@@ -240,7 +244,6 @@ export class Contact {
       `https://wa.me/${this.whatsapp}` +
       `?text=${encodeURIComponent(mensaje)}`;
 
-    // Navegación directa para evitar bloqueos de ventanas emergentes.
     if (typeof window !== 'undefined') {
       window.location.assign(enlace);
     }
