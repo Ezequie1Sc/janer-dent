@@ -6,7 +6,7 @@ El proyecto presenta de forma clara y moderna los servicios odontológicos del c
 
 ## Sobre el proyecto
 
-JANERDent es una landing page desarrollada para ofrecer a los pacientes una experiencia sencilla, moderna y adaptable a cualquier dispositivo.
+JANERDent es una landing page desarrollada para ofrecer a los pacientes una experiencia sencilla, moderna y adaptable.
 
 El sitio permite conocer:
 
