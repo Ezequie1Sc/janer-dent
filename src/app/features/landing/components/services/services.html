@@ -1,95 +1,110 @@
 <section
   id="servicios"
-  class="services-section"
+  class="services"
   aria-labelledby="services-title"
 >
-  <div class="services-container">
+  <div class="services__container">
+    <div class="services__intro">
+      <header class="services__header">
+        <p class="services__eyebrow">
+          <span aria-hidden="true"></span>
+          NUESTROS SERVICIOS
+        </p>
 
-    <header class="services-header">
-      <p class="services-eyebrow">
-        <span aria-hidden="true"></span>
-        NUESTROS SERVICIOS
-      </p>
+        <h2 id="services-title" class="services__title">
+          El cuidado que
+          <span>tu sonrisa merece.</span>
+        </h2>
 
-      <h2 id="services-title" class="services-title">
-        El cuidado que
-        <span>tu sonrisa merece.</span>
-      </h2>
+        <p class="services__description">
+          Cada sonrisa tiene necesidades distintas.
+          Encuentra una atención pensada para ti.
+        </p>
+      </header>
 
-      <p class="services-description">
-        Tratamientos para cuidar tu salud bucal con
-        atención profesional y personalizada.
-      </p>
-    </header>
-
-    <div
-      class="tooth-stage"
-      role="img"
-      aria-label="Diente cerámico con órbitas doradas"
-    >
-      <div class="tooth-motion">
-        <img
-          class="tooth-frame"
-          src="/assets/touch/01-tooth-front.webp"
-          alt=""
-          width="512"
-          height="512"
-          loading="eager"
-          decoding="async"
-          draggable="false"
-        >
+      <div class="services__visual" aria-hidden="true">
+        <div class="services__tooth-motion">
+          <img
+            class="services__tooth"
+            src="/assets/services/01-tooth-front.webp"
+            alt=""
+            width="512"
+            height="512"
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          />
+        </div>
       </div>
     </div>
 
-    <div class="service-list">
-      @for (service of services; track service.number) {
-        <article
-          class="service-item"
-          [attr.aria-labelledby]="'service-title-' + service.number"
-        >
-          <div class="service-heading">
-            <span class="service-number" aria-hidden="true">
-              {{ service.number }}
-            </span>
+    <div class="services__catalog">
+      <div class="services__catalog-heading">
+        <span>ATENCIÓN PERSONALIZADA</span>
+        <span>01 — 08</span>
+      </div>
 
-            <span class="service-icon" aria-hidden="true">
-              <svg
-                viewBox="0 0 32 32"
-                fill="none"
-                focusable="false"
-              >
-                @for (path of service.paths; track $index) {
-                  <path [attr.d]="path"></path>
-                }
-              </svg>
-            </span>
-          </div>
+      <ol class="services__list">
+        @for (service of services; track service.number) {
+          <li class="service">
+            <a
+              class="service__link"
+              href="#contacto"
+              [attr.aria-labelledby]="
+                'service-title-' + service.number +
+                ' service-action-' + service.number
+              "
+              [attr.aria-describedby]="
+                'service-description-' + service.number
+              "
+            >
+              <span class="service__number" aria-hidden="true">
+                {{ service.number }}
+              </span>
 
-          <div class="service-copy">
-            <h3 [id]="'service-title-' + service.number">
-              {{ service.name }}
-            </h3>
+              <div class="service__copy">
+                <p class="service__category">
+                  {{ service.category }}
+                </p>
 
-            <p>{{ service.description }}</p>
-          </div>
-        </article>
-      }
+                <h3
+                  class="service__title"
+                  [id]="'service-title-' + service.number"
+                >
+                  {{ service.name }}
+                </h3>
+
+                <p
+                  class="service__description"
+                  [id]="'service-description-' + service.number"
+                >
+                  {{ service.description }}
+                </p>
+
+                <span
+                  class="service__action"
+                  [id]="'service-action-' + service.number"
+                >
+                  Agendar cita
+                </span>
+              </div>
+
+              <span class="service__arrow" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  focusable="false"
+                >
+                  <path d="M7 17 17 7M7 7h10v10" />
+                </svg>
+              </span>
+            </a>
+          </li>
+        }
+      </ol>
     </div>
-
-    <footer class="services-footer">
-      <a class="services-cta" href="#contacto">
-        <span>Agenda una valoración</span>
-
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path d="M5 12h14m-6-6 6 6-6 6"></path>
-        </svg>
-      </a>
-    </footer>
-
   </div>
 </section>
