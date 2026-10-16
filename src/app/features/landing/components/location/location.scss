@@ -1,87 +1,71 @@
+:host {
+  display: block;
+}
+
+/* SECCIÓN SUPERIOR CON FOTOGRAFÍA Y FILTRO OSCURO */
+
 .location-section {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-
-  min-height: 680px;
-  padding: 110px 24px 0;
-
+  min-height: 590px;
+  padding: 100px 24px 90px;
   background: #0d0d0d;
-  color: #ffffff;
+  color: #fff;
 }
 
-/* =========================================
-   FONDO
-   ========================================= */
-
-.location-section::before {
-  content: '';
+.location-background {
   position: absolute;
-  inset: 0;
   z-index: -2;
-
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.48) 0%,
-      rgba(0, 0, 0, 0.30) 45%,
-      rgba(0, 0, 0, 0.18) 100%
-    ),
-    url('/assets/consultorio/janerdent-location-bg.webp');
-
+  inset: 0;
+  background-image: url('/assets/consultorio/janerdent-location-bg.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   transform: scale(1.02);
 }
 
-/* Sutil oscurecimiento inferior para conectar con el mapa */
-.location-section::after {
-  content: '';
+.location-background::after {
   position: absolute;
   inset: 0;
-  z-index: -1;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.05) 0%,
-    rgba(0, 0, 0, 0.02) 55%,
-    rgba(0, 0, 0, 0.45) 100%
-  );
-
-  pointer-events: none;
+  content: '';
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.58) 50%,
+      rgba(0, 0, 0, 0.48) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.42) 100%
+    );
 }
 
-/* =========================================
-   ENCABEZADO / CONTENIDO
-   ========================================= */
+.location-content {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
 
 .location-header {
   width: min(900px, 100%);
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   text-align: center;
 }
-
-/* =========================================
-   EYEBROW
-   ========================================= */
 
 .location-eyebrow {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
-
   margin: 0 0 28px;
-
   color: #cda654;
-
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -91,24 +75,15 @@
 
 .location-eyebrow span {
   display: block;
-
   width: 34px;
   height: 1px;
-
   background: #cda654;
 }
 
-/* =========================================
-   TÍTULO
-   ========================================= */
-
 .location-header h2 {
   max-width: 850px;
-
   margin: 0;
-
-  color: #ffffff;
-
+  color: #fff;
   font-size: clamp(3rem, 6vw, 5.8rem);
   font-weight: 300;
   line-height: 0.98;
@@ -117,31 +92,17 @@
 
 .location-header h2 span {
   display: block;
-
   color: #cda654;
-
   font-weight: 300;
 }
 
-/* =========================================
-   DESCRIPCIÓN
-   ========================================= */
-
 .location-description {
   max-width: 620px;
-
-  margin: 30px auto 0;
-
-  color: rgba(255, 255, 255, 0.78);
-
+  margin: 28px auto 0;
+  color: rgba(255, 255, 255, 0.82);
   font-size: 15px;
-  font-weight: 400;
   line-height: 1.8;
 }
-
-/* =========================================
-   BOTONES
-   ========================================= */
 
 .location-actions {
   display: flex;
@@ -149,270 +110,122 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
-
-  margin-top: 34px;
+  margin-top: 32px;
 }
 
 .location-button {
   display: inline-flex;
+  min-height: 50px;
   align-items: center;
   justify-content: center;
   gap: 10px;
-
-  min-height: 50px;
   padding: 0 22px;
-
-  border: 1px solid rgba(255, 255, 255, 0.28);
-
-  color: #ffffff;
-  background: rgba(10, 10, 10, 0.35);
-
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(12, 12, 12, 0.38);
+  color: #fff;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
-
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-
   transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease,
-    transform 0.3s ease;
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .location-button svg {
   width: 17px;
   height: 17px;
-
+  flex: 0 0 auto;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
-
-  flex-shrink: 0;
 }
 
 .location-button:hover {
   transform: translateY(-2px);
-
   border-color: #cda654;
-
-  background: rgba(205, 166, 84, 0.12);
-
-  color: #ffffff;
+  background: rgba(205, 166, 84, 0.16);
 }
 
 .button-gold {
   border-color: #cda654;
-
   background: #cda654;
-
-  color: #111111;
+  color: #111;
 }
 
 .button-gold:hover {
   border-color: #dfba70;
-
   background: #dfba70;
-
-  color: #111111;
+  color: #111;
 }
 
-/* =========================================
-   MAPA
-   ========================================= */
+/* MAPA ANCHO DEBAJO DEL BLOQUE SUPERIOR */
 
-.location-map {
-  position: relative;
-
+.map-section {
   width: 100%;
-  max-width: 1200px;
-
-  height: 420px;
-
-  margin: 90px auto 0;
-
-  overflow: hidden;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0;
+  background: #cda654;
 }
 
-.location-map iframe {
-  display: block;
+.map-frame {
+  position: relative;
+  width: 100%;
+  height: clamp(360px, 42vw, 560px);
+  overflow: hidden;
+  background: #f1f1ef;
+  isolation: isolate;
+}
 
+.map-frame iframe {
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
-
   border: 0;
-
-  filter: grayscale(0.25) contrast(0.95);
+  filter: grayscale(1) saturate(0) contrast(0.96) brightness(1.08);
+  pointer-events: none;
 }
 
-/* =========================================
-   ENLACE SOBRE EL MAPA
-   ========================================= */
-
-.location-map-link {
+/* El mapa queda fijo; tocarlo abre Google Maps con la ruta compartida */
+.map-click-layer {
   position: absolute;
-  right: 24px;
-  bottom: 24px;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 12px 16px;
-
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
-  background: rgba(15, 15, 15, 0.88);
-
-  color: #ffffff;
-
-  font-size: 12px;
-  font-weight: 500;
-  text-decoration: none;
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  transition:
-    background 0.3s ease,
-    border-color 0.3s ease;
+  z-index: 1;
+  inset: 0;
+  cursor: pointer;
 }
 
-.location-map-link:hover {
-  border-color: #cda654;
-
-  background: rgba(205, 166, 84, 0.95);
-
-  color: #111111;
-}
-
-.location-map-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.location-map-badge svg {
-  width: 16px;
-  height: 16px;
-
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* =========================================
-   INFORMACIÓN INFERIOR
-   ========================================= */
-
-.location-details {
-  background: #ffffff;
-
-  color: #171717;
-}
-
-.location-details-container {
-  width: min(1200px, calc(100% - 48px));
-
-  margin: 0 auto;
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  border-left: 1px solid #e7e4dd;
-  border-right: 1px solid #e7e4dd;
-}
-
-.location-detail {
-  min-height: 230px;
-
-  padding: 42px 36px;
-
-  border-right: 1px solid #e7e4dd;
-}
-
-.location-detail:last-child {
-  border-right: 0;
-}
-
-/* =========================================
-   TÍTULOS DE DETALLE
-   ========================================= */
-
-.detail-heading {
+.map-location-label {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  margin-bottom: 22px;
+  gap: 11px;
+  padding: 11px 16px 11px 11px;
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
 }
 
-.detail-heading svg {
-  width: 19px;
-  height: 19px;
-
-  fill: none;
-  stroke: #b88d3b;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-
-  flex-shrink: 0;
+.map-pin {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: #f7f3e9;
+  color: #a17a35;
 }
 
-.detail-heading h3 {
-  margin: 0;
-
-  color: #1b1b1b;
-
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-}
-
-/* =========================================
-   DIRECCIÓN
-   ========================================= */
-
-.location-address {
-  margin: 0 0 18px;
-
-  color: #555555;
-
-  font-size: 14px;
-  font-style: normal;
-  line-height: 1.7;
-}
-
-.location-text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-
-  color: #a77b2d;
-
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-
-  transition: color 0.25s ease;
-}
-
-.location-text-link:hover {
-  color: #76571e;
-}
-
-.location-text-link svg {
-  width: 14px;
-  height: 14px;
-
+.map-pin svg {
+  width: 20px;
+  height: 20px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.6;
@@ -420,119 +233,114 @@
   stroke-linejoin: round;
 }
 
-/* =========================================
-   TELÉFONO
-   ========================================= */
-
-.location-phone {
-  display: inline-block;
-
-  margin-bottom: 10px;
-
-  color: #171717;
-
-  font-size: 25px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-
-  transition: color 0.25s ease;
+.map-location-label strong,
+.map-location-label small {
+  display: block;
 }
 
-.location-phone:hover {
-  color: #b88d3b;
-}
-
-.detail-description {
-  max-width: 250px;
-
-  margin: 0;
-
-  color: #777777;
-
+.map-location-label strong {
+  color: #1d1d1d;
   font-size: 12px;
-  line-height: 1.7;
+  letter-spacing: 0.06em;
 }
 
-/* =========================================
-   HORARIOS
-   ========================================= */
-
-.location-schedules {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+.map-location-label small {
+  margin-top: 3px;
+  color: #777;
+  font-size: 11px;
 }
 
-.schedule h4 {
-  margin: 0 0 10px;
-
-  color: #222222;
-
+.map-open-button {
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+  bottom: 20px;
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 17px;
+  background: #171717;
+  color: #fff;
   font-size: 12px;
   font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
-.schedule p {
-  margin: 4px 0;
-
-  color: #666666;
-
-  font-size: 12px;
-  line-height: 1.6;
+.map-open-button:hover {
+  transform: translateY(-2px);
+  background: #a17a35;
 }
 
-/* =========================================
-   RESPONSIVE — TABLET
-   ========================================= */
+.map-open-button svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-@media (max-width: 900px) {
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
   .location-section {
     min-height: auto;
-    padding-top: 90px;
+    padding: 82px 20px 76px;
   }
 
   .location-header h2 {
-    font-size: clamp(3rem, 9vw, 5rem);
+    font-size: clamp(2.7rem, 12vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
   }
 
-  .location-map {
-    height: 360px;
-    margin-top: 70px;
+  .location-description {
+    margin-top: 22px;
+    font-size: 14px;
+    line-height: 1.7;
   }
 
-  .location-details-container {
-    grid-template-columns: 1fr;
+  .location-actions {
+    width: 100%;
+    flex-direction: column;
   }
 
-  .location-detail {
-    min-height: auto;
-
-    border-right: 0;
-    border-bottom: 1px solid #e7e4dd;
+  .location-button {
+    width: 100%;
   }
 
-  .location-detail:last-child {
-    border-bottom: 0;
+  .map-frame {
+    height: 380px;
+  }
+
+  .map-location-label {
+    top: 14px;
+    left: 14px;
+    gap: 9px;
+    padding: 9px 12px 9px 9px;
+  }
+
+  .map-pin {
+    width: 34px;
+    height: 34px;
+  }
+
+  .map-open-button {
+    right: 14px;
+    bottom: 14px;
+    min-height: 42px;
+    padding: 0 13px;
   }
 }
 
-/* =========================================
-   RESPONSIVE — MÓVIL
-   ========================================= */
-
-@media (max-width: 600px) {
-  .location-section {
-    padding: 80px 20px 0;
-  }
-
-  .location-section::before {
-    background-position: 62% center;
-  }
-
+@media (max-width: 420px) {
   .location-eyebrow {
-    margin-bottom: 22px;
-
     font-size: 10px;
     letter-spacing: 0.18em;
   }
@@ -541,67 +349,14 @@
     width: 24px;
   }
 
-  .location-header h2 {
-    font-size: clamp(2.7rem, 13vw, 4rem);
-    line-height: 1;
-    letter-spacing: -0.04em;
-  }
-
-  .location-description {
-    margin-top: 24px;
-
-    font-size: 14px;
-    line-height: 1.7;
-  }
-
-  .location-actions {
-    width: 100%;
-    margin-top: 28px;
-
-    flex-direction: column;
-  }
-
-  .location-button {
-    width: 100%;
-  }
-
-  .location-map {
-    height: 300px;
-    margin-top: 60px;
-  }
-
-  .location-map-link {
-    right: 14px;
-    bottom: 14px;
-
-    padding: 10px 12px;
-
-    font-size: 11px;
-  }
-
-  .location-details-container {
-    width: calc(100% - 32px);
-  }
-
-  .location-detail {
-    padding: 34px 24px;
-  }
-
-  .location-schedules {
-    grid-template-columns: 1fr;
-    gap: 18px;
+  .map-frame {
+    height: 330px;
   }
 }
 
-/* =========================================
-   REDUCCIÓN DE MOVIMIENTO
-   ========================================= */
-
 @media (prefers-reduced-motion: reduce) {
   .location-button,
-  .location-map-link,
-  .location-text-link,
-  .location-phone {
+  .map-open-button {
     transition: none;
   }
 }

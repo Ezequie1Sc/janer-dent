@@ -1,16 +1,13 @@
+<!-- Bloque superior: imagen de fondo con filtro oscuro -->
 <section
   id="ubicacion"
   class="location-section"
   aria-labelledby="location-title"
 >
-  <!-- CAPA DE FONDO -->
   <div class="location-background" aria-hidden="true"></div>
 
-  <!-- CONTENIDO CENTRADO -->
   <div class="location-content">
-
     <header class="location-header">
-
       <p class="location-eyebrow">
         <span aria-hidden="true"></span>
         VISÍTANOS
@@ -28,83 +25,95 @@
       </p>
 
       <div class="location-actions">
-
-        <!-- WHATSAPP -->
         <a
           class="location-button button-gold"
           href="https://wa.me/529961046096"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path
-              d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5
-                 9.4 9.4 0 0 1-4-.9L3 21l1.9-5.5
-                 a9.4 9.4 0 0 1-.9-4A8.5 8.5 0 0 1
-                 12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"
+              d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9.4 9.4 0 0 1-4-.9L3 21l1.9-5.5a9.4 9.4 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3H13a8.5 8.5 0 0 1 8 8v.5Z"
             ></path>
-
             <path d="M8 11h8M8 14h5"></path>
           </svg>
-
           <span>Contáctanos</span>
         </a>
 
-        <!-- TELÉFONO -->
-        <a
-          class="location-button button-outline"
-          href="tel:+529961046096"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
+        <a class="location-button button-outline" href="tel:+529961046096">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path
-              d="M22 16.92v3a2 2 0 0 1-2.18 2
-                 19.79 19.79 0 0 1-8.63-3.07
-                 19.5 19.5 0 0 1-6-6
-                 19.79 19.79 0 0 1-3.07-8.67
-                 A2 2 0 0 1 4.11 2h3
-                 a2 2 0 0 1 2 1.72
-                 c.12.96.35 1.9.69 2.79
-                 a2 2 0 0 1-.45 2.11L8.09 9.89
-                 a16 16 0 0 0 6 6l1.27-1.27
-                 a2 2 0 0 1 2.11-.45
-                 c.89.34 1.83.57 2.79.69
-                 A2 2 0 0 1 22 16.92Z"
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.35 1.9.69 2.79a2 2 0 0 1-.45 2.11L8.09 9.89a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.89.34 1.83.57 2.79.69A2 2 0 0 1 22 16.92Z"
             ></path>
           </svg>
-
           <span>Llamar ahora</span>
         </a>
 
-        <!-- GOOGLE MAPS -->
         <a
           class="location-button button-outline"
           [href]="mapsUrl"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            focusable="false"
-          >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="m3 10 18-7-7 18-3-8-8-3Z"></path>
             <path d="m11 13 10-10"></path>
           </svg>
-
           <span>Cómo llegar</span>
         </a>
-
       </div>
-
     </header>
+  </div>
+</section>
 
+<!-- El mapa va inmediatamente debajo, sin encabezado ni texto adicional -->
+<section class="map-section" aria-label="Mapa de ubicación de JANER DENT">
+  <div class="map-frame">
+    <iframe
+      [src]="mapEmbedUrl"
+      title="Ubicación de JANER DENT en Hecelchakán, Campeche"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      tabindex="-1"
+      aria-hidden="true"
+    ></iframe>
+
+    <!-- Impide mover el mapa; al hacer clic lleva a la ruta compartida -->
+    <a
+      class="map-click-layer"
+      [href]="mapsUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Abrir la ruta de JANER DENT en Google Maps"
+    ></a>
+
+    <div class="map-location-label" aria-hidden="true">
+      <span class="map-pin">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          ></path>
+          <circle cx="12" cy="10" r="2.5"></circle>
+        </svg>
+      </span>
+
+      <span>
+        <strong>JANER DENT</strong>
+        <small>Hecelchakán, Campeche</small>
+      </span>
+    </div>
+
+    <a
+      class="map-open-button"
+      [href]="mapsUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="m3 10 18-7-7 18-3-8-8-3Z"></path>
+        <path d="m11 13 10-10"></path>
+      </svg>
+      <span>Cómo llegar</span>
+    </a>
   </div>
 </section>
