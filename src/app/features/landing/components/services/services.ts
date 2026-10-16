@@ -10,6 +10,13 @@ import {
 
 import { isPlatformBrowser } from '@angular/common';
 
+interface DentalService {
+  number: string;
+  name: string;
+  category: string;
+  description: string;
+}
+
 @Component({
   selector: 'app-services',
   standalone: true,
@@ -25,11 +32,11 @@ export class Services implements OnDestroy {
   private rows: HTMLElement[] = [];
 
   private readonly framePaths = [
-    '/assets/touch/01-tooth-front.webp',
-    '/assets/touch/02-tooth-left.webp',
-    '/assets/touch/03-tooth-top.webp',
-    '/assets/touch/04-tooth-right.webp',
-    '/assets/touch/05-tooth-front-loop.webp',
+    '/assets/services/01-tooth-front.webp',
+    '/assets/services/02-tooth-left.webp',
+    '/assets/services/03-tooth-top.webp',
+    '/assets/services/04-tooth-right.webp',
+    '/assets/services/05-tooth-front-loop.webp',
   ];
 
   private readonly frameImages: HTMLImageElement[] = [];
@@ -44,64 +51,62 @@ export class Services implements OnDestroy {
   private initialized = false;
   private destroyed = false;
 
-  readonly services = [
+  readonly services: readonly DentalService[] = [
     {
       number: '01',
       name: 'Limpieza dental',
+      category: 'Prevención',
       description:
-        'Eliminamos placa y sarro para cuidar tu sonrisa.',
-      paths: [
-        'M6 22 20 8m-2-2 8 8M4 25l3 3 4-4M23 18v5m-2.5-2.5h5M8 6v4M6 8h4',
-      ],
+        'Eliminación de placa y sarro para mantener tus dientes y encías limpios, como parte del cuidado de tu salud bucal.',
     },
     {
       number: '02',
       name: 'Resinas dentales',
+      category: 'Restauración',
       description:
-        'Recuperamos la apariencia natural de tus dientes.',
-      paths: [
-        'M16 8c-3-2-8-2-10 2-2 4 1 8 2 12 1 4 2 5 4 5 2 0 2-6 4-6s2 6 4 6c2 0 3-1 4-5 1-4 4-8 2-12-2-4-7-4-10-2Z',
-        'm16 9-3 4 3 3 3-3-3-4Z',
-      ],
+        'Restauraciones del color del diente para reparar zonas dañadas y recuperar su forma y apariencia natural.',
     },
     {
       number: '03',
       name: 'Blanqueamiento dental',
+      category: 'Estética dental',
       description:
-        'Un tono más luminoso para tu sonrisa.',
-      paths: [
-        'M15 9c-3-2-7-2-9 2-2 4 1 8 2 12 1 4 2 5 4 5 2 0 2-6 4-6s2 6 4 6c2 0 3-1 4-5 1-4 4-8 2-12-2-4-6-4-9-2',
-        'M23 3v7M19.5 6.5h7M27 13v4m-2-2h4',
-      ],
+        'Un tratamiento para aclarar el tono de tus dientes, con un plan definido según las características de tu sonrisa.',
     },
     {
       number: '04',
-      name: 'Tratamientos de conductos',
+      name: 'Endodoncia',
+      category: 'Conservación dental',
       description:
-        'Atención profesional para conservar tus piezas dentales.',
-      paths: [
-        'M16 7c-3-2-8-2-10 2-2 4 1 8 2 12 1 4 2 5 4 5 2 0 2-6 4-6s2 6 4 6c2 0 3-1 4-5 1-4 4-8 2-12-2-4-7-4-10-2Z',
-        'M16 10v7m-4-4 4 4 4-4m-4 4v8',
-      ],
+        'Tratamiento del interior del diente cuando la pulpa está afectada, con el objetivo de conservar la pieza dental.',
     },
     {
       number: '05',
-      name: 'Implantes dentales',
+      name: 'Prostodoncia Total',
+      category: 'Rehabilitación oral',
       description:
-        'Recupera función y estética con un plan personalizado.',
-      paths: [
-        'M8 5h16v4c0 4-3 6-8 6s-8-2-8-6V5Zm4 10v11l4 4 4-4V15M11 19h10m-10 4h10m-8 4h6',
-      ],
+        'Prótesis completas para reemplazar los dientes de una arcada y ayudar a recuperar la función y apariencia de tu sonrisa.',
     },
     {
       number: '06',
-      name: 'Prótesis dentales',
+      name: 'Prótesis fijas y removibles',
+      category: 'Rehabilitación oral',
       description:
-        'Comodidad y confianza al volver a sonreír.',
-      paths: [
-        'M3 12c4-3 8-3 13-1 5-2 9-2 13 1l-2 8c-1 4-3 5-5 5-2 0-2-5-6-5s-4 5-6 5c-2 0-4-1-5-5l-2-8Z',
-        'M10 11v10m6-10v9m6-9v10',
-      ],
+        'Opciones para reemplazar dientes ausentes, seleccionadas de acuerdo con tus necesidades y las condiciones de tu boca.',
+    },
+    {
+      number: '07',
+      name: 'Extracción dental',
+      category: 'Atención dental',
+      description:
+        'Retiro de una pieza dental cuando está indicado, con valoración previa e indicaciones para los cuidados posteriores.',
+    },
+    {
+      number: '08',
+      name: 'Incrustaciones dentales',
+      category: 'Restauración',
+      description:
+        'Restauraciones elaboradas a medida para reparar parte de un diente y recuperar su forma y función.',
     },
   ];
 
@@ -123,10 +128,6 @@ export class Services implements OnDestroy {
     });
   }
 
-  /* =====================================================
-     INICIALIZACIÓN
-  ===================================================== */
-
   private initialize(): void {
     if (
       this.initialized ||
@@ -139,39 +140,46 @@ export class Services implements OnDestroy {
     const root = this.host.nativeElement;
 
     this.section =
-      root.querySelector<HTMLElement>('.services-section');
+      root.querySelector<HTMLElement>('.services');
 
     this.toothStage =
-      root.querySelector<HTMLElement>('.tooth-stage');
+      root.querySelector<HTMLElement>('.services__visual');
 
     this.toothImage =
-      root.querySelector<HTMLImageElement>('.tooth-frame');
+      root.querySelector<HTMLImageElement>('.services__tooth');
 
     this.rows = Array.from(
-      root.querySelectorAll<HTMLElement>('.service-item'),
+      root.querySelectorAll<HTMLElement>('.service')
     );
 
     if (
       !this.section ||
       !this.toothStage ||
       !this.toothImage ||
-      this.rows.length === 0
+      !this.rows.length
     ) {
       console.error(
-        '[JANERDent Services] No se encontraron los elementos de la sección.',
+        '[Services] No se encontraron los elementos de la animación.',
+        {
+          section: !!this.section,
+          toothStage: !!this.toothStage,
+          toothImage: !!this.toothImage,
+          services: this.rows.length,
+        }
       );
 
       return;
     }
 
     this.motionQuery = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
+      '(prefers-reduced-motion: reduce)'
     );
 
     this.initialized = true;
 
     window.addEventListener('scroll', this.requestRender, {
       passive: true,
+      capture: true,
     });
 
     window.addEventListener('resize', this.requestRender, {
@@ -180,23 +188,23 @@ export class Services implements OnDestroy {
 
     this.motionQuery.addEventListener(
       'change',
-      this.requestRender,
+      this.requestRender
     );
 
-    this.resizeObserver = new ResizeObserver(() => {
-      this.requestRender();
-    });
+    if (typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(
+        this.requestRender
+      );
 
-    this.resizeObserver.observe(this.section);
-    this.resizeObserver.observe(this.toothStage);
+      this.resizeObserver.observe(this.section);
+      this.resizeObserver.observe(this.toothStage);
+    }
 
     this.preloadFrames();
     this.render();
   }
 
-  /* =====================================================
-     PRECARGA DE LOS CINCO ÁNGULOS
-  ===================================================== */
+  /* PRECARGA DE LOS CINCO ÁNGULOS */
 
   private preloadFrames(): void {
     this.framePaths.forEach((path) => {
@@ -208,15 +216,20 @@ export class Services implements OnDestroy {
         this.requestRender();
       };
 
-      image.src = path;
+      image.onerror = () => {
+        if (!this.destroyed) {
+          console.error(
+            `[Services] No se pudo cargar el fotograma: ${path}`
+          );
+        }
+      };
 
       this.frameImages.push(image);
+      image.src = path;
     });
   }
 
-  /* =====================================================
-     ACTUALIZACIÓN SIN SATURAR EL SCROLL
-  ===================================================== */
+  /* UNA ACTUALIZACIÓN POR FOTOGRAMA DEL NAVEGADOR */
 
   private readonly requestRender = (): void => {
     if (
@@ -236,16 +249,14 @@ export class Services implements OnDestroy {
     });
   };
 
-  /* =====================================================
-     PROGRESO DURANTE TODA LA LISTA
-  ===================================================== */
+  /* PROGRESO DEL SCROLL */
 
   private render(): void {
     if (
       this.destroyed ||
       !this.section ||
       !this.toothStage ||
-      this.rows.length === 0
+      !this.rows.length
     ) {
       return;
     }
@@ -256,9 +267,7 @@ export class Services implements OnDestroy {
     }
 
     const viewportHeight = window.innerHeight;
-
-    const sectionRect =
-      this.section.getBoundingClientRect();
+    const sectionRect = this.section.getBoundingClientRect();
 
     if (
       sectionRect.bottom < 0 ||
@@ -267,9 +276,8 @@ export class Services implements OnDestroy {
       return;
     }
 
-    // Primero leemos las posiciones; después escribimos estilos.
     const rowRects = this.rows.map((row) =>
-      row.getBoundingClientRect(),
+      row.getBoundingClientRect()
     );
 
     const firstRow = rowRects[0];
@@ -281,32 +289,23 @@ export class Services implements OnDestroy {
     const lastCenter =
       lastRow.top + lastRow.height / 2;
 
-    /*
-     * Primer servicio entrando: primer ángulo.
-     * Último servicio en lectura: último ángulo.
-     *
-     * El cálculo usa la lista, porque el diente
-     * permanece sticky y su posición deja de cambiar.
-     */
     const startLine = viewportHeight * 0.8;
     const endLine = viewportHeight * 0.55;
 
     const scrollDistance = Math.max(
       1,
-      lastCenter - firstCenter + startLine - endLine,
+      lastCenter - firstCenter + startLine - endLine
     );
 
     const toothProgress = this.clamp(
-      (startLine - firstCenter) / scrollDistance,
+      (startLine - firstCenter) / scrollDistance
     );
 
     this.updateTooth(toothProgress);
     this.updateRows(rowRects, viewportHeight);
   }
 
-  /* =====================================================
-     MOVIMIENTO Y CAMBIO DE ÁNGULO DEL DIENTE
-  ===================================================== */
+  /* MOVIMIENTO ORIGINAL DEL DIENTE */
 
   private updateTooth(progress: number): void {
     if (!this.section) {
@@ -320,16 +319,16 @@ export class Services implements OnDestroy {
 
     this.section.style.setProperty(
       '--tooth-y',
-      `${y.toFixed(2)}px`,
+      `${y.toFixed(2)}px`
     );
 
     this.section.style.setProperty(
       '--tooth-rotation',
-      `${rotation.toFixed(2)}deg`,
+      `${rotation.toFixed(2)}deg`
     );
 
     const frameIndex = Math.round(
-      progress * (this.framePaths.length - 1),
+      progress * (this.framePaths.length - 1)
     );
 
     this.showFrame(frameIndex);
@@ -345,10 +344,6 @@ export class Services implements OnDestroy {
 
     const frame = this.frameImages[index];
 
-    /*
-     * Conserva el último frame válido si el siguiente
-     * todavía no ha cargado o el archivo ha fallado.
-     */
     if (
       !frame ||
       !frame.complete ||
@@ -361,13 +356,11 @@ export class Services implements OnDestroy {
     this.currentFrame = index;
   }
 
-  /* =====================================================
-     ENTRADA Y ÉNFASIS DE LOS SERVICIOS
-  ===================================================== */
+  /* ENTRADA Y ÉNFASIS DE SERVICIOS */
 
   private updateRows(
     rects: DOMRect[],
-    viewportHeight: number,
+    viewportHeight: number
   ): void {
     const focusLine = viewportHeight * 0.52;
 
@@ -380,7 +373,7 @@ export class Services implements OnDestroy {
         rect.top < viewportHeight;
 
       const distance = Math.abs(
-        rect.top + rect.height / 2 - focusLine,
+        rect.top + rect.height / 2 - focusLine
       );
 
       if (visible && distance < closestDistance) {
@@ -390,19 +383,19 @@ export class Services implements OnDestroy {
 
       const progress = this.clamp(
         (viewportHeight * 0.92 - rect.top) /
-        Math.max(1, viewportHeight * 0.38),
+          Math.max(1, viewportHeight * 0.38)
       );
 
       const eased = this.smoothStep(progress);
 
       this.rows[index].style.setProperty(
         '--row-y',
-        `${(16 * (1 - eased)).toFixed(2)}px`,
+        `${(16 * (1 - eased)).toFixed(2)}px`
       );
 
       this.rows[index].style.setProperty(
         '--row-progress',
-        eased.toFixed(4),
+        eased.toFixed(4)
       );
     });
 
@@ -412,22 +405,20 @@ export class Services implements OnDestroy {
       this.rows.forEach((row, index) => {
         row.classList.toggle(
           'is-active',
-          index === closestIndex,
+          index === closestIndex
         );
       });
     }
   }
 
-  /* =====================================================
-     MOVIMIENTO REDUCIDO
-  ===================================================== */
+  /* ACCESIBILIDAD */
 
   private renderReducedMotion(): void {
     this.section?.style.setProperty('--tooth-y', '0px');
 
     this.section?.style.setProperty(
       '--tooth-rotation',
-      '0deg',
+      '0deg'
     );
 
     this.rows.forEach((row) => {
@@ -440,10 +431,6 @@ export class Services implements OnDestroy {
     this.showFrame(0);
   }
 
-  /* =====================================================
-     UTILIDADES
-  ===================================================== */
-
   private clamp(value: number): number {
     return Math.max(0, Math.min(1, value));
   }
@@ -452,9 +439,7 @@ export class Services implements OnDestroy {
     return value * value * (3 - 2 * value);
   }
 
-  /* =====================================================
-     LIMPIEZA
-  ===================================================== */
+  /* LIMPIEZA */
 
   ngOnDestroy(): void {
     this.destroyed = true;
@@ -466,16 +451,17 @@ export class Services implements OnDestroy {
     window.removeEventListener(
       'scroll',
       this.requestRender,
+      true
     );
 
     window.removeEventListener(
       'resize',
-      this.requestRender,
+      this.requestRender
     );
 
     this.motionQuery?.removeEventListener(
       'change',
-      this.requestRender,
+      this.requestRender
     );
 
     this.resizeObserver?.disconnect();
@@ -487,6 +473,7 @@ export class Services implements OnDestroy {
 
     this.frameImages.forEach((image) => {
       image.onload = null;
+      image.onerror = null;
     });
   }
 }
