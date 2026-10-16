@@ -2,285 +2,286 @@
   #contactSection
   class="contact"
   [class.is-visible]="visible()"
+  aria-labelledby="contact-title"
 >
   <div class="contact__container">
-
-    <!-- ==========================================
-         ENCABEZADO / MENSAJE
-    =========================================== -->
-
     <div class="contact__intro">
-
       <div class="contact__eyebrow">
-        <span></span>
+        <span aria-hidden="true"></span>
         AGENDA TU CITA
       </div>
 
-      <h2 class="contact__title">
-        Una sonrisa que
-        <em>vale la pena</em>
-        cuidar.
+      <h2 id="contact-title" class="contact__title">
+        Una sonrisa que vale la pena cuidar.
       </h2>
 
       <p class="contact__description">
-        Elige el tratamiento y la fecha que prefieras.
-        Déjanos tus datos y nos pondremos en contacto
-        para confirmar tu cita.
+        Estamos aquí para cuidar de ti y de tu sonrisa.
+        Cuéntanos qué necesitas y demos juntos el siguiente paso.
       </p>
 
-      <div class="contact__direct">
+      <a
+        class="contact__phone"
+        href="https://wa.me/529961046096"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contactar por WhatsApp al 996 104 6096"
+      >
+        <span>996 104 6096</span>
 
-        <span class="contact__direct-label">
-          ¿Prefieres agendar directamente?
-        </span>
-
-        <a
-          class="contact__phone"
-          href="https://wa.me/529961046096"
-          target="_blank"
-          rel="noopener noreferrer"
+        <svg
+          class="contact__phone-arrow"
+          xmlns="http://www.w3.org/2000/svg"
+          width="26"
+          height="26"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
         >
-          <span>996 104 6096</span>
-          <span class="contact__phone-arrow">↗</span>
-        </a>
+          <path d="M7 17 17 7M7 7h10v10" />
+        </svg>
+      </a>
 
+      <div class="contact__signature">
+        <span
+          class="contact__signature-line"
+          aria-hidden="true"
+        ></span>
+
+        <p>
+          Cuidamos tu sonrisa.<br />
+          Cuidamos de ti.
+        </p>
       </div>
-
     </div>
 
-
-    <!-- ==========================================
-         FORMULARIO
-    =========================================== -->
-
     <div class="contact__form-area">
-
-      <div class="contact__form-heading">
-
-        <div class="contact__form-number">
-          01
+      <header class="contact__form-heading">
+        <div class="contact__logo-area">
+          <img
+            class="contact__logo"
+            src="/assets/logo/janerdent-logo-light.svg"
+            alt="JANERDent"
+            width="200"
+            height="80"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
-        <div>
-          <span>RESERVA</span>
-          <p>Cuéntanos cómo podemos ayudarte.</p>
+        <div class="contact__form-intro">
+          <h3>Tu próxima sonrisa comienza aquí.</h3>
+          <p>Completa tus datos para solicitar una cita.</p>
         </div>
-
-      </div>
-
+      </header>
 
       <form
         class="contact__form"
         (ngSubmit)="solicitarCita()"
         novalidate
       >
-
-        <!-- NOMBRE -->
         <div class="field field--full">
-
-          <label for="nombre">
-            Nombre completo
-          </label>
+          <label for="nombre">Nombre completo</label>
 
           <input
             id="nombre"
+            name="nombre"
             type="text"
+            placeholder="Tu nombre completo"
+            autocomplete="name"
+            maxlength="80"
+            required
             [value]="nombre()"
             (input)="nombre.set($any($event.target).value)"
-            placeholder="Tu nombre"
-            autocomplete="name"
+            [attr.aria-invalid]="enviado() && !!errorNombre()"
+            [attr.aria-describedby]="
+              enviado() && errorNombre() ? 'nombre-error' : null
+            "
           />
 
           @if (enviado() && errorNombre()) {
-            <span class="field__error">
+            <span
+              id="nombre-error"
+              class="field__error"
+              role="alert"
+            >
               {{ errorNombre() }}
             </span>
           }
-
         </div>
 
-
-        <!-- TRATAMIENTO -->
-        <div class="field">
-
-          <label for="servicio">
-            Tratamiento
-          </label>
+        <div class="field field--full">
+          <label for="servicio">Tratamiento</label>
 
           <div class="field__select">
-
             <select
               id="servicio"
+              name="servicio"
+              required
               [value]="servicio()"
               (change)="servicio.set($any($event.target).value)"
+              [attr.aria-invalid]="enviado() && !!errorServicio()"
+              [attr.aria-describedby]="
+                enviado() && errorServicio()
+                  ? 'servicio-error'
+                  : tratamientoSeleccionado()
+                    ? 'servicio-hint'
+                    : null
+              "
             >
-
               <option value="" disabled>
-                Selecciona
+                Selecciona un tratamiento
               </option>
 
               @for (
                 tratamiento of tratamientos;
                 track tratamiento.nombre
               ) {
-
                 <option [value]="tratamiento.nombre">
                   {{ tratamiento.nombre }}
                 </option>
-
               }
-
             </select>
 
-            <span class="field__arrow">
-              ↓
-            </span>
-
+            <svg
+              class="field__arrow"
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
           </div>
 
           @if (enviado() && errorServicio()) {
-            <span class="field__error">
+            <span
+              id="servicio-error"
+              class="field__error"
+              role="alert"
+            >
               {{ errorServicio() }}
             </span>
           }
 
           @if (tratamientoSeleccionado(); as tratamiento) {
-            <span class="field__hint">
+            <span id="servicio-hint" class="field__hint">
               {{ tratamiento.descripcion }}
             </span>
           }
-
         </div>
 
-
-        <!-- FECHA -->
         <div class="field">
+          <label for="fecha">Fecha preferida</label>
 
-          <label for="fecha">
-            Fecha preferida
-          </label>
-
-          <div class="field__date">
-
-            <input
-              id="fecha"
-              type="date"
-              [value]="fecha()"
-              [min]="reloj().fecha"
-              (change)="fecha.set($any($event.target).value)"
-            />
-
-          </div>
-
-          @if (fecha()) {
-            <span class="field__selected">
-              {{ fechaResumen() }}
-            </span>
-          }
+          <input
+            id="fecha"
+            name="fecha"
+            type="date"
+            required
+            [value]="fecha()"
+            [min]="reloj().fecha"
+            (change)="fecha.set($any($event.target).value)"
+            [attr.aria-invalid]="enviado() && !!errorFecha()"
+            [attr.aria-describedby]="
+              enviado() && errorFecha() ? 'fecha-error' : null
+            "
+          />
 
           @if (enviado() && errorFecha()) {
-            <span class="field__error">
+            <span
+              id="fecha-error"
+              class="field__error"
+              role="alert"
+            >
               {{ errorFecha() }}
             </span>
           }
-
         </div>
 
-
-        <!-- HORA -->
         <div class="field">
-
-          <label for="hora">
-            Hora preferida
-          </label>
+          <label for="hora">Hora preferida</label>
 
           <input
             id="hora"
+            name="hora"
             type="time"
+            required
             [value]="hora()"
             (change)="hora.set($any($event.target).value)"
+            [attr.aria-invalid]="enviado() && !!errorHora()"
+            [attr.aria-describedby]="
+              enviado() && errorHora() ? 'hora-error' : null
+            "
           />
 
           @if (enviado() && errorHora()) {
-            <span class="field__error">
+            <span
+              id="hora-error"
+              class="field__error"
+              role="alert"
+            >
               {{ errorHora() }}
             </span>
           }
-
         </div>
 
-
-        <!-- RESUMEN -->
         @if (fecha() && servicio()) {
+          <div class="appointment-summary" aria-live="polite">
+            <span class="appointment-summary__label">
+              TU SOLICITUD
+            </span>
 
-          <div class="appointment-summary">
+            <strong>{{ servicio() }}</strong>
 
-            <div class="appointment-summary__item">
+            <div class="appointment-summary__details">
+              <span>{{ fechaResumen() }}</span>
 
-              <span>TRATAMIENTO</span>
-
-              <strong>
-                {{ servicio() }}
-              </strong>
-
+              @if (hora()) {
+                <span>{{ hora() }} h</span>
+              }
             </div>
-
-
-            <div class="appointment-summary__item">
-
-              <span>FECHA</span>
-
-              <strong>
-                {{ fechaResumen() }}
-              </strong>
-
-            </div>
-
-
-            @if (hora()) {
-
-              <div class="appointment-summary__item">
-
-                <span>HORA</span>
-
-                <strong>
-                  {{ hora() }}
-                </strong>
-
-              </div>
-
-            }
-
           </div>
-
         }
 
+        <button class="contact__submit" type="submit">
+          <span>Solicitar cita por WhatsApp</span>
 
-        <!-- BOTÓN -->
-        <button
-          class="contact__submit"
-          type="submit"
-        >
-
-          <span>
-            Solicitar cita por WhatsApp
-          </span>
-
-          <span class="contact__submit-arrow">
-            →
-          </span>
-
+          <svg
+            class="contact__submit-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M7 17 17 7M7 7h10v10" />
+          </svg>
         </button>
 
-
         <p class="contact__note">
-          La fecha y hora son preferencias y están
-          sujetas a confirmación del consultorio.
+          Abriremos WhatsApp con los datos de tu solicitud.
+          Tu cita estará sujeta a confirmación del consultorio.
         </p>
-
       </form>
-
     </div>
-
   </div>
 </section>
